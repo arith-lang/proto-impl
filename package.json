@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "arith": "bin/arith"
+    "arith": "bin/arith",
+    "arc": "bin/arc"
   },
   "scripts": {
     "test": "jest",

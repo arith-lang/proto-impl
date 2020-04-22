@@ -1,4 +1,4 @@
-import { isInteger } from "../src/token-helpers";
+import { isInteger } from "../src/identifiers";
 
 describe("Token type helpers", () => {
   it("should correctly identify an integer", () => {

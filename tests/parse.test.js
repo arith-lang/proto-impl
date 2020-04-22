@@ -1,4 +1,4 @@
-import { parse } from "../src/parse";
+const { parse } = require("../src/parse");
 
 describe("The parser function", () => {
   it("Should return a node with the type of IntegerLiteral for integer tokens", () => {

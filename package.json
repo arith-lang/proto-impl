@@ -2,7 +2,9 @@
   "name": "arith",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "bin": {
+    "arith": "bin/arith"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch"
@@ -20,5 +22,6 @@
   },
   "jest": {
     "testRegex": "^.+\\.test.js$"
-  }
+  },
+  "dependencies": {}
 }

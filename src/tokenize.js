@@ -1,4 +1,4 @@
-import { isInteger } from "./identifiers";
+const { isInteger } = require("./identifiers");
 
 const tokenize = (input) => {
   const tokens = [];
@@ -36,4 +36,4 @@ const createIntegerToken = (value) => {
   };
 };
 
-export { tokenize };
+module.exports = { tokenize };

@@ -5,4 +5,4 @@ const { evaluate } = require("./evaluate");
 
 const parseAndEvaluate = pipe(tokenize, parse, evaluate);
 
-export { parseAndEvaluate };
+module.exports = { parseAndEvaluate };

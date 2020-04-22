@@ -1,4 +1,4 @@
-import { tokenize } from "../src/tokenize";
+const { tokenize } = require("../src/tokenize");
 
 describe("Tokenize the input stream", () => {
   it("Should return an empty array", () => {

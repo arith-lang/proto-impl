@@ -8,4 +8,4 @@ const evaluate = (node) => {
   }
 };
 
-export { evaluate };
+module.exports = { evaluate };

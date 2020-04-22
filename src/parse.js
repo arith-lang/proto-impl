@@ -20,4 +20,4 @@ const nodeCreators = {
   INTEGER,
 };
 
-export { parse };
+module.exports = { parse };

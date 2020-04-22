@@ -1,18 +1,5 @@
-const { parseAndEvaluate } = require("./src/parse-and-evaluate");
-const fs = require("fs");
+#!/usr/bin/env node
 
-const [command, ...args] = process.argv.slice(2);
+const { run } = require("../index.js");
 
-if (!command || command === "help".toLowerCase()) {
-  console.log("You must enter a valid command\n");
-  console.log("\n");
-  console.log("Here are the valid commands:");
-  console.log("COMMAND", "                    DESCRIPTION");
-  console.log(
-    "run",
-    "                    Execute the contents of a valid Arith file",
-  );
-}
-
-// const result = parseAndEvaluate(file);
-// console.log(result);
+run(process.argv);

@@ -1,5 +1,42 @@
 #!/usr/bin/env node
 
-const { run } = require("../index.js");
+const fs = require("fs");
+const chalk = require("chalk");
+const { parseAndEvaluate } = require("../src/parse-and-evaluate");
+
+const run = (argv) => {
+  const [command, ...args] = argv.slice(2);
+
+  if (!command || command.toLowerCase() === "help") {
+    console.log(
+      chalk.cyan(
+        "Welcome to Arith - a simple, arithmetic-based programming language.\n",
+      ),
+    );
+    console.log(chalk.blue("Here are the valid commands:\n"));
+    console.log("COMMAND", "                DESCRIPTION");
+    console.log(
+      "<none>, i",
+      "              Open the interpreter in interactive/REPL mode",
+    );
+    console.log(
+      "run",
+      "                    Execute the contents of a valid Arith file",
+    );
+    console.log(); // blank line
+    console.log(
+      chalk.cyan(
+        "Use the command 'arc <file> to transpile its contents to JavaScript.\n",
+      ),
+    );
+    console.log("Enjoy!");
+
+    process.exit(0);
+  } else if (command.toLowerCase() === "run") {
+    const input = fs.readFileSync(args[0], "utf-8");
+
+    console.log(parseAndEvaluate(input));
+  }
+};
 
 run(process.argv);

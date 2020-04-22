@@ -9,7 +9,7 @@ describe("Tokenize the input stream", () => {
     const input = "2";
     const result = [
       {
-        type: "Integer",
+        type: "INTEGER",
         value: 2,
       },
     ];
@@ -21,7 +21,7 @@ describe("Tokenize the input stream", () => {
     const input = "249102";
     const result = [
       {
-        type: "Integer",
+        type: "INTEGER",
         value: 249102,
       },
     ];

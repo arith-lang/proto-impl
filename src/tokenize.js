@@ -31,7 +31,7 @@ const tokenize = (input) => {
 // token creator helpers
 const createIntegerToken = (value) => {
   return {
-    type: "Integer",
+    type: "INTEGER",
     value: parseInt(value),
   };
 };

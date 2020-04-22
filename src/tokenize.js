@@ -1,5 +1,4 @@
 import { isInteger } from "./identifiers";
-import { peek } from "./utilities";
 
 const tokenize = (input) => {
   const tokens = [];
@@ -8,9 +7,20 @@ const tokenize = (input) => {
   while (i < input.length) {
     const current = input[i];
 
-    // if (isInteger(current)) {
-    //   ("");
-    // }
+    if (isInteger(current)) {
+      let value = current;
+      let j = 1;
+
+      while (isInteger(input[i + j])) {
+        value += input[i + j];
+        j += 1;
+      }
+      tokens.push(createIntegerToken(value));
+      i += j + 1;
+      continue;
+    } else {
+      throw new SyntaxError(`${current} is not valid`);
+    }
 
     i += 1;
   }
@@ -25,3 +35,5 @@ const createIntegerToken = (value) => {
     value: parseInt(value),
   };
 };
+
+export { tokenize };

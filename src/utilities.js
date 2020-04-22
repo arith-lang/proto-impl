@@ -1,3 +1,3 @@
-const peek = (sequence, index, n = 1) => sequence[index + n];
+const peek = (sequence, index) => sequence[index];
 
 export { peek };

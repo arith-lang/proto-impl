@@ -6,4 +6,10 @@ describe("AST Evaluator", () => {
 
     expect(evaluate(ast)).toBe(10);
   });
+
+  it("Should return zero", () => {
+    const ast = { type: "IntegerLiteral", value: 0 };
+
+    expect(evaluate(ast)).toBe(0);
+  });
 });

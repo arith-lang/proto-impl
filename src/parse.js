@@ -16,8 +16,16 @@ const INTEGER = (value) => {
   };
 };
 
+const FLOAT = (value) => {
+  return {
+    type: "FloatLiteral",
+    value,
+  };
+};
+
 const nodeCreators = {
   INTEGER,
+  FLOAT,
 };
 
 module.exports = { parse };

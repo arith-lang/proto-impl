@@ -13,7 +13,8 @@ const getInput = () => {
     {
       name: "INPUT",
       type: "input",
-      message: chalk.blue("(arith):"),
+      prefix: chalk.green(`(arith v${version}):`),
+      message: ">",
     },
   ];
 

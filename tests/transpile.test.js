@@ -11,4 +11,13 @@ describe("Transpile to JavaScript", () => {
 
     expect(transpile(ast)).toEqual(code);
   });
+
+  it("Should emit a float literal", () => {
+    const ast = {
+      type: "FloatLiteral",
+      value: 51.225,
+    };
+
+    expect(transpile(ast)).toEqual("51.225");
+  });
 });

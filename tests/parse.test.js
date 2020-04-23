@@ -13,4 +13,17 @@ describe("The parser function", () => {
 
     expect(parse(tokens)).toEqual(ast);
   });
+
+  it("Should return a node with the type of FloatLiteral for float tokens", () => {
+    const tokens = [
+      {
+        type: "FLOAT",
+        value: 210.5532,
+      },
+    ];
+
+    const ast = { type: "FloatLiteral", value: 210.5532 };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

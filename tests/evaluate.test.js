@@ -12,4 +12,10 @@ describe("AST Evaluator", () => {
 
     expect(evaluate(ast)).toBe(0);
   });
+
+  it("Should return the value of a primitive float literal", () => {
+    const ast = { type: "FloatLiteral", value: 3.14159 };
+
+    expect(evaluate(ast)).toBe(3.14159);
+  });
 });

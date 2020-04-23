@@ -7,8 +7,11 @@ const transpile = (node) => {
 
 const IntegerLiteral = ({ value }) => `${value}`;
 
+const FloatLiteral = ({ value }) => `${value}`;
+
 const emit = {
   IntegerLiteral,
+  FloatLiteral,
 };
 
 module.exports = { transpile };

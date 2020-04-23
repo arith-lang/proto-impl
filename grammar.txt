@@ -2,5 +2,6 @@ program = expression+
 
 digit = [0-9]
 integer = digit+
+float = integer "." integer
 
 expression = integer

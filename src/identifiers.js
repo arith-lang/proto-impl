@@ -1,8 +1,9 @@
 // constants
 const INTEGER = /^[+-]?[0-9]+$/;
+const FLOAT = /^[-+]?[0-9]+\.[0-9]+$/;
 const WHITESPACE = /\s+/;
 const LETTER = /[A-Za-z]/;
-const VALID_SYMBOLS = [
+const VALID_SPECIAL_CHARS = [
   "_",
   "-",
   "$",
@@ -20,11 +21,14 @@ const VALID_SYMBOLS = [
 ];
 
 // token identifiers
-const isInteger = (char) => INTEGER.test(char);
+const isInteger = (str) => INTEGER.test(str);
+
+const isFloat = (str) => FLOAT.test(str);
 
 const isLetter = (char) => LETTER.test(char);
 
-const isValidSymbol = (char) => VALID_SYMBOLS.includes(char);
+const isValidSpecialChar = (char) =>
+  VALID_SPECIAL_CHARS.includes(char);
 
 const isWhitespace = (char) => WHITESPACE.test(char);
 
@@ -36,12 +40,11 @@ const isUnderscore = (char) => char === "_";
 
 const isDollarSign = (char) => char === "$";
 
-const isOpeningParen = (char) => char === "(";
+const isLeftParen = (char) => char === "(";
 
-const isClosingParen = (char) => char === ")";
+const isRightParen = (char) => char === ")";
 
-const isParen = (char) =>
-  isOpeningParen(char) || isClosingParen(char);
+const isParen = (char) => isLeftParen(char) || isRightParen(char);
 
 const isSeparator = (char) =>
   isWhitespace || isComma || isPeriod || isParen;
@@ -49,14 +52,14 @@ const isSeparator = (char) =>
 module.exports = {
   isInteger,
   isLetter,
-  isValidSymbol,
+  isValidSpecialChar,
   isWhitespace,
   isComma,
   isPeriod,
   isUnderscore,
   isDollarSign,
-  isOpeningParen,
-  isClosingParen,
+  isLeftParen,
+  isRightParen,
   isParen,
   isSeparator,
 };

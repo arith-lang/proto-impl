@@ -1,3 +1,5 @@
+program = expression+
+
 digit = [0-9]
 integer = digit+
 

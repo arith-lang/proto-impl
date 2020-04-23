@@ -28,4 +28,16 @@ describe("Tokenize the input stream", () => {
 
     expect(tokenize(input)).toEqual(result);
   });
+
+  it("Should correctly tokenize a floating-point number", () => {
+    const input = "31.1415";
+    const result = [
+      {
+        type: "FLOAT",
+        value: 31.1415,
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
 });

@@ -1,4 +1,10 @@
-const { isInteger, isWhitespace } = require("./identifiers");
+const {
+  isInteger,
+  isWhitespace,
+  isPeriod,
+  isComma,
+  isClosingParen,
+} = require("./identifiers");
 
 const tokenize = (input) => {
   const tokens = [];
@@ -18,9 +24,27 @@ const tokenize = (input) => {
         value += input[i + j];
         j += 1;
       }
-      tokens.push(createIntegerToken(value));
-      i += j;
-      continue;
+
+      if (!isPeriod(input[i + j])) {
+        tokens.push(createIntegerToken(value));
+        i += j;
+        continue;
+      } else {
+        value += input[i + j];
+        j += 1;
+        if (isInteger(input[i + j])) {
+          while (isInteger(input[i + j])) {
+            value += input[i + j];
+            j += 1;
+          }
+
+          tokens.push(createFloatToken(value));
+          i += j;
+          continue;
+        } else {
+          throw new SyntaxError(`${input[i + j]} is invalid`);
+        }
+      }
     } else {
       throw new SyntaxError(`${current} is not valid`);
     }
@@ -36,6 +60,13 @@ const createIntegerToken = (value) => {
   return {
     type: "INTEGER",
     value: parseInt(value),
+  };
+};
+
+const createFloatToken = (value) => {
+  return {
+    type: "FLOAT",
+    value: parseFloat(value),
   };
 };
 

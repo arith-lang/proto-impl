@@ -43,6 +43,9 @@ const isClosingParen = (char) => char === ")";
 const isParen = (char) =>
   isOpeningParen(char) || isClosingParen(char);
 
+const isSeparator = (char) =>
+  isWhitespace || isComma || isPeriod || isParen;
+
 module.exports = {
   isInteger,
   isLetter,
@@ -55,4 +58,5 @@ module.exports = {
   isOpeningParen,
   isClosingParen,
   isParen,
+  isSeparator,
 };

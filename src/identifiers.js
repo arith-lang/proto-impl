@@ -34,6 +34,8 @@ const isPeriod = (char) => char === ".";
 
 const isUnderscore = (char) => char === "_";
 
+const isDollarSign = (char) => char === "$";
+
 const isOpeningParen = (char) => char === "(";
 
 const isClosingParen = (char) => char === ")";
@@ -49,5 +51,8 @@ module.exports = {
   isComma,
   isPeriod,
   isUnderscore,
+  isDollarSign,
+  isOpeningParen,
+  isClosingParen,
   isParen,
 };

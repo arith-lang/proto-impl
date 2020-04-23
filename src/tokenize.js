@@ -1,7 +1,11 @@
 const {
   isInteger,
+  isLetter,
+  isValidSymbol,
   isWhitespace,
   isPeriod,
+  isUnderscore,
+  isDollarSign,
   isComma,
   isClosingParen,
 } = require("./identifiers");
@@ -67,6 +71,13 @@ const createFloatToken = (value) => {
   return {
     type: "FLOAT",
     value: parseFloat(value),
+  };
+};
+
+const createIdentifierToken = (symbol) => {
+  return {
+    type: "IDENTIFIER",
+    value: symbol,
   };
 };
 

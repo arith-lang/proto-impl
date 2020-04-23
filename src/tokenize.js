@@ -16,7 +16,7 @@ const tokenize = (input) => {
         j += 1;
       }
       tokens.push(createIntegerToken(value));
-      i += j + 1;
+      i += j;
       continue;
     } else {
       throw new SyntaxError(`${current} is not valid`);

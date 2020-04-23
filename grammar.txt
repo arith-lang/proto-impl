@@ -1,4 +1,4 @@
 digit = [0-9]
-num = digit+
+integer = digit+
 
-expression = num
+expression = integer

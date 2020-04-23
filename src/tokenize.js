@@ -1,5 +1,6 @@
 const {
   isInteger,
+  isFloat,
   isLetter,
   isValidSymbol,
   isWhitespace,
@@ -7,7 +8,10 @@ const {
   isUnderscore,
   isDollarSign,
   isComma,
+  isOpeningParen,
   isClosingParen,
+  isSeparator,
+  isEndOfInput,
 } = require("./identifiers");
 
 const tokenize = (input) => {
@@ -16,41 +20,58 @@ const tokenize = (input) => {
 
   while (i < input.length) {
     const current = input[i];
-
+    // skip whitespace
     if (isWhitespace(current)) {
       i += 1;
       continue;
+
+      // read numeric tokens
     } else if (isInteger(current)) {
       let value = current;
       let j = 1;
 
-      while (isInteger(input[i + j])) {
+      // get the whole string of characters starting with the first int
+      while (
+        !isSeparator(input[i + j]) &&
+        !isEndOfInput(input, i + j)
+      ) {
         value += input[i + j];
         j += 1;
       }
 
+      // separators can include periods
       if (!isPeriod(input[i + j])) {
-        tokens.push(createIntegerToken(value));
-        i += j;
-        continue;
+        if (isInteger(value)) {
+          tokens.push(createIntegerToken(value));
+          i += j;
+          continue;
+        } else {
+          throw new SyntaxError(`Invalid symbol ${value}`);
+        }
+
+        // continue getting input string to check if valid float
       } else {
         value += input[i + j];
         j += 1;
-        if (isInteger(input[i + j])) {
-          while (isInteger(input[i + j])) {
-            value += input[i + j];
-            j += 1;
-          }
 
+        while (
+          !isSeparator(input[i + j]) &&
+          !isEndOfInput(input, i + j)
+        ) {
+          value += input[i + j];
+          j += 1;
+        }
+
+        if (isFloat(value)) {
           tokens.push(createFloatToken(value));
           i += j;
           continue;
         } else {
-          throw new SyntaxError(`${input[i + j]} is invalid`);
+          throw new SyntaxError(`Invalid symbol ${value}`);
         }
       }
     } else {
-      throw new SyntaxError(`${current} is not valid`);
+      throw new SyntaxError(`${current} is not a valid symbol`);
     }
 
     i += 1;

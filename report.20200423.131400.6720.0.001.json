@@ -1,0 +1,416 @@
+
+{
+  "header": {
+    "reportVersion": 2,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200423.131400.6720.0.001.json",
+    "dumpEventTime": "2020-04-23T13:14:00Z",
+    "dumpEventTimeStamp": "1587665640855",
+    "processId": 6720,
+    "threadId": null,
+    "cwd": "/home/jason/Projects/toy-languages/arith",
+    "commandLine": [
+      "/home/jason/.nvm/versions/node/v13.11.0/bin/node",
+      "/home/jason/Projects/toy-languages/arith/node_modules/jest-worker/build/workers/processChild.js"
+    ],
+    "nodejsVersion": "v13.11.0",
+    "glibcVersionRuntime": "2.30",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "13.11.0",
+      "v8": "7.9.317.25-node.29",
+      "uv": "1.34.2",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "79",
+      "nghttp2": "1.40.0",
+      "napi": "6",
+      "llhttp": "2.0.4",
+      "openssl": "1.1.1d",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v13.11.0/node-v13.11.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v13.11.0/node-v13.11.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.19.84-microsoft-standard",
+    "osVersion": "#1 SMP Wed Nov 13 11:44:37 UTC 2019",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 1777700,
+        "nice": 0,
+        "sys": 261100,
+        "idle": 14225400,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 3093100,
+        "nice": 0,
+        "sys": 285600,
+        "idle": 12970900,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 1881100,
+        "nice": 0,
+        "sys": 243900,
+        "idle": 14144700,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 2499000,
+        "nice": 0,
+        "sys": 257600,
+        "idle": 13646300,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 1992200,
+        "nice": 0,
+        "sys": 265700,
+        "idle": 14132000,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 2474600,
+        "nice": 0,
+        "sys": 271300,
+        "idle": 13654500,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 2915300,
+        "nice": 0,
+        "sys": 270400,
+        "idle": 13158600,
+        "irq": 0
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4790 CPU @ 3.60GHz",
+        "speed": 3598,
+        "user": 2447600,
+        "nice": 0,
+        "sys": 274400,
+        "idle": 13686600,
+        "irq": 0
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "eth0",
+        "internal": false,
+        "mac": "00:15:5d:ed:95:13",
+        "address": "172.30.53.117",
+        "netmask": "255.255.240.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "eth0",
+        "internal": false,
+        "mac": "00:15:5d:ed:95:13",
+        "address": "fe80::215:5dff:feed:9513",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 4
+      }
+    ],
+    "host": "Jarvis"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000b4ea05",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000a10baf",
+      "symbol": "node::OnFatalError(char const*, char const*) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b859ce",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b85d49",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d34255",
+      "symbol": " [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d348e6",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d43159",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d43f95",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d46a6c",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d0d644",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x000000000105a93e",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    },
+    {
+      "pc": "0x00000000013de0d9",
+      "symbol": " [/home/jason/.nvm/versions/node/v13.11.0/bin/node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2166218752,
+    "totalCommittedMemory": 2163883264,
+    "usedMemory": 1988301784,
+    "availableMemory": 92557624,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 33328,
+        "capacity": 33040,
+        "used": 33040,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16758784,
+        "used": 275896,
+        "available": 16482888
+      },
+      "old_space": {
+        "memorySize": 2103848960,
+        "committedMemory": 2101870576,
+        "capacity": 1988555544,
+        "used": 1960836136,
+        "available": 27719408
+      },
+      "code_space": {
+        "memorySize": 692224,
+        "committedMemory": 671904,
+        "capacity": 389504,
+        "used": 389504,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 2625536,
+        "committedMemory": 2517568,
+        "capacity": 1591520,
+        "used": 1591520,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 25186304,
+        "committedMemory": 25186304,
+        "capacity": 25172904,
+        "used": 25172904,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16758784,
+        "used": 0,
+        "available": 16758784
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 1085.57,
+    "kernelCpuSeconds": 36.8214,
+    "cpuConsumptionPercent": 148.072,
+    "maxRss": 2362339328,
+    "pageFaults": {
+      "IORequired": 0,
+      "IONotRequired": 1296525
+    },
+    "fsActivity": {
+      "reads": 272,
+      "writes": 64
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 732.217,
+    "kernelCpuSeconds": 13.0315,
+    "cpuConsumptionPercent": 98.3177,
+    "fsActivity": {
+      "reads": 272,
+      "writes": 64
+    }
+  },
+  "libuv": [
+  ],
+  "workers": [
+  ],
+  "environmentVariables": {
+    "PYENV_VIRTUALENV_INIT": "1",
+    "SDKMAN_VERSION": "5.7.4+362",
+    "USER": "jason",
+    "VSCODE_NLS_CONFIG": "{\"locale\":\"en\",\"availableLanguages\":{}}",
+    "VSCODE_WSL_EXT_LOCATION": "/mnt/c/Users/jason/.vscode/extensions/ms-vscode-remote.remote-wsl-0.44.2",
+    "VSCODE_HANDLES_UNCAUGHT_ERRORS": "true",
+    "CI": "true",
+    "SHLVL": "0",
+    "VSCODE_LOG_STACK": "false",
+    "HOME": "/home/jason",
+    "VAGRANT_WSL_ENABLE_WINDOWS_ACCESS": "1",
+    "NVM_BIN": "/home/jason/.nvm/versions/node/v13.11.0/bin",
+    "VSCODE_IPC_HOOK_CLI": "/tmp/vscode-ipc-c679ffb4-5f83-4edd-a0cb-b2867d385ab9.sock",
+    "PYENV_SHELL": "bash",
+    "VSCODE_LOGS": "/home/jason/.vscode-server/data/logs/20200423T124713",
+    "APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true",
+    "WSL2": "2",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:abstract=/tmp/dbus-BFLLGAWIeP,guid=fb25aa3d96a9d226113e15705ea1d4a2",
+    "WSL_DISTRO_NAME": "WLinux",
+    "PIPE_LOGGING": "true",
+    "VSCODE_EXTHOST_WILL_SEND_SOCKET": "true",
+    "NVM_DIR": "/home/jason/.nvm",
+    "LOGNAME": "jason",
+    "NAME": "Jarvis",
+    "WSL_INTEROP": "/run/WSL/800_interop",
+    "_": "/home/jason/.vscode-server/bin/ff915844119ce9485abfe8aa9076ec76b5300ddd/node",
+    "SDKMAN_CANDIDATES_API": "https://api.sdkman.io/2",
+    "TERM": "xterm-256color",
+    "RBENV_SHELL": "bash",
+    "VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH": "/home/jason/.vscode-server/bin/ff915844119ce9485abfe8aa9076ec76b5300ddd/remote/node_modules",
+    "DONT_PROMPT_WSL_INSTALL": "1",
+    "PATH": "/home/jason/.vscode-server/bin/ff915844119ce9485abfe8aa9076ec76b5300ddd/bin:/home/jason/.local/bin:/home/jason/bin:/home/jason/.sdkman/candidates/java/current/bin:/home/jason/.yarn/bin:/home/jason/.config/yarn/global/node_modules/.bin:/home/jason/.nvm/versions/node/v13.11.0/bin:/home/jason/.rbenv/shims:/home/jason/.rbenv/bin:/home/jason/.pyenv/plugins/pyenv-virtualenv/shims:/home/jason/.pyenv/shims:/home/jason/.pyenv/bin:/home/jason/.local/opt/bin:/home/jason/bin:/home/jason/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/ConEmu/ConEmu/Scripts:/mnt/c/Program Files/ConEmu:/mnt/c/Program Files/ConEmu/ConEmu:/mnt/c/Program Files/Racket:/mnt/c/Program Files/Haskell Platform/8.6.5/lib/extralibs/bin:/mnt/c/Program Files/Haskell Platform/8.6.5/bin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Calibre2/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/nodejs/:/mnt/c/PulseAudio/bin:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/GtkSharp/2.12/bin:/mnt/c/Program Files/Mono/bin/:/mnt/c/HashiCorp/Vagrant/bin:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE:/mnt/c/Program Files/PowerShell/6/:/mnt/c/Program Files/Haskell Platform/8.6.5/mingw/bin:/mnt/c/Program Files/Microsoft VS Code/bin:/mnt/c/Users/jason/AppData/Roaming/cabal/bin:/mnt/c/Users/jason/AppData/Roaming/local/bin:/mnt/c/Users/jason/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files/Oracle/VirtualBox:/mnt/c/Users/jason/AppData/Roaming/npm:/mnt/c/Users/jason/.dotnet/tools:/mnt/c/Program Files/Docker Toolbox:/mnt/c/Program Files (x86)/FAHClient:/home/jason/.dotnet/tools",
+    "VSCODE_AGENT_FOLDER": "/home/jason/.vscode-server",
+    "SDKMAN_CANDIDATES_DIR": "/home/jason/.sdkman/candidates",
+    "DISPLAY": "192.168.1.77:0.0",
+    "LANG": "en_US.UTF-8",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "SDKMAN_DIR": "/home/jason/.sdkman",
+    "SDKMAN_PLATFORM": "Linux64",
+    "SHELL": "/bin/bash",
+    "NO_AT_BRIDGE": "1",
+    "PROMPT_COMMAND": "__posh_git_ps1 \"\\\\[\\[\\e[0;32m\\]\\u@\\h \\[\\e[0;33m\\]\\w\" \" \\[\\e[1;34m\\]\\n\\$\\[\\e[0m\\] \";_pyenv_virtualenv_hook;",
+    "VERBOSE_LOGGING": "true",
+    "GCC_COLORS": "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01",
+    "PWD": "/home/jason/Projects/toy-languages/arith",
+    "JAVA_HOME": "/home/jason/.sdkman/candidates/java/current",
+    "WIN_HOME": "/mnt/c/Users/jason",
+    "NVM_CD_FLAGS": "",
+    "AMD_ENTRYPOINT": "vs/server/remoteExtensionHostProcess",
+    "HOSTTYPE": "x86_64",
+    "WSLENV": "VSCODE_WSL_EXT_LOCATION/up:ELECTRON_RUN_AS_NODE/w:",
+    "NODE_ENV": "test",
+    "JEST_WORKER_ID": "1"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 65536,
+      "hard": 65536
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 4096,
+      "hard": 4096
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 50122,
+      "hard": 50122
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2"
+  ]
+}

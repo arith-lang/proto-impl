@@ -22,7 +22,7 @@ To transpile a program to JavaScript, use `arc <filename>`.
 
 ## API
 
-For now, the interpreter merely reads integers as input and evaluates them to their literal value. Any other input should cause an error.
+For now, the interpreter merely reads integers and floats as input and evaluates them to their literal value. Any other input should cause an error.
 
 ## Credits
 

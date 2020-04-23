@@ -23,3 +23,7 @@ To transpile a program to JavaScript, use `arc <filename>`.
 ## API
 
 For now, the interpreter merely reads integers as input and evaluates them to their literal value. Any other input should cause an error.
+
+## Credits
+
+Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd Masters](https://frontendmasters.com/courses/programming-language/) ([repository](https://github.com/stevekinney/dropbear)).

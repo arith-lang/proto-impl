@@ -99,6 +99,12 @@ const tokenize = (input) => {
       tokens.push(createIdentifierToken(value));
       i += j;
       continue;
+
+      // parenthesis tokens for call expressions
+    } else if (isOpeningParen(current)) {
+      tokens.push(createLParenToken());
+    } else if (isClosingParen(current)) {
+      tokens.push(createRParenToken());
     } else {
       throw new SyntaxError(`${current} is not a valid identifier`);
     }
@@ -128,6 +134,20 @@ const createIdentifierToken = (symbol) => {
   return {
     type: "IDENTIFIER",
     value: symbol,
+  };
+};
+
+const createLParenToken = () => {
+  return {
+    type: "L_PAREN",
+    value: "(",
+  };
+};
+
+const createRParenToken = () => {
+  return {
+    type: "R_PAREN",
+    value: ")",
   };
 };
 

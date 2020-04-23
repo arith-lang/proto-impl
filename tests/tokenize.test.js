@@ -28,4 +28,25 @@ describe("Tokenize the input stream", () => {
 
     expect(tokenize(input)).toEqual(result);
   });
+
+  it("Should correctly tokenize multiple integers separated by whitespace", () => {
+    const input = "2 22 242";
+
+    const result = [
+      {
+        type: "INTEGER",
+        value: 2,
+      },
+      {
+        type: "INTEGER",
+        value: 22,
+      },
+      {
+        type: "INTEGER",
+        value: 242,
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
 });

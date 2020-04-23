@@ -1,4 +1,4 @@
-const { isInteger } = require("./identifiers");
+const { isInteger, isWhitespace } = require("./identifiers");
 
 const tokenize = (input) => {
   const tokens = [];
@@ -7,7 +7,10 @@ const tokenize = (input) => {
   while (i < input.length) {
     const current = input[i];
 
-    if (isInteger(current)) {
+    if (isWhitespace(current)) {
+      i += 1;
+      continue;
+    } else if (isInteger(current)) {
       let value = current;
       let j = 1;
 

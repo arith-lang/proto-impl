@@ -51,10 +51,7 @@ const isEndOfInput = (input, pos) =>
   pos >= input.length || input[pos] == undefined;
 
 const isSeparator = (char) =>
-  isWhitespace(char) ||
-  isComma(char) ||
-  isPeriod(char) ||
-  isParen(char);
+  isWhitespace(char) || isComma(char) || isParen(char);
 
 module.exports = {
   isInteger,

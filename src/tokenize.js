@@ -8,8 +8,7 @@ const {
   isUnderscore,
   isDollarSign,
   isComma,
-  isOpeningParen,
-  isClosingParen,
+  isParen,
   isSeparator,
   isEndOfInput,
 } = require("./identifiers");
@@ -39,37 +38,18 @@ const tokenize = (input) => {
         j += 1;
       }
 
-      // separators can include periods
-      if (!isPeriod(input[i + j])) {
-        if (isInteger(value)) {
-          tokens.push(createIntegerToken(value));
-          i += j;
-          continue;
-        } else {
-          throw new SyntaxError(`Invalid identifier ${value}`);
-        }
-
-        // continue getting input string to check if valid float
+      if (isInteger(value)) {
+        tokens.push(createIntegerToken(value));
+      } else if (isFloat(value)) {
+        tokens.push(createFloatToken(value));
       } else {
-        value += input[i + j];
-        j += 1;
-
-        while (
-          !isSeparator(input[i + j]) &&
-          !isEndOfInput(input, i + j)
-        ) {
-          value += input[i + j];
-          j += 1;
-        }
-
-        if (isFloat(value)) {
-          tokens.push(createFloatToken(value));
-          i += j;
-          continue;
-        } else {
-          throw new SyntaxError(`Invalid identifier ${value}`);
-        }
+        throw new SyntaxError(`Invalid identifier ${value}`);
       }
+
+      i += j;
+      continue;
+
+      // valid first character for an identifier
     } else if (
       isLetter(current) ||
       isUnderscore(current) ||
@@ -101,10 +81,8 @@ const tokenize = (input) => {
       continue;
 
       // parenthesis tokens for call expressions
-    } else if (isOpeningParen(current)) {
-      tokens.push(createLParenToken());
-    } else if (isClosingParen(current)) {
-      tokens.push(createRParenToken());
+    } else if (isParen(current)) {
+      tokens.push(createParenToken(current));
     } else {
       throw new SyntaxError(`${current} is not a valid identifier`);
     }
@@ -133,21 +111,14 @@ const createFloatToken = (value) => {
 const createIdentifierToken = (symbol) => {
   return {
     type: "IDENTIFIER",
-    value: symbol,
+    name: symbol,
   };
 };
 
-const createLParenToken = () => {
+const createLParenToken = (paren) => {
   return {
-    type: "L_PAREN",
-    value: "(",
-  };
-};
-
-const createRParenToken = () => {
-  return {
-    type: "R_PAREN",
-    value: ")",
+    type: "PAREN",
+    value: paren,
   };
 };
 

@@ -60,7 +60,7 @@ describe("Tokenize the input stream", () => {
     const result = [
       {
         type: "IDENTIFIER",
-        value: "abcdefg",
+        name: "abcdefg",
       },
     ];
 
@@ -72,7 +72,7 @@ describe("Tokenize the input stream", () => {
     const result = [
       {
         type: "IDENTIFIER",
-        value: "_abcdefg",
+        name: "_abcdefg",
       },
     ];
 
@@ -84,7 +84,7 @@ describe("Tokenize the input stream", () => {
     const result = [
       {
         type: "IDENTIFIER",
-        value: "$abcdefg",
+        name: "$abcdefg",
       },
     ];
 
@@ -96,7 +96,7 @@ describe("Tokenize the input stream", () => {
     const result = [
       {
         type: "IDENTIFIER",
-        value: "_-$%&!?*+/\\>^<",
+        name: "_-$%&!?*+/\\>^<",
       },
     ];
 

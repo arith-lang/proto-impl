@@ -47,7 +47,9 @@ const isRightParen = (char) => char === ")";
 const isParen = (char) => isLeftParen(char) || isRightParen(char);
 
 const isSeparator = (char) =>
-  isWhitespace || isComma || isPeriod || isParen;
+  isWhitespace() || isComma() || isPeriod() || isParen();
+
+const isEndOfInput = (input, pos) => pos >= input.length;
 
 module.exports = {
   isInteger,
@@ -62,4 +64,5 @@ module.exports = {
   isRightParen,
   isParen,
   isSeparator,
+  isEndOfInput,
 };

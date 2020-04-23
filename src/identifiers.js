@@ -9,6 +9,8 @@ const isWhitespace = (char) => WHITESPACE.test(char);
 
 const isComma = (char) => char === ",";
 
+const isPeriod = (char) => char === ".";
+
 const isOpeningParen = (char) => char === "(";
 
 const isClosingParen = (char) => char === ")";
@@ -20,6 +22,7 @@ module.exports = {
   isInteger,
   isWhitespace,
   isComma,
+  isPeriod,
   isOpeningParen,
   isClosingParen,
   isParen,

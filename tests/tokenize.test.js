@@ -40,4 +40,18 @@ describe("Tokenize the input stream", () => {
 
     expect(tokenize(input)).toEqual(result);
   });
+
+  it("Should throw an error on malformed numeric input", () => {
+    expect(() => {
+      tokenize("389ss9");
+    }).toThrow();
+
+    expect(() => {
+      tokenize("3.227dd");
+    }).toThrow();
+
+    expect(() => {
+      tokenize("842.888888.");
+    }).toThrow();
+  });
 });

@@ -2,7 +2,7 @@ const {
   isInteger,
   isFloat,
   isLetter,
-  isValidSymbol,
+  isValidSpecialChar,
   isWhitespace,
   isPeriod,
   isUnderscore,
@@ -46,7 +46,7 @@ const tokenize = (input) => {
           i += j;
           continue;
         } else {
-          throw new SyntaxError(`Invalid symbol ${value}`);
+          throw new SyntaxError(`Invalid identifier ${value}`);
         }
 
         // continue getting input string to check if valid float
@@ -67,11 +67,40 @@ const tokenize = (input) => {
           i += j;
           continue;
         } else {
-          throw new SyntaxError(`Invalid symbol ${value}`);
+          throw new SyntaxError(`Invalid identifier ${value}`);
         }
       }
+    } else if (
+      isLetter(current) ||
+      isUnderscore(current) ||
+      isDollarSign(current)
+    ) {
+      // check for valid identifier token
+      let j = 1;
+      let value = current;
+
+      while (
+        !isSeparator(input[i + j]) &&
+        !isEndOfInput(input, i + j)
+      ) {
+        if (
+          !isLetter(input[i + j]) &&
+          !isInteger(input[i + j]) &&
+          !isValidSpecialChar(input[i + j])
+        ) {
+          throw new SyntaxError(
+            `${input[i + j]} is not a valid identifier`,
+          );
+        }
+        value += input[i + j];
+        j += 1;
+      }
+
+      tokens.push(createIdentifierToken(value));
+      i += j;
+      continue;
     } else {
-      throw new SyntaxError(`${current} is not a valid symbol`);
+      throw new SyntaxError(`${current} is not a valid identifier`);
     }
 
     i += 1;

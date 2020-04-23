@@ -6,6 +6,7 @@ const LETTER = /[A-Za-z]/;
 const VALID_SPECIAL_CHARS = [
   "_",
   "-",
+  "=",
   "$",
   "%",
   "&",

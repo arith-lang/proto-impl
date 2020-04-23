@@ -54,4 +54,70 @@ describe("Tokenize the input stream", () => {
       tokenize("842.888888.");
     }).toThrow();
   });
+
+  it("Should correctly tokenize a string of letters as an identifier", () => {
+    const input = "abcdefg";
+    const result = [
+      {
+        type: "IDENTIFIER",
+        value: "abcdefg",
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should tokenize a string beginning with an underscore as an identifier", () => {
+    const input = "_abcdefg";
+    const result = [
+      {
+        type: "IDENTIFIER",
+        value: "_abcdefg",
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should tokenize a string beginning with a dollar sign as an identifier", () => {
+    const input = "$abcdefg";
+    const result = [
+      {
+        type: "IDENTIFIER",
+        value: "$abcdefg",
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should tokenize a string starting with a valid beginning character and containing valid special characters as an identifier", () => {
+    const input = "_-$%&!?*+/\\>^<";
+    const result = [
+      {
+        type: "IDENTIFIER",
+        value: "_-$%&!?*+/\\>^<",
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should throw an error when an identifier contains invalid characters", () => {
+    expect(() => {
+      tokenize("_:");
+    }).toThrow();
+  });
+
+  it("Should throw an error when an identifier starts with a number", () => {
+    expect(() => {
+      tokenize("12abc");
+    }).toThrow();
+  });
+
+  it("Should throw an error when an identifier starts with a valid special character that's not a letter, dollar sign, or underscore", () => {
+    expect(() => {
+      tokenize("^abc");
+    }).toThrow();
+  });
 });

@@ -18,6 +18,19 @@ const expressionize = (tokens) => {
   return token;
 };
 
+const parseProgram = (tokens) => {
+  const program = {
+    type: "Program",
+    body: [],
+  };
+
+  while (tokens.length) {
+    body.push(parse(tokens));
+  }
+
+  return program;
+};
+
 const parse = (tokens) => {
   if (Array.isArray(tokens)) {
     const [first, ...rest] = tokens;
@@ -79,4 +92,7 @@ const nodeCreators = {
   BOOLEAN,
 };
 
-module.exports = { parse: (tokens) => parse(expressionize(tokens)) };
+module.exports = {
+  parseProgram,
+  parse: (tokens) => parse(expressionize(tokens)),
+};

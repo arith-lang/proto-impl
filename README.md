@@ -31,3 +31,13 @@ See the [standard library code](./src/stdlib.js) for a complete list of availabl
 ## Credits
 
 Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd Masters](https://frontendmasters.com/courses/programming-language/) ([repository](https://github.com/stevekinney/dropbear)).
+
+## Todo list:
+
+[] Booleans and boolean operations
+[] String evaluation and processing
+[] Branching construct
+[] Iteration construct
+[] Infix binary expressions
+[] Defining variables
+[] Defining functions

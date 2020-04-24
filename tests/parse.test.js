@@ -1,4 +1,5 @@
 const { parse } = require("../src/parse");
+const { parseProgram } = require("../src/parse-program");
 
 describe("The parser function", () => {
   it("Should return a node with the type of IntegerLiteral for integer tokens", () => {
@@ -151,5 +152,43 @@ describe("The parser function", () => {
     };
 
     expect(parse(tokens)).toEqual(ast);
+  });
+
+  it("Should parse token stream as a program with a body of expressions", () => {
+    const tokens = [];
+
+    const ast = { type: "Program", body: [] };
+
+    expect(parseProgram(tokens)).toEqual(ast);
+  });
+
+  it("Should correctly parse multiple, consecutive (not nested) expressions as part of the program body", () => {
+    const tokens = [
+      { type: "STRING", value: "Hello" },
+      { type: "BOOLEAN", value: true },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "add" },
+      { type: "INTEGER", value: 2 },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "Program",
+      body: [
+        { type: "StringLiteral", value: "Hello" },
+        { type: "BooleanLiteral", value: true },
+        {
+          type: "CallExpression",
+          name: "add",
+          arguments: [
+            { type: "IntegerLiteral", value: 2 },
+            { type: "IntegerLiteral", value: 3 },
+          ],
+        },
+      ],
+    };
+
+    expect(parseProgram(tokens)).toEqual(ast);
   });
 });

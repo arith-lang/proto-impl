@@ -2,7 +2,7 @@
 
 After working through a few tutorials on writing interpreters and compilers, I decided to build one of my own.
 
-Arith is a very simple language that will evaluate basic arithmetic operations.
+Arith is a very simple language with a Lisp-like syntax that will evaluate basic arithmetic operations.
 
 I'm taking the incremental approach recommended by Abdulaziz Ghuloum in "[An Incremental Approach to Compiler Construction](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf)" and implementing one small piece at a time from input to code generation.
 
@@ -20,9 +20,13 @@ To evaluate a program and print its output to the terminal, use `arith run <file
 
 To transpile a program to JavaScript, use `arc <filename>`.
 
-## API
+## Evaluating the language
 
-For now, the interpreter merely reads integers and floats as input and evaluates them to their literal value. Any other input should cause an error.
+The evaluator/transpiler can currently process numeric and float literals as well as function calls and nested function calls for library functions.
+
+The standard library currently includes arithmetic functions, including `floorDiv` for floored division, `mod` for remainder operations, and `pow` for exponentiation. Most functions are variadic, so you can use them with any number of arguments.
+
+See the [standard library code]("./src/stdlib.js") for a complete list of available functions and constants.
 
 ## Credits
 

@@ -63,16 +63,15 @@ const tokenize = (input) => {
         !isSeparator(input[i + j]) &&
         !isEndOfInput(input, i + j)
       ) {
+        value += input[i + j];
+
         if (
           !isLetter(input[i + j]) &&
           !isInteger(input[i + j]) &&
           !isValidSpecialChar(input[i + j])
         ) {
-          throw new SyntaxError(
-            `${input[i + j]} is not a valid identifier`,
-          );
+          throw new SyntaxError(`${value} is not a valid identifier`);
         }
-        value += input[i + j];
         j += 1;
       }
 

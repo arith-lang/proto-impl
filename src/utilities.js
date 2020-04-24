@@ -1,4 +1,4 @@
-const peek = (sequence, index) => sequence[index];
+const peek = (sequence) => sequence[0];
 const pop = (sequence) => sequence.shift();
 
 const pipe = (...funcs) => (value) =>

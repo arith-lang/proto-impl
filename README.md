@@ -37,6 +37,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 - [x] String evaluation and processing
 - [ ] Booleans and boolean expressions
 - [ ] Ability to parse and evaluate/transpile multiple top-level expressions
+- [ ] Lambda functions
 - [ ] Branching construct
 - [ ] Defining variables
 - [ ] Defining functions
@@ -46,3 +47,4 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 - [ ] Ability to load files into REPL
 - [ ] Ability to eval code strings from stdin
 - [ ] Macros and macro expansion
+- [ ] User-definable structs

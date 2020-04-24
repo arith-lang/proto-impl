@@ -70,4 +70,23 @@ describe("AST Evaluator", () => {
 
     expect(evaluate(ast)).toBe(6);
   });
+
+  it("Should be able to evaluate a string literal", () => {
+    const ast = {
+      type: "StringLiteral",
+      value: "Hello",
+    };
+
+    expect(evaluate(ast)).toBe("Hello");
+  });
+
+  it("Should be able to evaluate a function with a string argument", () => {
+    const ast = {
+      type: "CallExpression",
+      name: "upper",
+      arguments: [{ type: "StringLiteral", value: "hello" }],
+    };
+
+    expect(evaluate(ast)).toBe("HELLO");
+  });
 });

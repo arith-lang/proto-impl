@@ -11,6 +11,7 @@ const {
   isParen,
   isSeparator,
   isEndOfInput,
+  isQuote,
 } = require("./identifiers");
 
 const tokenize = (input) => {
@@ -82,6 +83,20 @@ const tokenize = (input) => {
       // parenthesis tokens for call expressions
     } else if (isParen(current)) {
       tokens.push(createParenToken(current));
+
+      // detect string literals and tokenize
+    } else if (isQuote(current)) {
+      i += 1;
+      let value = "";
+
+      while (!isQuote(input[i])) {
+        value += input[i];
+        i += 1;
+      }
+
+      tokens.push(createStringToken(value));
+
+      // Is not a valid token type
     } else {
       throw new SyntaxError(`${current} is not a valid token`);
     }
@@ -107,17 +122,24 @@ const createFloatToken = (value) => {
   };
 };
 
-const createIdentifierToken = (symbol) => {
+const createIdentifierToken = (value) => {
   return {
     type: "IDENTIFIER",
-    value: symbol,
+    value,
   };
 };
 
-const createParenToken = (paren) => {
+const createParenToken = (value) => {
   return {
     type: "PAREN",
-    value: paren,
+    value,
+  };
+};
+
+const createStringToken = (value) => {
+  return {
+    type: "STRING",
+    value,
   };
 };
 

@@ -120,4 +120,26 @@ describe("Tokenize the input stream", () => {
       tokenize("^abc");
     }).toThrow();
   });
+
+  it("Should correctly tokenize a string literal", () => {
+    const input = '"This is a string"';
+    const result = [
+      {
+        type: "STRING",
+        value: "This is a string",
+      },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should correctly tokenize the next token after a string literal", () => {
+    const input = '"A string" 3.14';
+    const result = [
+      { type: "STRING", value: "A string" },
+      { type: "FLOAT", value: 3.14 },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
 });

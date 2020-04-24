@@ -24,11 +24,14 @@ const CallExpression = (node) => {
   return code;
 };
 
+const StringLiteral = ({ value }) => `"${value}"`;
+
 const emit = {
   IntegerLiteral,
   FloatLiteral,
   Identifier,
   CallExpression,
+  StringLiteral,
 };
 
 module.exports = { transpile };

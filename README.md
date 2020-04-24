@@ -34,10 +34,10 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 
 ## Todo list:
 
-[] Booleans and boolean operations
-[] String evaluation and processing
-[] Branching construct
-[] Iteration construct
-[] Infix binary expressions
-[] Defining variables
-[] Defining functions
+- [ ] Booleans and boolean operations
+- [ ] String evaluation and processing
+- [ ] Branching construct
+- [ ] Iteration construct
+- [ ] Infix binary expressions
+- [ ] Defining variables
+- [ ] Defining functions

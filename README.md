@@ -22,7 +22,7 @@ To transpile a program to JavaScript, use `arc <filename>`.
 
 ## Evaluating the language
 
-The evaluator/transpiler can currently process numeric and float literals as well as function calls and nested function calls for library functions.
+The evaluator/transpiler can currently process numeric and float literals, strings, and booleans as well as function calls and nested function calls for library functions.
 
 The standard library currently includes arithmetic functions, including `floorDiv` for floored division, `mod` for remainder operations, and `pow` for exponentiation. Most functions are variadic, so you can use them with any number of arguments.
 

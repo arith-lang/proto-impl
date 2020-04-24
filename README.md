@@ -36,11 +36,13 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 
 - [x] String evaluation and processing
 - [ ] Booleans and boolean expressions
+- [ ] Ability to parse and evaluate/transpile multiple top-level expressions
 - [ ] Branching construct
 - [ ] Defining variables
 - [ ] Defining functions
 - [ ] Proper pairs and lists
-- [ ] Ability to parse and evaluate/transpile multiple top-level expressions
 - [ ] Iteration construct
 - [ ] I/O primitives
+- [ ] Ability to load files into REPL
+- [ ] Ability to eval code strings from stdin
 - [ ] Macros and macro expansion

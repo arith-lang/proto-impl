@@ -1,5 +1,28 @@
 const all = (fn) => (...list) => list.reduce(fn);
 
+// boolean expression functions
+const and = (...exprs) => {
+  for (expr of exprs) {
+    if (Boolean(expr) === false) {
+      return false;
+    }
+  }
+
+  return exprs[exprs.length - 1];
+};
+
+const or = (...exprs) => {
+  for (expr of exprs) {
+    if (Boolean(expr) === true) {
+      return expr;
+    }
+  }
+
+  return exprs[exprs.length - 1];
+};
+
+const not = (expr) => !expr;
+
 // I/O functions
 const print = console.log;
 
@@ -31,6 +54,9 @@ const getStrIndex = (str, i) => str[i];
 const strSlice = (str, start, end) => str.slice(start, end);
 
 module.exports = {
+  and,
+  or,
+  not,
   PI,
   print,
   add,

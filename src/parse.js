@@ -1,50 +1,47 @@
 const { peek, pop } = require("./utilities");
 const { isRightParen, isLeftParen } = require("./identifiers");
 
-const expressionize = (tokens) => {
-  const token = pop(tokens);
-
-  if (isLeftParen(token.value)) {
-    const expression = [];
-
-    while (!isRightParen(peek(tokens).value)) {
-      expression.push(expressionize(tokens));
-    }
-
-    pop(tokens);
-    return expression;
-  }
-
-  return token;
-};
-
 const parseProgram = (tokens) => {
   const program = {
     type: "Program",
     body: [],
   };
 
+  let i = 0;
   while (tokens.length) {
-    body.push(parse(tokens));
+    program.body.push(parse(tokens));
+    i++;
   }
 
   return program;
 };
 
 const parse = (tokens) => {
-  if (Array.isArray(tokens)) {
-    const [first, ...rest] = tokens;
-    return {
-      type: "CallExpression",
-      name: first.value,
-      arguments: rest.map(parse),
-    };
+  const token = pop(tokens);
+
+  if (isLeftParen(token.value)) {
+    return parseCall(tokens);
   }
 
-  const token = tokens;
   return nodeCreators[token.type]
     ? nodeCreators[token.type](token.value)
     : noop();
+};
+
+const parseCall = (tokens) => {
+  const token = pop(tokens);
+  const call = {
+    type: "CallExpression",
+    name: token.value,
+    arguments: [],
+  };
+
+  while (!isRightParen(peek(tokens).value)) {
+    call.arguments.push(parse(tokens));
+  }
+
+  pop(tokens);
+  return call;
 };
 
 const INTEGER = (value) => {
@@ -94,5 +91,5 @@ const nodeCreators = {
 
 module.exports = {
   parseProgram,
-  parse: (tokens) => parse(expressionize(tokens)),
+  parse,
 };

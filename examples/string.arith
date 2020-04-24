@@ -1,0 +1,1 @@
+(print (strAdd (upper (getStrIndex "hello" 0)) (lower (strSlice "HELLO" 1))))

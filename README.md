@@ -42,6 +42,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 - [ ] Defining variables
 - [ ] Defining functions
 - [ ] Proper pairs and lists
+- [ ] Quoting and unquoting
 - [ ] Iteration construct
 - [ ] I/O primitives
 - [ ] Ability to load files into REPL

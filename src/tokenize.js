@@ -76,7 +76,12 @@ const tokenize = (input) => {
         j += 1;
       }
 
-      tokens.push(createIdentifierToken(value));
+      if (value === "true" || value === "false") {
+        tokens.push(createBooleanToken(value));
+      } else {
+        tokens.push(createIdentifierToken(value));
+      }
+
       i += j;
       continue;
 
@@ -95,9 +100,8 @@ const tokenize = (input) => {
       }
 
       tokens.push(createStringToken(value));
-
-      // Is not a valid token type
     } else {
+      // Is not a valid token type
       throw new SyntaxError(`${current} is not a valid token`);
     }
 
@@ -140,6 +144,13 @@ const createStringToken = (value) => {
   return {
     type: "STRING",
     value,
+  };
+};
+
+const createBooleanToken = (value) => {
+  return {
+    type: "BOOLEAN",
+    value: value === "true",
   };
 };
 

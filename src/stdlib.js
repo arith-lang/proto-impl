@@ -1,5 +1,28 @@
 const all = (fn) => (...list) => list.reduce(fn);
 
+// boolean expression functions
+const and = (...exprs) => {
+  for (expr of exprs) {
+    if (Boolean(expr) === false) {
+      return false;
+    }
+  }
+
+  return exprs[exprs.length - 1];
+};
+
+const or = (...exprs) => {
+  for (expr of exprs) {
+    if (Boolean(expr) === true) {
+      return expr;
+    }
+  }
+
+  return exprs[exprs.length - 1];
+};
+
+const not = (expr) => !expr;
+
 // I/O functions
 const print = console.log;
 
@@ -20,6 +43,13 @@ const ceil = (x) => Math.ceil(x);
 const floor = (x) => Math.floor(x);
 const floorDiv = (...args) => floor(div(...args));
 
+// numeric comparisons
+const eq = (x, y) => x === y;
+const lt = (x, y) => x < y;
+const lte = (x, y) => x <= y;
+const gt = (x, y) => x > y;
+const gte = (x, y) => x >= y;
+
 // string functions
 const strlen = (str) => str.length;
 const upper = (str) => str.toUpperCase();
@@ -30,7 +60,17 @@ const strDiv = (str, sep = "") => str.split("").join(sep);
 const getStrIndex = (str, i) => str[i];
 const strSlice = (str, start, end) => str.slice(start, end);
 
+// string comparisons
+const strEq = (str1, str2) => str1 === str2;
+const strLt = (str1, str2) => str1 < str2;
+const strLte = (str1, str2) => str1 <= str2;
+const strGt = (str1, str2) => str1 > str2;
+const strGte = (str1, str2) => str1 >= str2;
+
 module.exports = {
+  and,
+  or,
+  not,
   PI,
   print,
   add,
@@ -45,6 +85,11 @@ module.exports = {
   ceil,
   floor,
   floorDiv,
+  eq,
+  lt,
+  lte,
+  gt,
+  gte,
   strlen,
   upper,
   lower,
@@ -53,4 +98,9 @@ module.exports = {
   strDiv,
   getStrIndex,
   strSlice,
+  strEq,
+  strLt,
+  strLte,
+  strGt,
+  strGte,
 };

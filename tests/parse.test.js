@@ -141,4 +141,15 @@ describe("The parser function", () => {
 
     expect(parse(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a boolean token into a BooleanLiteral node", () => {
+    const tokens = [{ type: "BOOLEAN", value: false }];
+
+    const ast = {
+      type: "BooleanLiteral",
+      value: false,
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

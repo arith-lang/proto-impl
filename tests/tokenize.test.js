@@ -142,4 +142,14 @@ describe("Tokenize the input stream", () => {
 
     expect(tokenize(input)).toEqual(result);
   });
+
+  it("Should correctly tokenize a boolean literal", () => {
+    const input1 = "false";
+    const result1 = [{ type: "BOOLEAN", value: false }];
+    const input2 = "true";
+    const result2 = [{ type: "BOOLEAN", value: true }];
+
+    expect(tokenize(input1)).toEqual(result1);
+    expect(tokenize(input2)).toEqual(result2);
+  });
 });

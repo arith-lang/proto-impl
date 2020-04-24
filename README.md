@@ -22,7 +22,7 @@ To transpile a program to JavaScript, use `arc <filename>`.
 
 ## Evaluating the language
 
-The evaluator/transpiler can currently process numeric and float literals as well as function calls and nested function calls for library functions.
+The evaluator/transpiler can currently process numeric and float literals, strings, and booleans as well as function calls and nested function calls for library functions.
 
 The standard library currently includes arithmetic functions, including `floorDiv` for floored division, `mod` for remainder operations, and `pow` for exponentiation. Most functions are variadic, so you can use them with any number of arguments.
 
@@ -35,7 +35,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 ## Todo list:
 
 - [x] String evaluation and processing
-- [ ] Booleans and boolean expressions
+- [x] Booleans and boolean expressions
 - [ ] Ability to parse and evaluate/transpile multiple top-level expressions
 - [ ] Lambda functions
 - [ ] Branching construct

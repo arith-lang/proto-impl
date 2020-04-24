@@ -5,9 +5,12 @@ const transpile = (node) => {
   );
 };
 
-const IntegerLiteral = ({ value }) => `${value}`;
+const returnValue = ({ value }) => `${value}`;
 
-const FloatLiteral = ({ value }) => `${value}`;
+const IntegerLiteral = returnValue;
+const FloatLiteral = returnValue;
+const StringLiteral = returnValue;
+const BooleanLiteral = returnValue;
 
 const Identifier = ({ name }) => `${name}`;
 
@@ -24,14 +27,13 @@ const CallExpression = (node) => {
   return code;
 };
 
-const StringLiteral = ({ value }) => `"${value}"`;
-
 const emit = {
   IntegerLiteral,
   FloatLiteral,
+  StringLiteral,
+  BooleanLiteral,
   Identifier,
   CallExpression,
-  StringLiteral,
 };
 
 module.exports = { transpile };

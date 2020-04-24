@@ -34,6 +34,8 @@ const evaluate = (node) => {
     return node.value;
   } else if (node.value === 0) {
     return 0;
+  } else if (node.value === false) {
+    return false;
   } else {
     throw new TypeError(`${node.type} is invalid`);
   }

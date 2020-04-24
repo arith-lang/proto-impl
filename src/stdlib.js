@@ -98,4 +98,9 @@ module.exports = {
   strDiv,
   getStrIndex,
   strSlice,
+  strEq,
+  strLt,
+  strLte,
+  strGt,
+  strGte,
 };

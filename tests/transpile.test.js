@@ -40,6 +40,27 @@ describe("Transpile to JavaScript", () => {
       ],
     };
 
-    expect(transpile(ast)).toEqual("add(2, 3);");
+    expect(transpile(ast)).toEqual("add(2, 3)");
+  });
+
+  it("Should be able to emit code for a nested call expression", () => {
+    const ast = {
+      type: "CallExpression",
+      name: "add",
+      arguments: [
+        { type: "IntegerLiteral", value: 2 },
+        { type: "IntegerLiteral", value: 3 },
+        {
+          type: "CallExpression",
+          name: "sub",
+          arguments: [
+            { type: "IntegerLiteral", value: 5 },
+            { type: "IntegerLiteral", value: 4 },
+          ],
+        },
+      ],
+    };
+
+    expect(transpile(ast)).toEqual("add(2, 3, sub(5, 4))");
   });
 });

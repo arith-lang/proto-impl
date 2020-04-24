@@ -1,5 +1,4 @@
 const transpile = (node) => {
-  console.log(node.type);
   return (
     emit[node.type](node) ||
     new Error(`Cannot generate code for ${node.type}`)
@@ -20,7 +19,7 @@ const CallExpression = (node) => {
     return tmp;
   }, `${node.name}(`);
 
-  code += ");";
+  code += ")";
 
   return code;
 };

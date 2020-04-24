@@ -26,7 +26,7 @@ The evaluator/transpiler can currently process numeric and float literals as wel
 
 The standard library currently includes arithmetic functions, including `floorDiv` for floored division, `mod` for remainder operations, and `pow` for exponentiation. Most functions are variadic, so you can use them with any number of arguments.
 
-See the [standard library code]("./src/stdlib.js") for a complete list of available functions and constants.
+See the [standard library code](./src/stdlib.js) for a complete list of available functions and constants.
 
 ## Credits
 

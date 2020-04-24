@@ -20,4 +20,26 @@ describe("Transpile to JavaScript", () => {
 
     expect(transpile(ast)).toEqual("51.225");
   });
+
+  it("Should emit an identifier name", () => {
+    const ast = {
+      type: "Identifier",
+      name: "x",
+    };
+
+    expect(transpile(ast)).toEqual("x");
+  });
+
+  it("Should be able to emit a single call expression", () => {
+    const ast = {
+      type: "CallExpression",
+      name: "add",
+      arguments: [
+        { type: "IntegerLiteral", value: 2 },
+        { type: "IntegerLiteral", value: 3 },
+      ],
+    };
+
+    expect(transpile(ast)).toEqual("add(2, 3);");
+  });
 });

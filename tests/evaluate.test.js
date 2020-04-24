@@ -91,8 +91,10 @@ describe("AST Evaluator", () => {
   });
 
   it("Should correctly evaluate a boolean literal", () => {
-    const ast = { type: "BooleanLiteral", value: true };
+    const ast1 = { type: "BooleanLiteral", value: true };
+    const ast2 = { type: "BooleanLiteral", value: false };
 
-    expect(evaluate(ast)).toBe(true);
+    expect(evaluate(ast1)).toBe(true);
+    expect(evaluate(ast2)).toBe(false);
   });
 });

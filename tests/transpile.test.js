@@ -63,4 +63,16 @@ describe("Transpile to JavaScript", () => {
 
     expect(transpile(ast)).toEqual("add(2, 3, sub(5, 4))");
   });
+
+  it("Should be able to emit a string literal", () => {
+    const ast = { type: "StringLiteral", value: "Hello" };
+
+    expect(transpile(ast)).toEqual("Hello");
+  });
+
+  it("Should be able to emit a boolean literal", () => {
+    const ast = { type: "BooleanLiteral", value: false };
+
+    expect(transpile(ast)).toEqual("false");
+  });
 });

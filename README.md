@@ -35,9 +35,11 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 ## Todo list:
 
 - [ ] String evaluation and processing
-- [ ] Infix binary expressions
-- [ ] Booleans and boolean operations
+- [ ] Booleans and boolean expressions
 - [ ] Branching construct
-- [ ] Iteration construct
 - [ ] Defining variables
 - [ ] Defining functions
+- [ ] Proper pairs and lists
+- [ ] Iteration construct
+- [ ] I/O primitives
+- [ ] Macros and macro expansion

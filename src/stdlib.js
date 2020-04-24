@@ -43,6 +43,13 @@ const ceil = (x) => Math.ceil(x);
 const floor = (x) => Math.floor(x);
 const floorDiv = (...args) => floor(div(...args));
 
+// numeric comparisons
+const eq = (x, y) => x === y;
+const lt = (x, y) => x < y;
+const lte = (x, y) => x <= y;
+const gt = (x, y) => x > y;
+const gte = (x, y) => x >= y;
+
 // string functions
 const strlen = (str) => str.length;
 const upper = (str) => str.toUpperCase();
@@ -71,6 +78,11 @@ module.exports = {
   ceil,
   floor,
   floorDiv,
+  eq,
+  lt,
+  lte,
+  gt,
+  gte,
   strlen,
   upper,
   lower,

@@ -60,6 +60,13 @@ const strDiv = (str, sep = "") => str.split("").join(sep);
 const getStrIndex = (str, i) => str[i];
 const strSlice = (str, start, end) => str.slice(start, end);
 
+// string comparisons
+const strEq = (str1, str2) => str1 === str2;
+const strLt = (str1, str2) => str1 < str2;
+const strLte = (str1, str2) => str1 <= str2;
+const strGt = (str1, str2) => str1 > str2;
+const strGte = (str1, str2) => str1 >= str2;
+
 module.exports = {
   and,
   or,

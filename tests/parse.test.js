@@ -61,32 +61,53 @@ describe("The parser function", () => {
     expect(parse(tokens)).toEqual(ast);
   });
 
-  it("Should return an AST for a nested call expression", () => {
+  it("Should return an AST for a basic call expression", () => {
     const tokens = [
-      { type: "Parenthesis", value: "(" },
-      { type: "Name", value: "add" },
-      { type: "Number", value: 2 },
-      { type: "Number", value: 3 },
-      { type: "Parenthesis", value: "(" },
-      { type: "Name", value: "subtract" },
-      { type: "Number", value: 4 },
-      { type: "Number", value: 2 },
-      { type: "Parenthesis", value: ")" },
-      { type: "Parenthesis", value: ")" },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "add" },
+      { type: "FLOAT", value: 1.5 },
+      { type: "FLOAT", value: 3.2 },
+      { type: "PAREN", value: ")" },
     ];
 
     const ast = {
       type: "CallExpression",
       name: "add",
       arguments: [
-        { type: "NumericLiteral", value: 2 },
-        { type: "NumericLiteral", value: 3 },
+        { type: "FloatLiteral", value: 1.5 },
+        { type: "FloatLiteral", value: 3.2 },
+      ],
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
+
+  it("Should return an AST for a nested call expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "add" },
+      { type: "INTEGER", value: 2 },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "subtract" },
+      { type: "INTEGER", value: 4 },
+      { type: "INTEGER", value: 2 },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "CallExpression",
+      name: "add",
+      arguments: [
+        { type: "IntegerLiteral", value: 2 },
+        { type: "IntegerLiteral", value: 3 },
         {
           type: "CallExpression",
           name: "subtract",
           arguments: [
-            { type: "NumericLiteral", value: 4 },
-            { type: "NumericLiteral", value: 2 },
+            { type: "IntegerLiteral", value: 4 },
+            { type: "IntegerLiteral", value: 2 },
           ],
         },
       ],

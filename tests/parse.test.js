@@ -115,4 +115,30 @@ describe("The parser function", () => {
 
     expect(parse(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a string token into a StringLiteral node", () => {
+    const tokens = [{ type: "STRING", value: "A string" }];
+
+    const ast = {
+      type: "StringLiteral",
+      value: "A string",
+    };
+  });
+
+  it("Should correctly return an AST for a call expression using a string argument", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "print" },
+      { type: "STRING", value: "hello" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "CallExpression",
+      name: "print",
+      arguments: [{ type: "StringLiteral", value: "hello" }],
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

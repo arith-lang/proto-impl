@@ -35,7 +35,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 ## Todo list:
 
 - [x] String evaluation and processing
-- [ ] Booleans and boolean expressions
+- [x] Booleans and boolean expressions
 - [ ] Ability to parse and evaluate/transpile multiple top-level expressions
 - [ ] Lambda functions
 - [ ] Branching construct

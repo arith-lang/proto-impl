@@ -34,7 +34,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 
 ## Todo list:
 
-- [*] String evaluation and processing
+- [x] String evaluation and processing
 - [ ] Booleans and boolean expressions
 - [ ] Branching construct
 - [ ] Defining variables

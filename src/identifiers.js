@@ -53,6 +53,8 @@ const isEndOfInput = (input, pos) =>
 const isSeparator = (char) =>
   isWhitespace(char) || isComma(char) || isParen(char);
 
+const isQuote = (char) => char === '"';
+
 module.exports = {
   isInteger,
   isFloat,
@@ -68,4 +70,5 @@ module.exports = {
   isParen,
   isSeparator,
   isEndOfInput,
+  isQuote,
 };

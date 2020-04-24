@@ -1,8 +1,12 @@
 const all = (fn) => (...list) => list.reduce(fn);
 
+// I/O functions
+const print = console.log;
+
+// mathematical constants
 const PI = Math.PI;
 
-const print = console.log;
+// mathematical functions
 const add = all((a, c) => a + c);
 const sub = all((a, c) => a - c);
 const mul = all((a, c) => a * c);
@@ -15,6 +19,16 @@ const round = (x) => Math.round(x);
 const ceil = (x) => Math.ceil(x);
 const floor = (x) => Math.floor(x);
 const floorDiv = (...args) => floor(div(...args));
+
+// string functions
+const strlen = (str) => str.length;
+const upper = (str) => str.toUpperCase();
+const lower = (str) => str.toLowerCase();
+const strAdd = all((a, s) => a + s);
+const strMul = (str, num) => str.repeat(num);
+const strDiv = (str, sep = "") => str.split("").join(sep);
+const getStrIndex = (str, i) => str[i];
+const strSlice = (str, start, end) => str.slice(start, end);
 
 module.exports = {
   PI,
@@ -31,4 +45,12 @@ module.exports = {
   ceil,
   floor,
   floorDiv,
+  strlen,
+  upper,
+  lower,
+  strAdd,
+  strMul,
+  strDiv,
+  getStrIndex,
+  strSlice,
 };

@@ -29,7 +29,9 @@ const parse = (tokens) => {
   }
 
   const token = tokens;
-  return nodeCreators[token.type](token.value);
+  return nodeCreators[token.type]
+    ? nodeCreators[token.type](token.value)
+    : noop();
 };
 
 const INTEGER = (value) => {
@@ -53,13 +55,20 @@ const IDENTIFIER = (value) => {
   };
 };
 
+const STRING = (value) => {
+  return {
+    type: "StringLiteral",
+    value,
+  };
+};
+
 const noop = () => {};
 
 const nodeCreators = {
   INTEGER,
   FLOAT,
   IDENTIFIER,
-  PAREN: noop,
+  STRING,
 };
 
 module.exports = { parse: (tokens) => parse(expressionize(tokens)) };

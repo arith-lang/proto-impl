@@ -40,6 +40,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 - [ ] Defining variables
 - [ ] Defining functions
 - [ ] Proper pairs and lists
+- [ ] Ability to parse and evaluate/transpile multiple top-level expressions
 - [ ] Iteration construct
 - [ ] I/O primitives
 - [ ] Macros and macro expansion

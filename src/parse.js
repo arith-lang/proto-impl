@@ -62,6 +62,13 @@ const STRING = (value) => {
   };
 };
 
+const BOOLEAN = (value) => {
+  return {
+    type: "BooleanLiteral",
+    value,
+  };
+};
+
 const noop = () => {};
 
 const nodeCreators = {
@@ -69,6 +76,7 @@ const nodeCreators = {
   FLOAT,
   IDENTIFIER,
   STRING,
+  BOOLEAN,
 };
 
 module.exports = { parse: (tokens) => parse(expressionize(tokens)) };

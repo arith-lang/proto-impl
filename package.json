@@ -12,12 +12,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "@babel/plugin-proposal-export-default-from": "^7.8.3",
-    "@babel/plugin-transform-modules-commonjs": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "babel-jest": "^25.4.0",
     "jest": "^25.4.0",
     "prettier": "^2.0.5"
   },

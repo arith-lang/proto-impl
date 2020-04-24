@@ -1,7 +1,13 @@
 program = expression+
 
 digit = [0-9]
+letter = [a-zA-Z]
+special_char = [_-=\$%&!\?\*\+\/\\><^]
 integer = digit+
 float = integer "." integer
+string = '"' [letter | number | special_char]* '"'
+identifier = [letter | _ | \$][letter | integer | special_char]*
 
-expression = integer
+call = "(" identifier expr+ ")"
+
+expr = integer | float | string | identifier | call

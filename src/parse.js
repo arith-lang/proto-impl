@@ -1,12 +1,35 @@
-const { pop } = require("./utilities");
+const { peek, pop } = require("./utilities");
+const { isRightParen, isLeftParen } = require("./identifiers");
 
-const parse = (tokens) => {
+const expressionize = (tokens) => {
   const token = pop(tokens);
 
-  return (
-    nodeCreators[token.type](token.value) ||
-    new SyntaxError(`${token.type} not recognized`)
-  );
+  if (isLeftParen(token.value)) {
+    const expression = [];
+
+    while (!isRightParen(peek(tokens).value)) {
+      expression.push(expressionize(tokens));
+    }
+
+    pop(tokens);
+    return expression;
+  }
+
+  return token;
+};
+
+const parse = (tokens) => {
+  if (Array.isArray(tokens)) {
+    const [first, ...rest] = tokens;
+    return {
+      type: "CallExpression",
+      name: first.value,
+      arguments: rest.map(parse),
+    };
+  }
+
+  const token = tokens;
+  return nodeCreators[token.type](token.value);
 };
 
 const INTEGER = (value) => {
@@ -23,9 +46,20 @@ const FLOAT = (value) => {
   };
 };
 
+const IDENTIFIER = (value) => {
+  return {
+    type: "Identifier",
+    name: value,
+  };
+};
+
+const noop = () => {};
+
 const nodeCreators = {
   INTEGER,
   FLOAT,
+  IDENTIFIER,
+  PAREN: noop,
 };
 
-module.exports = { parse };
+module.exports = { parse: (tokens) => parse(expressionize(tokens)) };

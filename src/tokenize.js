@@ -63,16 +63,15 @@ const tokenize = (input) => {
         !isSeparator(input[i + j]) &&
         !isEndOfInput(input, i + j)
       ) {
+        value += input[i + j];
+
         if (
           !isLetter(input[i + j]) &&
           !isInteger(input[i + j]) &&
           !isValidSpecialChar(input[i + j])
         ) {
-          throw new SyntaxError(
-            `${input[i + j]} is not a valid identifier`,
-          );
+          throw new SyntaxError(`${value} is not a valid identifier`);
         }
-        value += input[i + j];
         j += 1;
       }
 
@@ -84,7 +83,7 @@ const tokenize = (input) => {
     } else if (isParen(current)) {
       tokens.push(createParenToken(current));
     } else {
-      throw new SyntaxError(`${current} is not a valid identifier`);
+      throw new SyntaxError(`${current} is not a valid token`);
     }
 
     i += 1;
@@ -111,11 +110,11 @@ const createFloatToken = (value) => {
 const createIdentifierToken = (symbol) => {
   return {
     type: "IDENTIFIER",
-    name: symbol,
+    value: symbol,
   };
 };
 
-const createLParenToken = (paren) => {
+const createParenToken = (paren) => {
   return {
     type: "PAREN",
     value: paren,

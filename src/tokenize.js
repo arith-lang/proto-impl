@@ -84,7 +84,7 @@ const tokenize = (input) => {
     } else if (isParen(current)) {
       tokens.push(createParenToken(current));
     } else {
-      throw new SyntaxError(`${current} is not a valid identifier`);
+      throw new SyntaxError(`${current} is not a valid token`);
     }
 
     i += 1;
@@ -111,11 +111,11 @@ const createFloatToken = (value) => {
 const createIdentifierToken = (symbol) => {
   return {
     type: "IDENTIFIER",
-    name: symbol,
+    value: symbol,
   };
 };
 
-const createLParenToken = (paren) => {
+const createParenToken = (paren) => {
   return {
     type: "PAREN",
     value: paren,

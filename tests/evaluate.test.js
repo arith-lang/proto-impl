@@ -1,4 +1,7 @@
-const { evaluate } = require("../src/evaluate");
+const { evaluate, evaluateProgram } = require("../src/evaluate");
+const {
+  tokenizeAndParseProgram,
+} = require("../src/parse-and-evaluate");
 
 describe("AST Evaluator", () => {
   it("Should return the value of a primitive integer literal", () => {
@@ -96,5 +99,25 @@ describe("AST Evaluator", () => {
 
     expect(evaluate(ast1)).toBe(true);
     expect(evaluate(ast2)).toBe(false);
+  });
+
+  it("Should correctly evaluate a program with multiple top-level expressions", () => {
+    const ast = {
+      type: "Program",
+      body: [
+        { type: "StringLiteral", value: "Hello" },
+        { type: "BooleanLiteral", value: true },
+        {
+          type: "CallExpression",
+          name: "add",
+          arguments: [
+            { type: "IntegerLiteral", value: 2 },
+            { type: "IntegerLiteral", value: 3 },
+          ],
+        },
+      ],
+    };
+
+    // how to test?
   });
 });

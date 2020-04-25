@@ -152,4 +152,24 @@ describe("Tokenize the input stream", () => {
     expect(tokenize(input1)).toEqual(result1);
     expect(tokenize(input2)).toEqual(result2);
   });
+
+  it("Should correctly tokenize consecutive (not nested) expressions", () => {
+    const input = `
+      "Hello"
+      true
+      (add 2 3)
+    `;
+
+    const result = [
+      { type: "STRING", value: "Hello" },
+      { type: "BOOLEAN", value: true },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "add" },
+      { type: "INTEGER", value: 2 },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: ")" },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
 });

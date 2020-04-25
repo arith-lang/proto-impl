@@ -2,7 +2,10 @@
 
 const fs = require("fs");
 const path = require("path");
-const { parseAndTranspile } = require("../src/parse-and-evaluate");
+const {
+  tokenizeAndParseProgram,
+} = require("../src/parse-and-evaluate");
+const { transpileProgram } = require("../src/transpile");
 
 const file = process.argv.slice(2)[0];
 const lib = fs
@@ -11,7 +14,7 @@ const lib = fs
 
 const input = fs.readFileSync(file, "utf-8");
 
-const code = `${parseAndTranspile(input)}\n`;
+const code = `${transpileProgram(tokenizeAndParseProgram(input))}\n`;
 const newFile = `${file.split(".")[0]}.js`;
 
 fs.writeFileSync(newFile, `${lib + code}`);

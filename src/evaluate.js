@@ -41,4 +41,14 @@ const evaluate = (node) => {
   }
 };
 
-module.exports = { evaluate };
+const evaluateProgram = (prog) => {
+  let i = 0;
+  while (i < prog.body.length) {
+    evaluate(prog.body[i]);
+    i += 1;
+  }
+
+  return;
+};
+
+module.exports = { evaluate, evaluateProgram };

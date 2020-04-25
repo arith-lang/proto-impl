@@ -5,6 +5,17 @@ const transpile = (node) => {
   );
 };
 
+const transpileProgram = (prog) => {
+  let i = 0;
+  let code = "";
+  while (i < prog.body.length) {
+    code += transpile(prog.body[i]) + "\n";
+    i += 1;
+  }
+
+  return code;
+};
+
 const returnValue = ({ value }) => `${value}`;
 
 const IntegerLiteral = returnValue;
@@ -36,4 +47,4 @@ const emit = {
   CallExpression,
 };
 
-module.exports = { transpile };
+module.exports = { transpile, transpileProgram };

@@ -20,8 +20,9 @@ const returnValue = ({ value }) => `${value}`;
 
 const IntegerLiteral = returnValue;
 const FloatLiteral = returnValue;
-const StringLiteral = returnValue;
 const BooleanLiteral = returnValue;
+
+const StringLiteral = ({ value }) => `"${value}"`;
 
 const Identifier = ({ name }) => `${name}`;
 

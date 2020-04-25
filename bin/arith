@@ -2,7 +2,10 @@
 
 const fs = require("fs");
 const chalk = require("chalk");
-const { parseAndEvaluate } = require("../src/parse-and-evaluate");
+const {
+  tokenizeAndParseProgram,
+} = require("../src/parse-and-evaluate");
+const { evaluateProgram } = require("../src/evaluate");
 
 const run = (argv) => {
   const [command, ...args] = argv.slice(2);
@@ -38,7 +41,7 @@ const run = (argv) => {
   } else if (command.toLowerCase() === "run") {
     const input = fs.readFileSync(args[0], "utf-8");
 
-    parseAndEvaluate(input);
+    evaluateProgram(tokenizeAndParseProgram(input));
   }
 };
 

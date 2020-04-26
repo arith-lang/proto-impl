@@ -1,6 +1,8 @@
 const { peek, pop } = require("./utilities");
 const { isRightParen, isLeftParen } = require("./identifiers");
 
+const keywords = ["if", "else", "cond"];
+
 const parseProgram = (tokens) => {
   const program = {
     type: "Program",
@@ -27,6 +29,8 @@ const parse = (tokens) => {
     ? nodeCreators[token.type](token.value)
     : noop();
 };
+
+const maybeCall = () => {};
 
 const parseCall = (tokens) => {
   const token = pop(tokens);

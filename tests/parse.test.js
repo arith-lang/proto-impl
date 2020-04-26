@@ -213,4 +213,16 @@ describe("The parser function", () => {
 
     expect(parse(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a literal enclosed in parenthesis as simply the literal itself", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "STRING", value: "hello" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = { type: "StringLiteral", value: "hello" };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

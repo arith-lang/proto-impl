@@ -22,7 +22,7 @@ const parse = (tokens) => {
   const token = pop(tokens);
 
   if (isLeftParen(token.value)) {
-    return parseCall(tokens);
+    return maybeCall(tokens);
   }
 
   return nodeCreators[token.type]
@@ -30,7 +30,17 @@ const parse = (tokens) => {
     : noop();
 };
 
-const maybeCall = () => {};
+const maybeCall = (tokens) => {
+  const token = peek(tokens);
+
+  if (keywords.has(token.name)) {
+    return parseKeyword(tokens);
+  }
+
+  return parseCall(tokens);
+};
+
+const parseKeyword = (tokens) => {};
 
 const parseCall = (tokens) => {
   const token = pop(tokens);

@@ -25,19 +25,21 @@ const parse = (tokens) => {
     return maybeCall(tokens);
   }
 
-  return nodeCreators[token.type]
-    ? nodeCreators[token.type](token.value)
-    : noop();
+  return parseAtom(token);
 };
 
 const maybeCall = (tokens) => {
   const token = peek(tokens);
 
-  if (keywords.includes(token.value)) {
-    return parseKeyword(tokens);
+  if (token.type === "IDENTIFIER") {
+    if (keywords.includes(token.value)) {
+      return parseKeyword(tokens);
+    }
+
+    return parseCall(tokens);
   }
 
-  return parseCall(tokens);
+  return parse(tokens);
 };
 
 const parseKeyword = (tokens) => {
@@ -70,6 +72,12 @@ const parseCall = (tokens) => {
 
   pop(tokens);
   return call;
+};
+
+const parseAtom = (token) => {
+  return nodeCreators[token.type]
+    ? nodeCreators[token.type](token.value)
+    : noop();
 };
 
 const INTEGER = (value) => {

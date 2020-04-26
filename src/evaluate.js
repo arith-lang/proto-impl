@@ -21,10 +21,22 @@ const apply = (node) => {
   return fn(...args);
 };
 
+const applyKeyword = (node) => {
+  const name = `${node.name}Expr`;
+
+  return apply({
+    ...node,
+    name,
+  });
+};
+
 const evaluate = (node) => {
   switch (node.type) {
     case "Identifier":
       return getIdentifier(node);
+
+    case "KeywordExpression":
+      return applyKeyword(node);
 
     case "CallExpression":
       return apply(node);

@@ -28,6 +28,7 @@
 
 ### Process:
 
+- THIS DOESN'T WORK --- WHY?
 - Define handler function that takes n args, 2 for each clause (including 2 for else and the else expression)
 - Use `for` loop to process args, incrementing counter by 2 each time through the loop
 - If first arg not false, return 2nd arg

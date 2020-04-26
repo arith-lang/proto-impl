@@ -33,14 +33,28 @@ const parse = (tokens) => {
 const maybeCall = (tokens) => {
   const token = peek(tokens);
 
-  if (keywords.includes(token.name)) {
+  if (keywords.includes(token.value)) {
     return parseKeyword(tokens);
   }
 
   return parseCall(tokens);
 };
 
-const parseKeyword = (tokens) => {};
+const parseKeyword = (tokens) => {
+  const token = pop(tokens);
+  const expr = {
+    type: "KeywordExpression",
+    name: token.value,
+    arguments: [],
+  };
+
+  while (!isRightParen(peek(tokens).value)) {
+    expr.arguments.push(parse(tokens));
+  }
+
+  pop(tokens);
+  return expr;
+};
 
 const parseCall = (tokens) => {
   const token = pop(tokens);

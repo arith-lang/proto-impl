@@ -33,7 +33,7 @@ const parse = (tokens) => {
 const maybeCall = (tokens) => {
   const token = peek(tokens);
 
-  if (keywords.has(token.name)) {
+  if (keywords.includes(token.name)) {
     return parseKeyword(tokens);
   }
 

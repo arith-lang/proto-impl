@@ -67,7 +67,7 @@ describe("Transpile to JavaScript", () => {
   it("Should be able to emit a string literal", () => {
     const ast = { type: "StringLiteral", value: "Hello" };
 
-    expect(transpile(ast)).toEqual("Hello");
+    expect(transpile(ast)).toEqual('"Hello"');
   });
 
   it("Should be able to emit a boolean literal", () => {

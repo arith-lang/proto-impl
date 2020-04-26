@@ -1,5 +1,22 @@
 const all = (fn) => (...list) => list.reduce(fn);
 
+// keyword expression functions
+const ifExpr = (cond, ifTrue, ifFalse) => {
+  if (cond !== false && cond !== null) {
+    return ifTrue;
+  }
+
+  return ifFalse;
+};
+
+// const condExpr = (...exprs) => {
+//   for (let i = 0; i < exprs.length; i += 2) {
+//     if (exprs[i] !== false && exprs[i] !== null) {
+//       return exprs[i + 1];
+//     }
+//   }
+// };
+
 // boolean expression functions
 const and = (...exprs) => {
   for (expr of exprs) {
@@ -68,6 +85,8 @@ const strGt = (str1, str2) => str1 > str2;
 const strGte = (str1, str2) => str1 >= str2;
 
 module.exports = {
+  ifExpr,
+  // condExpr,
   and,
   or,
   not,

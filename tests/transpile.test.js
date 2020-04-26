@@ -75,4 +75,20 @@ describe("Transpile to JavaScript", () => {
 
     expect(transpile(ast)).toEqual("false");
   });
+
+  it("Should properly transpile a keyword expression", () => {
+    const ast = {
+      type: "KeywordExpression",
+      name: "if",
+      arguments: [
+        { type: "BooleanLiteral", value: true },
+        { type: "StringLiteral", value: "This one" },
+        { type: "StringLiteral", value: "Not this one" },
+      ],
+    };
+
+    expect(transpile(ast)).toEqual(
+      'ifExpr(true, "This one", "Not this one")',
+    );
+  });
 });

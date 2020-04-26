@@ -190,4 +190,27 @@ describe("The parser function", () => {
 
     expect(parseProgram(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a keyword expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "if" },
+      { type: "BOOLEAN", value: true },
+      { type: "STRING", value: "This one" },
+      { type: "STRING", value: "Not this one" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "KeywordExpression",
+      name: "if",
+      arguments: [
+        { type: "BooleanLiteral", value: true },
+        { type: "StringLiteral", value: "This one" },
+        { type: "StringLiteral", value: "Not this one" },
+      ],
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

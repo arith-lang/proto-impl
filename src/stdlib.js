@@ -9,13 +9,14 @@ const ifExpr = (cond, ifTrue, ifFalse) => {
   return ifFalse;
 };
 
-// const condExpr = (...exprs) => {
-//   for (let i = 0; i < exprs.length; i += 2) {
-//     if (exprs[i] !== false && exprs[i] !== null) {
-//       return exprs[i + 1];
-//     }
-//   }
-// };
+const condExpr = (...exprs) => {
+  console.log(exprs);
+  for (let i = 0; i <= exprs.length; i += 2) {
+    if (exprs[i] !== false && exprs[i] !== null) {
+      return exprs[i + 1];
+    }
+  }
+};
 
 // boolean expression functions
 const and = (...exprs) => {
@@ -86,7 +87,7 @@ const strGte = (str1, str2) => str1 >= str2;
 
 module.exports = {
   ifExpr,
-  // condExpr,
+  condExpr,
   and,
   or,
   not,

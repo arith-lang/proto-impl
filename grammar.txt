@@ -8,7 +8,16 @@ float = integer "." integer
 boolean = true | false
 string = '"' [letter | number | special_char]* '"'
 identifier = [letter | _ | \$][letter | integer | special_char]*
+keyword = [if | else | cond]
 
 call = "(" identifier expr+ ")"
 
-expr = integer | float | boolean | string | identifier | call
+if = "(" if expr expr ")"
+
+expr = integer
+  | float
+  | boolean
+  | string
+  | identifier
+  | call
+  | if

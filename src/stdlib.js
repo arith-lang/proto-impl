@@ -12,7 +12,6 @@ const ifExpr = (cond, ifTrue, ifFalse) => {
 const elseExpr = (expr) => expr;
 
 const condExpr = (...exprs) => {
-  console.log(exprs);
   for (let i = 0; i <= exprs.length; i += 2) {
     if (
       exprs[i] !== false &&

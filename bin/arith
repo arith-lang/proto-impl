@@ -32,7 +32,7 @@ const run = (argv) => {
     console.log(); // blank line
     console.log(
       chalk.cyan(
-        "Use the command 'arc <file> to transpile its contents to JavaScript.\n",
+        "Use the command 'arc <file>' to transpile its contents to JavaScript.\n",
       ),
     );
     console.log("Enjoy!");

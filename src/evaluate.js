@@ -11,7 +11,7 @@ const getIdentifier = (node) => {
 };
 
 const apply = (node) => {
-  const fn = environment[node.name];
+  const fn = getIdentifier(node);
   const args = node.arguments.map(evaluate);
 
   if (typeof fn !== "function") {

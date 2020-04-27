@@ -1,0 +1,4 @@
+(define x 5)
+(define y 3)
+(define z 10)
+(print (+ x y z))

@@ -5,7 +5,6 @@ const ifExpr = (cond, ifTrue, ifFalse) => {
   if (cond !== false && cond !== null) {
     return ifTrue;
   }
-  console.log("false");
   return ifFalse;
 };
 

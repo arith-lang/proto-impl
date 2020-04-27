@@ -47,8 +47,6 @@ const maybeCall = (tokens) => {
 
 const parseKeyword = (tokens) => {
   let token = pop(tokens);
-  let lParens = 1;
-  let rParens = 0;
   const expr = {
     type: "KeywordExpression",
     name: token.value,
@@ -57,6 +55,8 @@ const parseKeyword = (tokens) => {
 
   if (expr.name === "cond") {
     let exprTokens = [];
+    let lParens = 1;
+    let rParens = 0;
     while (lParens > rParens) {
       token = pop(tokens);
       if (isLeftParen(token.value)) lParens += 1;

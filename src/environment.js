@@ -8,7 +8,7 @@ const setEnv = (obj) => {
   return env;
 };
 
-const getIdentifier = (node, env) => {
+const getValue = (node, env) => {
   if (env[Symbol.for(node.name)]) {
     return env[Symbol.for(node.name)];
   }
@@ -16,4 +16,10 @@ const getIdentifier = (node, env) => {
   throw new ReferenceError(`${node.name} is not defined`);
 };
 
-module.exports = { setEnv, getIdentifier };
+const getIdentifier = (node, env) => {
+  if (Reflect.ownKeys(env).includes(Symbol.for(node.name))) {
+    return Symbol.keyFor(Symbol.for(node.name));
+  }
+};
+
+module.exports = { setEnv, getValue, getIdentifier };

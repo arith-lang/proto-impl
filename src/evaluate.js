@@ -1,17 +1,17 @@
 const stdlib = require("./stdlib");
-const { setEnv, getIdentifier } = require("./environment");
+const { setEnv, getValue, getIdentifier } = require("./environment");
 
 const environment = setEnv(stdlib);
 
-const define = (node, env) => {
-  return (env[Symbol.for(node.name)] = evaluate(node.value));
+const define = (node, env = environment) => {
+  return (env[Symbol.for(node.name)] = evaluate(node.value, env));
 };
 
-const apply = (node) => {
-  const fn = getIdentifier(node, environment);
+const apply = (node, env = environment) => {
+  const fn = getValue(node, env);
   const name = fn.name || node.name;
-  const args = node.arguments.map(evaluate);
 
+  const args = node.arguments.map((a, i) => evaluate(a, env));
   if (typeof fn !== "function") {
     throw new TypeError(`${fn} is not a function`);
   }
@@ -19,28 +19,31 @@ const apply = (node) => {
   return fn(...args);
 };
 
-const applyKeyword = (node) => {
+const applyKeyword = (node, env = environment) => {
   const name = `${node.name}Expr`;
 
-  return apply({
-    ...node,
-    name,
-  });
+  return apply(
+    {
+      ...node,
+      name,
+    },
+    env,
+  );
 };
 
-const evaluate = (node) => {
+const evaluate = (node, env = environment) => {
   switch (node.type) {
     case "Identifier":
-      return getIdentifier(node, environment);
+      return getValue(node, env);
 
     case "KeywordExpression":
-      return applyKeyword(node);
+      return applyKeyword(node, env);
 
     case "CallExpression":
-      return apply(node);
+      return apply(node, env);
 
     case "DefinitionExpression":
-      return define(node, environment);
+      return define(node, env);
   }
 
   if (node.value) {

@@ -1,4 +1,5 @@
 const { transpile } = require("../src/transpile");
+const { setEnv } = require("../src/environment");
 
 describe("Transpile to JavaScript", () => {
   it("Should emit an integer literal", () => {
@@ -22,12 +23,10 @@ describe("Transpile to JavaScript", () => {
   });
 
   it("Should emit an identifier name", () => {
-    const ast = {
-      type: "Identifier",
-      name: "x",
-    };
+    const ast = { type: "Identifier", name: "x" };
+    const env = setEnv({ x: 5 });
 
-    expect(transpile(ast)).toEqual("x");
+    expect(transpile(ast, env)).toEqual("x");
   });
 
   it("Should be able to emit a single call expression", () => {

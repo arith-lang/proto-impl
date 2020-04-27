@@ -118,7 +118,7 @@ describe("AST Evaluator", () => {
       ],
     };
 
-    // how to test?
+    // it works, but how to test?
   });
 
   it("Should correctly evaluate a keyword expression", () => {

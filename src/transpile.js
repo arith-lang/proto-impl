@@ -1,12 +1,12 @@
 const stdlib = require("./stdlib");
-const { setEnv, getIdentifier } = require("./environment");
+const { setEnv, getValue, getIdentifier } = require("./environment");
 
 const environment = setEnv(stdlib);
 
-const transpile = (node) => {
+const transpile = (node, env = environment) => {
   if (node) {
     return (
-      emit[node.type](node, environment) ||
+      emit[node.type](node, env) ||
       new Error(`Cannot generate code for ${node.type}`)
     );
   }
@@ -33,11 +33,12 @@ const BooleanLiteral = returnValue;
 
 const StringLiteral = ({ value }) => `"${value}"`;
 
-const Identifier = (node, env = environment) =>
-  `${getIdentifier(node, env).name || node.name}`;
+const Identifier = (node, env = environment) => {
+  return `${getIdentifier(node, env)}`;
+};
 
 const CallExpression = (node, env = environment) => {
-  let name = getIdentifier(node, env).name || node.name;
+  let name = getValue(node, env).name;
   let code = node.arguments.reduce((acc, c, i, a) => {
     let tmp = acc + transpile(c);
     if (i + 1 < a.length) tmp += ", ";
@@ -50,14 +51,14 @@ const CallExpression = (node, env = environment) => {
   return code;
 };
 
-const KeywordExpression = (node) => {
+const KeywordExpression = (node, env = environment) => {
   node.name = `${node.name}Expr`;
 
-  return CallExpression(node);
+  return CallExpression(node, env);
 };
 
 const DefinitionExpression = (node, env = environment) => {
-  let value = transpile(node.value);
+  let value = transpile(node.value, env);
   env[Symbol.for(node.name)] = value;
   return `let ${node.name} = ${value};`;
 };

@@ -37,7 +37,7 @@ const and = (...exprs) => {
 
 const or = (...exprs) => {
   for (expr of exprs) {
-    if (Boolean(expr) === true) {
+    if (expr == true || expr === 0 || expr === "") {
       return expr;
     }
   }

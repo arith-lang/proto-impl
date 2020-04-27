@@ -7,7 +7,7 @@ integer = digit+
 float = integer "." integer
 boolean = true | false
 string = '"' [letter | number | special_char]* '"'
-identifier = [letter | _ | \$][letter | integer | special_char]*
+identifier = string
 keyword = [if | else | cond]
 
 call = "(" identifier expr+ ")"

@@ -110,21 +110,47 @@ function gte(x, y) {
 }
 
 // string functions
-const strlen = (str) => str.length;
+function strlen(str) {
+  str.length;
+}
+
 const upper = (str) => str.toUpperCase();
 const lower = (str) => str.toLowerCase();
-const strAppend = all((a, s) => a + s);
-const strRepeat = (str, num) => str.repeat(num);
-const strSeparate = (str, sep = "") => str.split("").join(sep);
-const strIndex = (str, i) => str[i];
-const strSlice = (str, start, end) => str.slice(start, end);
+
+function strAppend(...args) {
+  return all((a, s) => a + s)(...args);
+}
+
+function strRepeat(str, num) {
+  return str.repeat(num);
+}
+
+function strRef(str, i) {
+  return str[i];
+}
+
+const substring = (str, start, end) => str.slice(start, end);
 
 // string comparisons
-const strEq = (str1, str2) => str1 === str2;
-const strLt = (str1, str2) => str1 < str2;
-const strLte = (str1, str2) => str1 <= str2;
-const strGt = (str1, str2) => str1 > str2;
-const strGte = (str1, str2) => str1 >= str2;
+function strEq(str1, str2) {
+  return str1 === str2;
+}
+
+function strLt(str1, str2) {
+  str1 < str2;
+}
+
+function strLte(str1, str2) {
+  return str1 <= str2;
+}
+
+function strGt(str1, str2) {
+  return str1 > str2;
+}
+
+function strGte(str1, str2) {
+  return str1 >= str2;
+}
 
 module.exports = {
   ifExpr,
@@ -152,17 +178,18 @@ module.exports = {
   "<=": lte,
   ">": gt,
   ">=": gte,
-  strlen,
+  "string-length": strlen,
   upper,
   lower,
-  strAppend,
-  strRepeat,
-  strSeparate,
-  strIndex,
-  strSlice,
-  strEq,
-  strLt,
-  strLte,
-  strGt,
-  strGte,
+  "string-append": strAppend,
+  "string-repeat": strRepeat,
+  "string-ref": strRef,
+  substring,
+  "string-copy": (str) => substring(str, 0),
+  "string-trim": (str) => str.trim(),
+  "string=?": strEq,
+  "string<?": strLt,
+  "string<=?": strLte,
+  "string>?": strGt,
+  "string>=?": strGte,
 };

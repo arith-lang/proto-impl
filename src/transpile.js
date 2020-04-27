@@ -60,8 +60,10 @@ const KeywordExpression = (node, env = environment) => {
 const DefinitionExpression = (node, env = environment) => {
   let value = transpile(node.value, env);
   env[Symbol.for(node.name)] = value;
-  return `let ${node.name} = ${value};`;
+  return `let ${node.name} = ${makeVar(value)};`;
 };
+
+const makeVar = (name) => name;
 
 const emit = {
   IntegerLiteral,

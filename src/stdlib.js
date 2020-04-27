@@ -54,25 +54,58 @@ const print = console.log;
 const PI = Math.PI;
 
 // mathematical functions
-const add = all((a, c) => a + c);
-const sub = all((a, c) => a - c);
-const mul = all((a, c) => a * c);
-const div = all((a, c) => a / c);
-const mod = all((a, c) => a % c);
+// const add = all((a, c) => a + c);
+function add(...args) {
+  return all((a, c) => a + c);
+}
+
+function sub(...args) {
+  return all((a, c) => a - c);
+}
+
+function mul(...args) {
+  return all((a, c) => a * c);
+}
+
+function div(...args) {
+  return all((a, c) => a / c);
+}
+
+function mod(...args) {
+  return all((a, c) => a % c);
+}
+
+function floorDiv(...args) {
+  return floor(div(...args));
+}
+
 const max = (...args) => Math.max(...args);
 const min = (...args) => Math.min(...args);
 const pow = (x, y) => Math.pow(x, y);
 const round = (x) => Math.round(x);
 const ceil = (x) => Math.ceil(x);
 const floor = (x) => Math.floor(x);
-const floorDiv = (...args) => floor(div(...args));
 
 // numeric comparisons
-const eq = (x, y) => x === y;
-const lt = (x, y) => x < y;
-const lte = (x, y) => x <= y;
-const gt = (x, y) => x > y;
-const gte = (x, y) => x >= y;
+function eq(x, y) {
+  return x === y;
+}
+
+function lt(x, y) {
+  return x < y;
+}
+
+function lte(x, y) {
+  return x <= y;
+}
+
+function gt(x, y) {
+  return x > y;
+}
+
+function gte(x, y) {
+  return x >= y;
+}
 
 // string functions
 const strlen = (str) => str.length;

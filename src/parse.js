@@ -34,7 +34,7 @@ const parse = (tokens) => {
 const maybeCall = (tokens) => {
   const token = peek(tokens);
 
-  if (token.type === "IDENTIFIER") {
+  if (token && token.type === "IDENTIFIER") {
     if (keywords.includes(token.value)) {
       return parseKeyword(tokens);
     }

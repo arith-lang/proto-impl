@@ -48,7 +48,9 @@ const or = (...exprs) => {
 const not = (expr) => !expr;
 
 // I/O functions
-const print = console.log;
+const print = (...args) => {
+  console.log(...args);
+};
 
 // mathematical constants
 const PI = Math.PI;

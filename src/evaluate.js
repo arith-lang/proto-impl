@@ -1,10 +1,22 @@
 const stdlib = require("./stdlib");
 
-const environment = { ...stdlib };
+// const environment = { ...stdlib };
+
+const setEnv = (obj) => {
+  const env = Object.create(null);
+
+  for (key of Object.keys(obj)) {
+    env[Symbol.for(key)] = obj[key];
+  }
+
+  return env;
+};
+
+const environment = setEnv(stdlib);
 
 const getIdentifier = (node) => {
-  if (environment[node.name]) {
-    return environment[node.name];
+  if (environment[Symbol.for(node.name)]) {
+    return environment[Symbol.for(node.name)];
   }
 
   throw new ReferenceError(`${node.name} is not defined`);

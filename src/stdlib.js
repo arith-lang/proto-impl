@@ -100,7 +100,7 @@ module.exports = {
   not,
   PI,
   print,
-  add,
+  "+": add,
   sub,
   mul,
   div,

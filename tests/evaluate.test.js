@@ -30,7 +30,7 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a single call expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
@@ -56,7 +56,7 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a nested expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },

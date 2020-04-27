@@ -2,7 +2,7 @@
 
 After working through a few tutorials on writing interpreters and compilers, I decided to build one of my own.
 
-Arith is a very simple language with a Lisp-like syntax that will evaluate basic arithmetic operations.
+Arith is a very simple language with a Lisp-like syntax that will evaluate basic arithmetic operations, perform string operations, and generally do a little bit of everything you expect a programming language to do.
 
 I'm taking the incremental approach recommended by Abdulaziz Ghuloum in "[An Incremental Approach to Compiler Construction](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf)" and implementing one small piece at a time from input to code generation.
 

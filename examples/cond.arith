@@ -1,0 +1,4 @@
+(print (cond
+  ((eq 3 5) "wrong")
+  ((eq (add 2 3) (sub 6 5)) "false")
+  (else "This one should run")))

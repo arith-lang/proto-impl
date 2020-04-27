@@ -120,4 +120,18 @@ describe("AST Evaluator", () => {
 
     // how to test?
   });
+
+  it("Should correctly evaluate a keyword expression", () => {
+    const ast = {
+      type: "KeywordExpression",
+      name: "if",
+      arguments: [
+        { type: "BooleanLiteral", value: true },
+        { type: "StringLiteral", value: "This one" },
+        { type: "StringLiteral", value: "Not this one" },
+      ],
+    };
+
+    expect(evaluate(ast)).toEqual("This one");
+  });
 });

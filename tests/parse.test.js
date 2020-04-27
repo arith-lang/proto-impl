@@ -190,4 +190,69 @@ describe("The parser function", () => {
 
     expect(parseProgram(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a keyword expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "if" },
+      { type: "BOOLEAN", value: true },
+      { type: "STRING", value: "This one" },
+      { type: "STRING", value: "Not this one" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "KeywordExpression",
+      name: "if",
+      arguments: [
+        { type: "BooleanLiteral", value: true },
+        { type: "StringLiteral", value: "This one" },
+        { type: "StringLiteral", value: "Not this one" },
+      ],
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
+
+  it("Should correctly parse a literal enclosed in parenthesis as simply the literal itself", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "STRING", value: "hello" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = { type: "StringLiteral", value: "hello" };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
+
+  it("Should correctly parse a cond expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "cond" },
+      { type: "PAREN", value: "(" },
+      { type: "BOOLEAN", value: true },
+      { type: "STRING", value: "yes" },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: "(" },
+      { type: "BOOLEAN", value: false },
+      { type: "STRING", value: "no" },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "KeywordExpression",
+      name: "cond",
+      arguments: [
+        { type: "BooleanLiteral", value: true },
+        { type: "StringLiteral", value: "yes" },
+        { type: "BooleanLiteral", value: false },
+        { type: "StringLiteral", value: "no" },
+      ],
+    };
+    console.log(parse(tokens));
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

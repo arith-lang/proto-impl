@@ -38,7 +38,7 @@ Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd 
 - [x] Booleans and boolean expressions
 - [x] Ability to parse and evaluate/transpile multiple top-level expressions
 - [ ] Lambda functions
-- [ ] Branching construct
+- [x] Branching construct
 - [ ] Defining variables
 - [ ] Defining functions
 - [ ] Proper pairs and lists

@@ -39,6 +39,12 @@ const CallExpression = (node) => {
   return code;
 };
 
+const KeywordExpression = (node) => {
+  node.name = `${node.name}Expr`;
+
+  return CallExpression(node);
+};
+
 const emit = {
   IntegerLiteral,
   FloatLiteral,
@@ -46,6 +52,7 @@ const emit = {
   BooleanLiteral,
   Identifier,
   CallExpression,
+  KeywordExpression,
 };
 
 module.exports = { transpile, transpileProgram };

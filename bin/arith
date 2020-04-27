@@ -16,7 +16,7 @@ const run = (argv) => {
   } else if (command.toLowerCase() === "help") {
     console.log(
       chalk.cyan(
-        "Welcome to Arith - a simple, arithmetic-based programming language.\n",
+        "Welcome to Arith - a simple, Lisp-like programming language.\n",
       ),
     );
     console.log(chalk.blue("Here are the valid commands:\n"));

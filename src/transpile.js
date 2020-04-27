@@ -4,17 +4,21 @@ const { setEnv, getIdentifier } = require("./environment");
 const environment = setEnv(stdlib);
 
 const transpile = (node) => {
-  return (
-    emit[node.type](node, environment) ||
-    new Error(`Cannot generate code for ${node.type}`)
-  );
+  if (node) {
+    return (
+      emit[node.type](node, environment) ||
+      new Error(`Cannot generate code for ${node.type}`)
+    );
+  }
 };
 
 const transpileProgram = (prog) => {
   let i = 0;
   let code = "";
   while (i < prog.body.length) {
-    code += transpile(prog.body[i]) + "\n";
+    if (prog.body[i]) {
+      code += transpile(prog.body[i]) + "\n";
+    }
     i += 1;
   }
 
@@ -29,7 +33,8 @@ const BooleanLiteral = returnValue;
 
 const StringLiteral = ({ value }) => `"${value}"`;
 
-const Identifier = ({ name }) => `${name}`;
+const Identifier = (node, env = environment) =>
+  `${getIdentifier(node, env).name || node.name}`;
 
 const CallExpression = (node, env = environment) => {
   let name = getIdentifier(node, env).name || node.name;
@@ -51,7 +56,7 @@ const KeywordExpression = (node) => {
   return CallExpression(node);
 };
 
-const DefinitionExpression = (node) => {};
+const DefinitionExpression = (node, env = environment) => {};
 
 const emit = {
   IntegerLiteral,

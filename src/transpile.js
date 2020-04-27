@@ -1,6 +1,11 @@
+const stdlib = require("./stdlib");
+const { setEnv, getIdentifier } = require("./environment");
+
+const environment = setEnv(stdlib);
+
 const transpile = (node) => {
   return (
-    emit[node.type](node) ||
+    emit[node.type](node, environment) ||
     new Error(`Cannot generate code for ${node.type}`)
   );
 };
@@ -26,13 +31,14 @@ const StringLiteral = ({ value }) => `"${value}"`;
 
 const Identifier = ({ name }) => `${name}`;
 
-const CallExpression = (node) => {
+const CallExpression = (node, env = environment) => {
+  let name = getIdentifier(node, env).name || node.name;
   let code = node.arguments.reduce((acc, c, i, a) => {
     let tmp = acc + transpile(c);
     if (i + 1 < a.length) tmp += ", ";
 
     return tmp;
-  }, `${node.name}(`);
+  }, `${name}(`);
 
   code += ")";
 
@@ -56,3 +62,14 @@ const emit = {
 };
 
 module.exports = { transpile, transpileProgram };
+
+// console.log(
+//   transpile({
+//     type: "CallExpression",
+//     name: "+",
+//     arguments: [
+//       { type: "IntegerLiteral", value: 2 },
+//       { type: "IntegerLiteral", value: 3 },
+//     ],
+//   }),
+// );

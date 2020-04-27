@@ -172,4 +172,18 @@ describe("Tokenize the input stream", () => {
 
     expect(tokenize(input)).toEqual(result);
   });
+
+  it("Should correctly tokenize a define expression", () => {
+    const input = "(define x 3)";
+
+    const result = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "define" },
+      { type: "IDENTIFIER", value: "x" },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: ")" },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
 });

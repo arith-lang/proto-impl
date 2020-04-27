@@ -56,23 +56,23 @@ const PI = Math.PI;
 // mathematical functions
 // const add = all((a, c) => a + c);
 function add(...args) {
-  return all((a, c) => a + c);
+  return all((a, c) => a + c)(...args);
 }
 
 function sub(...args) {
-  return all((a, c) => a - c);
+  return all((a, c) => a - c)(...args);
 }
 
 function mul(...args) {
-  return all((a, c) => a * c);
+  return all((a, c) => a * c)(...args);
 }
 
 function div(...args) {
-  return all((a, c) => a / c);
+  return all((a, c) => a / c)(...args);
 }
 
 function mod(...args) {
-  return all((a, c) => a % c);
+  return all((a, c) => a % c)(...args);
 }
 
 function floorDiv(...args) {
@@ -138,13 +138,13 @@ module.exports = {
   "*": mul,
   "/": div,
   "%": mod,
+  "//": floorDiv,
   max,
   min,
   pow,
   round,
   ceil,
   floor,
-  "//": floorDiv,
   "=": eq,
   "<": lt,
   "<=": lte,

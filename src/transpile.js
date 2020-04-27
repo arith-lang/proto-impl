@@ -34,7 +34,7 @@ const BooleanLiteral = returnValue;
 const StringLiteral = ({ value }) => `"${value}"`;
 
 const Identifier = (node, env = environment) => {
-  return `${getIdentifier(node, env)}`;
+  return `${makeVar(getIdentifier(node, env))}`;
 };
 
 const CallExpression = (node, env = environment) => {
@@ -60,10 +60,15 @@ const KeywordExpression = (node, env = environment) => {
 const DefinitionExpression = (node, env = environment) => {
   let value = transpile(node.value, env);
   env[Symbol.for(node.name)] = value;
-  return `let ${node.name} = ${makeVar(value)};`;
+  return `let ${makeVar(node.name)} = ${value};`;
 };
 
-const makeVar = (name) => name;
+const makeVar = (name) => {
+  const specialChars = /[-%&!\?\*\+\/\\><\^]/g;
+  const newName = `_arith_${name.replace(specialChars, "_")}`;
+
+  return newName;
+};
 
 const emit = {
   IntegerLiteral,

@@ -115,12 +115,6 @@ describe("Tokenize the input stream", () => {
     }).toThrow();
   });
 
-  it("Should throw an error when an identifier starts with a valid special character that's not a letter, dollar sign, or underscore", () => {
-    expect(() => {
-      tokenize("^abc");
-    }).toThrow();
-  });
-
   it("Should correctly tokenize a string literal", () => {
     const input = '"This is a string"';
     const result = [

@@ -1,33 +1,14 @@
 const stdlib = require("./stdlib");
-
-// const environment = { ...stdlib };
-
-const setEnv = (obj) => {
-  const env = Object.create(null);
-
-  for (key of Object.keys(obj)) {
-    env[Symbol.for(key)] = obj[key];
-  }
-
-  return env;
-};
+const { setEnv, getIdentifier } = require("./environment");
 
 const environment = setEnv(stdlib);
-
-const getIdentifier = (node) => {
-  if (environment[Symbol.for(node.name)]) {
-    return environment[Symbol.for(node.name)];
-  }
-
-  throw new ReferenceError(`${node.name} is not defined`);
-};
 
 const define = (node, env) => {
   return (env[Symbol.for(node.name)] = evaluate(node.value));
 };
 
 const apply = (node) => {
-  const fn = getIdentifier(node);
+  const fn = getIdentifier(node, environment);
   const args = node.arguments.map(evaluate);
 
   if (typeof fn !== "function") {
@@ -49,7 +30,7 @@ const applyKeyword = (node) => {
 const evaluate = (node) => {
   switch (node.type) {
     case "Identifier":
-      return getIdentifier(node);
+      return getIdentifier(node, environment);
 
     case "KeywordExpression":
       return applyKeyword(node);

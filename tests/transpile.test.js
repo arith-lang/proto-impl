@@ -33,7 +33,7 @@ describe("Transpile to JavaScript", () => {
   it("Should be able to emit a single call expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
@@ -46,13 +46,13 @@ describe("Transpile to JavaScript", () => {
   it("Should be able to emit code for a nested call expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
         {
           type: "CallExpression",
-          name: "sub",
+          name: "-",
           arguments: [
             { type: "IntegerLiteral", value: 5 },
             { type: "IntegerLiteral", value: 4 },

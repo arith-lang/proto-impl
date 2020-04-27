@@ -71,7 +71,7 @@ describe("AST Evaluator", () => {
       ],
     };
 
-    expect(evaluate(ast)).toBe(6);
+    expect(evaluate(ast)).toEqual(6);
   });
 
   it("Should be able to evaluate a string literal", () => {
@@ -80,7 +80,7 @@ describe("AST Evaluator", () => {
       value: "Hello",
     };
 
-    expect(evaluate(ast)).toBe("Hello");
+    expect(evaluate(ast)).toEqual("Hello");
   });
 
   it("Should be able to evaluate a function with a string argument", () => {
@@ -90,7 +90,7 @@ describe("AST Evaluator", () => {
       arguments: [{ type: "StringLiteral", value: "hello" }],
     };
 
-    expect(evaluate(ast)).toBe("HELLO");
+    expect(evaluate(ast)).toEqual("HELLO");
   });
 
   it("Should correctly evaluate a boolean literal", () => {

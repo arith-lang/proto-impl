@@ -22,6 +22,10 @@ const getIdentifier = (node) => {
   throw new ReferenceError(`${node.name} is not defined`);
 };
 
+const define = (node, env) => {
+  env[Symbol.for(node.name)] = evaluate(node.value);
+};
+
 const apply = (node) => {
   const fn = getIdentifier(node);
   const args = node.arguments.map(evaluate);
@@ -52,6 +56,9 @@ const evaluate = (node) => {
 
     case "CallExpression":
       return apply(node);
+
+    case "DefinitionExpression":
+      return define(node, (env = environment));
   }
 
   if (node.value) {

@@ -64,7 +64,7 @@ const parseKeyword = (tokens) => {
       exprTokens.push(token);
     }
 
-    return parseExpr(expr, exprTokens);
+    return parseCond(expr, exprTokens);
   } else {
     while (!isRightParen(peek(tokens).value)) {
       expr.arguments.push(parse(tokens));
@@ -90,7 +90,7 @@ const parseCall = (tokens) => {
   return call;
 };
 
-const parseExpr = (exprNode, tokens) => {
+const parseCond = (exprNode, tokens) => {
   while (tokens.length) {
     if (peek(tokens).value) {
       if (!isRightParen(peek(tokens).value)) {

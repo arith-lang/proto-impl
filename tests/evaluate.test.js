@@ -86,7 +86,7 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a function with a string argument", () => {
     const ast = {
       type: "CallExpression",
-      name: "upper",
+      name: "string-upcase",
       arguments: [{ type: "StringLiteral", value: "hello" }],
     };
 

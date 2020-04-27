@@ -114,8 +114,12 @@ function strlen(str) {
   str.length;
 }
 
-const upper = (str) => str.toUpperCase();
-const lower = (str) => str.toLowerCase();
+function upper(str) {
+  return str.toUpperCase();
+}
+function lower(str) {
+  return str.toLowerCase();
+}
 
 function strAppend(...args) {
   return all((a, s) => a + s)(...args);
@@ -179,8 +183,8 @@ module.exports = {
   ">": gt,
   ">=": gte,
   "string-length": strlen,
-  upper,
-  lower,
+  "string-upcase": upper,
+  "string-downcase": lower,
   "string-append": strAppend,
   "string-repeat": strRepeat,
   "string-ref": strRef,

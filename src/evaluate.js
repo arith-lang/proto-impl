@@ -9,10 +9,11 @@ const define = (node, env) => {
 
 const apply = (node) => {
   const fn = getIdentifier(node, environment);
+  const name = fn.name || node.name;
   const args = node.arguments.map(evaluate);
 
   if (typeof fn !== "function") {
-    throw new TypeError(`${node.name} is not a function`);
+    throw new TypeError(`${fn} is not a function`);
   }
 
   return fn(...args);
@@ -56,7 +57,9 @@ const evaluate = (node) => {
 const evaluateProgram = (prog) => {
   let i = 0;
   while (i < prog.body.length) {
-    evaluate(prog.body[i]);
+    if (prog.body[i]) {
+      evaluate(prog.body[i]);
+    }
     i += 1;
   }
 

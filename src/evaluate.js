@@ -23,7 +23,7 @@ const getIdentifier = (node) => {
 };
 
 const define = (node, env) => {
-  env[Symbol.for(node.name)] = evaluate(node.value);
+  return (env[Symbol.for(node.name)] = evaluate(node.value));
 };
 
 const apply = (node) => {
@@ -58,7 +58,7 @@ const evaluate = (node) => {
       return apply(node);
 
     case "DefinitionExpression":
-      return define(node, (env = environment));
+      return define(node, environment);
   }
 
   if (node.value) {

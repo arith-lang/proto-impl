@@ -43,7 +43,7 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a call expression with float arguments", () => {
     const ast = {
       type: "CallExpression",
-      name: "sub",
+      name: "-",
       arguments: [
         { type: "FloatLiteral", value: 6.4 },
         { type: "FloatLiteral", value: 3.2 },
@@ -62,7 +62,7 @@ describe("AST Evaluator", () => {
         { type: "IntegerLiteral", value: 3 },
         {
           type: "CallExpression",
-          name: "sub",
+          name: "-",
           arguments: [
             { type: "IntegerLiteral", value: 5 },
             { type: "IntegerLiteral", value: 4 },
@@ -109,7 +109,7 @@ describe("AST Evaluator", () => {
         { type: "BooleanLiteral", value: true },
         {
           type: "CallExpression",
-          name: "add",
+          name: "+",
           arguments: [
             { type: "IntegerLiteral", value: 2 },
             { type: "IntegerLiteral", value: 3 },

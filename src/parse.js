@@ -47,6 +47,11 @@ const maybeCall = (tokens) => {
 
 const parseKeyword = (tokens) => {
   let token = pop(tokens);
+
+  if (token.value === "define") {
+    return parseDefine(tokens);
+  }
+
   const expr = {
     type: "KeywordExpression",
     name: token.value,
@@ -72,6 +77,17 @@ const parseKeyword = (tokens) => {
 
     return expr;
   }
+};
+
+const parseDefine = (tokens) => {
+  let token = pop(tokens);
+  const definition = {
+    type: "DefinitionExpression",
+    name: token.value,
+    value: parse(tokens),
+  };
+
+  return definition;
 };
 
 const parseCall = (tokens) => {

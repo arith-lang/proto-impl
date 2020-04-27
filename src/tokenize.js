@@ -12,6 +12,8 @@ const {
   isSeparator,
   isEndOfInput,
   isQuote,
+  isSemicolon,
+  isEndOfLine,
 } = require("./identifiers");
 
 const tokenize = (input) => {
@@ -20,6 +22,14 @@ const tokenize = (input) => {
 
   while (i < input.length) {
     const current = input[i];
+    // ; starts a comment - skip to end of line
+    if (isSemicolon(current)) {
+      while (!isEndOfLine(input[i])) {
+        i += 1;
+      }
+      continue;
+    }
+
     // skip whitespace
     if (isWhitespace(current)) {
       i += 1;

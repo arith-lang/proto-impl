@@ -1,7 +1,10 @@
 const { peek, pop } = require("./utilities");
-const { isRightParen, isLeftParen } = require("./identifiers");
-
-const keywords = ["if", "else", "cond"];
+const {
+  isRightParen,
+  isLeftParen,
+  isParen,
+} = require("./identifiers");
+const keywords = require("./keywords");
 
 const parseProgram = (tokens) => {
   const program = {
@@ -43,19 +46,32 @@ const maybeCall = (tokens) => {
 };
 
 const parseKeyword = (tokens) => {
-  const token = pop(tokens);
+  let token = pop(tokens);
+  let lParens = 1;
+  let rParens = 0;
   const expr = {
     type: "KeywordExpression",
     name: token.value,
     arguments: [],
   };
 
-  while (!isRightParen(peek(tokens).value)) {
-    expr.arguments.push(parse(tokens));
-  }
+  if (expr.name === "cond") {
+    let exprTokens = [];
+    while (lParens > rParens) {
+      token = pop(tokens);
+      if (isLeftParen(token.value)) lParens += 1;
+      else if (isRightParen(token.value)) rParens += 1;
+      exprTokens.push(token);
+    }
 
-  pop(tokens);
-  return expr;
+    return parseExpr(expr, exprTokens);
+  } else {
+    while (!isRightParen(peek(tokens).value)) {
+      expr.arguments.push(parse(tokens));
+    }
+
+    return expr;
+  }
 };
 
 const parseCall = (tokens) => {
@@ -72,6 +88,22 @@ const parseCall = (tokens) => {
 
   pop(tokens);
   return call;
+};
+
+const parseExpr = (exprNode, tokens) => {
+  while (tokens.length) {
+    if (peek(tokens).value) {
+      if (!isRightParen(peek(tokens).value)) {
+        exprNode.arguments.push(parse(tokens));
+      } else {
+        pop(tokens);
+        continue;
+      }
+    }
+  }
+
+  pop(tokens);
+  return exprNode;
 };
 
 const parseAtom = (token) => {
@@ -129,3 +161,23 @@ module.exports = {
   parseProgram,
   parse,
 };
+
+// console.log(
+//   parse([
+//     { type: "PAREN", value: "(" },
+//     { type: "IDENTIFIER", value: "cond" },
+//     { type: "PAREN", value: "(" },
+//     { type: "BOOLEAN", value: true },
+//     { type: "STRING", value: "yes" },
+//     { type: "PAREN", value: ")" },
+//     { type: "PAREN", value: "(" },
+//     { type: "BOOLEAN", value: false },
+//     { type: "STRING", value: "no" },
+//     { type: "PAREN", value: ")" },
+//     { type: "PAREN", value: "(" },
+//     { type: "IDENTIFIER", value: "else" },
+//     { type: "STRING", value: "else clause" },
+//     { type: "PAREN", value: ")" },
+//     { type: "PAREN", value: ")" },
+//   ]),
+// );

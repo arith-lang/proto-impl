@@ -225,4 +225,34 @@ describe("The parser function", () => {
 
     expect(parse(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a cond expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "cond" },
+      { type: "PAREN", value: "(" },
+      { type: "BOOLEAN", value: true },
+      { type: "STRING", value: "yes" },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: "(" },
+      { type: "BOOLEAN", value: false },
+      { type: "STRING", value: "no" },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "KeywordExpression",
+      name: "cond",
+      arguments: [
+        { type: "BooleanLiteral", value: true },
+        { type: "StringLiteral", value: "yes" },
+        { type: "BooleanLiteral", value: false },
+        { type: "StringLiteral", value: "no" },
+      ],
+    };
+    console.log(parse(tokens));
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

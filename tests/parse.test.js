@@ -254,4 +254,51 @@ describe("The parser function", () => {
 
     expect(parse(tokens)).toEqual(ast);
   });
+
+  it("Should correctly parse a definition expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "define" },
+      { type: "IDENTIFIER", value: "x" },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "DefinitionExpression",
+      name: "x",
+      value: { type: "IntegerLiteral", value: 3 },
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
+
+  it("Should correctly parse a definition expression with an expression as its value", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "define" },
+      { type: "IDENTIFIER", value: "x" },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "add" },
+      { type: "INTEGER", value: 2 },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "DefinitionExpression",
+      name: "x",
+      value: {
+        type: "CallExpression",
+        name: "add",
+        arguments: [
+          { type: "IntegerLiteral", value: 2 },
+          { type: "IntegerLiteral", value: 3 },
+        ],
+      },
+    };
+
+    expect(parse(tokens)).toEqual(ast);
+  });
 });

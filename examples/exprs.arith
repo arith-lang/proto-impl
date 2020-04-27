@@ -1,1 +1,6 @@
-(print (add 2 3 (mul 5 2) 4 5 (sub 3 1 (floorDiv 10 3))))
+(print
+  (add 2 3
+    (mul 5 2)
+    4 5
+    (sub 3 1
+      (floorDiv 10 3))))

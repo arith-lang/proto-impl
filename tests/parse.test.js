@@ -251,7 +251,6 @@ describe("The parser function", () => {
         { type: "StringLiteral", value: "no" },
       ],
     };
-    console.log(parse(tokens));
 
     expect(parse(tokens)).toEqual(ast);
   });

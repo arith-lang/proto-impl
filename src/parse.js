@@ -24,7 +24,7 @@ const parseProgram = (tokens) => {
 const parse = (tokens) => {
   const token = pop(tokens);
 
-  if (isLeftParen(token.value)) {
+  if (token && isLeftParen(token.value)) {
     return maybeCall(tokens);
   }
 
@@ -107,9 +107,11 @@ const parseCond = (exprNode, tokens) => {
 };
 
 const parseAtom = (token) => {
-  return nodeCreators[token.type]
-    ? nodeCreators[token.type](token.value)
-    : noop();
+  if (token) {
+    return nodeCreators[token.type]
+      ? nodeCreators[token.type](token.value)
+      : noop();
+  }
 };
 
 const INTEGER = (value) => {
@@ -161,23 +163,3 @@ module.exports = {
   parseProgram,
   parse,
 };
-
-// console.log(
-//   parse([
-//     { type: "PAREN", value: "(" },
-//     { type: "IDENTIFIER", value: "cond" },
-//     { type: "PAREN", value: "(" },
-//     { type: "BOOLEAN", value: true },
-//     { type: "STRING", value: "yes" },
-//     { type: "PAREN", value: ")" },
-//     { type: "PAREN", value: "(" },
-//     { type: "BOOLEAN", value: false },
-//     { type: "STRING", value: "no" },
-//     { type: "PAREN", value: ")" },
-//     { type: "PAREN", value: "(" },
-//     { type: "IDENTIFIER", value: "else" },
-//     { type: "STRING", value: "else clause" },
-//     { type: "PAREN", value: ")" },
-//     { type: "PAREN", value: ")" },
-//   ]),
-// );

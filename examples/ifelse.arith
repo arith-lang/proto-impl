@@ -1,6 +1,6 @@
 (print (if
-  (eq
-    (add (sub 10 4) (mul 2 6))
-    (mul 3 6))
+  (=
+    (+ (- 10 4) (* 2 6))
+    (* 3 6))
   "They're equal!"
   "They're not equal."))

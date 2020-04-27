@@ -1,3 +1,3 @@
-(print(and
-  (strEq "hello" (lower "HELLO"))
-  (eq (add 10 10 10 10) (mul 8 5))))
+(print (and
+  (string=? "hello" (lower "HELLO"))
+  (= (+ 10 10 10 10) (* 8 5))))

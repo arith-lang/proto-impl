@@ -30,7 +30,7 @@ See the [standard library code](./src/stdlib.js) for a complete list of availabl
 
 ## Credits
 
-Heavily influenced by Steve Kinney's [programming language workshop on FrontEnd Masters](https://frontendmasters.com/courses/programming-language/) ([repository](https://github.com/stevekinney/dropbear)).
+Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](https://frontendmasters.com/courses/programming-language/) ([repository](https://github.com/stevekinney/dropbear)).
 
 ## Todo list:
 

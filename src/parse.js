@@ -34,7 +34,7 @@ const parse = (tokens) => {
 const maybeCall = (tokens) => {
   const token = peek(tokens);
 
-  if (token.type === "IDENTIFIER") {
+  if (token && token.type === "IDENTIFIER") {
     if (keywords.includes(token.value)) {
       return parseKeyword(tokens);
     }
@@ -47,6 +47,11 @@ const maybeCall = (tokens) => {
 
 const parseKeyword = (tokens) => {
   let token = pop(tokens);
+
+  if (token.value === "define") {
+    return parseDefine(tokens);
+  }
+
   const expr = {
     type: "KeywordExpression",
     name: token.value,
@@ -72,6 +77,17 @@ const parseKeyword = (tokens) => {
 
     return expr;
   }
+};
+
+const parseDefine = (tokens) => {
+  let token = pop(tokens);
+  const definition = {
+    type: "DefinitionExpression",
+    name: token.value,
+    value: parse(tokens),
+  };
+
+  return definition;
 };
 
 const parseCall = (tokens) => {

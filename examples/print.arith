@@ -1,0 +1,4 @@
+(print "adding numbers")
+(print (+ 2 3 4))
+(print "up-casing a string")
+(print (upper "hello"))

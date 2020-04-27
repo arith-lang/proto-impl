@@ -1,4 +1,5 @@
 const { transpile } = require("../src/transpile");
+const { setEnv } = require("../src/environment");
 
 describe("Transpile to JavaScript", () => {
   it("Should emit an integer literal", () => {
@@ -22,18 +23,16 @@ describe("Transpile to JavaScript", () => {
   });
 
   it("Should emit an identifier name", () => {
-    const ast = {
-      type: "Identifier",
-      name: "x",
-    };
+    const ast = { type: "Identifier", name: "x" };
+    const env = setEnv({ x: 5 });
 
-    expect(transpile(ast)).toEqual("x");
+    expect(transpile(ast, env)).toEqual("x");
   });
 
   it("Should be able to emit a single call expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
@@ -46,13 +45,13 @@ describe("Transpile to JavaScript", () => {
   it("Should be able to emit code for a nested call expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
         {
           type: "CallExpression",
-          name: "sub",
+          name: "-",
           arguments: [
             { type: "IntegerLiteral", value: 5 },
             { type: "IntegerLiteral", value: 4 },

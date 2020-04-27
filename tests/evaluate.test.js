@@ -30,7 +30,7 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a single call expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
@@ -43,7 +43,7 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a call expression with float arguments", () => {
     const ast = {
       type: "CallExpression",
-      name: "sub",
+      name: "-",
       arguments: [
         { type: "FloatLiteral", value: 6.4 },
         { type: "FloatLiteral", value: 3.2 },
@@ -56,13 +56,13 @@ describe("AST Evaluator", () => {
   it("Should be able to evaluate a nested expression", () => {
     const ast = {
       type: "CallExpression",
-      name: "add",
+      name: "+",
       arguments: [
         { type: "IntegerLiteral", value: 2 },
         { type: "IntegerLiteral", value: 3 },
         {
           type: "CallExpression",
-          name: "sub",
+          name: "-",
           arguments: [
             { type: "IntegerLiteral", value: 5 },
             { type: "IntegerLiteral", value: 4 },
@@ -71,7 +71,7 @@ describe("AST Evaluator", () => {
       ],
     };
 
-    expect(evaluate(ast)).toBe(6);
+    expect(evaluate(ast)).toEqual(6);
   });
 
   it("Should be able to evaluate a string literal", () => {
@@ -80,7 +80,7 @@ describe("AST Evaluator", () => {
       value: "Hello",
     };
 
-    expect(evaluate(ast)).toBe("Hello");
+    expect(evaluate(ast)).toEqual("Hello");
   });
 
   it("Should be able to evaluate a function with a string argument", () => {
@@ -90,7 +90,7 @@ describe("AST Evaluator", () => {
       arguments: [{ type: "StringLiteral", value: "hello" }],
     };
 
-    expect(evaluate(ast)).toBe("HELLO");
+    expect(evaluate(ast)).toEqual("HELLO");
   });
 
   it("Should correctly evaluate a boolean literal", () => {
@@ -109,7 +109,7 @@ describe("AST Evaluator", () => {
         { type: "BooleanLiteral", value: true },
         {
           type: "CallExpression",
-          name: "add",
+          name: "+",
           arguments: [
             { type: "IntegerLiteral", value: 2 },
             { type: "IntegerLiteral", value: 3 },
@@ -118,7 +118,7 @@ describe("AST Evaluator", () => {
       ],
     };
 
-    // how to test?
+    // it works, but how to test?
   });
 
   it("Should correctly evaluate a keyword expression", () => {

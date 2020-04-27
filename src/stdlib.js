@@ -48,48 +48,109 @@ const or = (...exprs) => {
 const not = (expr) => !expr;
 
 // I/O functions
-const print = console.log;
+const print = (...args) => {
+  console.log(...args);
+};
 
 // mathematical constants
 const PI = Math.PI;
 
 // mathematical functions
-const add = all((a, c) => a + c);
-const sub = all((a, c) => a - c);
-const mul = all((a, c) => a * c);
-const div = all((a, c) => a / c);
-const mod = all((a, c) => a % c);
+// const add = all((a, c) => a + c);
+function add(...args) {
+  return all((a, c) => a + c)(...args);
+}
+
+function sub(...args) {
+  return all((a, c) => a - c)(...args);
+}
+
+function mul(...args) {
+  return all((a, c) => a * c)(...args);
+}
+
+function div(...args) {
+  return all((a, c) => a / c)(...args);
+}
+
+function mod(...args) {
+  return all((a, c) => a % c)(...args);
+}
+
+function floorDiv(...args) {
+  return floor(div(...args));
+}
+
 const max = (...args) => Math.max(...args);
 const min = (...args) => Math.min(...args);
 const pow = (x, y) => Math.pow(x, y);
 const round = (x) => Math.round(x);
 const ceil = (x) => Math.ceil(x);
 const floor = (x) => Math.floor(x);
-const floorDiv = (...args) => floor(div(...args));
 
 // numeric comparisons
-const eq = (x, y) => x === y;
-const lt = (x, y) => x < y;
-const lte = (x, y) => x <= y;
-const gt = (x, y) => x > y;
-const gte = (x, y) => x >= y;
+function eq(x, y) {
+  return x === y;
+}
+
+function lt(x, y) {
+  return x < y;
+}
+
+function lte(x, y) {
+  return x <= y;
+}
+
+function gt(x, y) {
+  return x > y;
+}
+
+function gte(x, y) {
+  return x >= y;
+}
 
 // string functions
-const strlen = (str) => str.length;
+function strlen(str) {
+  str.length;
+}
+
 const upper = (str) => str.toUpperCase();
 const lower = (str) => str.toLowerCase();
-const strAppend = all((a, s) => a + s);
-const strRepeat = (str, num) => str.repeat(num);
-const strSeparate = (str, sep = "") => str.split("").join(sep);
-const strIndex = (str, i) => str[i];
-const strSlice = (str, start, end) => str.slice(start, end);
+
+function strAppend(...args) {
+  return all((a, s) => a + s)(...args);
+}
+
+function strRepeat(str, num) {
+  return str.repeat(num);
+}
+
+function strRef(str, i) {
+  return str[i];
+}
+
+const substring = (str, start, end) => str.slice(start, end);
 
 // string comparisons
-const strEq = (str1, str2) => str1 === str2;
-const strLt = (str1, str2) => str1 < str2;
-const strLte = (str1, str2) => str1 <= str2;
-const strGt = (str1, str2) => str1 > str2;
-const strGte = (str1, str2) => str1 >= str2;
+function strEq(str1, str2) {
+  return str1 === str2;
+}
+
+function strLt(str1, str2) {
+  str1 < str2;
+}
+
+function strLte(str1, str2) {
+  return str1 <= str2;
+}
+
+function strGt(str1, str2) {
+  return str1 > str2;
+}
+
+function strGte(str1, str2) {
+  return str1 >= str2;
+}
 
 module.exports = {
   ifExpr,
@@ -100,34 +161,35 @@ module.exports = {
   not,
   PI,
   print,
-  add,
-  sub,
-  mul,
-  div,
-  mod,
+  "+": add,
+  "-": sub,
+  "*": mul,
+  "/": div,
+  "%": mod,
+  "//": floorDiv,
   max,
   min,
   pow,
   round,
   ceil,
   floor,
-  floorDiv,
-  eq,
-  lt,
-  lte,
-  gt,
-  gte,
-  strlen,
+  "=": eq,
+  "<": lt,
+  "<=": lte,
+  ">": gt,
+  ">=": gte,
+  "string-length": strlen,
   upper,
   lower,
-  strAppend,
-  strRepeat,
-  strSeparate,
-  strIndex,
-  strSlice,
-  strEq,
-  strLt,
-  strLte,
-  strGt,
-  strGte,
+  "string-append": strAppend,
+  "string-repeat": strRepeat,
+  "string-ref": strRef,
+  substring,
+  "string-copy": (str) => substring(str, 0),
+  "string-trim": (str) => str.trim(),
+  "string=?": strEq,
+  "string<?": strLt,
+  "string<=?": strLte,
+  "string>?": strGt,
+  "string>=?": strGte,
 };

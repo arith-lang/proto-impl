@@ -115,12 +115,6 @@ describe("Tokenize the input stream", () => {
     }).toThrow();
   });
 
-  it("Should throw an error when an identifier starts with a valid special character that's not a letter, dollar sign, or underscore", () => {
-    expect(() => {
-      tokenize("^abc");
-    }).toThrow();
-  });
-
   it("Should correctly tokenize a string literal", () => {
     const input = '"This is a string"';
     const result = [
@@ -166,6 +160,20 @@ describe("Tokenize the input stream", () => {
       { type: "PAREN", value: "(" },
       { type: "IDENTIFIER", value: "add" },
       { type: "INTEGER", value: 2 },
+      { type: "INTEGER", value: 3 },
+      { type: "PAREN", value: ")" },
+    ];
+
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should correctly tokenize a define expression", () => {
+    const input = "(define x 3)";
+
+    const result = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "define" },
+      { type: "IDENTIFIER", value: "x" },
       { type: "INTEGER", value: 3 },
       { type: "PAREN", value: ")" },
     ];

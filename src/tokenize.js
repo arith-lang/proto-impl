@@ -51,11 +51,7 @@ const tokenize = (input) => {
       continue;
 
       // valid first character for an identifier
-    } else if (
-      isLetter(current) ||
-      isUnderscore(current) ||
-      isDollarSign(current)
-    ) {
+    } else if (isLetter(current) || isValidSpecialChar(current)) {
       // check for valid identifier token
       let j = 1;
       let value = current;

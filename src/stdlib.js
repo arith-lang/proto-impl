@@ -78,10 +78,10 @@ const gte = (x, y) => x >= y;
 const strlen = (str) => str.length;
 const upper = (str) => str.toUpperCase();
 const lower = (str) => str.toLowerCase();
-const strAdd = all((a, s) => a + s);
-const strMul = (str, num) => str.repeat(num);
-const strDiv = (str, sep = "") => str.split("").join(sep);
-const getStrIndex = (str, i) => str[i];
+const strAppend = all((a, s) => a + s);
+const strRepeat = (str, num) => str.repeat(num);
+const strSeparate = (str, sep = "") => str.split("").join(sep);
+const strIndex = (str, i) => str[i];
 const strSlice = (str, start, end) => str.slice(start, end);
 
 // string comparisons

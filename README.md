@@ -49,3 +49,4 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] Ability to eval code strings from stdin
 - [ ] Macros and macro expansion
 - [ ] User-definable structs
+- [ ] Better test coverage

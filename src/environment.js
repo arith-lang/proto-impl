@@ -24,4 +24,4 @@ const getIdentifier = (node, env) => {
   }
 };
 
-module.exports = { setEnv, getValue, getIdentifier };
+module.exports = { createEnv, setEnv, getValue, getIdentifier };

@@ -85,10 +85,14 @@ const parseLambda = (tokens) => {
   let token = pop(tokens);
   let params = [];
 
-  while (!isRightParen) {
-    params.push(parseParam(tokens));
+  while (!isRightParen(token.value)) {
+    token = pop(tokens);
+
+    if (token && token.type === "IDENTIFIER") {
+      params.push(parseParam(token));
+    }
   }
-  pop(token);
+
   return {
     type: "LambdaExpression",
     params,
@@ -96,12 +100,10 @@ const parseLambda = (tokens) => {
   };
 };
 
-const parseParam = (tokens) => {
-  const token = pop(tokens);
-
+const parseParam = (token) => {
   return {
     type: "FunctionParameter",
-    name: parse(token),
+    name: token.value,
   };
 };
 

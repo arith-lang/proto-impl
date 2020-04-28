@@ -1,4 +1,8 @@
-const createEnv = (parent) => Object.create(parent ? parent : null);
+const createEnv = (parent) => {
+  const newEnv = Object.create(parent ? parent : null);
+  newEnv.parent = parent || null;
+  return newEnv;
+};
 
 const setEnv = (obj, parent) => {
   const env = createEnv(parent);
@@ -8,6 +12,17 @@ const setEnv = (obj, parent) => {
   }
 
   return env;
+};
+
+const lookup = (name, env) => {
+  let scope = env;
+  while (scope) {
+    if (scope[Symbol.for(name)]) {
+      return scope;
+    }
+
+    scope = scope.parent;
+  }
 };
 
 const getValue = (node, env) => {
@@ -24,4 +39,15 @@ const getIdentifier = (node, env) => {
   }
 };
 
-module.exports = { createEnv, setEnv, getValue, getIdentifier };
+const setVar = (name, value, env) => {
+  return (env[Symbol.for(name)] = value);
+};
+
+module.exports = {
+  createEnv,
+  setEnv,
+  lookup,
+  getValue,
+  getIdentifier,
+  setVar,
+};

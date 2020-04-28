@@ -1,8 +1,8 @@
 const all = (fn) => (...list) => list.reduce(fn);
 
 // keyword expression functions
-const ifExpr = (cond, ifTrue, ifFalse) => {
-  if (cond !== false && cond !== null) {
+const ifExpr = (condition, ifTrue, ifFalse) => {
+  if (condition !== false && condition !== null) {
     return ifTrue;
   }
   return ifFalse;

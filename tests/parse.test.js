@@ -279,7 +279,7 @@ describe("The parser function", () => {
       { type: "IDENTIFIER", value: "define" },
       { type: "IDENTIFIER", value: "x" },
       { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
+      { type: "IDENTIFIER", value: "+" },
       { type: "INTEGER", value: 2 },
       { type: "INTEGER", value: 3 },
       { type: "PAREN", value: ")" },
@@ -291,7 +291,7 @@ describe("The parser function", () => {
       name: "x",
       value: {
         type: "CallExpression",
-        name: "add",
+        name: "+",
         arguments: [
           { type: "IntegerLiteral", value: 2 },
           { type: "IntegerLiteral", value: 3 },
@@ -299,6 +299,37 @@ describe("The parser function", () => {
       },
     };
 
+    expect(parse(tokens)).toEqual(ast);
+  });
+
+  it("Should correctly parse a lambda expression", () => {
+    const tokens = [
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "lambda" },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "x" },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: "(" },
+      { type: "IDENTIFIER", value: "+" },
+      { type: "IDENTIFIER", value: "x" },
+      { type: "INTEGER", value: 1 },
+      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: ")" },
+    ];
+
+    const ast = {
+      type: "LambdaExpression",
+      params: [{ type: "FunctionParameter", name: "x" }],
+      body: {
+        type: "CallExpression",
+        name: "+",
+        arguments: [
+          { type: "Identifier", name: "x" },
+          { type: "IntegerLiteral", value: 1 },
+        ],
+      },
+    };
+    console.log(parse(tokens));
     expect(parse(tokens)).toEqual(ast);
   });
 });

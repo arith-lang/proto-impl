@@ -50,3 +50,5 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] Macros and macro expansion
 - [ ] User-definable structs
 - [ ] Better test coverage
+- [ ] Vector data type
+- [ ] Modules and imports

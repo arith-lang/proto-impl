@@ -34,17 +34,45 @@ const parse = (tokens) => {
 };
 
 const maybeCall = (tokens) => {
-  const token = peek(tokens);
+  let token = peek(tokens);
 
   if (token && token.type === "IDENTIFIER") {
     if (keywords.includes(token.value)) {
       return parseKeyword(tokens);
     }
-
     return parseCall(tokens);
+  } else if (isLeftParen(token.value)) {
+    token = pop(tokens);
+
+    if (peek(tokens) && peek(tokens).value === "lambda") {
+      return parseIIFE(tokens);
+    } else {
+      tokens.unshift(token);
+    }
   }
 
   return parse(tokens);
+};
+
+const parseIIFE = (tokens) => {
+  const exprTokens = eatExprTokens(tokens, 2);
+
+  let token = pop(exprTokens); // lambda identifier
+  let callExpr = {
+    type: "CallExpression",
+    lambda: parseLambda(exprTokens),
+    name: "lambda",
+    arguments: [],
+  };
+
+  pop(exprTokens); // end-of-lambda right paren
+
+  while (token && !isRightParen(token.value)) {
+    callExpr.arguments.push(parse(exprTokens));
+    token = pop(exprTokens);
+  }
+
+  return callExpr;
 };
 
 const parseKeyword = (tokens) => {
@@ -76,7 +104,7 @@ const parseKeyword = (tokens) => {
 };
 
 const parseLambda = (tokens) => {
-  let token = pop(tokens);
+  let token = pop(tokens); // left paren for args
   let params = [];
 
   while (!isRightParen(token.value)) {
@@ -90,7 +118,6 @@ const parseLambda = (tokens) => {
 
   return {
     type: "LambdaExpression",
-    name: `lambda${lambdas}`,
     params,
     body: parse(tokens),
   };

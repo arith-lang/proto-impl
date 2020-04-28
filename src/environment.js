@@ -1,5 +1,7 @@
+const createEnv = (parent) => Object.create(parent ? parent : null);
+
 const setEnv = (obj) => {
-  const env = Object.create(null);
+  const env = createEnv();
 
   for (key of Object.keys(obj)) {
     env[Symbol.for(key)] = obj[key];

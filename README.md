@@ -43,14 +43,16 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] Defining functions
 - [ ] Proper pairs and lists
 - [ ] Quoting and unquoting
-- [ ] Iteration construct
 - [ ] Refactor evaluator and transpiler to CPS
 - [ ] I/O primitives
+- [ ] Vector data type
+- [ ] Modules and imports
+- [ ] Iteration construct (for)
+- [ ] Hash tables
+- [ ] User-definable structs
 - [ ] Ability to load files into REPL
 - [ ] Ability to eval code strings from stdin
 - [ ] Macros and macro expansion
-- [ ] User-definable structs
 - [ ] Better test coverage
-- [ ] Vector data type
-- [ ] Modules and imports
 - [ ] Assertions and tests
+- [ ] Exceptions

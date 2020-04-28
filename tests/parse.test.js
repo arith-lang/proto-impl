@@ -329,7 +329,7 @@ describe("The parser function", () => {
         ],
       },
     };
-    console.log(parse(tokens));
+
     expect(parse(tokens)).toEqual(ast);
   });
 });

@@ -145,6 +145,22 @@ describe("Lambda expression tests", () => {
     expect(parse(tokens)).toEqual(ast);
   });
 
+  it.skip("Should return a function when a lambda definition is evaluated", () => {
+    const ast = {
+      type: "DefinitionExpression",
+      name: "identity",
+      value: {
+        type: "LambdaExpression",
+        params: [{ type: "FunctionParameter", name: "x" }],
+        body: { type: "Identifier", name: "x" },
+      },
+    };
+
+    const result = evaluate(ast);
+
+    expect(typeof result).toBe("function");
+  });
+
   it.skip("Should correctly evaluate the identity function", () => {
     const ast = [
       {

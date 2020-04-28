@@ -1,4 +1,5 @@
 const { parse } = require("../src/parse");
+const { evaluate } = require("../src/evaluate");
 
 describe("Lambda expression tests", () => {
   it("Should correctly parse a lambda expression", () => {

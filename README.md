@@ -44,6 +44,7 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] Proper pairs and lists
 - [ ] Quoting and unquoting
 - [ ] Iteration construct
+- [ ] Refactor evaluator and transpiler to CPS
 - [ ] I/O primitives
 - [ ] Ability to load files into REPL
 - [ ] Ability to eval code strings from stdin
@@ -52,3 +53,4 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] Better test coverage
 - [ ] Vector data type
 - [ ] Modules and imports
+- [ ] Assertions and tests

@@ -61,15 +61,7 @@ const parseKeyword = (tokens) => {
   };
 
   if (expr.name === "cond") {
-    let exprTokens = [];
-    let lParens = 1;
-    let rParens = 0;
-    while (lParens > rParens) {
-      token = pop(tokens);
-      if (isLeftParen(token.value)) lParens += 1;
-      else if (isRightParen(token.value)) rParens += 1;
-      exprTokens.push(token);
-    }
+    const exprTokens = eatExprTokens(tokens);
 
     return parseCond(expr, exprTokens);
   } else {
@@ -156,6 +148,21 @@ const parseAtom = (token) => {
       ? nodeCreators[token.type](token.value)
       : noop();
   }
+};
+
+const eatExprTokens = (tokens) => {
+  let exprTokens = [];
+  let lParens = 1;
+  let rParens = 0;
+
+  while (lParens > rParens) {
+    token = pop(tokens);
+    if (isLeftParen(token.value)) lParens += 1;
+    if (isRightParen(token.value)) rParens += 1;
+    exprTokens.push(token);
+  }
+
+  return exprTokens;
 };
 
 const INTEGER = (value) => {

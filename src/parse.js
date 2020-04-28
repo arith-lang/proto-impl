@@ -50,6 +50,8 @@ const parseKeyword = (tokens) => {
 
   if (token.value === "define") {
     return parseDefine(tokens);
+  } else if (token.value === "lambda") {
+    return parseLambda(tokens);
   }
 
   const expr = {
@@ -77,6 +79,30 @@ const parseKeyword = (tokens) => {
 
     return expr;
   }
+};
+
+const parseLambda = (tokens) => {
+  let token = pop(tokens);
+  let params = [];
+
+  while (!isRightParen) {
+    params.push(parseParam(tokens));
+  }
+  pop(token);
+  return {
+    type: "LambdaExpression",
+    params,
+    body: parse(tokens),
+  };
+};
+
+const parseParam = (tokens) => {
+  const token = pop(tokens);
+
+  return {
+    type: "FunctionParameter",
+    name: parse(token),
+  };
 };
 
 const parseDefine = (tokens) => {

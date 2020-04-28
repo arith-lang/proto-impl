@@ -42,8 +42,8 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] Defining variables
 - [ ] Defining functions
 - [ ] Proper pairs and lists
-- [ ] Quoting and unquoting
 - [ ] Refactor evaluator and transpiler to CPS
+- [ ] Quoting and unquoting
 - [ ] I/O primitives
 - [ ] Vector data type
 - [ ] Modules and imports

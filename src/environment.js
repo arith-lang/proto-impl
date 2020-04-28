@@ -20,7 +20,6 @@ const lookup = (name, env) => {
     if (scope[Symbol.for(name)]) {
       return scope;
     }
-
     scope = scope.parent;
   }
 };
@@ -39,7 +38,15 @@ const getIdentifier = (node, env) => {
   }
 };
 
-const setVar = (name, value, env) => {
+const setValue = (name, value, env) => {
+  const scope = lookup(name, env);
+  if (!scope && env.parent) {
+    throw new ReferenceError(`Cannot set undefined variable ${name}`);
+  }
+  return (scope[Symbol.for(name)] = value);
+};
+
+const defVar = (name, value, env) => {
   return (env[Symbol.for(name)] = value);
 };
 
@@ -48,6 +55,7 @@ module.exports = {
   setEnv,
   lookup,
   getValue,
+  setValue,
   getIdentifier,
-  setVar,
+  defVar,
 };

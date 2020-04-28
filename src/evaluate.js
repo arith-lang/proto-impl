@@ -4,14 +4,15 @@ const {
   setEnv,
   lookup,
   getValue,
-  setVar,
+  setValue,
+  defVar,
   getIdentifier,
 } = require("./environment");
 
 const environment = setEnv(stdlib);
 
 const define = (node, env = environment) => {
-  return setVar(node.name, evaluate(node.value, env), env);
+  return defVar(node.name, evaluate(node.value, env), env);
 };
 
 const apply = (node, env = environment) => {

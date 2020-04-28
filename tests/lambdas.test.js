@@ -1,5 +1,5 @@
 const { parse } = require("../src/parse");
-const { evaluate } = require("../src/evaluate");
+const { evaluate, evaluateProgram } = require("../src/evaluate");
 
 describe("Lambda expression tests", () => {
   let lambdas = 0;
@@ -145,7 +145,62 @@ describe("Lambda expression tests", () => {
     expect(parse(tokens)).toEqual(ast);
   });
 
-  it.skip("Should correctly evaluate a call expression invoking a lambda", () => {
+  it.skip("Should correctly evaluate the identity function", () => {
+    const ast = [
+      {
+        type: "DefinitionExpression",
+        name: "identity",
+        value: {
+          type: "LambdaExpression",
+          params: [{ type: "FunctionParameter", name: "x" }],
+          body: { type: "Identifier", name: "x" },
+        },
+      },
+      {
+        type: "CallExpression",
+        name: "identity",
+        arguments: [{ type: "IntegerLiteral", value: 10 }],
+      },
+    ];
+
+    expect(evaluateProgram(ast)).toEqual(10);
+  });
+
+  it.skip("Should correctly evaluate a function with a call expression body", () => {
+    const ast = [
+      {
+        type: "DefinitionExpression",
+        name: "add2",
+        value: {
+          type: "LambdaExpression",
+          params: [
+            { type: "FunctionParameter", name: "x" },
+            { type: "FunctionParameter", name: "y" },
+          ],
+          body: {
+            type: "CallExpression",
+            name: "+",
+            arguments: [
+              { type: "Identifier", name: "x" },
+              { type: "Identifier", name: "y" },
+            ],
+          },
+        },
+      },
+      {
+        type: "CallExpression",
+        name: "add2",
+        arguments: [
+          { type: "IntegerLiteral", value: 2 },
+          { type: "IntegerLiteral", value: 3 },
+        ],
+      },
+    ];
+
+    expect(evaluateProgram(ast)).toEqual(5);
+  });
+
+  it.skip("Should correctly evaluate a call expression immediately invoking a lambda", () => {
     const ast = {
       type: "CallExpression",
       lambda: {

@@ -2,6 +2,8 @@ const { parse } = require("../src/parse");
 const { evaluate } = require("../src/evaluate");
 
 describe("Lambda expression tests", () => {
+  let lambdas = 0;
+
   it("Should correctly parse a lambda expression", () => {
     const tokens = [
       { type: "PAREN", value: "(" },
@@ -19,7 +21,6 @@ describe("Lambda expression tests", () => {
 
     const ast = {
       type: "LambdaExpression",
-      name: "lambda1",
       params: [{ type: "FunctionParameter", name: "x" }],
       body: {
         type: "CallExpression",
@@ -56,7 +57,6 @@ describe("Lambda expression tests", () => {
       type: "CallExpression",
       lambda: {
         type: "LambdaExpression",
-        name: "lambda2",
         params: [{ type: "FunctionParameter", name: "x" }],
         body: {
           type: "CallExpression",
@@ -67,7 +67,7 @@ describe("Lambda expression tests", () => {
           ],
         },
       },
-      name: "lambda2",
+      name: "lambda",
       arguments: [{ type: "IntegerLiteral", value: 10 }],
     };
 

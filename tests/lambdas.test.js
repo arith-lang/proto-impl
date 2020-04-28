@@ -19,6 +19,7 @@ describe("Lambda expression tests", () => {
 
     const ast = {
       type: "LambdaExpression",
+      name: "lambda1",
       params: [{ type: "FunctionParameter", name: "x" }],
       body: {
         type: "CallExpression",

@@ -1,10 +1,17 @@
 const stdlib = require("./stdlib");
-const { setEnv, getValue, getIdentifier } = require("./environment");
+const {
+  createEnv,
+  setEnv,
+  lookup,
+  getValue,
+  setVar,
+  getIdentifier,
+} = require("./environment");
 
 const environment = setEnv(stdlib);
 
 const define = (node, env = environment) => {
-  return (env[Symbol.for(node.name)] = evaluate(node.value, env));
+  return setVar(node.name, evaluate(node.value, env), env);
 };
 
 const apply = (node, env = environment) => {
@@ -47,8 +54,8 @@ const evaluate = (node, env = environment) => {
     case "DefinitionExpression":
       return define(node, env);
 
-    case: "LambdaExpression":
-      return makeLambda(node, env);
+    // case: "LambdaExpression":
+    //   return makeLambda(node, env);
   }
 
   if (node.value) {

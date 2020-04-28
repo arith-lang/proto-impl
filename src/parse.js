@@ -6,6 +6,8 @@ const {
 } = require("./identifiers");
 const keywords = require("./keywords");
 
+let lambdas = 0;
+
 const parseProgram = (tokens) => {
   const program = {
     type: "Program",
@@ -84,9 +86,11 @@ const parseLambda = (tokens) => {
       params.push(parseParam(token));
     }
   }
+  lambdas += 1;
 
   return {
     type: "LambdaExpression",
+    name: `lambda${lambdas}`,
     params,
     body: parse(tokens),
   };

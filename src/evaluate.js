@@ -59,14 +59,15 @@ const evaluate = (node, env = environment) => {
 
 const evaluateProgram = (prog) => {
   let i = 0;
+  let val;
   while (i < prog.body.length) {
     if (prog.body[i]) {
-      evaluate(prog.body[i]);
+      val = evaluate(prog.body[i]);
     }
     i += 1;
   }
 
-  return;
+  return val;
 };
 
 module.exports = { evaluate, evaluateProgram };

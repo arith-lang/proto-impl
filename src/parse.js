@@ -154,9 +154,9 @@ const parseAtom = (token) => {
   }
 };
 
-const eatExprTokens = (tokens) => {
+const eatExprTokens = (tokens, numOfLeft = 1) => {
   let exprTokens = [];
-  let lParens = 1;
+  let lParens = numOfLeft;
   let rParens = 0;
 
   while (lParens > rParens) {

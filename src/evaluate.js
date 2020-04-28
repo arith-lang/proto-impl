@@ -31,6 +31,8 @@ const applyKeyword = (node, env = environment) => {
   );
 };
 
+const makeLambda = (node, env) => {};
+
 const evaluate = (node, env = environment) => {
   switch (node.type) {
     case "Identifier":
@@ -44,6 +46,9 @@ const evaluate = (node, env = environment) => {
 
     case "DefinitionExpression":
       return define(node, env);
+
+    case: "LambdaExpression":
+      return makeLambda(node, env);
   }
 
   if (node.value) {

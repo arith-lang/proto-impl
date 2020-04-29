@@ -42,17 +42,5 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] Defining variables
 - [x] Defining functions
 - [ ] Proper pairs and lists
-- [ ] Refactor evaluator and transpiler to CPS
-- [ ] Quoting and unquoting
-- [ ] I/O primitives
-- [ ] Vector data type
-- [ ] Modules and imports
 - [ ] Iteration construct (for)
-- [ ] Hash tables
-- [ ] User-definable structs
-- [ ] Ability to load files into REPL
-- [ ] Ability to eval code strings from stdin
-- [ ] Macros and macro expansion
-- [ ] Better test coverage
-- [ ] Assertions and tests
-- [ ] Exceptions
+- [ ] I/O primitives

@@ -25,7 +25,13 @@ const lookup = (name, env) => {
 };
 
 const getValue = (node, env) => {
-  if (env[Symbol.for(node.name)]) {
+  if (
+    env[Symbol.for(node.name)] ||
+    env[Symbol.for(node.name)] === 0 ||
+    env[Symbol.for(node.name)] === false ||
+    env[Symbol.for(node.name)] === null ||
+    env[Symbol.for(node.name)] === ""
+  ) {
     return env[Symbol.for(node.name)];
   }
 

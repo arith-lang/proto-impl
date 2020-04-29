@@ -40,7 +40,7 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] Lambda functions
 - [x] Branching construct
 - [x] Defining variables
-- [ ] Defining functions
+- [x] Defining functions
 - [ ] Proper pairs and lists
 - [ ] Refactor evaluator and transpiler to CPS
 - [ ] Quoting and unquoting

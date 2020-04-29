@@ -96,38 +96,3 @@ const evaluateProgram = (prog) => {
 };
 
 module.exports = { evaluate, evaluateProgram };
-
-console.log(
-  evaluateProgram({
-    type: "Program",
-    body: [
-      {
-        type: "DefinitionExpression",
-        name: "add2",
-        value: {
-          type: "LambdaExpression",
-          params: [
-            { type: "FunctionParameter", name: "x" },
-            { type: "FunctionParameter", name: "y" },
-          ],
-          body: {
-            type: "CallExpression",
-            name: "+",
-            arguments: [
-              { type: "Identifier", name: "x" },
-              { type: "Identifier", name: "y" },
-            ],
-          },
-        },
-      },
-      {
-        type: "CallExpression",
-        name: "add2",
-        arguments: [
-          { type: "IntegerLiteral", value: 2 },
-          { type: "IntegerLiteral", value: 3 },
-        ],
-      },
-    ],
-  }),
-);

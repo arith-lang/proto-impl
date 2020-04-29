@@ -39,7 +39,19 @@ const applyKeyword = (node, env = environment) => {
   );
 };
 
-const makeLambda = (node, env) => {};
+const makeLambda = (node, env = environment) => {
+  const lambda = (...args) => {
+    const names = node.params;
+    const scope = createEnv(env);
+    if (names && names.length) {
+      names.forEach((n, i) => {
+        defVar(n.name, args[i], scope);
+      });
+    }
+    return evaluate(node.body, scope);
+  };
+  return lambda;
+};
 
 const evaluate = (node, env = environment) => {
   switch (node.type) {
@@ -55,8 +67,8 @@ const evaluate = (node, env = environment) => {
     case "DefinitionExpression":
       return define(node, env);
 
-    // case: "LambdaExpression":
-    //   return makeLambda(node, env);
+    case "LambdaExpression":
+      return makeLambda(node, env);
   }
 
   if (node.value) {
@@ -84,3 +96,38 @@ const evaluateProgram = (prog) => {
 };
 
 module.exports = { evaluate, evaluateProgram };
+
+console.log(
+  evaluateProgram({
+    type: "Program",
+    body: [
+      {
+        type: "DefinitionExpression",
+        name: "add2",
+        value: {
+          type: "LambdaExpression",
+          params: [
+            { type: "FunctionParameter", name: "x" },
+            { type: "FunctionParameter", name: "y" },
+          ],
+          body: {
+            type: "CallExpression",
+            name: "+",
+            arguments: [
+              { type: "Identifier", name: "x" },
+              { type: "Identifier", name: "y" },
+            ],
+          },
+        },
+      },
+      {
+        type: "CallExpression",
+        name: "add2",
+        arguments: [
+          { type: "IntegerLiteral", value: 2 },
+          { type: "IntegerLiteral", value: 3 },
+        ],
+      },
+    ],
+  }),
+);

@@ -24,7 +24,7 @@ To transpile a program to JavaScript, use `arc <filename>`.
 
 The evaluator/transpiler can currently process numeric and float literals, strings, and booleans as well as function calls and nested function calls for library functions. You can also declare variable bindings using `define`. As one would expect for a Lisp, you can define identifier names with certain special characters (e.g. -, =).
 
-The standard library currently includes arithmetic, string manipulation, and comparison functions. Most functions are variadic, so you can use them with any number of arguments.
+The standard library currently includes arithmetic, string manipulation, and comparison functions. Most functions are variadic, so you can use them with any number of arguments. You can also create lambda functions, define them as a variable, and call them.
 
 See the [standard library code](./src/stdlib.js) for a complete list of available functions and constants.
 
@@ -37,7 +37,7 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] String evaluation and processing
 - [x] Booleans and boolean expressions
 - [x] Ability to parse and evaluate/transpile multiple top-level expressions
-- [ ] Lambda functions
+- [x] Lambda functions
 - [x] Branching construct
 - [x] Defining variables
 - [ ] Defining functions

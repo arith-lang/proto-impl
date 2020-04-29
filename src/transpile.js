@@ -1,9 +1,18 @@
 const stdlib = require("./stdlib");
-const { setEnv, getValue, getIdentifier } = require("./environment");
+const {
+  setEnv,
+  lookup,
+  getValue,
+  getIdentifier,
+  defVar,
+  createEnv,
+} = require("./environment");
 
 const environment = setEnv(stdlib);
+let scope = undefined;
 
 const transpile = (node, env = environment) => {
+  // console.log("transpile:", node);
   if (node) {
     return (
       emit[node.type](node, env) ||
@@ -34,11 +43,15 @@ const BooleanLiteral = returnValue;
 const StringLiteral = ({ value }) => `"${value}"`;
 
 const Identifier = (node, env = environment) => {
-  return `${makeVar(getIdentifier(node, env))}`;
+  const e = scope || env;
+  const local = lookup(node.name, e);
+  return `${makeVar(getIdentifier(node, e))}`;
 };
 
 const CallExpression = (node, env = environment) => {
-  let name = getValue(node, env).name;
+  let name =
+    getValue(node, env).name || makeVar(getIdentifier(node, env));
+  console.log(name);
   let code = node.arguments.reduce((acc, c, i, a) => {
     let tmp = acc + transpile(c);
     if (i + 1 < a.length) tmp += ", ";
@@ -59,8 +72,23 @@ const KeywordExpression = (node, env = environment) => {
 
 const DefinitionExpression = (node, env = environment) => {
   let value = transpile(node.value, env);
-  env[Symbol.for(node.name)] = value;
+  defVar(node.name, value, env);
   return `let ${makeVar(node.name)} = ${value};`;
+};
+
+const LambdaExpression = (node, env = environment) => {
+  scope = createEnv(env);
+  let code = "(function(";
+  node.params.forEach((param, i, a) => {
+    code += `${makeVar(param.name)}`;
+    defVar(param.name, undefined, scope);
+    if (i + 1 < a.length) code += ", ";
+  });
+  code += ") { ";
+  code += "return " + transpile(node.body);
+  code += " })\n";
+
+  return code;
 };
 
 const makeVar = (name) => {
@@ -79,17 +107,7 @@ const emit = {
   CallExpression,
   KeywordExpression,
   DefinitionExpression,
+  LambdaExpression,
 };
 
 module.exports = { transpile, transpileProgram };
-
-// console.log(
-//   transpile({
-//     type: "CallExpression",
-//     name: "+",
-//     arguments: [
-//       { type: "IntegerLiteral", value: 2 },
-//       { type: "IntegerLiteral", value: 3 },
-//     ],
-//   }),
-// );

@@ -41,7 +41,7 @@ const run = (argv) => {
   } else if (command.toLowerCase() === "run") {
     const input = fs.readFileSync(args[0], "utf-8");
 
-    evaluateProgram(tokenizeAndParseProgram(input));
+    console.log(evaluateProgram(tokenizeAndParseProgram(input)));
   }
 };
 

@@ -55,6 +55,10 @@ const isSeparator = (char) =>
 
 const isQuote = (char) => char === '"';
 
+const isSemicolon = (char) => char === ";";
+
+const isEndOfLine = (char) => char === "\n";
+
 module.exports = {
   isInteger,
   isFloat,
@@ -71,4 +75,6 @@ module.exports = {
   isSeparator,
   isEndOfInput,
   isQuote,
+  isSemicolon,
+  isEndOfLine,
 };

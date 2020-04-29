@@ -1,0 +1,4 @@
+; testing comments
+(print "this is not a comment")
+; (print "this is a comment and should not print")
+(print "this is the end of the file")

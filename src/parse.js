@@ -32,17 +32,45 @@ const parse = (tokens) => {
 };
 
 const maybeCall = (tokens) => {
-  const token = peek(tokens);
+  let token = peek(tokens);
 
   if (token && token.type === "IDENTIFIER") {
     if (keywords.includes(token.value)) {
       return parseKeyword(tokens);
     }
-
     return parseCall(tokens);
+  } else if (isLeftParen(token.value)) {
+    token = pop(tokens);
+
+    if (peek(tokens) && peek(tokens).value === "lambda") {
+      return parseIIFE(tokens);
+    } else {
+      tokens.unshift(token);
+    }
   }
 
   return parse(tokens);
+};
+
+const parseIIFE = (tokens) => {
+  const exprTokens = eatExprTokens(tokens, 2);
+
+  let token = pop(exprTokens); // lambda identifier
+  let callExpr = {
+    type: "CallExpression",
+    lambda: parseLambda(exprTokens),
+    name: "lambda",
+    arguments: [],
+  };
+
+  pop(exprTokens); // end-of-lambda right paren
+
+  while (token && !isRightParen(token.value)) {
+    callExpr.arguments.push(parse(exprTokens));
+    token = pop(exprTokens);
+  }
+
+  return callExpr;
 };
 
 const parseKeyword = (tokens) => {
@@ -50,6 +78,8 @@ const parseKeyword = (tokens) => {
 
   if (token.value === "define") {
     return parseDefine(tokens);
+  } else if (token.value === "lambda") {
+    return parseLambda(tokens);
   }
 
   const expr = {
@@ -59,15 +89,7 @@ const parseKeyword = (tokens) => {
   };
 
   if (expr.name === "cond") {
-    let exprTokens = [];
-    let lParens = 1;
-    let rParens = 0;
-    while (lParens > rParens) {
-      token = pop(tokens);
-      if (isLeftParen(token.value)) lParens += 1;
-      else if (isRightParen(token.value)) rParens += 1;
-      exprTokens.push(token);
-    }
+    const exprTokens = eatExprTokens(tokens);
 
     return parseCond(expr, exprTokens);
   } else {
@@ -77,6 +99,32 @@ const parseKeyword = (tokens) => {
 
     return expr;
   }
+};
+
+const parseLambda = (tokens) => {
+  let token = pop(tokens); // left paren for args
+  let params = [];
+
+  while (!isRightParen(token.value)) {
+    token = pop(tokens);
+
+    if (token && token.type === "IDENTIFIER") {
+      params.push(parseParam(token));
+    }
+  }
+
+  return {
+    type: "LambdaExpression",
+    params,
+    body: parse(tokens),
+  };
+};
+
+const parseParam = (token) => {
+  return {
+    type: "FunctionParameter",
+    name: token.value,
+  };
 };
 
 const parseDefine = (tokens) => {
@@ -128,6 +176,21 @@ const parseAtom = (token) => {
       ? nodeCreators[token.type](token.value)
       : noop();
   }
+};
+
+const eatExprTokens = (tokens, numOfLeft = 1) => {
+  let exprTokens = [];
+  let lParens = numOfLeft;
+  let rParens = 0;
+
+  while (lParens > rParens) {
+    token = pop(tokens);
+    if (isLeftParen(token.value)) lParens += 1;
+    if (isRightParen(token.value)) rParens += 1;
+    exprTokens.push(token);
+  }
+
+  return exprTokens;
 };
 
 const INTEGER = (value) => {

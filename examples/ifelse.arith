@@ -1,6 +1,6 @@
-(print (if
+(if
   (=
     (+ (- 10 4) (* 2 6))
     (* 3 6))
   "They're equal!"
-  "They're not equal."))
+  "They're not equal.")

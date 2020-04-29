@@ -1,0 +1,6 @@
+(define name-case
+  (lambda (name)
+    (string-append (string-upcase (string-ref name 0))
+                    (string-downcase (substring name 1)))))
+
+(print(name-case "jAsON"))

@@ -279,7 +279,7 @@ describe("The parser function", () => {
       { type: "IDENTIFIER", value: "define" },
       { type: "IDENTIFIER", value: "x" },
       { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
+      { type: "IDENTIFIER", value: "+" },
       { type: "INTEGER", value: 2 },
       { type: "INTEGER", value: 3 },
       { type: "PAREN", value: ")" },
@@ -291,7 +291,7 @@ describe("The parser function", () => {
       name: "x",
       value: {
         type: "CallExpression",
-        name: "add",
+        name: "+",
         arguments: [
           { type: "IntegerLiteral", value: 2 },
           { type: "IntegerLiteral", value: 3 },

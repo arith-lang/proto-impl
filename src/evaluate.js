@@ -1,10 +1,18 @@
 const stdlib = require("./stdlib");
-const { setEnv, getValue, getIdentifier } = require("./environment");
+const {
+  createEnv,
+  setEnv,
+  lookup,
+  getValue,
+  setValue,
+  defVar,
+  getIdentifier,
+} = require("./environment");
 
 const environment = setEnv(stdlib);
 
 const define = (node, env = environment) => {
-  return (env[Symbol.for(node.name)] = evaluate(node.value, env));
+  return defVar(node.name, evaluate(node.value, env), env);
 };
 
 const apply = (node, env = environment) => {
@@ -31,6 +39,20 @@ const applyKeyword = (node, env = environment) => {
   );
 };
 
+const makeLambda = (node, env = environment) => {
+  const lambda = (...args) => {
+    const names = node.params;
+    const scope = createEnv(env);
+    if (names && names.length) {
+      names.forEach((n, i) => {
+        defVar(n.name, args[i], scope);
+      });
+    }
+    return evaluate(node.body, scope);
+  };
+  return lambda;
+};
+
 const evaluate = (node, env = environment) => {
   switch (node.type) {
     case "Identifier":
@@ -44,6 +66,9 @@ const evaluate = (node, env = environment) => {
 
     case "DefinitionExpression":
       return define(node, env);
+
+    case "LambdaExpression":
+      return makeLambda(node, env);
   }
 
   if (node.value) {
@@ -59,14 +84,15 @@ const evaluate = (node, env = environment) => {
 
 const evaluateProgram = (prog) => {
   let i = 0;
+  let val;
   while (i < prog.body.length) {
     if (prog.body[i]) {
-      evaluate(prog.body[i]);
+      val = evaluate(prog.body[i]);
     }
     i += 1;
   }
 
-  return;
+  return val;
 };
 
 module.exports = { evaluate, evaluateProgram };

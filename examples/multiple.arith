@@ -1,3 +1,4 @@
 (print "hello")
 (print "There are multiple top-level expressions")
-(print (+ 3 4 5 6))
+(print "The next one adds a range of numbers from 3 to 6, and should have its value returned by the interpreter.")
+(+ 3 4 5 6)

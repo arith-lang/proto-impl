@@ -73,13 +73,31 @@ const parseIIFE = (tokens) => {
   return callExpr;
 };
 
+const parseIf = (tokens) => {
+  // eat if expression tokens
+  // if left paren, eat condition expression tokens and save
+  // otherwise save token in array as condition expression tokens
+  // if left paren, eat then expression tokens and save
+  // otherwise save token in array as then expression tokens
+  // if left paren, eat else expression tokens and save
+  // otherwise save token in array as else expression tokens
+  // create AST node for IfExpression
+  // parse condition tokens as condition property
+  // parse then expression as then property
+  // parse else expression as else property
+  // return expression node
+};
+
 const parseKeyword = (tokens) => {
   let token = pop(tokens);
 
-  if (token.value === "define") {
-    return parseDefine(tokens);
-  } else if (token.value === "lambda") {
-    return parseLambda(tokens);
+  switch (token.value) {
+    case "define":
+      return parseDefine(tokens);
+    case "lambda":
+      return parseLambda(tokens);
+    case "if":
+      return parseIf(tokens);
   }
 
   const expr = {

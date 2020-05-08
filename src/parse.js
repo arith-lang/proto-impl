@@ -80,7 +80,7 @@ const parseIf = (tokens) => {
 
   if (token && isLeftParen(token.value)) {
     conditionTokens = eatExprTokens(ifExprTokens);
-    conditionTokens.unshift(token);
+    conditionTokens.unshift(token); // needed for parsing
   } else {
     conditionTokens = [token];
   }
@@ -90,7 +90,7 @@ const parseIf = (tokens) => {
 
   if (token && isLeftParen(token.value)) {
     thenTokens = eatExprTokens(ifExprTokens);
-    thenTokens.unshift(token);
+    thenTokens.unshift(token); // needed for parsing
   } else {
     thenTokens = [token];
   }
@@ -100,7 +100,7 @@ const parseIf = (tokens) => {
 
   if (token && isLeftParen(token.value)) {
     elseTokens = eatExprTokens(ifExprTokens);
-    elseTokens.unshift(token);
+    elseTokens.unshift(token); // needed for parsing
   } else {
     elseTokens = [token];
   }

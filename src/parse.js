@@ -74,18 +74,43 @@ const parseIIFE = (tokens) => {
 };
 
 const parseIf = (tokens) => {
-  // eat if expression tokens
-  // if left paren, eat condition expression tokens and save
-  // otherwise save token in array as condition expression tokens
-  // if left paren, eat then expression tokens and save
-  // otherwise save token in array as then expression tokens
-  // if left paren, eat else expression tokens and save
-  // otherwise save token in array as else expression tokens
-  // create AST node for IfExpression
-  // parse condition tokens as condition property
-  // parse then expression as then property
-  // parse else expression as else property
-  // return expression node
+  const ifExprTokens = eatExprTokens(tokens);
+  let token = pop(ifExprTokens);
+  let conditionTokens;
+
+  if (token && isLeftParen(token.value)) {
+    conditionTokens = eatExprTokens(ifExprTokens);
+    conditionTokens.unshift(token);
+  } else {
+    conditionTokens = [token];
+  }
+
+  token = pop(ifExprTokens);
+  let thenTokens;
+
+  if (token && isLeftParen(token.value)) {
+    thenTokens = eatExprTokens(ifExprTokens);
+    thenTokens.unshift(token);
+  } else {
+    thenTokens = [token];
+  }
+
+  token = pop(ifExprTokens);
+  let elseTokens;
+
+  if (token && isLeftParen(token.value)) {
+    elseTokens = eatExprTokens(ifExprTokens);
+    elseTokens.unshift(token);
+  } else {
+    elseTokens = [token];
+  }
+
+  return {
+    type: "IfExpression",
+    condition: parse(conditionTokens),
+    then: parse(thenTokens),
+    else: parse(elseTokens),
+  };
 };
 
 const parseKeyword = (tokens) => {

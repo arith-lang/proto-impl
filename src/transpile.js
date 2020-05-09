@@ -92,6 +92,17 @@ const LambdaExpression = (node, env = environment) => {
   return code;
 };
 
+const IfExpression = (node, env = environment) => {
+  let code = "(";
+  code += transpile(node.condition, env) !== false;
+  code += " ? ";
+  code += transpile(node.then, env);
+  code += " : ";
+  code += transpile(node.else, env) + ")";
+
+  return code;
+};
+
 const makeVar = (name) => {
   const specialChars = /[-%&!\?\*\+\/\\><\^]/g;
   const newName = `_arith_${name.replace(specialChars, "_")}`;
@@ -109,6 +120,7 @@ const emit = {
   KeywordExpression,
   DefinitionExpression,
   LambdaExpression,
+  IfExpression,
 };
 
 module.exports = { transpile, transpileProgram };

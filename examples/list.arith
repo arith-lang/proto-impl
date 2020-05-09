@@ -1,0 +1,7 @@
+(define l1
+  (list 1 2 3))
+(define l2
+  (list "a" "b" "c"))
+
+(print l1 l2)
+(print "l1 length is:" (length l1)) ; -> 3

@@ -1,4 +1,4 @@
-const nil = null;
+const nil = [];
 
 const cons = (car, cdr) => {
   if (!cdr) {
@@ -32,7 +32,7 @@ const length = (list) => {
   const helper = (total, l) => {
     if (!l || !l.length) {
       return 0;
-    } else if (l[1] === nil) {
+    } else if (!l[1].length) {
       return total + 1;
     } else {
       return helper(total + 1, cdr(l));

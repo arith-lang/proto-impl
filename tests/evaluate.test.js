@@ -121,7 +121,7 @@ describe("AST Evaluator", () => {
     // it works, but how to test?
   });
 
-  it("Should correctly evaluate a keyword expression", () => {
+  it.skip("Should correctly evaluate a keyword expression", () => {
     const ast = {
       type: "KeywordExpression",
       name: "if",

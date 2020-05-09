@@ -4,7 +4,8 @@ const {
   isLeftParen,
   isParen,
 } = require("./identifiers");
-const keywords = require("./keywords");
+
+const keywords = ["if", "cond", "define", "lambda"];
 
 const parseProgram = (tokens) => {
   const program = {

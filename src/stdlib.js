@@ -1,12 +1,8 @@
+const list = require("./stdlib/lists");
+
 const all = (fn) => (...list) => list.reduce(fn);
 
 // keyword expression functions
-const ifExpr = (condition, ifTrue, ifFalse) => {
-  return condition !== false ? ifTrue : ifFalse;
-};
-
-const elseExpr = (expr) => expr;
-
 const condExpr = (...exprs) => {
   for (let i = 0; i <= exprs.length; i += 2) {
     if (
@@ -154,8 +150,6 @@ function strGte(str1, str2) {
 }
 
 module.exports = {
-  ifExpr,
-  elseExpr,
   condExpr,
   and,
   or,
@@ -193,4 +187,5 @@ module.exports = {
   "string<=?": strLte,
   "string>?": strGt,
   "string>=?": strGte,
+  ...list,
 };

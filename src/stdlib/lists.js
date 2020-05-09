@@ -40,3 +40,15 @@ const length = (list) => {
   };
   return helper(0, list);
 };
+
+module.exports = {
+  cons,
+  list,
+  car,
+  cdr,
+  first,
+  head,
+  rest,
+  tail,
+  length,
+};

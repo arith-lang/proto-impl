@@ -73,13 +73,56 @@ const parseIIFE = (tokens) => {
   return callExpr;
 };
 
+const parseIf = (tokens) => {
+  const ifExprTokens = eatExprTokens(tokens);
+  let token = pop(ifExprTokens);
+  let conditionTokens;
+
+  if (token && isLeftParen(token.value)) {
+    conditionTokens = eatExprTokens(ifExprTokens);
+    conditionTokens.unshift(token); // needed for parsing
+  } else {
+    conditionTokens = [token];
+  }
+
+  token = pop(ifExprTokens);
+  let thenTokens;
+
+  if (token && isLeftParen(token.value)) {
+    thenTokens = eatExprTokens(ifExprTokens);
+    thenTokens.unshift(token); // needed for parsing
+  } else {
+    thenTokens = [token];
+  }
+
+  token = pop(ifExprTokens);
+  let elseTokens;
+
+  if (token && isLeftParen(token.value)) {
+    elseTokens = eatExprTokens(ifExprTokens);
+    elseTokens.unshift(token); // needed for parsing
+  } else {
+    elseTokens = [token];
+  }
+
+  return {
+    type: "IfExpression",
+    condition: parse(conditionTokens),
+    then: parse(thenTokens),
+    else: parse(elseTokens),
+  };
+};
+
 const parseKeyword = (tokens) => {
   let token = pop(tokens);
 
-  if (token.value === "define") {
-    return parseDefine(tokens);
-  } else if (token.value === "lambda") {
-    return parseLambda(tokens);
+  switch (token.value) {
+    case "define":
+      return parseDefine(tokens);
+    case "lambda":
+      return parseLambda(tokens);
+    case "if":
+      return parseIf(tokens);
   }
 
   const expr = {

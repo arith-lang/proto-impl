@@ -5,6 +5,7 @@ const {
   getValue,
   getIdentifier,
   defVar,
+  defName,
   createEnv,
 } = require("./environment");
 
@@ -51,7 +52,6 @@ const Identifier = (node, env = environment) => {
 const CallExpression = (node, env = environment) => {
   let name =
     getValue(node, env).name || makeVar(getIdentifier(node, env));
-  console.log(name);
   let code = node.arguments.reduce((acc, c, i, a) => {
     let tmp = acc + transpile(c);
     if (i + 1 < a.length) tmp += ", ";
@@ -71,6 +71,7 @@ const KeywordExpression = (node, env = environment) => {
 };
 
 const DefinitionExpression = (node, env = environment) => {
+  defVar(node.name, "", env);
   let value = transpile(node.value, env);
   defVar(node.name, value, env);
   return `let ${makeVar(node.name)} = ${value};`;
@@ -87,6 +88,17 @@ const LambdaExpression = (node, env = environment) => {
   code += ") { ";
   code += "return " + transpile(node.body);
   code += " })\n";
+
+  return code;
+};
+
+const IfExpression = (node, env = environment) => {
+  let code = "(";
+  code += transpile(node.condition, env) !== false;
+  code += " ? ";
+  code += transpile(node.then, env);
+  code += " : ";
+  code += transpile(node.else, env) + ")";
 
   return code;
 };
@@ -108,6 +120,7 @@ const emit = {
   KeywordExpression,
   DefinitionExpression,
   LambdaExpression,
+  IfExpression,
 };
 
 module.exports = { transpile, transpileProgram };

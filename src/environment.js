@@ -56,6 +56,10 @@ const defVar = (name, value, env) => {
   return (env[Symbol.for(name)] = value);
 };
 
+const defName = (name, env) => {
+  return env[Symbol.for(name)];
+};
+
 module.exports = {
   createEnv,
   setEnv,
@@ -64,4 +68,5 @@ module.exports = {
   setValue,
   getIdentifier,
   defVar,
+  defName,
 };

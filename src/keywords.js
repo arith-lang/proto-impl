@@ -1,1 +1,1 @@
-module.exports = ["if", "else", "cond", "define", "lambda"];
+module.exports = ["if", "cond", "define", "lambda"];

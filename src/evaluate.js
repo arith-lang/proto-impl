@@ -58,7 +58,7 @@ const makeLambda = (node, env = environment) => {
 const applyIf = (node, env = environment) => {
   const cond = evaluate(node.condition, env);
 
-  if (cond !== false && cond !== null) {
+  if (cond !== false) {
     return evaluate(node.then, env);
   } else {
     return evaluate(node.else, env);

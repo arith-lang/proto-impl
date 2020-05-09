@@ -26,6 +26,8 @@ The evaluator/transpiler can currently process numeric and float literals, strin
 
 The standard library currently includes arithmetic, string manipulation, and comparison functions. Most functions are variadic, so you can use them with any number of arguments. You can also create lambda functions, define them as a variable, and call them.
 
+Functions defined as a variable can be called recursively, so the language is technically Turing-complete.
+
 See the [standard library code](./src/stdlib.js) for a complete list of available functions and constants.
 
 ## Credits

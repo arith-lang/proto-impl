@@ -10,10 +10,8 @@ const {
 } = require("./environment");
 
 const environment = setEnv(stdlib);
-let scope = undefined;
 
 const transpile = (node, env = environment) => {
-  // console.log("transpile:", node);
   if (node) {
     return (
       emit[node.type](node, env) ||
@@ -44,14 +42,26 @@ const BooleanLiteral = returnValue;
 const StringLiteral = ({ value }) => `"${value}"`;
 
 const Identifier = (node, env = environment) => {
-  const e = scope || env;
-  const local = lookup(node.name, e);
-  return `${makeVar(getIdentifier(node, e))}`;
+  let name = "";
+
+  try {
+    name = getValue(node, env).name;
+  } catch (e) {
+    name = getIdentifier(node, env) || makeVar(node.name);
+  }
+
+  return name;
 };
 
 const CallExpression = (node, env = environment) => {
-  let name =
-    getValue(node, env).name || makeVar(getIdentifier(node, env));
+  let name = "";
+
+  try {
+    name = getValue(node, env).name;
+  } catch (e) {
+    name = makeVar(node.name);
+  }
+
   let code = node.arguments.reduce((acc, c, i, a) => {
     let tmp = acc + transpile(c);
     if (i + 1 < a.length) tmp += ", ";
@@ -71,18 +81,14 @@ const KeywordExpression = (node, env = environment) => {
 };
 
 const DefinitionExpression = (node, env = environment) => {
-  defVar(node.name, "", env);
   let value = transpile(node.value, env);
-  defVar(node.name, value, env);
   return `let ${makeVar(node.name)} = ${value};`;
 };
 
 const LambdaExpression = (node, env = environment) => {
-  scope = createEnv(env);
   let code = "(function(";
   node.params.forEach((param, i, a) => {
     code += `${makeVar(param.name)}`;
-    defVar(param.name, undefined, scope);
     if (i + 1 < a.length) code += ", ";
   });
   code += ") { ";

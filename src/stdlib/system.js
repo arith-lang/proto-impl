@@ -1,5 +1,5 @@
 // boolean expression functions
-const and = (...exprs) => {
+function and(...exprs) {
   for (expr of exprs) {
     if (Boolean(expr) === false) {
       return false;
@@ -7,9 +7,9 @@ const and = (...exprs) => {
   }
 
   return exprs[exprs.length - 1];
-};
+}
 
-const or = (...exprs) => {
+function or(...exprs) {
   for (expr of exprs) {
     if (expr == true || expr === 0 || expr === "") {
       return expr;
@@ -17,9 +17,11 @@ const or = (...exprs) => {
   }
 
   return exprs[exprs.length - 1];
-};
+}
 
-const not = (expr) => !expr;
+function not(expr) {
+  return !expr;
+}
 
 module.exports = {
   and,

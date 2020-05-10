@@ -1,4 +1,6 @@
-const all = (fn) => (...list) => list.reduce(fn);
+function all(fn) {(...list) =>
+  return list.reduce(fn);
+}
 
 module.exports = {
   all,

@@ -29,12 +29,29 @@ function floorDiv(...args) {
   return floor(div(...args));
 }
 
-const max = (...args) => Math.max(...args);
-const min = (...args) => Math.min(...args);
-const pow = (x, y) => Math.pow(x, y);
-const round = (x) => Math.round(x);
-const ceil = (x) => Math.ceil(x);
-const floor = (x) => Math.floor(x);
+function max(...args) {
+  return Math.max(...args);
+}
+
+function min(...args) {
+  return Math.min(...args);
+}
+
+function pow(x, y) {
+  return Math.pow(x, y);
+}
+
+function round(x) {
+  function Math.round(x);
+}
+
+function ceil(x) {
+  return Math.ceil(x);
+}
+
+function floor(x) {
+  return Math.floor(x);
+}
 
 // numeric comparisons
 function eq(x, y) {

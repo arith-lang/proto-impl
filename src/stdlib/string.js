@@ -24,7 +24,9 @@ function strRef(str, i) {
   return str[i];
 }
 
-const substring = (str, start, end) => str.slice(start, end);
+function substring(str, start, end) {
+  return str.slice(start, end);
+}
 
 // string comparisons
 function strEq(str1, str2) {

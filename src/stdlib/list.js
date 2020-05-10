@@ -1,27 +1,29 @@
 const nil = [];
 
-const cons = (car, cdr) => {
+function cons(car, cdr) {
   if (!cdr) {
     cdr = nil;
   }
   return [car, cdr];
-};
+}
 
-const list = (...args) => {
+function list(...args) {
   if (!args.length) {
     return nil;
   } else {
     const [head, ...tail] = args;
     return cons(head, list(...tail));
   }
-};
+}
 
-const car = (list) => list[0];
+function car(list) {
+  return list[0];
+}
 
-const cdr = (list) => {
+function cdr(list) {
   const [, [...rest]] = list;
   return rest;
-};
+}
 
 const first = car;
 const head = car;
@@ -32,7 +34,7 @@ function isNull(obj) {
   return obj instanceof Array && obj.length === 0;
 }
 
-const length = (list) => {
+function length(list) {
   const helper = (total, l) => {
     if (isNull(list)) {
       return 0;
@@ -43,18 +45,18 @@ const length = (list) => {
     }
   };
   return helper(0, list);
-};
+}
 
-const map = (fn, lst) => {
+function map(fn, lst) {
   if (isNull(lst)) {
     return nil;
   } else {
     const [head, [...tail]] = lst;
     return cons(fn(head), map(fn, tail));
   }
-};
+}
 
-const filter = (pred, lst) => {
+function filter(pred, lst) {
   if (isNull(lst)) {
     return nil;
   }
@@ -64,7 +66,7 @@ const filter = (pred, lst) => {
   } else {
     return filter(pred, tail);
   }
-};
+}
 
 function foldl(fn, accum, lst) {
   if (isNull(lst)) {

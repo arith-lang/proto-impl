@@ -34,6 +34,10 @@ function isNull(obj) {
   return obj instanceof Array && obj.length === 0;
 }
 
+function isPair(obj) {
+  return obj instanceof Array && obj.length === 2;
+}
+
 function length(list) {
   const helper = (total, l) => {
     if (isNull(list)) {
@@ -89,6 +93,7 @@ module.exports = {
   rest,
   tail,
   "null?": isNull,
+  "pair?": isPair,
   length,
   map,
   filter,

@@ -1,0 +1,12 @@
+(define nums
+  (list 1 2 3))
+
+(define square
+  (lambda (x) (* x x)))
+
+(define squared
+  (map
+    square
+    nums))
+
+(print squared)

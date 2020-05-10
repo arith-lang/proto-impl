@@ -19,8 +19,8 @@ const list = (...args) => {
 const car = (list) => list[0];
 
 const cdr = (list) => {
-  const [, ...rest] = list;
-  return rest[0];
+  const [, [...rest]] = list;
+  return rest;
 };
 
 const first = car;
@@ -41,6 +41,15 @@ const length = (list) => {
   return helper(0, list);
 };
 
+const map = (fn, lst) => {
+  if (!lst.length) {
+    return nil;
+  } else {
+    const [head, [...tail]] = lst;
+    return cons(fn(head), map(fn, tail));
+  }
+};
+
 module.exports = {
   cons,
   list,
@@ -51,4 +60,12 @@ module.exports = {
   rest,
   tail,
   length,
+  map,
 };
+
+// const nums = list(1, 2, 3, 4, 5);
+// const square = (x) => {
+//   return x * x;
+// };
+
+// console.log(map(square, nums));

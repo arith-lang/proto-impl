@@ -50,6 +50,18 @@ const map = (fn, lst) => {
   }
 };
 
+const filter = (pred, lst) => {
+  if (!lst.length) {
+    return nil;
+  }
+  const [head, [...tail]] = lst;
+  if (pred(head) !== false) {
+    return cons(head, filter(pred, tail));
+  } else {
+    return filter(pred, tail);
+  }
+};
+
 module.exports = {
   cons,
   list,
@@ -61,11 +73,5 @@ module.exports = {
   tail,
   length,
   map,
+  filter,
 };
-
-// const nums = list(1, 2, 3, 4, 5);
-// const square = (x) => {
-//   return x * x;
-// };
-
-// console.log(map(square, nums));

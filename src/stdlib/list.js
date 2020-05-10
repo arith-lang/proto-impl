@@ -28,6 +28,10 @@ const head = car;
 const rest = cdr;
 const tail = cdr;
 
+function isNull(obj) {
+  return obj instanceof Array && obj.length === 0;
+}
+
 const length = (list) => {
   const helper = (total, l) => {
     if (!l || !l.length) {
@@ -62,6 +66,16 @@ const filter = (pred, lst) => {
   }
 };
 
+function foldl(fn, accum, lst) {
+  if (!lst.length) {
+    return accum;
+  }
+  const [head, [...tail]] = lst;
+  return foldl(fn, fn(accum, head), tail);
+}
+
+const fold = foldl;
+
 module.exports = {
   cons,
   list,
@@ -71,7 +85,9 @@ module.exports = {
   head,
   rest,
   tail,
+  "null?": isNull,
   length,
   map,
   filter,
+  foldl,
 };

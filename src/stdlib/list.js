@@ -34,7 +34,7 @@ function isNull(obj) {
 
 const length = (list) => {
   const helper = (total, l) => {
-    if (!l || !l.length) {
+    if (isNull(list)) {
       return 0;
     } else if (!l[1].length) {
       return total + 1;
@@ -46,7 +46,7 @@ const length = (list) => {
 };
 
 const map = (fn, lst) => {
-  if (!lst.length) {
+  if (isNull(lst)) {
     return nil;
   } else {
     const [head, [...tail]] = lst;
@@ -55,7 +55,7 @@ const map = (fn, lst) => {
 };
 
 const filter = (pred, lst) => {
-  if (!lst.length) {
+  if (isNull(lst)) {
     return nil;
   }
   const [head, [...tail]] = lst;
@@ -67,7 +67,7 @@ const filter = (pred, lst) => {
 };
 
 function foldl(fn, accum, lst) {
-  if (!lst.length) {
+  if (isNull(lst)) {
     return accum;
   }
   const [head, [...tail]] = lst;

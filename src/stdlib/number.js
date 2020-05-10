@@ -42,7 +42,7 @@ function pow(x, y) {
 }
 
 function round(x) {
-  function Math.round(x);
+  return Math.round(x);
 }
 
 function ceil(x) {

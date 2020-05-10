@@ -1,5 +1,7 @@
-function all(fn) {(...list) =>
-  return list.reduce(fn);
+function all(fn) {
+  return function (...list) {
+    return list.reduce(fn);
+  };
 }
 
 module.exports = {

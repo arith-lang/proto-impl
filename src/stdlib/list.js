@@ -77,6 +77,7 @@ function foldl(fn, accum, lst) {
 }
 
 const fold = foldl;
+const reduce = foldl;
 
 module.exports = {
   cons,
@@ -92,4 +93,6 @@ module.exports = {
   map,
   filter,
   foldl,
+  fold,
+  reduce,
 };

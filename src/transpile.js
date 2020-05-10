@@ -1,13 +1,5 @@
 const stdlib = require("./stdlib");
-const {
-  setEnv,
-  lookup,
-  getValue,
-  getIdentifier,
-  defVar,
-  defName,
-  createEnv,
-} = require("./environment");
+const { setEnv, getValue, getIdentifier } = require("./environment");
 
 const environment = setEnv(stdlib);
 

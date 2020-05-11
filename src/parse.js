@@ -191,7 +191,7 @@ const parseCall = (tokens) => {
       const lambda = parseLambda(lambdaTokens);
       call.arguments.push(lambda);
     } else {
-      tokens.unshift(token);
+      tokens.unshift(token); // if not a lambda, the next line needs that token
     }
   }
 

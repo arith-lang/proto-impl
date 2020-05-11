@@ -108,6 +108,14 @@ function append(...lists) {
   return list(...temp);
 }
 
+function copy(lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  const temp = toArray(lst);
+  return list(...temp);
+}
+
 function reverse(lst) {
   if (isNull(lst) || length(lst) === 1) {
     return lst;
@@ -357,6 +365,7 @@ module.exports = {
   "list-ref": listRef,
   "list-tail": listTail,
   append,
+  copy,
   reverse,
   map,
   foldl,

@@ -132,17 +132,11 @@ const parseKeyword = (tokens) => {
     arguments: [],
   };
 
-  if (expr.name === "cond") {
-    const exprTokens = eatExprTokens(tokens);
-
-    return parseCond(expr, exprTokens);
-  } else {
     while (!isRightParen(peek(tokens).value)) {
       expr.arguments.push(parse(tokens));
     }
 
     return expr;
-  }
 };
 
 const parseLambda = (tokens) => {
@@ -196,22 +190,6 @@ const parseCall = (tokens) => {
 
   pop(tokens);
   return call;
-};
-
-const parseCond = (exprNode, tokens) => {
-  while (tokens.length) {
-    if (peek(tokens).value) {
-      if (!isRightParen(peek(tokens).value)) {
-        exprNode.arguments.push(parse(tokens));
-      } else {
-        pop(tokens);
-        continue;
-      }
-    }
-  }
-
-  pop(tokens);
-  return exprNode;
 };
 
 const parseAtom = (token) => {

@@ -1,7 +1,7 @@
 // I/O functions
-const print = (...args) => {
+function print(...args) {
   console.log(...args);
-};
+}
 
 module.exports = {
   print,

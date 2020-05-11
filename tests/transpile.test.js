@@ -24,9 +24,8 @@ describe("Transpile to JavaScript", () => {
 
   it("Should emit an identifier name", () => {
     const ast = { type: "Identifier", name: "x" };
-    const env = setEnv({ x: 5 });
 
-    expect(transpile(ast, env)).toEqual("_arith_x");
+    expect(transpile(ast)).toEqual("_arith_x");
   });
 
   it("Should be able to emit a single call expression", () => {

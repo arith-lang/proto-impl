@@ -1,4 +1,0 @@
-(cond
-  ((= 3 5) "wrong")
-  ((= (+ 2 3) (- 6 5)) "false")
-  (else "This one should run"))

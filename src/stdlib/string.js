@@ -1,6 +1,7 @@
 const { all } = require("./utils");
+const list = require("./list");
 
-// string functions
+// string utilities
 function strlen(str) {
   str.length;
 }
@@ -24,7 +25,38 @@ function strRef(str, i) {
   return str[i];
 }
 
-const substring = (str, start, end) => str.slice(start, end);
+function substring(str, start, end) {
+  return str.slice(start, end);
+}
+
+function makeString(num, char) {
+  return char.repeat(num);
+}
+
+function stringCopy(str) {
+  return substring(str, 0);
+}
+
+function stringTrim(str) {
+  return str.trim();
+}
+
+function stringJoin(sep, ...strs) {
+  return strs.join(sep);
+}
+
+function stringReplace(str, toReplace, replaceWith) {
+  return str.replace(toReplace, replaceWith);
+}
+
+// to list and array
+function stringToList(str) {
+  return list(...str);
+}
+
+function stringToArray(str) {
+  return [...str];
+}
 
 // string comparisons
 function strEq(str1, str2) {
@@ -47,6 +79,11 @@ function strGte(str1, str2) {
   return str1 >= str2;
 }
 
+// string predicate
+function isString(obj) {
+  return typeof obj === "string";
+}
+
 module.exports = {
   "string-length": strlen,
   "string-upcase": upper,
@@ -55,11 +92,17 @@ module.exports = {
   "string-repeat": strRepeat,
   "string-ref": strRef,
   substring,
-  "string-copy": (str) => substring(str, 0),
-  "string-trim": (str) => str.trim(),
+  "make-string": makeString,
+  "string-copy": stringCopy,
+  "string-trim": stringTrim,
+  "string-join": stringJoin,
+  "string-replace": stringReplace,
+  "string-to-list": stringToList,
+  "string-to-array": stringToArray,
   "string=?": strEq,
   "string<?": strLt,
   "string<=?": strLte,
   "string>?": strGt,
   "string>=?": strGte,
+  "string?": isString,
 };

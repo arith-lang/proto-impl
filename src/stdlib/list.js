@@ -153,8 +153,7 @@ function foldr(fn, accum, lst) {
 
 const reduceRight = foldr;
 
-// to array helper
-// (will be more useful when I actually add arrays to the language)
+// conversion functions
 function toArray(lst) {
   let arr = [];
   if (isNull(lst)) {
@@ -170,6 +169,31 @@ function toArray(lst) {
     }
   }
   return arr;
+}
+
+function toString(lst, n) {
+  if (isNull(lst)) {
+    return `'()`;
+  }
+  let arr = toArray(lst);
+  let str = "";
+  if (!n) {
+    str = `'`;
+  }
+  str += `(`;
+  for (const [i, item] of arr.entries()) {
+    if (isList(item)) {
+      str += `${toString(item, i + 1)}`;
+    } else {
+      if (i === arr.length - 1) {
+        str += `${item.toString()}`;
+      } else {
+        str += `${item.toString()} `;
+      }
+    }
+  }
+  str += `)`;
+  return str;
 }
 
 // filtering, removing, sorting, and searching
@@ -341,6 +365,7 @@ module.exports = {
   foldr,
   "reduce-right": reduceRight,
   "to-array": toArray,
+  "to-string": toString,
   filter,
   remove,
   sort,

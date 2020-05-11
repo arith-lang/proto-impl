@@ -195,16 +195,6 @@ const parseCall = (tokens) => {
     }
   }
 
-  if (isLeftParen(peek(tokens).value)) {
-    token = pop(tokens);
-    if (peek(tokens).value === "lambda") {
-      token = pop(tokens); // parseLambda expects tokens starting with left paren starting args
-      const lambda = parseLambda(tokens);
-      call.arguments.push(lambda);
-      pop(tokens); // right paren at end of lambda
-    }
-  }
-
   while (!isRightParen(peek(tokens).value)) {
     call.arguments.push(parse(tokens));
   }

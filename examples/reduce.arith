@@ -1,0 +1,16 @@
+(define nums
+  (list 1 2 3 4 5 6 7 8 9 10))
+
+(define square
+  (lambda (x) (* x x)))
+
+(define squared
+  (map square nums))
+
+(define sum
+  (lambda (acc x) (+ acc x)))
+
+(define sum-of-squares
+  (reduce sum 0 squared))
+
+(print sum-of-squares)

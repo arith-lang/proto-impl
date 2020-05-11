@@ -183,6 +183,17 @@ const parseCall = (tokens) => {
     name: token.value,
     arguments: [],
   };
+  if (isLeftParen(peek(tokens).value)) {
+    token = pop(tokens);
+    if (peek(tokens).value === "lambda") {
+      pop(tokens); // get rid of "lambda" token for parseLambda
+      const lambdaTokens = eatExprTokens(tokens);
+      const lambda = parseLambda(lambdaTokens);
+      call.arguments.push(lambda);
+    } else {
+      tokens.unshift(token);
+    }
+  }
 
   if (isLeftParen(peek(tokens).value)) {
     token = pop(tokens);

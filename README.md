@@ -2,11 +2,11 @@
 
 After working through a few tutorials on writing interpreters and compilers, I decided to build one of my own.
 
-Arith is a very simple language with a Lisp-like syntax that will evaluate basic arithmetic operations, perform string operations, and generally do a little bit of everything you expect a programming language to do.
+Arith is a very simple language with a Lisp-like syntax that will evaluate basic arithmetic operations, perform string and list operations, and generally do a little bit of everything you expect a programming language to do.
 
 I'm taking the incremental approach recommended by Abdulaziz Ghuloum in "[An Incremental Approach to Compiler Construction](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf)" and implementing one small piece at a time from input to code generation.
 
-## Usage
+## Using the interpreter and transpiler
 
 Start by cloning the repo: `git clone https://github.com/jasonsbarr/arith.git <directory>`.
 
@@ -20,15 +20,11 @@ To evaluate a program and print its output to the terminal, use `arith run <file
 
 To transpile a program to JavaScript, use `arc <filename>`.
 
-## Evaluating the language
+## Using the language
 
-The evaluator/transpiler can currently process numeric and float literals, strings, and booleans as well as function calls and nested function calls for library functions. You can also declare variable bindings using `define`. As one would expect for a Lisp, you can define identifier names with certain special characters (e.g. -, =).
+The interpreter and transpiler can handle many basic string, numeric, and list operations. You can also define lambda functions and either pass them to higher-order functions like `map`, `reduce`, and `filter` or use `define` statements to give them names.
 
-The standard library currently includes arithmetic, string manipulation, and comparison functions. Most functions are variadic, so you can use them with any number of arguments. You can also create lambda functions, define them as a variable, and call them.
-
-Functions defined as a variable can be called recursively, so the language is technically Turing-complete.
-
-See the [standard library code](./src/stdlib.js) for a complete list of available functions and constants.
+The standard library has many of the functions one would expect from a Lisp. There is currently no documentation, but the code in the files in the [stdlib](./src/stdlib) directory should be fairly self-documenting.
 
 ## Credits
 
@@ -43,6 +39,8 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] Branching construct
 - [x] Defining variables
 - [x] Defining functions
-- [ ] Proper pairs and lists
+- [x] Proper pairs and lists
 - [ ] Iteration construct (for)
 - [ ] I/O primitives
+- [ ] Arrays
+- [ ] Structs

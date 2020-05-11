@@ -1,5 +1,6 @@
 // let nil = empty array
 const nil = [];
+const empty = nil;
 
 // pair constructor
 function cons(car, cdr) {
@@ -37,6 +38,8 @@ const tail = cdr;
 function isNull(obj) {
   return obj instanceof Array && obj.length === 0;
 }
+
+const isEmpty = isNull;
 
 function isPair(obj) {
   return obj instanceof Array && obj.length === 2;
@@ -208,7 +211,33 @@ function sort(compare, lst) {
   return list(...temp);
 }
 
+function member(item, lst) {
+  if (isNull(lst)) {
+    return lst;
+  }
+  const temp = toArray(lst);
+  const i = temp.indexOf(item);
+  if (item > -1) {
+    return listTail(lst);
+  }
+  return nil;
+}
+
+function find(item, list) {
+  if (isNull(lst)) {
+    return lst;
+  }
+  const temp = toArray(lst);
+  const i = temp.indexOf(item);
+  if (item > -1) {
+    return listRef(i, lst);
+  }
+  return nil;
+}
+
 module.exports = {
+  nil,
+  empty,
   cons,
   list,
   car,
@@ -218,6 +247,7 @@ module.exports = {
   rest,
   tail,
   "null?": isNull,
+  "empty?": isEmpty,
   "pair?": isPair,
   "list?": isList,
   length,

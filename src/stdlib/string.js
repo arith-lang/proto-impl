@@ -1,5 +1,5 @@
 const { all } = require("./utils");
-const list = require("./list");
+const { list } = require("./list");
 
 // string utilities
 function strlen(str) {

@@ -45,7 +45,7 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] Arrays
 - [ ] Structs
 - [ ] Modules
-- [ ] Quoting/unquoting
+- [ ] Symbols and quote/quasiquote/unquote
 - [ ] Macro expansion
 - [ ] Making network requests and handling responses
 - [ ] Working with JSON data

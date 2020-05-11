@@ -10,10 +10,9 @@ function cons(car, cdr) {
 function list(...args) {
   if (!args.length) {
     return nil;
-  } else {
-    const [head, ...tail] = args;
-    return cons(head, list(...tail));
   }
+  const [head, ...tail] = args;
+  return cons(head, list(...tail));
 }
 
 function car(list) {
@@ -45,21 +44,19 @@ function isList(obj) {
     return false;
   } else if (isPair(obj) && obj[1] instanceof Array === false) {
     return false;
-  } else {
-    const [head, [...tail]] = obj;
-    return isList(tail);
   }
+  const [head, [...tail]] = obj;
+  return isList(tail);
 }
 
 function length(lst) {
   const helper = (total, l) => {
     if (isNull(lst)) {
       return 0;
-    } else if (!l[1].length) {
+    } else if (isNull(l[1])) {
       return total + 1;
-    } else {
-      return helper(total + 1, cdr(l));
     }
+    return helper(total + 1, cdr(l));
   };
   return helper(0, lst);
 }
@@ -93,6 +90,22 @@ function listTail(lst, pos) {
     }
   }
   return tail;
+}
+
+function append(...lists) {
+  let temp = [];
+  for (lst of lists) {
+    let [head, [...tail]] = lst;
+    while (head) {
+      temp.push(head);
+      if (!isNull(tail)) {
+        [head, ...[tail]] = tail;
+      } else {
+        head = null;
+      }
+    }
+  }
+  return list(...temp);
 }
 
 function reverse(lst) {
@@ -166,6 +179,7 @@ module.exports = {
   length,
   "list-ref": listRef,
   "list-tail": listTail,
+  append,
   reverse,
   map,
   filter,

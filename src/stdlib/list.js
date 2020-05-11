@@ -276,6 +276,35 @@ function last(lst) {
   return listRef(length(lst) - 1, lst);
 }
 
+// take and drop
+function take(num, lst) {
+  if (isNull(lst)) {
+    return lst;
+  }
+  let temp = [];
+  let [head, [...tail]] = lst;
+  let c = 0;
+  while (head && c < num) {
+    temp.push(head);
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    } else {
+      head = null;
+    }
+  }
+  return list(...temp);
+}
+
+function drop(num, lst) {
+  if (isNull(lst) || length(lst) <= num) {
+    return nil;
+  }
+  let temp1 = toArray(lst);
+  let temp2 = temp1.slice(num);
+  return list(...temp2);
+}
+
 module.exports = {
   nil,
   empty,

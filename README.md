@@ -41,9 +41,11 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] Defining functions
 - [x] Proper pairs and lists
 - [ ] Iteration construct (for)
-- [ ] I/O primitives
+- [x] I/O primitives
 - [ ] Arrays
 - [ ] Structs
 - [ ] Modules
 - [ ] Quoting/unquoting
 - [ ] Macro expansion
+- [ ] Making network requests and handling responses
+- [ ] Working with JSON data

@@ -51,9 +51,9 @@ function isList(obj) {
   }
 }
 
-function length(list) {
+function length(lst) {
   const helper = (total, l) => {
-    if (isNull(list)) {
+    if (isNull(lst)) {
       return 0;
     } else if (!l[1].length) {
       return total + 1;
@@ -61,7 +61,24 @@ function length(list) {
       return helper(total + 1, cdr(l));
     }
   };
-  return helper(0, list);
+  return helper(0, lst);
+}
+
+function reverse(lst) {
+  if (isNull(lst) || length(lst) === 1) {
+    return lst;
+  }
+  let temp = [];
+  let [head, [...tail]] = lst;
+  while (head) {
+    temp.unshift(head);
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+    } else {
+      head = null;
+    }
+  }
+  return list(...temp);
 }
 
 function map(fn, lst) {
@@ -96,6 +113,13 @@ function foldl(fn, accum, lst) {
 const fold = foldl;
 const reduce = foldl;
 
+function foldr(fn, accum, lst) {
+  const temp = reverse(lst);
+  return foldl(fn, accum, temp);
+}
+
+const reduceRight = foldr;
+
 module.exports = {
   cons,
   list,
@@ -109,9 +133,12 @@ module.exports = {
   "pair?": isPair,
   "list?": isList,
   length,
+  reverse,
   map,
   filter,
   foldl,
   fold,
   reduce,
+  foldr,
+  "reduce-right": reduceRight,
 };

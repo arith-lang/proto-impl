@@ -38,6 +38,19 @@ function isPair(obj) {
   return obj instanceof Array && obj.length === 2;
 }
 
+function isList(obj) {
+  if (isNull(obj)) {
+    return true;
+  } else if (obj instanceof Array === false) {
+    return false;
+  } else if (isPair(obj) && obj[1] instanceof Array === false) {
+    return false;
+  } else {
+    const [head, [...tail]] = obj;
+    return isList(tail);
+  }
+}
+
 function length(list) {
   const helper = (total, l) => {
     if (isNull(list)) {
@@ -94,6 +107,7 @@ module.exports = {
   tail,
   "null?": isNull,
   "pair?": isPair,
+  "list?": isList,
   length,
   map,
   filter,

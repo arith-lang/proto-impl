@@ -320,8 +320,6 @@ function range(...args) {
   throw new RangeError("Invalid arguments to range function");
 }
 
-console.log(range(0, 6, 3));
-
 module.exports = {
   nil,
   empty,

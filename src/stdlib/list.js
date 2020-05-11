@@ -164,6 +164,33 @@ function foldr(fn, accum, lst) {
 
 const reduceRight = foldr;
 
+function toArray(lst) {
+  let arr = [];
+  if (isNull(lst)) {
+    return arr;
+  }
+  let [head, [...tail]] = lst;
+  while (head) {
+    arr.push(head);
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+    } else {
+      head = null;
+    }
+  }
+  return arr;
+}
+
+function remove(item, lst) {
+  let temp = toArray(lst);
+  let i = temp.indexOf(item);
+  if (i > -1) {
+    temp.splice(i, 1);
+    return list(...temp);
+  }
+  return lst;
+}
+
 module.exports = {
   cons,
   list,
@@ -188,4 +215,5 @@ module.exports = {
   reduce,
   foldr,
   "reduce-right": reduceRight,
+  "to-array": toArray,
 };

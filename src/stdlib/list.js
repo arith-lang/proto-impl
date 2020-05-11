@@ -171,27 +171,30 @@ function toArray(lst) {
   return arr;
 }
 
-function toString(lst) {
+function toString(lst, n) {
   if (isNull(lst)) {
     return `'()`;
   }
   let arr = toArray(lst);
-  let str = `'(`;
+  let str = "";
+  if (!n) {
+    str = `'`;
+  }
+  str += `(`;
   for (const [i, item] of arr.entries()) {
     if (isList(item)) {
-      str += toString(item);
+      str += `${toString(item, i + 1)}`;
     } else {
       if (i === arr.length - 1) {
-        str += `${item.toString()})`;
+        str += `${item.toString()}`;
       } else {
         str += `${item.toString()} `;
       }
     }
   }
+  str += `)`;
   return str;
 }
-
-console.log(toString(list(1, 2, 3, 4, 5, 6, 7)));
 
 // filtering, removing, sorting, and searching
 function filter(pred, lst) {

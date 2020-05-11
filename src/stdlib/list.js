@@ -129,31 +129,26 @@ function reverse(lst) {
 function map(fn, lst) {
   if (isNull(lst)) {
     return nil;
+  } else {
+    const [head, [...tail]] = lst;
+    return cons(fn(head), map(fn, tail));
   }
-  const temp1 = toArray(lst);
-  const temp2 = temp1.map(fn);
-  return list(...temp2);
 }
 
 function foldl(fn, accum, lst) {
   if (isNull(lst)) {
     return accum;
   }
-  const temp1 = toArray(lst);
-  const temp2 = temp1.reduce(fn, accum);
-  return list(...temp);
+  const [head, [...tail]] = lst;
+  return foldl(fn, fn(accum, head), tail);
 }
 
 const fold = foldl;
 const reduce = foldl;
 
 function foldr(fn, accum, lst) {
-  if (isNull(lst)) {
-    return accum;
-  }
-  const temp1 = toArray(lst);
-  const temp2 = temp1.reduceRight(fn, accum);
-  return list(...temp2);
+  const temp = reverse(lst);
+  return foldl(fn, accum, temp);
 }
 
 const reduceRight = foldr;
@@ -182,9 +177,12 @@ function filter(pred, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  const temp1 = toArray(lst);
-  const temp2 = temp1.filter(pred);
-  return list(...temp2);
+  const [head, [...tail]] = lst;
+  if (pred(head) !== false) {
+    return cons(head, filter(pred, tail));
+  } else {
+    return filter(pred, tail);
+  }
 }
 
 function remove(item, lst) {

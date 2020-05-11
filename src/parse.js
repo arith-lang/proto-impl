@@ -132,11 +132,11 @@ const parseKeyword = (tokens) => {
     arguments: [],
   };
 
-    while (!isRightParen(peek(tokens).value)) {
-      expr.arguments.push(parse(tokens));
-    }
+  while (!isRightParen(peek(tokens).value)) {
+    expr.arguments.push(parse(tokens));
+  }
 
-    return expr;
+  return expr;
 };
 
 const parseLambda = (tokens) => {
@@ -177,12 +177,22 @@ const parseDefine = (tokens) => {
 };
 
 const parseCall = (tokens) => {
-  const token = pop(tokens);
+  let token = pop(tokens);
   const call = {
     type: "CallExpression",
     name: token.value,
     arguments: [],
   };
+
+  if (isLeftParen(peek(tokens).value)) {
+    token = pop(tokens);
+    if (peek(tokens).value === "lambda") {
+      token = pop(tokens); // parseLambda expects tokens starting with left paren starting args
+      const lambda = parseLambda(tokens);
+      call.arguments.push(lambda);
+      pop(tokens); // right paren at end of lambda
+    }
+  }
 
   while (!isRightParen(peek(tokens).value)) {
     call.arguments.push(parse(tokens));

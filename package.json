@@ -1,7 +1,7 @@
 {
   "name": "arith",
   "version": "0.8.4",
-  "description": "",
+  "description": "Interpreter and transpiler for a Lisp-like language",
   "bin": {
     "arith": "bin/arith",
     "arc": "bin/arc"
@@ -11,7 +11,7 @@
     "test:watch": "jest --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jason Barr <me@jasonbarr.dev>",
   "license": "MIT",
   "devDependencies": {
     "jest": "^25.4.0",

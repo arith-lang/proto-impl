@@ -189,6 +189,15 @@ function remove(item, lst) {
   return lst;
 }
 
+function sort(compare, lst) {
+  if (isNull(lst)) {
+    return lst;
+  }
+  const temp = toArray(lst);
+  temp.sort(compare);
+  return list(...temp);
+}
+
 module.exports = {
   cons,
   list,
@@ -215,4 +224,5 @@ module.exports = {
   "reduce-right": reduceRight,
   "to-array": toArray,
   remove,
+  sort,
 };

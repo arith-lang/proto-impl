@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const readlineSync = require("readline-sync");
 const { list } = require("./list");
-const toString = require("./list")["to-string"];
+const toString = require("./list")["list->string"];
 const isList = require("./list")["list?"];
 
 // I/O functions

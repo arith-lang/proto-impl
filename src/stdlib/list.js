@@ -29,11 +29,6 @@ function cdr(list) {
   return rest;
 }
 
-const first = car;
-const head = car;
-const rest = cdr;
-const tail = cdr;
-
 // basic predicates
 function isNull(obj) {
   return obj instanceof Array && obj.length === 0;
@@ -235,6 +230,52 @@ function find(item, list) {
   return nil;
 }
 
+// list accessors
+const first = car;
+const head = car;
+const rest = cdr;
+const tail = cdr;
+
+function second(lst) {
+  return listRef(2, lst);
+}
+
+function third(lst) {
+  return listRef(3, lst);
+}
+
+function fourth(lst) {
+  return listRef(4, lst);
+}
+
+function fifth(lst) {
+  return listRef(5, lst);
+}
+
+function sixth(lst) {
+  return listRef(6, lst);
+}
+
+function seventh(lst) {
+  return listRef(7, lst);
+}
+
+function eighth(lst) {
+  return listRef(8, lst);
+}
+
+function ninth(lst) {
+  return listRef(9, lst);
+}
+
+function tenth(lst) {
+  return listRef(10, lst);
+}
+
+function last(lst) {
+  return listRef(length(lst) - 1, lst);
+}
+
 module.exports = {
   nil,
   empty,
@@ -242,10 +283,6 @@ module.exports = {
   list,
   car,
   cdr,
-  first,
-  head,
-  rest,
-  tail,
   "null?": isNull,
   "empty?": isEmpty,
   "pair?": isPair,
@@ -265,4 +302,18 @@ module.exports = {
   filter,
   remove,
   sort,
+  first,
+  head,
+  rest,
+  tail,
+  second,
+  third,
+  fourth,
+  fifth,
+  sixth,
+  seventh,
+  eighth,
+  ninth,
+  tenth,
+  last,
 };

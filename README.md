@@ -44,3 +44,6 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [ ] I/O primitives
 - [ ] Arrays
 - [ ] Structs
+- [ ] Modules
+- [ ] Quoting/unquoting
+- [ ] Macro expansion

@@ -50,15 +50,11 @@ function isList(obj) {
 }
 
 function length(lst) {
-  const helper = (total, l) => {
-    if (isNull(lst)) {
-      return 0;
-    } else if (isNull(l[1])) {
-      return total + 1;
-    }
-    return helper(total + 1, cdr(l));
-  };
-  return helper(0, lst);
+  if (isNull(lst)) {
+    return 0;
+  }
+  const temp = toArray(lst);
+  return temp.length;
 }
 
 function listRef(lst, pos) {
@@ -216,4 +212,5 @@ module.exports = {
   foldr,
   "reduce-right": reduceRight,
   "to-array": toArray,
+  remove,
 };

@@ -1,5 +1,7 @@
+// let nil = empty array
 const nil = [];
 
+// pair constructor
 function cons(car, cdr) {
   if (!cdr) {
     cdr = nil;
@@ -7,6 +9,7 @@ function cons(car, cdr) {
   return [car, cdr];
 }
 
+// list constructor
 function list(...args) {
   if (!args.length) {
     return nil;
@@ -15,6 +18,7 @@ function list(...args) {
   return cons(head, list(...tail));
 }
 
+// pair accessors
 function car(list) {
   return list[0];
 }
@@ -29,6 +33,7 @@ const head = car;
 const rest = cdr;
 const tail = cdr;
 
+// basic predicates
 function isNull(obj) {
   return obj instanceof Array && obj.length === 0;
 }
@@ -49,6 +54,7 @@ function isList(obj) {
   return isList(tail);
 }
 
+// list helpers
 function length(lst) {
   if (isNull(lst)) {
     return 0;
@@ -121,21 +127,13 @@ function reverse(lst) {
   return list(...temp);
 }
 
+// list iterators
 function map(fn, lst) {
   if (isNull(lst)) {
     return nil;
   }
   const temp1 = toArray(lst);
   const temp2 = temp1.map(fn);
-  return list(...temp2);
-}
-
-function filter(pred, lst) {
-  if (isNull(lst)) {
-    return nil;
-  }
-  const temp1 = toArray(lst);
-  const temp2 = temp1.filter(pred);
   return list(...temp2);
 }
 
@@ -162,6 +160,8 @@ function foldr(fn, accum, lst) {
 
 const reduceRight = foldr;
 
+// to array helper
+// (will be more useful when I actually add arrays to the language)
 function toArray(lst) {
   let arr = [];
   if (isNull(lst)) {
@@ -177,6 +177,16 @@ function toArray(lst) {
     }
   }
   return arr;
+}
+
+// filtering, removing, sorting, and searching
+function filter(pred, lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  const temp1 = toArray(lst);
+  const temp2 = temp1.filter(pred);
+  return list(...temp2);
 }
 
 function remove(item, lst) {
@@ -216,13 +226,13 @@ module.exports = {
   append,
   reverse,
   map,
-  filter,
   foldl,
   fold,
   reduce,
   foldr,
   "reduce-right": reduceRight,
   "to-array": toArray,
+  filter,
   remove,
   sort,
 };

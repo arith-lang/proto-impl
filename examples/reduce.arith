@@ -7,10 +7,7 @@
 (define squared
   (map square nums))
 
-(define sum
-  (lambda (acc x) (+ acc x)))
-
 (define sum-of-squares
-  (reduce sum 0 squared))
+  (reduce + 0 squared))
 
 (print sum-of-squares)

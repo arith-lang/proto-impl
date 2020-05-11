@@ -28,9 +28,10 @@ for (let i = 0; i < libArr.length; i++) {
   lib += libArr[i] + "\n";
 }
 
+lib = `const readlineSync = require("readline-sync");\n` + lib;
+lib = `const L = require("list");\n` + lib;
 lib = `const fs = require("fs");\n` + lib;
 lib = `const path = require("path");\n` + lib;
-lib = `const readlineSync = require("readline-sync");\n` + lib;
 
 const file = process.argv.slice(2)[0];
 

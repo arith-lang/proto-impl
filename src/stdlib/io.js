@@ -1,8 +1,8 @@
 // I/O functions
-function print(...args) {
+function log(...args) {
   console.log(...args);
 }
 
 module.exports = {
-  print,
+  log,
 };

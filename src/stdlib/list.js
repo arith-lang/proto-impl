@@ -64,6 +64,37 @@ function length(lst) {
   return helper(0, lst);
 }
 
+function listRef(lst, pos) {
+  let c = 0;
+  let [head, [...tail]] = lst;
+  while (c < pos) {
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    }
+    throw new ReferenceError(
+      "Ref out of bounds: list length exceeded",
+    );
+  }
+  return head;
+}
+
+function listTail(lst, pos) {
+  let c = 0;
+  let [head, [...tail]] = lst;
+  while (c < pos - 1) {
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    } else {
+      throw new ReferenceError(
+        "Tail starting point exceeds length of list",
+      );
+    }
+  }
+  return tail;
+}
+
 function reverse(lst) {
   if (isNull(lst) || length(lst) === 1) {
     return lst;
@@ -133,6 +164,8 @@ module.exports = {
   "pair?": isPair,
   "list?": isList,
   length,
+  "list-ref": listRef,
+  "list-tail": listTail,
   reverse,
   map,
   filter,

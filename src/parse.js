@@ -132,11 +132,11 @@ const parseKeyword = (tokens) => {
     arguments: [],
   };
 
-    while (!isRightParen(peek(tokens).value)) {
-      expr.arguments.push(parse(tokens));
-    }
+  while (!isRightParen(peek(tokens).value)) {
+    expr.arguments.push(parse(tokens));
+  }
 
-    return expr;
+  return expr;
 };
 
 const parseLambda = (tokens) => {
@@ -177,12 +177,23 @@ const parseDefine = (tokens) => {
 };
 
 const parseCall = (tokens) => {
-  const token = pop(tokens);
+  let token = pop(tokens);
   const call = {
     type: "CallExpression",
     name: token.value,
     arguments: [],
   };
+  if (isLeftParen(peek(tokens).value)) {
+    token = pop(tokens);
+    if (peek(tokens).value === "lambda") {
+      pop(tokens); // get rid of "lambda" token for parseLambda
+      const lambdaTokens = eatExprTokens(tokens);
+      const lambda = parseLambda(lambdaTokens);
+      call.arguments.push(lambda);
+    } else {
+      tokens.unshift(token);
+    }
+  }
 
   while (!isRightParen(peek(tokens).value)) {
     call.arguments.push(parse(tokens));

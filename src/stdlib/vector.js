@@ -68,11 +68,11 @@ function vectorPrepend(item, vec) {
   return vector(...L.prepend(item, vec));
 }
 
-function vectorPush(item, vec) {
+function vectorAppend(item, vec) {
   return vector(...L.append(item, vec));
 }
 
-function vectorAppend(...vecs) {
+function vectorConcat(...vecs) {
   let accum = L.list();
   for (vec of vecs) {
     accum = L.concat(accum, vec);
@@ -214,8 +214,8 @@ module.exports = {
   "vector-length": vectorLength,
   "vector-slice": vectorSlice,
   "vector-prepend": vectorPrepend,
-  "vector-push": vectorPush,
   "vector-append": vectorAppend,
+  "vector-concat": vectorConcat,
   "vector-copy": vectorCopy,
   "vector-reverse": vectorReverse,
   "vector-update": vectorUpdate,

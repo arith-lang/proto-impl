@@ -189,6 +189,7 @@ module.exports = {
   "array-prepend!": arrayPrepend,
   "array-append!": arrayAppend,
   "array-concat": arrayConcat,
+  "array-copy": arrayCopy,
   "array-reverse!": arrayReverse,
   "array-update!": arrayUpdate,
   "array-set!": arraySet,

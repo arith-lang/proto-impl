@@ -146,6 +146,13 @@ function vectorToString(vec) {
 }
 
 // filtering, removing, sorting, and searching
+function vectorFilter(pred, vec) {
+  return vector(...L.filter(pred, vec));
+}
+
+function vectorReject(pred, vec) {
+  return vector(...L.reject(pred, vec));
+}
 
 // vector accessors
 
@@ -178,4 +185,6 @@ module.exports = {
   "vector->list": vectorToList,
   "list->vector": listToVector,
   "vector->string": vectorToString,
+  "vector-filter": vectorFilter,
+  "vector-reject": vectorReject,
 };

@@ -22,7 +22,7 @@ To transpile a program to JavaScript, use `arc <filename>`.
 
 ## Using the language
 
-The interpreter and transpiler can handle many basic string, numeric, and list operations. You can also define lambda functions and either pass them to higher-order functions like `map`, `reduce`, and `filter` or use `define` statements to give them names.
+The interpreter and transpiler can handle many basic string, numeric, list, and (immutable) vector operations. You can also define lambda functions and either pass them to higher-order functions like `map`, `reduce`, and `filter` or use `define` statements to give them names.
 
 The standard library has many of the functions one would expect from a Lisp. There is currently no documentation, but the code in the files in the [stdlib](./src/stdlib) directory should be fairly self-documenting.
 

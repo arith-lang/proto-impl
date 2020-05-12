@@ -63,6 +63,10 @@ function vectorToArray(v) {
   return L.toArray(v);
 }
 
+function vectorToList(v) {
+  return list(...v);
+}
+
 function vectorToString(v) {
   return v.toString();
 }
@@ -80,5 +84,6 @@ module.exports = {
   "vector?": isVector,
   "vector-empty?": isVectorEmpty,
   "vector->array": vectorToArray,
+  "vector->list": vectorToList,
   "vector->string": vectorToString,
 };

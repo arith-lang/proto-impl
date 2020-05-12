@@ -82,8 +82,12 @@ function vectorPush(item, vec) {
   return vector(...L.append(item, vec));
 }
 
+function vectorFirst(vec) {
+  return L.first(vec);
+}
+
 function vectorPop(vec) {
-  return vector(...L.pop(vec));
+  return vector(...L.last(vec));
 }
 
 function vectorAppend(...vecs) {
@@ -107,6 +111,22 @@ function vectorUpdate(index, newItem, vec) {
 }
 
 // vector iterators
+function vectorMap(fn, vec) {
+  return vector(...L.map(fn, vec));
+}
+
+function vectorFoldl(fn, accum, vec) {
+  return L.foldl(fn, accum, vec);
+}
+
+const vectorFold = vectorFoldl;
+const vectorReduce = vectorFoldl;
+
+function vectorFoldr(fn, accum, vec) {
+  return L.foldr(fn, accum, vec);
+}
+
+const vectorReduceRight = vectorFoldr;
 
 // conversion functions
 function vectorToArray(vec) {
@@ -142,11 +162,18 @@ module.exports = {
   "vector-slice": vectorSlice,
   "vector-prepend": vectorPrepend,
   "vector-push": vectorPush,
+  "vector-first": vectorFirst,
   "vector-pop": vectorPop,
   "vector-append": vectorAppend,
   "vector-copy": vectorCopy,
   "vector-reverse": vectorReverse,
   "vector-update": vectorUpdate,
+  "vector-map": vectorMap,
+  "vector-foldl": vectorFoldl,
+  "vector-fold": vectorFold,
+  "vector-reduce": vectorReduce,
+  "vector-foldr": vectorFoldr,
+  "vector-reduce-right": vectorReduceRight,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

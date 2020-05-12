@@ -102,8 +102,8 @@ function vectorReverse(vec) {
   return vector(...L.reverse(vec));
 }
 
-function vectorUpdate(index, new, vec) {
-  return vector(...L.update(index, new, vec));
+function vectorUpdate(index, newItem, vec) {
+  return vector(...L.update(index, newItem, vec));
 }
 
 // vector iterators

@@ -143,7 +143,27 @@ function arrayRef(pos, arr) {
   return elem;
 }
 
+function arrayTail(pos, arr) {
+  return array(...arr.slice(pos));
+}
+
+function arrayFirst(arr) {
+  return arr[0];
+}
+
+function arrayLast(arr) {
+  return array.pop();
+}
+
 // take and drop
+function arrayTake(num, arr) {
+  return arr.slice(0, num);
+}
+
+function arrayDrop(num, arr) {
+  const toTake = arr.length - 1 - num;
+  return arr.slice(toTake);
+}
 
 // range
 
@@ -173,4 +193,8 @@ module.exports = {
   "array-sort!": arraySort,
   "array-sort-by!": arraySortBy,
   "array-find": arrayFind,
+  "array-ref": arrayRef,
+  "array-tail": arrayTail,
+  "array-first": arrayFirst,
+  "array-last": arrayLast,
 };

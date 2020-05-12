@@ -74,7 +74,7 @@ const KeywordExpression = (node, env = environment) => {
 
 const DefinitionExpression = (node, env = environment) => {
   let value = transpile(node.value, env);
-  return `let ${makeVar(node.name)} = ${value};`;
+  return `var ${makeVar(node.name)} = ${value};`;
 };
 
 const LambdaExpression = (node, env = environment) => {

@@ -45,6 +45,9 @@ function isArrayEmpty(arr) {
 }
 
 // array helpers
+function arrayLength(arr) {
+  return arr.length;
+}
 
 // array iterators
 
@@ -62,4 +65,5 @@ module.exports = {
   array,
   "array?": isArray,
   "array-empty?": isArrayEmpty,
+  "array-length": arrayLength,
 };

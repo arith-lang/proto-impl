@@ -80,7 +80,7 @@ function vectorToArray(v) {
 }
 
 function vectorToList(v) {
-  return list(...v);
+  return list(vectorToArray(v));
 }
 
 function listToVector(lst) {

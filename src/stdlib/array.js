@@ -4,7 +4,7 @@ const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 
 // replace toString method
-function arrayToString() {
+function arrToString() {
   if (isNull(this)) {
     return `#(||)`;
   }
@@ -31,7 +31,7 @@ function arrayToString() {
 // array constructor
 function array(...args) {
   let arr = [...args];
-  arr.toString = arrayToString.bind(arr);
+  arr.toString = arrToString.bind(arr);
   return arr;
 }
 
@@ -74,15 +74,38 @@ function arrayReverse(arr) {
   arr.reverse();
 }
 
-function vectorSet(pos, newItem, arr) {
+function arraySet(pos, newItem, arr) {
   arr.splice(pos, 1, newItem);
 }
 
-const vectorUpdate = vectorSet;
+const arrayUpdate = arraySet;
 
 // array iterators
+function arrayMap(fn, arr) {
+  return arr.map(fn);
+}
+
+function arrayFoldl(fn, accum, arr) {
+  return arr.reduce(fn, accum);
+}
+
+const arrayFold = arrayFoldl;
+const arrayReduce = arrayFoldl;
+
+function arrayFoldr(fn, accum, arr) {
+  return arr.reduceRight(fn, accum);
+}
+
+const arrayReduceRight = arrayFoldr;
+
+function arrayForeach(fn, arr) {
+  arr.forEach(fn);
+}
 
 // conversion functions
+function arrayToString(arr) {
+  return arr.toString();
+}
 
 // filtering, removing, sorting, and searching
 
@@ -102,6 +125,14 @@ module.exports = {
   "array-append!": arrayAppend,
   "array-concat": arrayConcat,
   "array-reverse!": arrayReverse,
-  "vector-update!": vectorUpdate,
-  "vector-set!": vectorSet,
+  "array-update!": arrayUpdate,
+  "array-set!": arraySet,
+  "array-map": arrayMap,
+  "array-foldl": arrayFoldl,
+  "array-fold": arrayFold,
+  "array-reduce": arrayReduce,
+  "array-foldr": arrayFoldr,
+  "array-reduce-right": arrayReduceRight,
+  "array-foreach": arrayForeach,
+  "array->string": arrayToString,
 };

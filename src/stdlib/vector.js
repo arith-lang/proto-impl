@@ -112,7 +112,6 @@ const vectorReduceRight = vectorFoldr;
 
 function vectorForeach(fn, vec) {
   L.forEach(fn, vec);
-  return nil;
 }
 
 // conversion functions

@@ -2,7 +2,6 @@ const { nil } = require("./list");
 const isNull = require("./list")["null?"];
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
-const toArray = require("./list")["list->array"];
 
 // replace toString method
 function arrayToString() {
@@ -41,6 +40,10 @@ function isArray(obj) {
   return obj instanceof Array;
 }
 
+function isArrayEmpty(arr) {
+  return isNull(arr);
+}
+
 // array helpers
 
 // array iterators
@@ -58,4 +61,5 @@ function isArray(obj) {
 module.exports = {
   array,
   "array?": isArray,
+  "array-empty?": isArrayEmpty,
 };

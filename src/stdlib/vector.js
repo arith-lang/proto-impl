@@ -4,9 +4,7 @@ const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 const toArray = require("./list")["list->array"];
 
-// vector prototype
-const vectorPrototype = Object.create({});
-
+// replace toString method
 function vecToString() {
   if (isVectorEmpty(this)) {
     return `#()`;
@@ -80,11 +78,15 @@ function vectorPrepend(item, vec) {
   return vector(...L.prepend(item, vec));
 }
 
-function vectorAppend(item, vec) {
+function vectorPush(item, vec) {
   return vector(...L.append(item, vec));
 }
 
-function vectorConcat(...vecs) {
+function vectorPop(vec) {
+  return vector(...L.pop(vec));
+}
+
+function vectorAppend(...vecs) {
   let accum = L.list();
   for (vec of vecs) {
     accum = L.concat(accum, vec);
@@ -94,6 +96,10 @@ function vectorConcat(...vecs) {
 
 function vectorCopy(vec) {
   return vector(...vec);
+}
+
+function vectorReverse(vec) {
+  return vector(...L.reverse(vec));
 }
 
 // vector iterators
@@ -131,8 +137,9 @@ module.exports = {
   "vector-ref": vectorRef,
   "vector-slice": vectorSlice,
   "vector-prepend": vectorPrepend,
+  "vector-push": vectorPush,
+  "vector-pop": vectorPop,
   "vector-append": vectorAppend,
-  "vector-concat": vectorConcat,
   "vector-copy": vectorCopy,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,

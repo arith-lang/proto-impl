@@ -163,12 +163,16 @@ function vectorRef(pos, vec) {
   return elem;
 }
 
+function vectorTail(pos, vec) {
+  return vector(...L.slice(pos, vectorLength(vec), vec));
+}
+
 function vectorFirst(vec) {
   return L.first(vec);
 }
 
-function vectorPop(vec) {
-  return vector(...L.last(vec));
+function vectorLast(vec) {
+  return L.last(vec);
 }
 
 // take and drop
@@ -204,6 +208,7 @@ module.exports = {
   "vector-sort-by": vectorSortBy,
   "vector-find": vectorFind,
   "vector-ref": vectorRef,
+  "vector-tail": vectorTail,
   "vector-first": vectorFirst,
-  "vector-pop": vectorPop,
+  "vector-last": vectorLast,
 };

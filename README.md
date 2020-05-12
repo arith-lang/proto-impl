@@ -29,25 +29,3 @@ The standard library has many of the functions one would expect from a Lisp. The
 ## Credits
 
 Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](https://frontendmasters.com/courses/programming-language/) ([repository](https://github.com/stevekinney/dropbear)).
-
-## Todo list:
-
-- [x] String evaluation and processing
-- [x] Booleans and boolean expressions
-- [x] Ability to parse and evaluate/transpile multiple top-level expressions
-- [x] Lambda functions
-- [x] Branching construct
-- [x] Defining variables
-- [x] Defining functions
-- [x] Proper pairs and lists
-- [ ] Iteration construct (for)
-- [x] I/O primitives
-- [x] Immutable vectors
-- [ ] Arrays (mutable)
-- [ ] Maps and mutable maps
-- [ ] Structs
-- [ ] Modules
-- [ ] Symbols and quote/quasiquote/unquote
-- [ ] Macro expansion
-- [ ] Making network requests and handling responses
-- [ ] Working with JSON data

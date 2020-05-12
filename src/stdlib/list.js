@@ -92,7 +92,9 @@ function listTail(pos, lst) {
   return tail;
 }
 
-function append(...lists) {
+const prepend = cons;
+
+function concat(...lists) {
   let temp = [];
   for (lst of lists) {
     let [head, [...tail]] = lst;
@@ -364,7 +366,8 @@ module.exports = {
   length,
   "list-ref": listRef,
   "list-tail": listTail,
-  append,
+  prepend,
+  concat,
   copy,
   reverse,
   map,

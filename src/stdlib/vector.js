@@ -128,6 +128,10 @@ function listToVector(lst) {
   return vector(...toArray(lst));
 }
 
+function arrayToVector(arr) {
+  return vector(...arr);
+}
+
 function vectorToString(vec) {
   return vec.toString();
 }
@@ -225,6 +229,7 @@ module.exports = {
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,
+  "array->vector": arrayToVector,
   "vector->string": vectorToString,
   "vector-filter": vectorFilter,
   "vector-reject": vectorReject,

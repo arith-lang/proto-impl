@@ -76,6 +76,22 @@ function vectorSlice(start, end, vec) {
   return L.slice(start, stop, vec);
 }
 
+function vectorPrepend(item, vec) {
+  return L.prepend(item, vec);
+}
+
+function vectorAppend(item, vec) {
+  return L.append(item, vec);
+}
+
+function vectorConcat(...vecs) {
+  let accum = vector();
+  for (vec of vecs) {
+    accum = L.concat(accum, vec);
+  }
+  return accum;
+}
+
 // vector iterators
 
 // conversion functions
@@ -110,6 +126,9 @@ module.exports = {
   "vector-length": vectorLength,
   "vector-ref": vectorRef,
   "vector-slice": vectorSlice,
+  "vector-prepend": vectorPrepend,
+  "vector-append": vectorAppend,
+  "vector-concat": vectorConcat,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

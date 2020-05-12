@@ -61,37 +61,6 @@ function length(lst) {
   return temp.length;
 }
 
-function listRef(pos, lst) {
-  let c = 0;
-  let [head, [...tail]] = lst;
-  while (c < pos) {
-    if (!isNull(tail)) {
-      [head, [...tail]] = tail;
-      c++;
-    }
-    throw new ReferenceError(
-      "Ref out of bounds: list length exceeded",
-    );
-  }
-  return head;
-}
-
-function listTail(pos, lst) {
-  let c = 0;
-  let [head, [...tail]] = lst;
-  while (c < pos - 1) {
-    if (!isNull(tail)) {
-      [head, [...tail]] = tail;
-      c++;
-    } else {
-      throw new ReferenceError(
-        "Tail starting point exceeds length of list",
-      );
-    }
-  }
-  return tail;
-}
-
 const prepend = cons;
 
 function append(...lists) {
@@ -278,6 +247,37 @@ const head = car;
 const rest = cdr;
 const tail = cdr;
 
+function listRef(pos, lst) {
+  let c = 0;
+  let [head, [...tail]] = lst;
+  while (c < pos) {
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    }
+    throw new ReferenceError(
+      "Ref out of bounds: list length exceeded",
+    );
+  }
+  return head;
+}
+
+function listTail(pos, lst) {
+  let c = 0;
+  let [head, [...tail]] = lst;
+  while (c < pos - 1) {
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    } else {
+      throw new ReferenceError(
+        "Tail starting point exceeds length of list",
+      );
+    }
+  }
+  return tail;
+}
+
 function second(lst) {
   return listRef(2, lst);
 }
@@ -374,8 +374,6 @@ module.exports = {
   "pair?": isPair,
   "list?": isList,
   length,
-  "list-ref": listRef,
-  "list-tail": listTail,
   prepend,
   append,
   copy,
@@ -396,6 +394,8 @@ module.exports = {
   head,
   rest,
   tail,
+  "list-ref": listRef,
+  "list-tail": listTail,
   second,
   third,
   fourth,

@@ -102,6 +102,10 @@ function vectorReverse(vec) {
   return vector(...L.reverse(vec));
 }
 
+function vectorUpdate(index, new, vec) {
+  return vector(...L.update(index, new, vec));
+}
+
 // vector iterators
 
 // conversion functions
@@ -141,6 +145,8 @@ module.exports = {
   "vector-pop": vectorPop,
   "vector-append": vectorAppend,
   "vector-copy": vectorCopy,
+  "vector-reverse": vectorReverse,
+  "vector-update": vectorUpdate,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

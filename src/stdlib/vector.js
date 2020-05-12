@@ -2,8 +2,10 @@ const L = require("list");
 const { list } = require("./list");
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
+const toArray = require("./list")["list->array"];
 
-vectorPrototype = Object.create({});
+// vector prototype
+const vectorPrototype = Object.create({});
 
 vectorPrototype.toString = function () {
   if (isVectorEmpty(this)) {
@@ -39,6 +41,7 @@ vectorPrototype.toString = function () {
   return str;
 };
 
+// vector constructor
 function vector(...args) {
   let v = L.list(...args);
   v = { ...v, ...vectorPrototype };
@@ -67,6 +70,10 @@ function vectorToList(v) {
   return list(...v);
 }
 
+function listToVector(lst) {
+  return vector(...toArray(lst));
+}
+
 function vectorToString(v) {
   return v.toString();
 }
@@ -85,5 +92,6 @@ module.exports = {
   "vector-empty?": isVectorEmpty,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
+  "list->vector": listToVector,
   "vector->string": vectorToString,
 };

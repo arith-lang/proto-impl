@@ -1,5 +1,3 @@
-const L = require("list");
-
 // let nil = empty array
 const nil = [];
 const empty = nil;
@@ -179,10 +177,6 @@ function toArray(lst) {
     }
   }
   return arr;
-}
-
-function toVector(lst) {
-  return L.from(toArray(lst));
 }
 
 function toString(lst, n) {
@@ -380,7 +374,6 @@ module.exports = {
   foldr,
   "reduce-right": reduceRight,
   "list->array": toArray,
-  "list->vector": toVector,
   "list->string": toString,
   filter,
   remove,

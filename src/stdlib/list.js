@@ -61,7 +61,7 @@ function length(lst) {
   return temp.length;
 }
 
-function listRef(lst, pos) {
+function listRef(pos, lst) {
   let c = 0;
   let [head, [...tail]] = lst;
   while (c < pos) {
@@ -76,7 +76,7 @@ function listRef(lst, pos) {
   return head;
 }
 
-function listTail(lst, pos) {
+function listTail(pos, lst) {
   let c = 0;
   let [head, [...tail]] = lst;
   while (c < pos - 1) {

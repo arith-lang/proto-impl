@@ -238,4 +238,5 @@ module.exports = {
   "vector-last": vectorLast,
   "vector-take": vectorTake,
   "vector-drop": vectorDrop,
+  "vector-range": vectorRange,
 };

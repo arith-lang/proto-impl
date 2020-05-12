@@ -1,5 +1,5 @@
 const L = require("list");
-const { list } = require("./list");
+const { nil, list } = require("./list");
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 const toArray = require("./list")["list->array"];
@@ -110,6 +110,11 @@ function vectorFoldr(fn, accum, vec) {
 
 const vectorReduceRight = vectorFoldr;
 
+function vectorForeach(fn, vec) {
+  L.forEach(fn, vec);
+  return nil;
+}
+
 // conversion functions
 function vectorToArray(vec) {
   return L.toArray(vec);
@@ -216,6 +221,7 @@ module.exports = {
   "vector-reduce": vectorReduce,
   "vector-foldr": vectorFoldr,
   "vector-reduce-right": vectorReduceRight,
+  "vector-foreach": vectorForeach,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

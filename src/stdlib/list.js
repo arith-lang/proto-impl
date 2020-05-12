@@ -132,6 +132,22 @@ function foldr(fn, accum, lst) {
 
 const reduceRight = foldr;
 
+function foreach(fn, lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  let [head, [...tail]] = lst;
+  while (head) {
+    fn(head);
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+    } else {
+      head = null;
+    }
+  }
+  return nil;
+}
+
 // conversion functions
 function toArray(lst) {
   let arr = [];

@@ -68,11 +68,11 @@ function vectorPrepend(item, vec) {
   return vector(...L.prepend(item, vec));
 }
 
-function vectorPush(item, vec) {
+function vectorAppend(item, vec) {
   return vector(...L.append(item, vec));
 }
 
-function vectorAppend(...vecs) {
+function vectorConcat(...vecs) {
   let accum = L.list();
   for (vec of vecs) {
     accum = L.concat(accum, vec);
@@ -112,7 +112,6 @@ const vectorReduceRight = vectorFoldr;
 
 function vectorForeach(fn, vec) {
   L.forEach(fn, vec);
-  return nil;
 }
 
 // conversion functions
@@ -128,6 +127,10 @@ function listToVector(lst) {
   return vector(...toArray(lst));
 }
 
+function arrayToVector(arr) {
+  return vector(...arr);
+}
+
 function vectorToString(vec) {
   return vec.toString();
 }
@@ -141,8 +144,8 @@ function vectorReject(pred, vec) {
   return vector(...L.reject(pred, vec));
 }
 
-function vectorRemove(index, elements, vec) {
-  return vector(...L.remove(index, elements, vec));
+function vectorRemove(index, number, vec) {
+  return vector(...L.remove(index, number, vec));
 }
 
 function vectorSort(vec) {
@@ -210,8 +213,8 @@ module.exports = {
   "vector-length": vectorLength,
   "vector-slice": vectorSlice,
   "vector-prepend": vectorPrepend,
-  "vector-push": vectorPush,
   "vector-append": vectorAppend,
+  "vector-concat": vectorConcat,
   "vector-copy": vectorCopy,
   "vector-reverse": vectorReverse,
   "vector-update": vectorUpdate,
@@ -225,6 +228,7 @@ module.exports = {
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,
+  "array->vector": arrayToVector,
   "vector->string": vectorToString,
   "vector-filter": vectorFilter,
   "vector-reject": vectorReject,
@@ -238,4 +242,5 @@ module.exports = {
   "vector-last": vectorLast,
   "vector-take": vectorTake,
   "vector-drop": vectorDrop,
+  "vector-range": vectorRange,
 };

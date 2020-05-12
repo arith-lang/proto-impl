@@ -61,36 +61,7 @@ function length(lst) {
   return temp.length;
 }
 
-function listRef(lst, pos) {
-  let c = 0;
-  let [head, [...tail]] = lst;
-  while (c < pos) {
-    if (!isNull(tail)) {
-      [head, [...tail]] = tail;
-      c++;
-    }
-    throw new ReferenceError(
-      "Ref out of bounds: list length exceeded",
-    );
-  }
-  return head;
-}
-
-function listTail(lst, pos) {
-  let c = 0;
-  let [head, [...tail]] = lst;
-  while (c < pos - 1) {
-    if (!isNull(tail)) {
-      [head, [...tail]] = tail;
-      c++;
-    } else {
-      throw new ReferenceError(
-        "Tail starting point exceeds length of list",
-      );
-    }
-  }
-  return tail;
-}
+const prepend = cons;
 
 function append(...lists) {
   let temp = [];
@@ -105,6 +76,14 @@ function append(...lists) {
       }
     }
   }
+  return list(...temp);
+}
+
+function copy(lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  const temp = toArray(lst);
   return list(...temp);
 }
 
@@ -152,6 +131,22 @@ function foldr(fn, accum, lst) {
 }
 
 const reduceRight = foldr;
+
+function foreach(fn, lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  let [head, [...tail]] = lst;
+  while (head) {
+    fn(head);
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+    } else {
+      head = null;
+    }
+  }
+  return nil;
+}
 
 // conversion functions
 function toArray(lst) {
@@ -204,9 +199,19 @@ function filter(pred, lst) {
   const [head, [...tail]] = lst;
   if (pred(head) !== false) {
     return cons(head, filter(pred, tail));
-  } else {
-    return filter(pred, tail);
   }
+  return filter(pred, tail);
+}
+
+function reject(pred, lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  const [head, [...tail]] = lst;
+  if (pred(head) === false) {
+    return cons(head, filter(pred, tail));
+  }
+  return reject(pred, tail);
 }
 
 function remove(item, lst) {
@@ -219,7 +224,16 @@ function remove(item, lst) {
   return lst;
 }
 
-function sort(compare, lst) {
+function sort(lst) {
+  if (isNull(lst)) {
+    return lst;
+  }
+  const temp = toArray(lst);
+  temp.sort();
+  return list(...temp);
+}
+
+function sortBy(compare, lst) {
   if (isNull(lst)) {
     return lst;
   }
@@ -240,16 +254,12 @@ function member(item, lst) {
   return nil;
 }
 
-function find(item, list) {
+function find(pred, list) {
   if (isNull(lst)) {
     return lst;
   }
   const temp = toArray(lst);
-  const i = temp.indexOf(item);
-  if (item > -1) {
-    return listRef(i, lst);
-  }
-  return nil;
+  return temp.find(pred) || nil;
 }
 
 // list accessors
@@ -257,6 +267,37 @@ const first = car;
 const head = car;
 const rest = cdr;
 const tail = cdr;
+
+function listRef(pos, lst) {
+  let c = 0;
+  let [head, [...tail]] = lst;
+  while (c < pos) {
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    }
+    throw new ReferenceError(
+      "Ref out of bounds: list length exceeded",
+    );
+  }
+  return head;
+}
+
+function listTail(pos, lst) {
+  let c = 0;
+  let [head, [...tail]] = lst;
+  while (c < pos - 1) {
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+      c++;
+    } else {
+      throw new ReferenceError(
+        "Tail starting point exceeds length of list",
+      );
+    }
+  }
+  return tail;
+}
 
 function second(lst) {
   return listRef(2, lst);
@@ -354,9 +395,9 @@ module.exports = {
   "pair?": isPair,
   "list?": isList,
   length,
-  "list-ref": listRef,
-  "list-tail": listTail,
+  prepend,
   append,
+  copy,
   reverse,
   map,
   foldl,
@@ -367,12 +408,16 @@ module.exports = {
   "list->array": toArray,
   "list->string": toString,
   filter,
+  reject,
   remove,
   sort,
+  "sort-by": sortBy,
   first,
   head,
   rest,
   tail,
+  "list-ref": listRef,
+  "list-tail": listTail,
   second,
   third,
   fourth,

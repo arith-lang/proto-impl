@@ -58,6 +58,19 @@ function isVectorEmpty(vec) {
 }
 
 // vector helpers
+function vectorLength(v) {
+  return L.length(v);
+}
+
+function vectorRef(vec, pos) {
+  const elem = L.nth(pos, vec);
+  if (!elem) {
+    throw new ReferenceError(
+      "Ref out of bounds: vector length exceeded",
+    );
+  }
+  return elem;
+}
 
 // vector iterators
 
@@ -90,6 +103,8 @@ module.exports = {
   vector,
   "vector?": isVector,
   "vector-empty?": isVectorEmpty,
+  "vector-length": vectorLength,
+  "vector-ref": vectorRef,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

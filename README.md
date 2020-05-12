@@ -1,10 +1,14 @@
 # Arith Programming Language
 
-After working through a few tutorials on writing interpreters and compilers, I decided to build one of my own.
+Arith is a Lisp-like programming language implemented in JavaScript, designed for use in either a browser or server-side (via NodeJS) environment.
 
-Arith is a very simple language with a Lisp-like syntax that will evaluate basic arithmetic operations, perform string and list operations, and generally do a little bit of everything you expect a programming language to do.
+## The story
 
-I'm taking the incremental approach recommended by Abdulaziz Ghuloum in "[An Incremental Approach to Compiler Construction](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf)" and implementing one small piece at a time from input to code generation.
+Arith started with simple intentions: I would build a Lisp-like interpreter and transpiler for simple arithmetic functions just to see if I could make it work. Then I decided to add strings and Booleans.
+
+One thing led to another, and suddenly I had a Turing-complete language with lambda functions, pairs and lists, and built-in data structures.
+
+Now I'm on a mission to bring the power and elegance of Lisp to the web, while also taking advantage of recent innovations in the JavaScript ecosystem and functional development techniques. This isn't yet another Scheme clone, but I hope to capture what makes languages like Scheme and Common Lisp special while also building elegant modern applications that are fun for developers too.
 
 ## Using the interpreter and transpiler
 

@@ -60,16 +60,6 @@ function vectorLength(vec) {
   return L.length(vec);
 }
 
-function vectorRef(pos, vec) {
-  const elem = L.nth(pos, vec);
-  if (!elem) {
-    throw new ReferenceError(
-      "Ref out of bounds: vector length exceeded",
-    );
-  }
-  return elem;
-}
-
 function vectorSlice(start, end, vec) {
   return vector(...L.slice(start, end, vec));
 }
@@ -80,14 +70,6 @@ function vectorPrepend(item, vec) {
 
 function vectorPush(item, vec) {
   return vector(...L.append(item, vec));
-}
-
-function vectorFirst(vec) {
-  return L.first(vec);
-}
-
-function vectorPop(vec) {
-  return vector(...L.last(vec));
 }
 
 function vectorAppend(...vecs) {
@@ -154,7 +136,40 @@ function vectorReject(pred, vec) {
   return vector(...L.reject(pred, vec));
 }
 
+function vectorRemove(index, elements, vec) {
+  return vector(...L.remove(index, elements, vec));
+}
+
+function vectorSort(vec) {
+  return vector(...L.sort(vec));
+}
+
+function vectorSortBy(compare, vec) {
+  return vector(...L.sortBy(compare, vec));
+}
+
+function vectorFind(pred, vec) {
+  return L.find(pred, vec);
+}
+
 // vector accessors
+function vectorRef(pos, vec) {
+  const elem = L.nth(pos, vec);
+  if (!elem) {
+    throw new ReferenceError(
+      "Ref out of bounds: vector length exceeded",
+    );
+  }
+  return elem;
+}
+
+function vectorFirst(vec) {
+  return L.first(vec);
+}
+
+function vectorPop(vec) {
+  return vector(...L.last(vec));
+}
 
 // take and drop
 
@@ -165,12 +180,9 @@ module.exports = {
   "vector?": isVector,
   "vector-empty?": isVectorEmpty,
   "vector-length": vectorLength,
-  "vector-ref": vectorRef,
   "vector-slice": vectorSlice,
   "vector-prepend": vectorPrepend,
   "vector-push": vectorPush,
-  "vector-first": vectorFirst,
-  "vector-pop": vectorPop,
   "vector-append": vectorAppend,
   "vector-copy": vectorCopy,
   "vector-reverse": vectorReverse,
@@ -187,4 +199,11 @@ module.exports = {
   "vector->string": vectorToString,
   "vector-filter": vectorFilter,
   "vector-reject": vectorReject,
+  "vector-remove": vectorRemove,
+  "vector-sort": vectorSort,
+  "vector-sort-by": vectorSortBy,
+  "vector-find": vectorFind,
+  "vector-ref": vectorRef,
+  "vector-first": vectorFirst,
+  "vector-pop": vectorPop,
 };

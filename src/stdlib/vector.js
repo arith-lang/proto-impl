@@ -7,7 +7,7 @@ const toArray = require("./list")["list->array"];
 // vector prototype
 const vectorPrototype = Object.create({});
 
-vectorPrototype.toString = function () {
+function vecToString() {
   if (isVectorEmpty(this)) {
     return `#()`;
   }
@@ -39,12 +39,12 @@ vectorPrototype.toString = function () {
 
   str += `)`;
   return str;
-};
+}
 
 // vector constructor
 function vector(...args) {
   let v = L.list(...args);
-  v = { ...v, ...vectorPrototype };
+  v.toString = vecToString.bind(v);
   return v;
 }
 
@@ -92,6 +92,10 @@ function vectorConcat(...vecs) {
   return accum;
 }
 
+function vectorCopy(vec) {
+  return vector(...vec);
+}
+
 // vector iterators
 
 // conversion functions
@@ -100,7 +104,7 @@ function vectorToArray(vec) {
 }
 
 function vectorToList(vec) {
-  return list(...vectorToArray(vec));
+  return list(...vec);
 }
 
 function listToVector(lst) {
@@ -129,6 +133,7 @@ module.exports = {
   "vector-prepend": vectorPrepend,
   "vector-append": vectorAppend,
   "vector-concat": vectorConcat,
+  "vector-copy": vectorCopy,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

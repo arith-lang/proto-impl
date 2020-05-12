@@ -42,8 +42,9 @@ Inspired by Steve Kinney's [programming language workshop on FrontEnd Masters](h
 - [x] Proper pairs and lists
 - [ ] Iteration construct (for)
 - [x] I/O primitives
-- [ ] Immutable vectors
+- [x] Immutable vectors
 - [ ] Arrays (mutable)
+- [ ] Maps and mutable maps
 - [ ] Structs
 - [ ] Modules
 - [ ] Symbols and quote/quasiquote/unquote

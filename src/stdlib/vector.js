@@ -58,11 +58,11 @@ function isVectorEmpty(vec) {
 }
 
 // vector helpers
-function vectorLength(v) {
-  return L.length(v);
+function vectorLength(vec) {
+  return L.length(vec);
 }
 
-function vectorRef(vec, pos) {
+function vectorRef(pos, vec) {
   const elem = L.nth(pos, vec);
   if (!elem) {
     throw new ReferenceError(
@@ -72,23 +72,27 @@ function vectorRef(vec, pos) {
   return elem;
 }
 
+function vectorSlice(start, end, vec) {
+  return L.slice(start, stop, vec);
+}
+
 // vector iterators
 
 // conversion functions
-function vectorToArray(v) {
-  return L.toArray(v);
+function vectorToArray(vec) {
+  return L.toArray(vec);
 }
 
-function vectorToList(v) {
-  return list(vectorToArray(v));
+function vectorToList(vec) {
+  return list(...vectorToArray(vec));
 }
 
 function listToVector(lst) {
   return vector(...toArray(lst));
 }
 
-function vectorToString(v) {
-  return v.toString();
+function vectorToString(vec) {
+  return vec.toString();
 }
 
 // filtering, removing, sorting, and searching
@@ -105,6 +109,7 @@ module.exports = {
   "vector-empty?": isVectorEmpty,
   "vector-length": vectorLength,
   "vector-ref": vectorRef,
+  "vector-slice": vectorSlice,
   "vector->array": vectorToArray,
   "vector->list": vectorToList,
   "list->vector": listToVector,

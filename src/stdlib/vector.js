@@ -73,23 +73,23 @@ function vectorRef(pos, vec) {
 }
 
 function vectorSlice(start, end, vec) {
-  return L.slice(start, stop, vec);
+  return vector(...L.slice(start, end, vec));
 }
 
 function vectorPrepend(item, vec) {
-  return L.prepend(item, vec);
+  return vector(...L.prepend(item, vec));
 }
 
 function vectorAppend(item, vec) {
-  return L.append(item, vec);
+  return vector(...L.append(item, vec));
 }
 
 function vectorConcat(...vecs) {
-  let accum = vector();
+  let accum = L.list();
   for (vec of vecs) {
     accum = L.concat(accum, vec);
   }
-  return accum;
+  return vector(...accum);
 }
 
 function vectorCopy(vec) {

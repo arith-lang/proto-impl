@@ -214,9 +214,19 @@ function filter(pred, lst) {
   const [head, [...tail]] = lst;
   if (pred(head) !== false) {
     return cons(head, filter(pred, tail));
-  } else {
-    return filter(pred, tail);
   }
+  return filter(pred, tail);
+}
+
+function reject(pred, lst) {
+  if (isNull(lst)) {
+    return nil;
+  }
+  const [head, [...tail]] = lst;
+  if (pred(head) === false) {
+    return cons(head, filter(pred, tail));
+  }
+  return reject(pred, tail);
 }
 
 function remove(item, lst) {
@@ -379,6 +389,7 @@ module.exports = {
   "list->array": toArray,
   "list->string": toString,
   filter,
+  reject,
   remove,
   sort,
   first,

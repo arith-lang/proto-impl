@@ -176,6 +176,13 @@ function vectorLast(vec) {
 }
 
 // take and drop
+function vectorTake(num, vec) {
+  return vector(...L.take(num, vec));
+}
+
+function vectorDrop(num, vec) {
+  return vector(...L.drop(num, vec));
+}
 
 // range
 
@@ -211,4 +218,6 @@ module.exports = {
   "vector-tail": vectorTail,
   "vector-first": vectorFirst,
   "vector-last": vectorLast,
+  "vector-take": vectorTake,
+  "vector-drop": vectorDrop,
 };

@@ -79,6 +79,8 @@ function append(...lists) {
   return list(...temp);
 }
 
+const concat = append;
+
 function copy(lst) {
   if (isNull(lst)) {
     return nil;
@@ -397,6 +399,7 @@ module.exports = {
   length,
   prepend,
   append,
+  concat,
   copy,
   reverse,
   map,

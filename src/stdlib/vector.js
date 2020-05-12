@@ -144,8 +144,8 @@ function vectorReject(pred, vec) {
   return vector(...L.reject(pred, vec));
 }
 
-function vectorRemove(index, elements, vec) {
-  return vector(...L.remove(index, elements, vec));
+function vectorRemove(index, number, vec) {
+  return vector(...L.remove(index, number, vec));
 }
 
 function vectorSort(vec) {

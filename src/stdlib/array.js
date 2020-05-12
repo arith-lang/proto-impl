@@ -82,18 +82,18 @@ const arrayUpdate = arraySet;
 
 // array iterators
 function arrayMap(fn, arr) {
-  return arr.map(fn);
+  return array(...arr.map(fn));
 }
 
 function arrayFoldl(fn, accum, arr) {
-  return arr.reduce(fn, accum);
+  return array(...arr.reduce(fn, accum));
 }
 
 const arrayFold = arrayFoldl;
 const arrayReduce = arrayFoldl;
 
 function arrayFoldr(fn, accum, arr) {
-  return arr.reduceRight(fn, accum);
+  return array(...arr.reduceRight(fn, accum));
 }
 
 const arrayReduceRight = arrayFoldr;
@@ -108,8 +108,40 @@ function arrayToString(arr) {
 }
 
 // filtering, removing, sorting, and searching
+function arrayFilter(pred, arr) {
+  return array(...arr.filter(pred));
+}
+
+function arrayReject(pred, arr) {
+  return array(...arr.filter(!pred));
+}
+
+function arrayRemove(index, number, arr) {
+  arr.splice(index, number);
+}
+
+function arraySort(arr) {
+  arr.sort();
+}
+
+function arraySortBy(compare, arr) {
+  arr.sort(compare);
+}
+
+function arrayFind(pred, arr) {
+  return arr.find(pred);
+}
 
 // array accessors
+function arrayRef(pos, arr) {
+  const elem = arr[pos];
+  if (!elem) {
+    throw new ReferenceError(
+      "Ref out of bounds: array length exceeded",
+    );
+  }
+  return elem;
+}
 
 // take and drop
 
@@ -135,4 +167,10 @@ module.exports = {
   "array-reduce-right": arrayReduceRight,
   "array-foreach": arrayForeach,
   "array->string": arrayToString,
+  "array-filter": arrayFilter,
+  "array-reject": arrayReject,
+  "array-remove!": arrayRemove,
+  "array-sort!": arraySort,
+  "array-sort-by!": arraySortBy,
+  "array-find": arrayFind,
 };

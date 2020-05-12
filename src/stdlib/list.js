@@ -208,7 +208,16 @@ function remove(item, lst) {
   return lst;
 }
 
-function sort(compare, lst) {
+function sort(lst) {
+  if (isNull(lst)) {
+    return lst;
+  }
+  const temp = toArray(lst);
+  temp.sort();
+  return list(...temp);
+}
+
+function sortBy(compare, lst) {
   if (isNull(lst)) {
     return lst;
   }
@@ -229,16 +238,12 @@ function member(item, lst) {
   return nil;
 }
 
-function find(item, list) {
+function find(pred, list) {
   if (isNull(lst)) {
     return lst;
   }
   const temp = toArray(lst);
-  const i = temp.indexOf(item);
-  if (item > -1) {
-    return listRef(i, lst);
-  }
-  return nil;
+  return temp.find(pred) || nil;
 }
 
 // list accessors
@@ -390,6 +395,7 @@ module.exports = {
   reject,
   remove,
   sort,
+  "sort-by": sortBy,
   first,
   head,
   rest,

@@ -23,6 +23,20 @@ const VALID_SPECIAL_CHARS = [
   "#",
   "@",
 ];
+const KEYWORDS = [
+  "true",
+  "false",
+  "nil",
+  "if",
+  "cond",
+  "else",
+  "lambda",
+  "define",
+  "let",
+  "type",
+  "class",
+  "struct",
+];
 
 // token identifiers
 const isInteger = (str) => INTEGER.test(str);
@@ -62,6 +76,8 @@ const isSemicolon = (char) => char === ";";
 
 const isEndOfLine = (char) => char === "\n";
 
+const isKeyword = (word) => KEYWORDS.includes(word);
+
 module.exports = {
   isInteger,
   isFloat,
@@ -80,4 +96,5 @@ module.exports = {
   isQuote,
   isSemicolon,
   isEndOfLine,
+  isKeyword,
 };

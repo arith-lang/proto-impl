@@ -20,6 +20,8 @@ const VALID_SPECIAL_CHARS = [
   ">",
   "<",
   "^",
+  "#",
+  "@",
 ];
 
 // token identifiers

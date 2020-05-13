@@ -10,6 +10,30 @@ One thing led to another, and suddenly I had a Turing-complete language with lam
 
 Now I'm on a mission to bring the power and elegance of Lisp to the web, while also taking advantage of recent innovations in the JavaScript ecosystem and functional development techniques. This isn't yet another Scheme clone, but I hope to capture what makes languages like Scheme and Common Lisp special while also building elegant modern applications that are fun for developers too.
 
+## Language features
+
+*Note: this section includes features that are still under development*
+
+- Lisp-style syntax, programs as data, and macros
+- The best features of both functional and object-oriented paradigms
+- Proper Unicode string handling with characters based on grapheme clusters
+- Exact-precision numbers for calculations and mathematical operations
+- Built-in list and stream primitives with lazy evaluation
+- Gradual typing with type inference
+- Easy interoperability with JavaScript
+- Built-in collection types with mutable and immutable variants
+- Variant (tagged union) types with pattern matching
+- User-defined data types, including structs, objects, and sum types
+- Monadic types for handling handling nullable data, errors, and other tasks
+- Automatically curried functions and partial application
+- Function pipelining and composition
+- Direct access to DOM and web APIs (browser) and I/O and system APIs (NodeJS)
+- Batteries-included standard library that includes a fully-featured set of functionality out of the box
+- Lexical scoping for functions, objects, and let expressions
+- Traits and interfaces for user-defined types
+- Assertions and contract-driven development for better runtime safety
+- Robust support for concurrent and asynchronous operations
+
 ## Using the interpreter and transpiler
 
 Start by cloning the repo: `git clone https://github.com/jasonsbarr/arith.git <directory>`.

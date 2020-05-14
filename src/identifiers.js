@@ -71,7 +71,7 @@ const isEndOfInput = (input, pos) =>
 const isSeparator = (char) =>
   isWhitespace(char) || isComma(char) || isParen(char);
 
-const isQuote = (char) => char === '"';
+const isDoubleQuote = (char) => char === '"';
 
 const isSemicolon = (char) => char === ";";
 
@@ -96,7 +96,7 @@ module.exports = {
   isParen,
   isSeparator,
   isEndOfInput,
-  isQuote,
+  isDoubleQuote,
   isSemicolon,
   isEndOfLine,
   isKeyword,

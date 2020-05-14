@@ -24,7 +24,7 @@ const { peek } = require("./utilities");
 const { ArithReadInputError, ArithSyntaxError } = require("./errors");
 
 const tokenize = (input) => {
-  let pos = 0;
+  let pos = -1;
   let line = 1;
   let col = 0;
 
@@ -70,7 +70,7 @@ const tokenize = (input) => {
   };
 
   const readNumber = () => {
-    let tok = readWhile(!isSeparator);
+    let tok = readWhile((c) => !isSeparator(c));
     if (isInteger(tok) || isFloat(tok)) {
       return createToken("NUMBER", tok, line, col);
     } else {
@@ -82,7 +82,10 @@ const tokenize = (input) => {
   };
 
   const read = () => {
-    readWhile(isWhitespace);
+    if (isWhitespace(input[pos])) {
+      readWhile(isWhitespace);
+      return null;
+    }
     if (isEndOfInput(input, pos)) {
       return null;
     }
@@ -94,12 +97,14 @@ const tokenize = (input) => {
 
   let tokens = [];
   while (!isEndOfInput(input, pos)) {
-    tokens.push(read());
+    let tok = read();
+
+    if (tok) {
+      tokens.push(tok);
+    }
   }
   return tokens;
 };
-
-console.log(tokenize("1"));
 
 // const tokenize = (input) => {
 //   const tokens = [];

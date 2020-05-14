@@ -68,7 +68,7 @@ const isRightParen = (char) => char === ")";
 const isParen = (char) => isLeftParen(char) || isRightParen(char);
 
 const isEndOfInput = (input, pos) =>
-  pos >= input.length || input[pos] == undefined;
+  pos > -1 && input[pos] == undefined;
 
 const isSeparator = (char) =>
   isWhitespace(char) || isComma(char) || isParen(char);

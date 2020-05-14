@@ -68,7 +68,26 @@ const parseKeyword = (tokens) => {
   );
 };
 
-const parseDefine = (tokens) => {};
+const parseDefine = (tokens) => {
+  const defineTokens = eatExprTokens(tokens);
+  let startToken = peek(defineTokens);
+  let endToken = lookahead(defineTokens, defineTokens.length - 1);
+  let token = pop(defineTokens);
+  const definition = {
+    type: "DefinitionExpression",
+    name: token.value,
+    value: parseExpr(defineTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
+  };
+  return definition;
+};
 
 const parseCall = (tokens) => {
   const callTokens = eatExprTokens(tokens);

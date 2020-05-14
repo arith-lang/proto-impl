@@ -126,8 +126,7 @@ const tokenize = (input) => {
     }
     // FIXME: currently this will cause the lexer to attempt to process
     // valid identifiers that start with + or - to as numbers if
-    // the symbol is immediately followed by a digit. Need to
-    // fix in readNumber.
+    // the symbol is immediately followed by a digit.
 
     }
     if (isPlusOrMinus(char)) {

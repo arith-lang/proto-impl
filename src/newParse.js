@@ -71,7 +71,11 @@ const STRING = ({ value, line, start, end }) => {
   return createAtomNode("StringLiteral", value, line, start, end);
 };
 
-const nodeCreators = { NUMBER, STRING };
+const IDENTIFIER = ({ value, line, start, end }) => {
+  return createAtomNode("Identifier", value, line, start, end);
+};
+
+const nodeCreators = { NUMBER, STRING, IDENTIFIER };
 
 const createAtomNode = (type, value, line, start, end) => {
   return {

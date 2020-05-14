@@ -102,7 +102,7 @@ const IfExpression = (node, env = environment) => {
 };
 
 const makeVar = (name) => {
-  const specialChars = /[-%|&!\?\*\+\/\\><\^]/g;
+  const specialChars = /[-%|&!\?\*\+\/\\><\^@]/g;
   const newName = `_arith_${name.replace(specialChars, "_")}`;
 
   return newName;

@@ -126,8 +126,23 @@ describe("Tokenize the input stream", () => {
 
   it("Should correctly tokenize a punctuation mark", () => {
     const input = ":";
-    result = [
+    const result = [
       { type: "PUNC", value: ":", end: 1, line: 1, start: 0 },
+    ];
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should correctly tokenize a punctuation mark followed by an identifier", () => {
+    const input = "'symbol";
+    const result = [
+      { type: "PUNC", value: "'", end: 1, line: 1, start: 0 },
+      {
+        type: "IDENTIFIER",
+        value: "symbol",
+        end: 8,
+        line: 1,
+        start: 2,
+      },
     ];
     expect(tokenize(input)).toEqual(result);
   });

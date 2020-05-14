@@ -1,6 +1,10 @@
 const { peek, lookahead, pop } = require("./utilities");
 const { tokenize } = require("./tokenize");
-const { isLeftParen, isRightParen } = require("./identifiers");
+const {
+  isLeftParen,
+  isRightParen,
+  isKeyword,
+} = require("./identifiers");
 
 const parse = (tokens) => {
   const parseProgram = (tokens) => {
@@ -45,6 +49,13 @@ const maybeCall = (tokens) => {
 };
 
 const parseAtom = (token) => {
+  if (isKeyword(token.value)) {
+    if (token.value === "true" || token.value === "false") {
+      return nodeCreators["BOOLEAN"](token);
+    } else if (token.value === "nil") {
+      return nodeCreators["NIL"](token);
+    }
+  }
   return nodeCreators[token.type](token);
 };
 
@@ -75,7 +86,15 @@ const IDENTIFIER = ({ value, line, start, end }) => {
   return createAtomNode("Identifier", value, line, start, end);
 };
 
-const nodeCreators = { NUMBER, STRING, IDENTIFIER };
+const BOOLEAN = ({ value, line, start, end }) => {
+  return createAtomNode("BooleanLiteral", value, line, start, end);
+};
+
+const NIL = ({ value, line, start, end }) => {
+  return createAtomNode("NilLiteral", value, line, start, end);
+};
+
+const nodeCreators = { NUMBER, STRING, IDENTIFIER, BOOLEAN, NIL };
 
 const createAtomNode = (type, value, line, start, end) => {
   return {

@@ -37,7 +37,7 @@ const KEYWORDS = [
   "class",
   "struct",
 ];
-const PUNCTUATION = ",:[]{}.,`'";
+const PUNCTUATION = [",", ":", "[", "]", "{", "}", ".", "'"];
 
 // token identifiers
 const isDigit = (char) => DIGIT.test(char);
@@ -81,7 +81,7 @@ const isEndOfLine = (char) => char === "\n";
 
 const isKeyword = (word) => KEYWORDS.includes(word);
 
-const isPunctuation = (char) => PUNCTUATION.indexOf(char) > -1;
+const isPunctuation = (char) => PUNCTUATION.includes(char);
 
 const isHash = (char) => char === "#";
 

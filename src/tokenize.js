@@ -20,7 +20,7 @@ const {
   isPlusOrMinus,
   isDigit,
 } = require("./identifiers");
-const { peek } = require("./utilities");
+const { peek, lookahead } = require("./utilities");
 const { ArithReadInputError, ArithSyntaxError } = require("./errors");
 
 const tokenize = (input) => {
@@ -67,7 +67,10 @@ const tokenize = (input) => {
 
   const readWhile = (predicate) => {
     let str = "";
-    while (!isEndOfInput(input, pos) && predicate(peek(input, pos))) {
+    while (
+      !isEndOfInput(input, pos - 1) &&
+      predicate(peek(input, pos))
+    ) {
       str += next();
     }
     return str;
@@ -78,16 +81,16 @@ const tokenize = (input) => {
     next();
   };
 
-  const readNumber = () => {
-    let tok = readWhile((c) => !isSeparator(c));
+  const readNumber = (char) => {
+    let tok = char + readWhile((c) => !isSeparator(c));
     if (isInteger(tok) || isFloat(tok)) {
       return createToken("NUMBER", tok);
     } else {
       throw new ArithSyntaxError(
-        `Cannot start an identifier with a number at line ${line}, col ${col}`,
+        `Invalid numeric literal at line ${line}, col ${col}`,
       );
     }
-    die("Could not read input");
+    die("Input error");
   };
 
   const readString = () => {
@@ -96,8 +99,8 @@ const tokenize = (input) => {
     return createToken("STRING", tok);
   };
 
-  const readIdent = () => {
-    const tok = readWhile(isIdChar);
+  const readIdent = (char) => {
+    const tok = char + readWhile(isIdChar);
     return createToken(
       isKeyword(tok) ? "KEYWORD" : "IDENTIFIER",
       tok,
@@ -113,19 +116,35 @@ const tokenize = (input) => {
       return null;
     }
     let char = next();
+    if (isSemicolon(char)) {
+      skipComment();
+      return null;
+    }
     if (isHash(char) || isDigit(char)) {
-      return readNumber();
+      return readNumber(char);
     }
     if (isPlusOrMinus(char)) {
-      if (!isSeparator(peek(input, pos))) {
-        return readNumber();
+      if (
+        !isEndOfInput(input, pos) &&
+        !isSeparator(peek(input, pos))
+      ) {
+        return readNumber(char);
       }
     }
     if (isDoubleQuote(char)) {
       return readString();
     }
-    if (isIdStart) {
-      return readIdent();
+    if (isIdStart(char)) {
+      return readIdent(char);
+    }
+    if (isParen(char)) {
+      return createToken("PAREN", char);
+    }
+    if (isPunctuation(char)) {
+      console.log(isPunctuation(char));
+      return createToken("PUNC", char);
+    } else {
+      return null;
     }
   };
 
@@ -139,7 +158,7 @@ const tokenize = (input) => {
   return tokens;
 };
 
-console.log(tokenize(`Identifier`));
+console.log(tokenize(`2.55e+2`));
 
 // const tokenize = (input) => {
 //   const tokens = [];

@@ -50,6 +50,7 @@ const tokenize = (input) => {
     return {
       type,
       value,
+      // FIXME: Gives incorrect values for these if string token has \n
       line,
       start: col - value.length - 1,
       end: col - 1,

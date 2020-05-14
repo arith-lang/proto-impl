@@ -127,8 +127,6 @@ const tokenize = (input) => {
     // FIXME: currently this will cause the lexer to attempt to process
     // valid identifiers that start with + or - to as numbers if
     // the symbol is immediately followed by a digit.
-
-    }
     if (isPlusOrMinus(char)) {
       if (
         isHash(lookahead(input, pos)) ||
@@ -165,5 +163,3 @@ const tokenize = (input) => {
 };
 
 module.exports = { tokenize };
-
-console.log(tokenize(`-1`));

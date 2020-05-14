@@ -135,4 +135,73 @@ describe("The parser function", () => {
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
+
+  it("Should be able to correctly parse nested call expressions", () => {
+    const input = `(+ 8 (- 2 3))`;
+    const ast = {
+      type: "CallExpression",
+      name: "+",
+      arguments: [
+        {
+          type: "NumericLiteral",
+          value: "8",
+          start: {
+            line: 1,
+            col: 3,
+          },
+          end: {
+            line: 1,
+            col: 4,
+          },
+        },
+        {
+          type: "CallExpression",
+          name: "-",
+          arguments: [
+            {
+              type: "NumericLiteral",
+              value: "2",
+              start: {
+                line: 1,
+                col: 8,
+              },
+              end: {
+                line: 1,
+                col: 9,
+              },
+            },
+            {
+              type: "NumericLiteral",
+              value: "3",
+              start: {
+                line: 1,
+                col: 10,
+              },
+              end: {
+                line: 1,
+                col: 11,
+              },
+            },
+          ],
+          start: {
+            line: 1,
+            col: 6,
+          },
+          end: {
+            line: 1,
+            col: 12,
+          },
+        },
+      ],
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 13,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
 });

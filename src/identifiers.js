@@ -1,6 +1,7 @@
 // constants
-const INTEGER = /^[+-]?[0-9]+$/;
-const FLOAT = /^[-+]?[0-9]+\.[0-9]+$/;
+const DIGIT = [0 - 9];
+const INTEGER = /^[+-]?#?[o|b|x]?[0-9]+$/;
+const FLOAT = /^[-+]?#?[o|b|x]?[0-9]+\.[0-9]+$/;
 const WHITESPACE = /\s+/;
 const LETTER = /[A-Za-z]/;
 const VALID_SPECIAL_CHARS = [
@@ -39,6 +40,8 @@ const KEYWORDS = [
 const PUNCTUATION = ",:[]{}.,`'";
 
 // token identifiers
+const isDigit = (char) => DIGIT.test(char);
+
 const isInteger = (str) => INTEGER.test(str);
 
 const isFloat = (str) => FLOAT.test(str);
@@ -80,7 +83,12 @@ const isKeyword = (word) => KEYWORDS.includes(word);
 
 const isPunctuation = (char) => KEYWORDS.indexOf(char) > -1;
 
+const isHash = (char) => char === "#";
+
+const isPlusOrMinus = (char) => "+-".indexOf(char) > -1;
+
 module.exports = {
+  isDigit,
   isInteger,
   isFloat,
   isLetter,
@@ -100,4 +108,6 @@ module.exports = {
   isEndOfLine,
   isKeyword,
   isPunctuation,
+  isHash,
+  isPlusOrMinus,
 };

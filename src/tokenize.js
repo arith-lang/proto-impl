@@ -16,9 +16,12 @@ const {
   isEndOfLine,
   isKeyword,
   isPunctuation,
+  isHash,
+  isPlusOrMinus,
+  isDigit,
 } = require("./identifiers");
 const { peek } = require("./utilities");
-const { ArithReadInputError } = require("./errors");
+const { ArithReadInputError, ArithSyntaxError } = require("./errors");
 
 const tokenize = (input) => {
   let pos = 0;
@@ -58,6 +61,7 @@ const tokenize = (input) => {
     while (!isEndOfInput(input, pos) && predicate(peek(input))) {
       str += next();
     }
+    return str;
   };
 
   const skipComment = () => {
@@ -65,7 +69,34 @@ const tokenize = (input) => {
     next();
   };
 
-  const readNumber = () => {};
+  const readNumber = () => {
+    let tok = readWhile(!isSeparator);
+    if (isInteger(tok) || isFloat(tok)) {
+      return createToken("NUMBER", tok, line, col);
+    } else {
+      throw new ArithSyntaxError(
+        `Cannot start an identifier with a number at line ${line}, col ${col}`,
+      );
+    }
+    die("Could not read input");
+  };
+
+  const read = () => {
+    readWhile(isWhitespace);
+    if (isEndOfInput(input, pos)) {
+      return null;
+    }
+    let char = next();
+    if (isPlusOrMinus(char) || isHash(char) || isDigit(char)) {
+      return readNumber();
+    }
+  };
+
+  let tokens = [];
+  while (!isEndOfInput(input, pos)) {
+    tokens.push(read());
+  }
+  return tokens;
 };
 
 // const tokenize = (input) => {

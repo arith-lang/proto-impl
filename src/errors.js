@@ -11,7 +11,14 @@ class ArithReadInputError extends ArithError {
   }
 }
 
+class ArithSyntaxError extends ArithError {
+  constructor(message) {
+    super(`Invalid syntax: ${message}`);
+  }
+}
+
 module.exports = {
   ArithError,
   ArithReadInputError,
+  ArithSyntaxError,
 };

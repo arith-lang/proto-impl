@@ -53,11 +53,20 @@ const maybeCall = (tokens) => {
     return parseCall(tokens);
   }
   throw new ArithSyntaxError(
-    `Don't know how to parse at line ${token.line}, col ${token.start}`,
+    `Don't know how to parse ${token.value} at line ${token.line}, col ${token.start}`,
   );
 };
 
-const parseKeyword = (tokens) => {};
+const parseKeyword = (tokens) => {
+  let token = pop(tokens);
+  switch (token.value) {
+    case "define":
+      return parseDefine(tokens);
+  }
+  throw new ArithSyntaxError(
+    `Unknown keyword ${token.value} at line ${token.line} and col ${token.start}`,
+  );
+};
 
 const parseCall = (tokens) => {
   const callTokens = eatExprTokens(tokens);
@@ -93,7 +102,7 @@ const parseAtom = (token) => {
     return nodeCreators[token.type](token);
   }
   throw new ArithSyntaxError(
-    `Could not parse token at line ${token.line}, col ${token.start}`,
+    `Could not parse ${token.value} at line ${token.line}, col ${token.start}`,
   );
 };
 

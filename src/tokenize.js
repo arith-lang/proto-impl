@@ -46,6 +46,15 @@ const tokenize = (input) => {
     );
   };
 
+  const createToken = (type, value) => {
+    return {
+      type,
+      value,
+      line,
+      col,
+    };
+  };
+
   const isIdStart = (char) => {
     return isLetter(char) || isValidSpecialChar(char);
   };
@@ -72,7 +81,7 @@ const tokenize = (input) => {
   const readNumber = () => {
     let tok = readWhile((c) => !isSeparator(c));
     if (isInteger(tok) || isFloat(tok)) {
-      return createToken("NUMBER", tok, line, col);
+      return createToken("NUMBER", tok);
     } else {
       throw new ArithSyntaxError(
         `Cannot start an identifier with a number at line ${line}, col ${col}`,
@@ -208,13 +217,5 @@ const tokenize = (input) => {
 // };
 
 // token creator helpers
-const createToken = (type, value, line, col) => {
-  return {
-    type,
-    value,
-    line,
-    col,
-  };
-};
 
 module.exports = { tokenize };

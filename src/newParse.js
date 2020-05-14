@@ -37,6 +37,14 @@ const parse = (tokens) => {
     return parseAtom(token);
   };
 
+  const maybeCall = (tokens) => {
+    return "Maybe Call";
+  };
+
+  const parseAtom = (token) => {
+    return token;
+  };
+
   const eatExprTokens = (tokens, numOfLeft = 1) => {
     let exprTokens = [];
     let lParens = numOfLeft;

@@ -24,7 +24,6 @@ const tokenize = (input) => {
   let pos = 0;
   let line = 1;
   let col = 0;
-  const tokens = [];
 
   const next = () => {
     let ch = input.charAt(pos);
@@ -55,9 +54,16 @@ const tokenize = (input) => {
   };
 
   const readWhile = (predicate) => {
-    let str = ""
-    while (!isEndOfInput())
-  }
+    let str = "";
+    while (!isEndOfInput(input, pos) && predicate(peek(input))) {
+      str += next();
+    }
+  };
+
+  const skipComment = () => {
+    readWhile((ch) => ch !== "\n");
+    next();
+  };
 };
 
 // const tokenize = (input) => {

@@ -92,4 +92,47 @@ describe("The parser function", () => {
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
+
+  it("Should correctly parse a simple call expression", () => {
+    const input = `(+ 2 3)`;
+    const ast = {
+      type: "CallExpression",
+      name: "+",
+      arguments: [
+        {
+          type: "NumericLiteral",
+          value: "2",
+          start: {
+            line: 1,
+            col: 3,
+          },
+          end: {
+            line: 1,
+            col: 4,
+          },
+        },
+        {
+          type: "NumericLiteral",
+          value: "3",
+          start: {
+            line: 1,
+            col: 5,
+          },
+          end: {
+            line: 1,
+            col: 6,
+          },
+        },
+      ],
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 7,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
 });

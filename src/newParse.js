@@ -46,7 +46,26 @@ parseExpr = (tokens) => {
 };
 
 const maybeCall = (tokens) => {
-  return "Maybe Call";
+  let token = peek(tokens);
+  if (token.type === "KEYWORD") {
+    return parseKeyword(tokens);
+  } else if (token.type === "IDENTIFIER") {
+    return parseCall(tokens);
+  }
+  throw new ArithSyntaxError(
+    `Don't know how to parse at line ${token.line}, col ${token.start}`,
+  );
+};
+
+const parseKeyword = (tokens) => {};
+
+const parseCall = (tokens) => {
+  let token = pop(tokens);
+  const call = {
+    type: "CallExpression",
+    name: token.value,
+    arguments,
+  };
 };
 
 const parseAtom = (token) => {

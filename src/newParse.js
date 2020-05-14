@@ -28,60 +28,61 @@ const parse = (tokens) => {
     }
     return body;
   };
-
-  parseExpr = (tokens) => {
-    const token = pop(tokens);
-    if (isLeftParen(token.value)) {
-      return maybeCall(tokens);
-    }
-    return parseAtom(token);
-  };
-
-  const maybeCall = (tokens) => {
-    return "Maybe Call";
-  };
-
-  const parseAtom = (token) => {
-    return nodeCreators[token.type](token);
-  };
-
-  const eatExprTokens = (tokens, numOfLeft = 1) => {
-    let exprTokens = [];
-    let lParens = numOfLeft;
-    let rParens = 0;
-
-    while (lParens > rParens) {
-      token = pop(tokens);
-      if (isLeftParen(token.value)) lParens += 1;
-      if (isRightParen(token.value)) rParens += 1;
-      exprTokens.push(token);
-    }
-
-    return exprTokens;
-  };
-
-  const NUMBER = ({ value, line, start, end }) => {
-    return createAtomNode("NumericLiteral", value, line, start, end);
-  };
-
-  const nodeCreators = { NUMBER };
-
-  const createAtomNode = (type, value, line, start, end) => {
-    return {
-      type,
-      value,
-      start: {
-        line,
-        col: start,
-      },
-      end: {
-        line,
-        col: end,
-      },
-    };
-  };
-
   return parseProgram(tokens);
 };
 
+parseExpr = (tokens) => {
+  const token = pop(tokens);
+  if (isLeftParen(token.value)) {
+    return maybeCall(tokens);
+  }
+  return parseAtom(token);
+};
+
+const maybeCall = (tokens) => {
+  return "Maybe Call";
+};
+
+const parseAtom = (token) => {
+  return nodeCreators[token.type](token);
+};
+
+const eatExprTokens = (tokens, numOfLeft = 1) => {
+  let exprTokens = [];
+  let lParens = numOfLeft;
+  let rParens = 0;
+
+  while (lParens > rParens) {
+    token = pop(tokens);
+    if (isLeftParen(token.value)) lParens += 1;
+    if (isRightParen(token.value)) rParens += 1;
+    exprTokens.push(token);
+  }
+
+  return exprTokens;
+};
+
+const NUMBER = ({ value, line, start, end }) => {
+  return createAtomNode("NumericLiteral", value, line, start, end);
+};
+
+const nodeCreators = { NUMBER };
+
+const createAtomNode = (type, value, line, start, end) => {
+  return {
+    type,
+    value,
+    start: {
+      line,
+      col: start,
+    },
+    end: {
+      line,
+      col: end,
+    },
+  };
+};
+
 module.exports = { parse };
+
+console.log(JSON.stringify(parse(tokenize(`1`)), null, 2));

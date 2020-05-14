@@ -1,4 +1,4 @@
-const peek = (sequence, pos = 0) => sequence[pos];
+const peek = (sequence) => sequence[0];
 const lookahead = (sequence, pos) => sequence[pos];
 const pop = (sequence) => sequence.shift();
 const push = (token, sequence) => sequence.unshift(token);

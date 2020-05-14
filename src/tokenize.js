@@ -20,7 +20,7 @@ const {
   isPlusOrMinus,
   isDigit,
 } = require("./identifiers");
-const { peek, lookahead } = require("./utilities");
+const { lookahead } = require("./utilities");
 const { ArithReadInputError, ArithSyntaxError } = require("./errors");
 
 const tokenize = (input) => {
@@ -69,7 +69,7 @@ const tokenize = (input) => {
     let str = "";
     while (
       !isEndOfInput(input, pos - 1) &&
-      predicate(peek(input, pos))
+      predicate(lookahead(input, pos))
     ) {
       str += next();
     }
@@ -125,8 +125,8 @@ const tokenize = (input) => {
     }
     if (isPlusOrMinus(char)) {
       if (
-        !isEndOfInput(input, pos) &&
-        !isSeparator(peek(input, pos))
+        isHash(lookahead(input, pos)) ||
+        isDigit(lookahead(input, pos))
       ) {
         return readNumber(char);
       }
@@ -159,3 +159,5 @@ const tokenize = (input) => {
 };
 
 module.exports = { tokenize };
+
+console.log(tokenize(`-1`));

@@ -70,4 +70,26 @@ describe("The parser function", () => {
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
+
+  it("Should return a BooleanLiteral node when parsing a boolean keyword token", () => {
+    const input = `true`;
+    const ast = {
+      type: "BooleanLiteral",
+      value: "true",
+      start: { line: 1, col: 1 },
+      end: { line: 1, col: 5 },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should return a NilLiteral node when parsing a nil keyword token", () => {
+    const input = `nil`;
+    const ast = {
+      type: "NilLiteral",
+      value: "nil",
+      start: { line: 1, col: 1 },
+      end: { line: 1, col: 4 },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
 });

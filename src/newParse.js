@@ -60,12 +60,26 @@ const maybeCall = (tokens) => {
 const parseKeyword = (tokens) => {};
 
 const parseCall = (tokens) => {
-  let token = pop(tokens);
+  const callTokens = eatExprTokens(tokens);
+  let token = pop(callTokens);
+  let endToken = lookahead(callTokens, callTokens.length - 1);
   const call = {
     type: "CallExpression",
     name: token.value,
-    arguments,
+    arguments: [],
+    start: {
+      line: token.line,
+      col: token.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
+  while (!isRightParen(peek(callTokens).value)) {
+    call.arguments.push(parseExpr(callTokens));
+  }
+  return call;
 };
 
 const parseAtom = (token) => {

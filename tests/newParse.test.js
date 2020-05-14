@@ -48,4 +48,15 @@ describe("The parser function", () => {
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
+
+  it("Should return a StringLiteral node when parsing a string token", () => {
+    const input = `"hello"`;
+    const ast = {
+      type: "StringLiteral",
+      value: "hello",
+      start: { line: 1, col: 2 },
+      end: { line: 1, col: 7 },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
 });

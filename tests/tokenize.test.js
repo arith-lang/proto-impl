@@ -124,6 +124,14 @@ describe("Tokenize the input stream", () => {
     expect(tokenize(input)).toEqual(result);
   });
 
+  it("Should correctly tokenize a punctuation mark", () => {
+    const input = ":";
+    result = [
+      { type: "PUNC", value: ":", end: 1, line: 1, start: 0 },
+    ];
+    expect(tokenize(input)).toEqual(result);
+  });
+
   it("Should throw an error when an identifier contains invalid characters", () => {
     expect(() => {
       tokenize("_#");

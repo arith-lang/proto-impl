@@ -37,6 +37,7 @@ const KEYWORDS = [
   "class",
   "struct",
 ];
+const PUNCTUATION = ",:[]{}.,`'";
 
 // token identifiers
 const isInteger = (str) => INTEGER.test(str);
@@ -78,6 +79,8 @@ const isEndOfLine = (char) => char === "\n";
 
 const isKeyword = (word) => KEYWORDS.includes(word);
 
+const isPunctuation = (char) => KEYWORDS.indexOf(char) > -1;
+
 module.exports = {
   isInteger,
   isFloat,
@@ -97,4 +100,5 @@ module.exports = {
   isSemicolon,
   isEndOfLine,
   isKeyword,
+  isPunctuation,
 };

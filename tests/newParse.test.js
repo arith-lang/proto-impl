@@ -204,4 +204,33 @@ describe("The parser function", () => {
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
+
+  it("Should correctly parse a DefinitionExpression", () => {
+    const input = `(define x 7)`;
+    const ast = {
+      type: "DefinitionExpression",
+      name: "x",
+      value: {
+        type: "NumericLiteral",
+        value: "7",
+        start: {
+          line: 1,
+          col: 10,
+        },
+        end: {
+          line: 1,
+          col: 11,
+        },
+      },
+      start: {
+        line: 1,
+        col: 8,
+      },
+      end: {
+        line: 1,
+        col: 12,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
 });

@@ -31,4 +31,21 @@ describe("The parser function", () => {
     };
     expect(parse(tokenize(input))).toEqual(ast);
   });
+
+  it("Should return a NumericLiteral node when parsing a number token", () => {
+    const input = `3.1415`;
+    const ast = {
+      type: "NumericLiteral",
+      value: "3.1415",
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 7,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
 });

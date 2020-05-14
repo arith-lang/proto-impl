@@ -21,14 +21,15 @@ const parse = (tokens) => {
     return program;
   };
 
-  const parseBlock = (tokens) => {
-    let body = [];
-    while (tokens.length) {
-      body.push(parseExpr(tokens));
-    }
-    return body;
-  };
   return parseProgram(tokens);
+};
+
+const parseBlock = (tokens) => {
+  let body = [];
+  while (tokens.length) {
+    body.push(parseExpr(tokens));
+  }
+  return body;
 };
 
 parseExpr = (tokens) => {

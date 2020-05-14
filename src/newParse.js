@@ -42,7 +42,7 @@ const parse = (tokens) => {
   };
 
   const parseAtom = (token) => {
-    return token;
+    return nodeCreators[token.type](token);
   };
 
   const eatExprTokens = (tokens, numOfLeft = 1) => {
@@ -60,9 +60,28 @@ const parse = (tokens) => {
     return exprTokens;
   };
 
+  const NUMBER = ({ value, line, start, end }) => {
+    return createAtomNode("NumericLiteral", value, line, start, end);
+  };
+
+  const nodeCreators = { NUMBER };
+
+  const createAtomNode = (type, value, line, start, end) => {
+    return {
+      type,
+      value,
+      start: {
+        line,
+        col: start,
+      },
+      end: {
+        line,
+        col: end,
+      },
+    };
+  };
+
   return parseProgram(tokens);
 };
 
 module.exports = { parse };
-
-console.log(parse(tokenize(``)));

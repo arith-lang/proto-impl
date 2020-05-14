@@ -83,6 +83,4 @@ const createAtomNode = (type, value, line, start, end) => {
   };
 };
 
-module.exports = { parse };
-
-console.log(JSON.stringify(parse(tokenize(`1`)), null, 2));
+module.exports = { parse, parseExpr };

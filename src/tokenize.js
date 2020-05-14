@@ -64,6 +64,8 @@ const tokenize = (input) => {
     readWhile((ch) => ch !== "\n");
     next();
   };
+
+  const readNumber = () => {};
 };
 
 // const tokenize = (input) => {
@@ -168,31 +170,12 @@ const tokenize = (input) => {
 // };
 
 // token creator helpers
-const createNumberToken = (value) => {
+const createToken = (type, value, line, col) => {
   return {
-    type: "Number",
+    type,
     value,
-  };
-};
-
-const createIdentifierToken = (value) => {
-  return {
-    type: "IDENTIFIER",
-    value,
-  };
-};
-
-const createParenToken = (value) => {
-  return {
-    type: "PAREN",
-    value,
-  };
-};
-
-const createStringToken = (value) => {
-  return {
-    type: "STRING",
-    value,
+    line,
+    col,
   };
 };
 

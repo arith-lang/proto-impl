@@ -51,7 +51,8 @@ const tokenize = (input) => {
       type,
       value,
       line,
-      col,
+      start: col - value.length - 1,
+      end: col - 1,
     };
   };
 
@@ -122,6 +123,12 @@ const tokenize = (input) => {
     }
     if (isHash(char) || isDigit(char)) {
       return readNumber(char);
+    }
+    // FIXME: currently this will cause the lexer to attempt to process
+    // valid identifiers that start with + or - to as numbers if
+    // the symbol is immediately followed by a digit. Need to
+    // fix in readNumber.
+
     }
     if (isPlusOrMinus(char)) {
       if (

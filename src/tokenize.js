@@ -147,7 +147,6 @@ const tokenize = (input) => {
       return createToken("PAREN", char);
     }
     if (isPunctuation(char)) {
-      console.log(isPunctuation(char));
       return createToken("PUNC", char);
     } else {
       return null;

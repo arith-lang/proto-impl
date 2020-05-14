@@ -68,6 +68,8 @@ const parseKeyword = (tokens) => {
   );
 };
 
+const parseDefine = (tokens) => {};
+
 const parseCall = (tokens) => {
   const callTokens = eatExprTokens(tokens);
   let token = pop(callTokens);

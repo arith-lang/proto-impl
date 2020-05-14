@@ -11,17 +11,20 @@ const {
   isParen,
   isSeparator,
   isEndOfInput,
-  isQuote,
+  isDoubleQuote,
   isSemicolon,
   isEndOfLine,
+  isKeyword,
+  isPunctuation,
 } = require("./identifiers");
 const { peek } = require("./utilities");
 const { ArithReadInputError } = require("./errors");
 
-const getInputStream = (input) => {
+const tokenize = (input) => {
   let pos = 0;
   let line = 1;
   let col = 0;
+  const tokens = [];
 
   const next = () => {
     let ch = input.charAt(pos);
@@ -35,21 +38,26 @@ const getInputStream = (input) => {
     return ch;
   };
 
-  const eof = () => {
-    return peek(input[pos]) === undefined;
-  };
-
   const die = (msg) => {
     throw new ArithReadInputError(
       `${msg} at line ${line}, col ${col}`,
     );
   };
 
-  return {
-    next,
-    eof,
-    die,
+  const isIdStart = (char) => {
+    return isLetter(char) || isValidSpecialChar(char);
   };
+
+  const isIdChar = (char) => {
+    return (
+      isLetter(char) || isInteger(char) || isValidSpecialChar(char)
+    );
+  };
+
+  const readWhile = (predicate) => {
+    let str = ""
+    while (!isEndOfInput())
+  }
 };
 
 // const tokenize = (input) => {

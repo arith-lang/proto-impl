@@ -81,11 +81,11 @@ const isEndOfLine = (char) => char === "\n";
 
 const isKeyword = (word) => KEYWORDS.includes(word);
 
-const isPunctuation = (char) => KEYWORDS.indexOf(char) > -1;
+const isPunctuation = (char) => PUNCTUATION.indexOf(char) > -1;
 
 const isHash = (char) => char === "#";
 
-const isPlusOrMinus = (char) => "+-".indexOf(char) > -1;
+const isPlusOrMinus = (char) => char === "+" || char === "-";
 
 module.exports = {
   isDigit,

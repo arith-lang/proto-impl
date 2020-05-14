@@ -67,7 +67,7 @@ const tokenize = (input) => {
 
   const readWhile = (predicate) => {
     let str = "";
-    while (!isEndOfInput(input, pos) && predicate(peek(input))) {
+    while (!isEndOfInput(input, pos) && predicate(peek(input, pos))) {
       str += next();
     }
     return str;
@@ -90,6 +90,20 @@ const tokenize = (input) => {
     die("Could not read input");
   };
 
+  const readString = () => {
+    const tok = readWhile((c) => !isDoubleQuote(c));
+    next(); // skip closing quotation mark
+    return createToken("STRING", tok);
+  };
+
+  const readIdent = () => {
+    const tok = readWhile(isIdChar);
+    return createToken(
+      isKeyword(tok) ? "KEYWORD" : "IDENTIFIER",
+      tok,
+    );
+  };
+
   const read = () => {
     if (isWhitespace(input[pos])) {
       readWhile(isWhitespace);
@@ -99,21 +113,33 @@ const tokenize = (input) => {
       return null;
     }
     let char = next();
-    if (isPlusOrMinus(char) || isHash(char) || isDigit(char)) {
+    if (isHash(char) || isDigit(char)) {
       return readNumber();
+    }
+    if (isPlusOrMinus(char)) {
+      if (!isSeparator(peek(input, pos))) {
+        return readNumber();
+      }
+    }
+    if (isDoubleQuote(char)) {
+      return readString();
+    }
+    if (isIdStart) {
+      return readIdent();
     }
   };
 
   let tokens = [];
   while (!isEndOfInput(input, pos)) {
     let tok = read();
-
     if (tok) {
       tokens.push(tok);
     }
   }
   return tokens;
 };
+
+console.log(tokenize(`Identifier`));
 
 // const tokenize = (input) => {
 //   const tokens = [];

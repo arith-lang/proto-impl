@@ -5,6 +5,7 @@ const {
   isRightParen,
   isKeyword,
 } = require("./identifiers");
+const { ArithSyntaxError } = require("./errors");
 
 const parse = (tokens) => {
   const parseProgram = (tokens) => {
@@ -55,8 +56,12 @@ const parseAtom = (token) => {
     } else if (token.value === "nil") {
       return nodeCreators["NIL"](token);
     }
+  } else if (nodeCreators[token.type]) {
+    return nodeCreators[token.type](token);
   }
-  return nodeCreators[token.type](token);
+  throw new ArithSyntaxError(
+    `Could not parse token at line ${token.line}, col ${token.start}`,
+  );
 };
 
 const eatExprTokens = (tokens, numOfLeft = 1) => {

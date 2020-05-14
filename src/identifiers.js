@@ -1,7 +1,7 @@
 // constants
 const DIGIT = /[0-9]/;
 const INTEGER = /^[+-]?#?[o|b|x]?[0-9]+$/;
-const FLOAT = /^[-+]?#?[0-9]+\.[0-9]+$/;
+const FLOAT = /^[-+]?#?[0-9]+\.[0-9]+([eE][-+]?[0-9]+)?$/;
 const WHITESPACE = /\s+/;
 const LETTER = /[A-Za-z]/;
 const VALID_SPECIAL_CHARS = [

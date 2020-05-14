@@ -28,11 +28,13 @@ const tokenize = (input) => {
   let line = 1;
   let col = 0;
 
-  const next = () => {
+  const next = (isString) => {
     let ch = input.charAt(pos);
     if (ch == "\n") {
-      line++;
-      col = 0;
+      if (!isString) {
+        line++;
+        col = 0;
+      }
     } else {
       col++;
     }
@@ -50,7 +52,6 @@ const tokenize = (input) => {
     return {
       type,
       value,
-      // FIXME: Gives incorrect values for these if string token has \n
       line,
       start: col - value.length - 1,
       end: col - 1,
@@ -67,13 +68,13 @@ const tokenize = (input) => {
     );
   };
 
-  const readWhile = (predicate) => {
+  const readWhile = (predicate, isString) => {
     let str = "";
     while (
       !isEndOfInput(input, pos - 1) &&
       predicate(lookahead(input, pos))
     ) {
-      str += next();
+      str += next(isString);
     }
     return str;
   };
@@ -88,6 +89,9 @@ const tokenize = (input) => {
     if (isInteger(tok) || isFloat(tok)) {
       return createToken("NUMBER", tok);
     } else {
+      if (isPlusOrMinus(tok[0])) {
+        return readIdent(tok);
+      }
       throw new ArithSyntaxError(
         `Invalid numeric literal at line ${line}, col ${col}`,
       );
@@ -96,7 +100,7 @@ const tokenize = (input) => {
   };
 
   const readString = () => {
-    const tok = readWhile((c) => !isDoubleQuote(c));
+    const tok = readWhile((c) => !isDoubleQuote(c), true);
     next(); // skip closing quotation mark
     return createToken("STRING", tok);
   };
@@ -125,9 +129,6 @@ const tokenize = (input) => {
     if (isHash(char) || isDigit(char)) {
       return readNumber(char);
     }
-    // FIXME: currently this will cause the lexer to attempt to process
-    // valid identifiers that start with + or - to as numbers if
-    // the symbol is immediately followed by a digit.
     if (isPlusOrMinus(char)) {
       if (
         isHash(lookahead(input, pos)) ||

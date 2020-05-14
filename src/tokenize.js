@@ -99,6 +99,8 @@ const tokenize = (input) => {
   return tokens;
 };
 
+console.log(tokenize("1"));
+
 // const tokenize = (input) => {
 //   const tokens = [];
 //   let i = 0;

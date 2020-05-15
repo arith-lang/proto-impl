@@ -15,8 +15,11 @@ function list(...args) {
   if (!args.length) {
     return nil;
   }
-  const [head, ...tail] = args;
-  return cons(head, list(...tail));
+  let l = cons(args.pop(), nil);
+  while (args.length) {
+    l = cons(args.pop(), l);
+  }
+  return l;
 }
 
 // pair accessors
@@ -57,8 +60,17 @@ function length(lst) {
   if (isNull(lst)) {
     return 0;
   }
-  const temp = toArray(lst);
-  return temp.length;
+  let [head, [...tail]] = lst;
+  let len = 0;
+  while (head) {
+    len += 1;
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+    } else {
+      head = null;
+    }
+  }
+  return len;
 }
 
 const prepend = cons;
@@ -111,8 +123,12 @@ function map(fn, lst) {
   if (isNull(lst)) {
     return nil;
   } else {
-    const [head, [...tail]] = lst;
-    return cons(fn(head), map(fn, tail));
+    let temp = toArray(lst);
+    let l = cons(fn(temp.pop()), nil);
+    while (temp.length) {
+      l = cons(fn(temp.pop()), l);
+    }
+    return l;
   }
 }
 
@@ -120,8 +136,16 @@ function foldl(fn, accum, lst) {
   if (isNull(lst)) {
     return accum;
   }
-  const [head, [...tail]] = lst;
-  return foldl(fn, fn(accum, head), tail);
+  let [head, [...tail]] = lst;
+  while (head) {
+    accum = fn(accum, head);
+    if (!isNull(tail)) {
+      [head, [...tail]] = tail;
+    } else {
+      head = null;
+    }
+  }
+  return accum;
 }
 
 const fold = foldl;
@@ -147,7 +171,6 @@ function foreach(fn, lst) {
       head = null;
     }
   }
-  return nil;
 }
 
 // conversion functions
@@ -198,22 +221,30 @@ function filter(pred, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  const [head, [...tail]] = lst;
-  if (pred(head) !== false) {
-    return cons(head, filter(pred, tail));
+  let temp = toArray(lst);
+  let l = nil;
+  while (temp.length) {
+    let i = temp.pop();
+    if (pred(i) !== false) {
+      l = cons(i, l);
+    }
   }
-  return filter(pred, tail);
+  return l;
 }
 
 function reject(pred, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  const [head, [...tail]] = lst;
-  if (pred(head) === false) {
-    return cons(head, filter(pred, tail));
+  let temp = toArray(lst);
+  let l = nil;
+  while (temp.length) {
+    let i = temp.pop();
+    if (pred(i) === false) {
+      l = cons(i, l);
+    }
   }
-  return reject(pred, tail);
+  return l;
 }
 
 function remove(item, lst) {

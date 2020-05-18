@@ -4,10 +4,8 @@ const evaluate = (node) => {
   switch (node.type) {
     case "Program":
       return evalBlock(node.body);
-  }
-
-  if (node.value) {
-    return node.value;
+    case "NumericLiteral":
+      return stdlib.number(node.value);
   }
 };
 
@@ -21,5 +19,3 @@ const evalBlock = (block) => {
 
 const { tokenize } = require("./tokenize");
 const { parse } = require("./newParse");
-
-console.log(evaluate(parse(tokenize(`15`))));

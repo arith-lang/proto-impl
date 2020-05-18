@@ -6,4 +6,4 @@ class Number extends Decimal {
   }
 }
 
-module.exports = { Number };
+module.exports = Number;

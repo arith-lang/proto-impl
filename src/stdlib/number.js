@@ -1,6 +1,7 @@
-const { Number } = "./types/Number";
+const Number = require("./types/Number");
 const { all } = require("./utils");
 
+// Create a new Number
 function number(value) {
   return new Number(value);
 }

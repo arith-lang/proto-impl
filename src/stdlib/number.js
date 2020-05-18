@@ -1,4 +1,9 @@
+const { Number } = "./types/Number";
 const { all } = require("./utils");
+
+function number(value) {
+  return new Number(value);
+}
 
 // mathematical constants
 const PI = Math.PI;
@@ -75,6 +80,7 @@ function gte(x, y) {
 }
 
 module.exports = {
+  number,
   PI,
   "+": add,
   "-": sub,

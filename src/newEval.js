@@ -16,6 +16,3 @@ const evalBlock = (block) => {
   }
   return val;
 };
-
-const { tokenize } = require("./tokenize");
-const { parse } = require("./newParse");

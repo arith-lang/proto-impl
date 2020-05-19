@@ -179,13 +179,15 @@ function foreach(fn, lst) {
 function toArray(lst) {
   let arr = [];
   if (isNull(lst)) {
-    return arr;
+    return nil;
   }
-  let [head, [...tail]] = lst;
+  let head = lst[0];
+  let tail = lst[1];
   while (head) {
     arr.push(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = tail[0];
+      tail = tail[1];
     } else {
       head = null;
     }

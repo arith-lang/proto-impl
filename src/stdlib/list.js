@@ -25,13 +25,12 @@ function list(...args) {
 }
 
 // pair accessors
-function car(list) {
-  return list[0];
+function car(lst) {
+  return lst[0];
 }
 
-function cdr(list) {
-  const [, [...rest]] = list;
-  return rest;
+function cdr(lst) {
+  return lst[1];
 }
 
 // basic predicates

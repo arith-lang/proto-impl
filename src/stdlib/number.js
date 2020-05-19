@@ -4,6 +4,10 @@ const NumberPrompt = require("inquirer/lib/prompts/number");
 
 // Create a new Number
 function number(value) {
+  // Allow numbers to be specified in hex, octal, and binary
+  if (value[0] === "#") {
+    value = value.replace("#", "0");
+  }
   return new Number(value);
 }
 

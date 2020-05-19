@@ -1,5 +1,6 @@
-// let nil = empty array
-const nil = [];
+const Nil = require("./types/Nil");
+
+const nil = new Nil();
 const empty = nil;
 
 // pair constructor
@@ -34,7 +35,7 @@ function cdr(list) {
 
 // basic predicates
 function isNull(obj) {
-  return obj instanceof Array && obj.length === 0;
+  return obj.constructor.name === "Nil";
 }
 
 const isEmpty = isNull;
@@ -193,7 +194,7 @@ function toArray(lst) {
 
 function toString(lst, n) {
   if (isNull(lst)) {
-    return `'()`;
+    return nil.toString();
   }
   let arr = toArray(lst);
   let str = "";

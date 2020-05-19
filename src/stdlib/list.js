@@ -1,4 +1,5 @@
 const Nil = require("./types/Nil");
+const Cons = require("./types/Cons");
 
 const nil = new Nil();
 const empty = nil;
@@ -8,7 +9,7 @@ function cons(car, cdr) {
   if (!cdr) {
     cdr = nil;
   }
-  return [car, cdr];
+  return new Cons(car, cdr);
 }
 
 // list constructor

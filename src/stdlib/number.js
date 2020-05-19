@@ -17,23 +17,23 @@ const PI = Number.acos(-1);
 // mathematical functions
 // const add = all((a, c) => a + c);
 function add(...args) {
-  return all((a, c) => a.add(c))(...args);
+  return all((a, c) => Number.add(a, c))(...args);
 }
 
 function sub(...args) {
-  return all((a, c) => a.sub(c))(...args);
+  return all((a, c) => Number.sub(a, c))(...args);
 }
 
 function mul(...args) {
-  return all((a, c) => a.mul(c))(...args);
+  return all((a, c) => Number.mul(a, c))(...args);
 }
 
 function div(...args) {
-  return all((a, c) => a.div(c))(...args);
+  return all((a, c) => Number.div(a, c))(...args);
 }
 
 function mod(...args) {
-  return all((a, c) => a.mod(c))(...args);
+  return all((a, c) => Number.mod(a, c))(...args);
 }
 
 function floorDiv(...args) {

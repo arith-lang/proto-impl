@@ -41,7 +41,7 @@ function isNull(obj) {
 const isEmpty = isNull;
 
 function isPair(obj) {
-  return obj instanceof Array && obj.length === 2;
+  return obj.constructor.name === "Cons";
 }
 
 function isList(obj) {
@@ -52,7 +52,8 @@ function isList(obj) {
   } else if (isPair(obj) && obj[1] instanceof Array === false) {
     return false;
   }
-  const [head, [...tail]] = obj;
+  const head = obj[0];
+  const tail = obj[1];
   return isList(tail);
 }
 

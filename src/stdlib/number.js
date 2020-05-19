@@ -12,7 +12,7 @@ function number(value) {
 }
 
 // mathematical constants
-const PI = Math.PI;
+const PI = number(Math.PI);
 
 // mathematical functions
 // const add = all((a, c) => a + c);

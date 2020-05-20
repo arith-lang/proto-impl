@@ -82,7 +82,9 @@ function length(lst) {
   return len;
 }
 
-const prepend = cons;
+function prepend(item, lst) {
+  return cons(item, lst);
+}
 
 function append(...lists) {
   let temp = [];

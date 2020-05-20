@@ -38,6 +38,9 @@ const KEYWORDS = [
   "struct",
   "union",
   "enum",
+  "require",
+  "provide",
+  "module",
 ];
 const PUNCTUATION = [",", ":", "[", "]", "{", "}", ".", "'"];
 

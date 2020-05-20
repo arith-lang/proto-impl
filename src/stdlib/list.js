@@ -50,14 +50,14 @@ function isList(obj) {
   } else if (isPair(obj) === false) {
     return false;
   }
-  let head = obj[0];
-  let tail = obj[1];
+  let head = car(obj);
+  let tail = cdr(obj);
   while (!isNull(tail)) {
     if (isPair(tail) && !isPair(tail[1]) && !isNull(tail[1])) {
       return false;
     }
-    head = tail[0];
-    tail = tail[1];
+    head = car(tail);
+    tail = cdr(tail);
   }
   return true;
 }
@@ -67,12 +67,14 @@ function length(lst) {
   if (isNull(lst)) {
     return 0;
   }
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   let len = 0;
   while (head) {
     len += 1;
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
     } else {
       head = null;
     }

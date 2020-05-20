@@ -326,10 +326,12 @@ const tail = cdr;
 
 function listRef(pos, lst) {
   let c = 0;
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (c < pos) {
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
       c++;
     }
     throw new ReferenceError(

@@ -179,11 +179,13 @@ function foreach(fn, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (head) {
     fn(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
     } else {
       head = null;
     }

@@ -343,10 +343,12 @@ function listRef(pos, lst) {
 
 function listTail(pos, lst) {
   let c = 0;
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (c < pos - 1) {
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(lst);
+      tail = cdr(lst);
       c++;
     } else {
       throw new ReferenceError(

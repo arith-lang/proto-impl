@@ -36,6 +36,8 @@ const KEYWORDS = [
   "type",
   "class",
   "struct",
+  "union",
+  "enum",
 ];
 const PUNCTUATION = [",", ":", "[", "]", "{", "}", ".", "'"];
 

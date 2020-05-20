@@ -215,6 +215,8 @@ function toArray(lst) {
 function toString(lst, n) {
   if (isNull(lst)) {
     return nil.toString();
+  } else if (isPair(lst) && !isList(lst)) {
+    return lst.toString();
   }
   let arr = toArray(lst);
   let str = "";

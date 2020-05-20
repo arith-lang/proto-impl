@@ -89,11 +89,13 @@ function prepend(item, lst) {
 function append(...lists) {
   let temp = [];
   for (lst of lists) {
-    let [head, [...tail]] = lst;
+    let head = car(lst);
+    let tail = cdr(lst);
     while (head) {
       temp.push(head);
       if (!isNull(tail)) {
-        [head, ...[tail]] = tail;
+        head = car(tail);
+        tail = cdr(tail);
       } else {
         head = null;
       }

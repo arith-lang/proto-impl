@@ -198,13 +198,13 @@ function toArray(lst) {
   if (isNull(lst)) {
     return nil;
   }
-  let head = lst[0];
-  let tail = lst[1];
+  let head = car(lst);
+  let tail = cdr(lst);
   while (head) {
     arr.push(head);
     if (!isNull(tail)) {
-      head = tail[0];
-      tail = tail[1];
+      head = car(tail);
+      tail = cdr(tail);
     } else {
       head = null;
     }

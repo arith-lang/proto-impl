@@ -119,11 +119,13 @@ function reverse(lst) {
     return lst;
   }
   let temp = [];
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (head) {
     temp.unshift(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(lst);
+      tail = cdr(lst);
     } else {
       head = null;
     }

@@ -1,39 +1,38 @@
-const Number = require("./types/Number");
+const _Number = require("./types/_Number");
 const { all } = require("./utils");
-const NumberPrompt = require("inquirer/lib/prompts/number");
 
-// Create a new Number
+// Create a new _Number
 function number(value) {
   // Allow numbers to be specified in hex, octal, and binary
   if (value[0] === "#") {
     value = value.replace("#", "0");
   }
-  return new Number(value);
+  return new _Number(value);
 }
 
 // mathematical constants
-const PI = Number.acos(-1);
+const PI = _Number.acos(-1);
 
 // mathematical functions
 // const add = all((a, c) => a + c);
 function add(...args) {
-  return all((a, c) => Number.add(a, c))(...args);
+  return all((a, c) => _Number.add(a, c))(...args);
 }
 
 function sub(...args) {
-  return all((a, c) => Number.sub(a, c))(...args);
+  return all((a, c) => _Number.sub(a, c))(...args);
 }
 
 function mul(...args) {
-  return all((a, c) => Number.mul(a, c))(...args);
+  return all((a, c) => _Number.mul(a, c))(...args);
 }
 
 function div(...args) {
-  return all((a, c) => Number.div(a, c))(...args);
+  return all((a, c) => _Number.div(a, c))(...args);
 }
 
 function mod(...args) {
-  return all((a, c) => Number.mod(a, c))(...args);
+  return all((a, c) => _Number.mod(a, c))(...args);
 }
 
 function floorDiv(...args) {
@@ -42,15 +41,15 @@ function floorDiv(...args) {
 }
 
 function max(...args) {
-  return Number.max(...args);
+  return _Number.max(...args);
 }
 
 function min(...args) {
-  return Number.min(...args);
+  return _Number.min(...args);
 }
 
 function pow(x, y) {
-  return Number.pow(x, y);
+  return _Number.pow(x, y);
 }
 
 function round(x) {

@@ -1,5 +1,11 @@
+const _String = require("./types/String");
 const { all } = require("./utils");
 const { list } = require("./list");
+
+// string constructor
+function string(value) {
+  return new _String(value);
+}
 
 // string utilities
 function strlen(str) {

@@ -405,12 +405,14 @@ function take(num, lst) {
     return lst;
   }
   let temp = [];
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   let c = 0;
   while (head && c < num) {
     temp.push(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
       c++;
     } else {
       head = null;

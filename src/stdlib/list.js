@@ -47,14 +47,19 @@ function isPair(obj) {
 function isList(obj) {
   if (isNull(obj)) {
     return true;
-  } else if (obj instanceof Array === false) {
-    return false;
-  } else if (isPair(obj) && obj[1] instanceof Array === false) {
+  } else if (isPair(obj) === false) {
     return false;
   }
-  const head = obj[0];
-  const tail = obj[1];
-  return isList(tail);
+  let head = obj[0];
+  let tail = obj[1];
+  while (!isNull(tail)) {
+    if (isPair(tail) && !isPair(tail[1]) && !isNull(tail[1])) {
+      return false;
+    }
+    head = tail[0];
+    tail = tail[1];
+  }
+  return true;
 }
 
 // list helpers

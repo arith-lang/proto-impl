@@ -20,7 +20,7 @@ function print(...args) {
       temp.push(item.toString());
     }
   }
-  printf(...temp);
+  console.log(...temp);
 }
 
 const outputString = print;

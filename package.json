@@ -25,6 +25,7 @@
     "decimal.js": "^10.2.0",
     "inquirer": "^7.1.0",
     "list": "^2.0.19",
+    "printf": "^0.5.3",
     "readline-sync": "^1.4.10"
   }
 }

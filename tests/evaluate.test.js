@@ -1,7 +1,4 @@
-const { evaluate, evaluateProgram } = require("../src/evaluate");
-const {
-  tokenizeAndParseProgram,
-} = require("../src/parse-and-evaluate");
+const { evaluate } = require("../src/evaluate");
 
 describe("AST Evaluator", () => {
   it("Should return the value of a primitive integer literal", () => {

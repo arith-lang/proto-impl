@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const readlineSync = require("readline-sync");
+const printf = require("printf");
 const { list } = require("./list");
 const toString = require("./list")["list->string"];
 const isList = require("./list")["list?"];
@@ -19,10 +20,15 @@ function print(...args) {
       temp.push(item.toString());
     }
   }
-  console.log(...temp);
+  printf(...temp);
 }
 
 const outputString = print;
+
+function println(...args) {
+  print(...args);
+  console.log("");
+}
 
 function input(prompt) {
   return readlineSync.question(prompt);
@@ -50,6 +56,7 @@ module.exports = {
   log,
   print,
   "output-string": outputString,
+  println,
   input,
   "input-string": input,
   "input-file-read": inputFileRead,

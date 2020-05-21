@@ -73,11 +73,15 @@ const parseKeyword = (tokens) => {
       return parseDefine(tokens);
     case "lambda":
       return parseLambda(tokens);
+    case "if":
+      return parseIf(tokens);
   }
   throw new ArithSyntaxError(
     `Unknown keyword ${token.value} at line ${token.line} and col ${token.start}`,
   );
 };
+
+const parseIf = (tokens) => {};
 
 const parseLambda = (tokens) => {
   const lambdaTokens = eatExprTokens(tokens);
@@ -229,20 +233,5 @@ const createAtomNode = (type, value, line, start, end) => {
     },
   };
 };
-
-// const createIdentifierNode = (type, value, line, start, end) => {
-//   return {
-//     type,
-//     name: value,
-//     start: {
-//       line,
-//       col: start,
-//     },
-//     end: {
-//       line,
-//       col: end,
-//     },
-//   };
-// };
 
 module.exports = { parse, parseExpr };

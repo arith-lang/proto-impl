@@ -64,7 +64,7 @@ describe("The parser function", () => {
     const input = `add`;
     const ast = {
       type: "Identifier",
-      value: "add",
+      name: "add",
       start: { line: 1, col: 0 },
       end: { line: 1, col: 3 },
     };
@@ -339,7 +339,7 @@ describe("The parser function", () => {
               arguments: [
                 {
                   type: "Identifier",
-                  value: "x",
+                  name: "x",
                   start: {
                     line: 3,
                     col: 6,
@@ -351,7 +351,7 @@ describe("The parser function", () => {
                 },
                 {
                   type: "Identifier",
-                  value: "x",
+                  name: "x",
                   start: {
                     line: 3,
                     col: 8,
@@ -410,7 +410,7 @@ describe("The parser function", () => {
               arguments: [
                 {
                   type: "Identifier",
-                  value: "x",
+                  name: "x",
                   start: {
                     line: 3,
                     col: 6,
@@ -422,7 +422,7 @@ describe("The parser function", () => {
                 },
                 {
                   type: "Identifier",
-                  value: "x",
+                  name: "x",
                   start: {
                     line: 3,
                     col: 8,

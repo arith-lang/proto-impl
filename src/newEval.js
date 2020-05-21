@@ -1,6 +1,11 @@
 const stdlib = require("./stdlib");
 const _Boolean = require("./stdlib/types/Boolean");
-const { setEnv, getValue, defVar } = require("./environment");
+const {
+  createEnv,
+  setEnv,
+  getValue,
+  defVar,
+} = require("./environment");
 const { ArithTypeError } = require("./errors");
 const environment = setEnv(stdlib);
 
@@ -19,6 +24,8 @@ const evaluate = (node, env = environment) => {
       return stdlib.nil;
     case "BooleanLiteral":
       return new _Boolean(node.value);
+    case "Identifier":
+      return getValue(node, env);
     case "CallExpression":
       return apply(node, env);
     case "DefinitionExpression":
@@ -39,7 +46,9 @@ const evalBlock = (block, env) => {
 const apply = (node, env) => {
   const fn = getValue(node, env);
   const name = fn.name || node.name;
-  const args = node.arguments.map((a) => evaluate(a, env));
+  const args = node.arguments.map((a) => {
+    return evaluate(a, env);
+  });
   if (fn instanceof Function !== true) {
     throw new ArithTypeError(`${name} is not a function`);
   }

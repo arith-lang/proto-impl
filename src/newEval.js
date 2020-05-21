@@ -32,6 +32,8 @@ const evaluate = (node, env = environment) => {
       return define(node, env);
     case "LambdaExpression":
       return makeLambda(node, env);
+    case "IfExpression":
+      return applyIf(node, env);
   }
 };
 
@@ -71,6 +73,14 @@ const makeLambda = (node, env) => {
     return evalBlock(node.body, scope);
   };
   return lambda;
+};
+
+const applyIf = (node, env) => {
+  const cond = evaluate(node.condition);
+  if (cond !== false) {
+    return evaluate(node.then, env);
+  }
+  return evaluate(node.else, env);
 };
 
 module.exports = { evaluate };

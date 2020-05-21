@@ -29,5 +29,3 @@ class _String extends String {
 }
 
 module.exports = _String;
-
-console.log(new _String("☃★♲").toCharList());

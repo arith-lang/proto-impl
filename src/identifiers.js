@@ -43,7 +43,7 @@ const KEYWORDS = [
   "provide",
   "module",
 ];
-const PUNCTUATION = [",", "[", "]", "{", "}", "'"];
+const PUNCTUATION = [",", "[", "]", "{", "}", "'", "."];
 
 // token identifiers
 const isDigit = (char) => DIGIT.test(char);

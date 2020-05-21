@@ -106,6 +106,9 @@ const tokenize = (input) => {
   };
 
   const readIdent = (char) => {
+    if (char === ".") {
+      return createToken("PUNC", char);
+    }
     const tok = char + readWhile(isIdChar);
     return createToken(
       isKeyword(tok) ? "KEYWORD" : "IDENTIFIER",

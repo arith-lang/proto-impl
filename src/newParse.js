@@ -142,8 +142,8 @@ const eatExprTokens = (tokens, numOfLeft = 1) => {
   return exprTokens;
 };
 
-const NUMBER = ({ value, line, start, end }) => {
-  return createAtomNode("NumericLiteral", value, line, start, end);
+const DECIMAL = ({ value, line, start, end }) => {
+  return createAtomNode("DecimalLiteral", value, line, start, end);
 };
 
 const STRING = ({ value, line, start, end }) => {
@@ -168,7 +168,7 @@ const NIL = ({ value, line, start, end }) => {
   return createAtomNode("NilLiteral", value, line, start, end);
 };
 
-const nodeCreators = { NUMBER, STRING, IDENTIFIER, BOOLEAN, NIL };
+const nodeCreators = { DECIMAL, STRING, IDENTIFIER, BOOLEAN, NIL };
 
 const createAtomNode = (type, value, line, start, end) => {
   return {

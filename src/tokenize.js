@@ -87,7 +87,7 @@ const tokenize = (input) => {
   const readNumber = (char) => {
     let tok = char + readWhile((c) => !isSeparator(c));
     if (isInteger(tok) || isFloat(tok)) {
-      return createToken("NUMBER", tok);
+      return createToken("DECIMAL", tok);
     } else {
       if (isPlusOrMinus(tok[0])) {
         return readIdent(tok);

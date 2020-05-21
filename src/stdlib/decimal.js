@@ -1,38 +1,38 @@
-const _Number = require("./types/Number");
+const _Decimal = require("./types/Decimal");
 const { all } = require("./utils");
 
 // Create a new _Number
-function number(value) {
+function decimal(value) {
   // Allow numbers to be specified in hex, octal, and binary
   if (value[0] === "#") {
     value = value.replace("#", "0");
   }
-  return new _Number(value);
+  return new _Decimal(value);
 }
 
 // mathematical constants
-const PI = _Number.acos(-1);
+const PI = _Decimal.acos(-1);
 
 // mathematical functions
 // const add = all((a, c) => a + c);
 function add(...args) {
-  return all((a, c) => _Number.add(a, c))(...args);
+  return all((a, c) => _Decimal.add(a, c))(...args);
 }
 
 function sub(...args) {
-  return all((a, c) => _Number.sub(a, c))(...args);
+  return all((a, c) => _Decimal.sub(a, c))(...args);
 }
 
 function mul(...args) {
-  return all((a, c) => _Number.mul(a, c))(...args);
+  return all((a, c) => _Decimal.mul(a, c))(...args);
 }
 
 function div(...args) {
-  return all((a, c) => _Number.div(a, c))(...args);
+  return all((a, c) => _Decimal.div(a, c))(...args);
 }
 
 function mod(...args) {
-  return all((a, c) => _Number.mod(a, c))(...args);
+  return all((a, c) => _Decimal.mod(a, c))(...args);
 }
 
 function floorDiv(...args) {
@@ -41,15 +41,15 @@ function floorDiv(...args) {
 }
 
 function max(...args) {
-  return _Number.max(...args);
+  return _Decimal.max(...args);
 }
 
 function min(...args) {
-  return _Number.min(...args);
+  return _Decimal.min(...args);
 }
 
 function pow(x, y) {
-  return _Number.pow(x, y);
+  return _Decimal.pow(x, y);
 }
 
 function round(x) {
@@ -86,7 +86,7 @@ function gte(x, y) {
 }
 
 module.exports = {
-  number,
+  decimal,
   PI,
   "+": add,
   "-": sub,

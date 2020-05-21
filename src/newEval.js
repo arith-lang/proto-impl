@@ -5,8 +5,8 @@ const evaluate = (node) => {
   switch (node.type) {
     case "Program":
       return evalBlock(node.body);
-    case "NumericLiteral":
-      return stdlib.number(node.value);
+    case "DecimalLiteral":
+      return stdlib.decimal(node.value);
     case "StringLiteral":
       return stdlib.string(node.value);
     case "NilLiteral":

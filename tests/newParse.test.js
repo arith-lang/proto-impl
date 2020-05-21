@@ -2,13 +2,13 @@ const { parse, parseExpr } = require("../src/newParse");
 const { tokenize } = require("../src/tokenize");
 
 describe("The parser function", () => {
-  it("Should return a program with a node the type of NumericLiteral for a program consisting of one number token", () => {
+  it("Should return a program with a node the type of DecimalLiteral for a program consisting of one number token", () => {
     const input = `1`;
     const ast = {
       type: "Program",
       body: [
         {
-          type: "NumericLiteral",
+          type: "DecimalLiteral",
           value: "1",
           start: {
             line: 1,
@@ -32,10 +32,10 @@ describe("The parser function", () => {
     expect(parse(tokenize(input))).toEqual(ast);
   });
 
-  it("Should return a NumericLiteral node when parsing a number token", () => {
+  it("Should return a DecimalLiteral node when parsing a number token", () => {
     const input = `3.1415`;
     const ast = {
-      type: "NumericLiteral",
+      type: "DecimalLiteral",
       value: "3.1415",
       start: {
         line: 1,
@@ -100,7 +100,7 @@ describe("The parser function", () => {
       name: "+",
       arguments: [
         {
-          type: "NumericLiteral",
+          type: "DecimalLiteral",
           value: "2",
           start: {
             line: 1,
@@ -112,7 +112,7 @@ describe("The parser function", () => {
           },
         },
         {
-          type: "NumericLiteral",
+          type: "DecimalLiteral",
           value: "3",
           start: {
             line: 1,
@@ -143,7 +143,7 @@ describe("The parser function", () => {
       name: "+",
       arguments: [
         {
-          type: "NumericLiteral",
+          type: "DecimalLiteral",
           value: "8",
           start: {
             line: 1,
@@ -159,7 +159,7 @@ describe("The parser function", () => {
           name: "-",
           arguments: [
             {
-              type: "NumericLiteral",
+              type: "DecimalLiteral",
               value: "2",
               start: {
                 line: 1,
@@ -171,7 +171,7 @@ describe("The parser function", () => {
               },
             },
             {
-              type: "NumericLiteral",
+              type: "DecimalLiteral",
               value: "3",
               start: {
                 line: 1,
@@ -211,7 +211,7 @@ describe("The parser function", () => {
       type: "DefinitionExpression",
       name: "x",
       value: {
-        type: "NumericLiteral",
+        type: "DecimalLiteral",
         value: "7",
         start: {
           line: 1,

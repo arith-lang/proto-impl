@@ -1,9 +1,9 @@
 const Decimal = require("decimal.js");
 
-class _Number extends Decimal {
+class _Decimal extends Decimal {
   constructor(value) {
     super(value);
   }
 }
 
-module.exports = _Number;
+module.exports = _Decimal;

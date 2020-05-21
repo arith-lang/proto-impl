@@ -24,7 +24,7 @@ const evaluate = (node, env = environment) => {
     case "DefinitionExpression":
       return define(node, env);
     case "LambdaExpression":
-      return define(node, env);
+      return makeLambda(node, env);
   }
 };
 
@@ -49,5 +49,7 @@ const apply = (node, env) => {
 const define = (node, env) => {
   return defVar(node.name, evaluate(node.value, env), env);
 };
+
+const makeLambda = (node, env) => {};
 
 module.exports = { evaluate };

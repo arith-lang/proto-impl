@@ -85,13 +85,6 @@ function gte(x, y) {
   return x.greaterThanOrEqualTo(y);
 }
 
-function fib(x) {
-  if (x < 2) {
-    return x;
-  }
-  return fib(x - 2) + fib(x - 1);
-}
-
 module.exports = {
   number,
   PI,

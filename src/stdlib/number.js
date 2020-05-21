@@ -1,4 +1,4 @@
-const _Number = require("./types/_Number");
+const _Number = require("./types/Number");
 const { all } = require("./utils");
 
 // Create a new _Number
@@ -83,6 +83,13 @@ function gt(x, y) {
 
 function gte(x, y) {
   return x.greaterThanOrEqualTo(y);
+}
+
+function fib(x) {
+  if (x < 2) {
+    return x;
+  }
+  return fib(x - 2) + fib(x - 1);
 }
 
 module.exports = {

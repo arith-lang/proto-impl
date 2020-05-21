@@ -220,16 +220,3 @@ const createAtomNode = (type, value, line, start, end) => {
 };
 
 module.exports = { parse, parseExpr };
-
-console.log(
-  JSON.stringify(
-    parse(
-      tokenize(`
-  (lambda (x)
-    (+ x x))
-  `),
-    ),
-    null,
-    2,
-  ),
-);

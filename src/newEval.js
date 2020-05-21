@@ -1,12 +1,11 @@
 const stdlib = require("./stdlib");
 const _Boolean = require("./stdlib/types/Boolean");
 const { setEnv, getValue, defVar } = require("./environment");
+const { ArithTypeError } = require("./errors");
+const environment = setEnv(stdlib);
 
 const { tokenize } = require("./tokenize");
 const { parse } = require("./newParse");
-const { ArithTypeError } = require("./errors");
-
-const environment = setEnv(stdlib);
 
 const evaluate = (node, env = environment) => {
   switch (node.type) {
@@ -23,6 +22,8 @@ const evaluate = (node, env = environment) => {
     case "CallExpression":
       return apply(node, env);
     case "DefinitionExpression":
+      return define(node, env);
+    case "LambdaExpression":
       return define(node, env);
   }
 };

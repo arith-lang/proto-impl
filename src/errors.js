@@ -23,9 +23,16 @@ class ArithTypeError extends ArithError {
   }
 }
 
+class ArithReferenceError extends ArithError {
+  constructor(message) {
+    super(`Reference error: ${message}`);
+  }
+}
+
 module.exports = {
   ArithError,
   ArithReadInputError,
   ArithSyntaxError,
   ArithTypeError,
+  ArithReferenceError,
 };

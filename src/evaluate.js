@@ -8,8 +8,6 @@ const {
 } = require("./environment");
 const { ArithTypeError } = require("./errors");
 const environment = setEnv(stdlib);
-
-const { tokenize } = require("./tokenize");
 const { parse } = require("./parse");
 
 const evaluate = (node, env = environment) => {
@@ -83,4 +81,4 @@ const applyIf = (node, env) => {
   return evaluate(node.else, env);
 };
 
-module.exports = { evaluate };
+module.exports = { evaluate: (input) => evaluate(parse(input)) };

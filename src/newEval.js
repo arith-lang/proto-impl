@@ -28,10 +28,10 @@ const evaluate = (node, env = environment) => {
   }
 };
 
-const evalBlock = (block) => {
+const evalBlock = (block, env) => {
   let val;
   for (let i = 0; i < block.length; i++) {
-    val = evaluate(block[i]);
+    val = evaluate(block[i], env);
   }
   return val;
 };

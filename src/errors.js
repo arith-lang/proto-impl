@@ -17,8 +17,15 @@ class ArithSyntaxError extends ArithError {
   }
 }
 
+class ArithTypeError extends ArithError {
+  constructor(message) {
+    super(`Type error: ${message}`);
+  }
+}
+
 module.exports = {
   ArithError,
   ArithReadInputError,
   ArithSyntaxError,
+  ArithTypeError,
 };

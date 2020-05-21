@@ -1,4 +1,5 @@
 const stdlib = require("./stdlib");
+const _Boolean = require("./stdlib/types/Boolean");
 
 const evaluate = (node) => {
   switch (node.type) {
@@ -6,6 +7,12 @@ const evaluate = (node) => {
       return evalBlock(node.body);
     case "NumericLiteral":
       return stdlib.number(node.value);
+    case "StringLiteral":
+      return stdlib.string(node.value);
+    case "NilLiteral":
+      return stdlib.nil;
+    case "BooleanLiteral":
+      return new _Boolean(node.value);
   }
 };
 

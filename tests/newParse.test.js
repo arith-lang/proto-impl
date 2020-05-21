@@ -65,8 +65,8 @@ describe("The parser function", () => {
     const ast = {
       type: "Identifier",
       value: "add",
-      start: { line: 1, col: 1 },
-      end: { line: 1, col: 4 },
+      start: { line: 1, col: 0 },
+      end: { line: 1, col: 3 },
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
@@ -76,8 +76,8 @@ describe("The parser function", () => {
     const ast = {
       type: "BooleanLiteral",
       value: "true",
-      start: { line: 1, col: 1 },
-      end: { line: 1, col: 5 },
+      start: { line: 1, col: 0 },
+      end: { line: 1, col: 2 },
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
@@ -87,8 +87,8 @@ describe("The parser function", () => {
     const ast = {
       type: "NilLiteral",
       value: "nil",
-      start: { line: 1, col: 1 },
-      end: { line: 1, col: 4 },
+      start: { line: 1, col: 0 },
+      end: { line: 1, col: 3 },
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });

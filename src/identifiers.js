@@ -16,16 +16,17 @@ const VALID_SPECIAL_CHARS = [
   "*",
   "+",
   "/",
-  "\\",
   "|",
   ">",
   "<",
   "^",
   "@",
+  ":",
+  ".",
 ];
 const KEYWORDS = [
-  "true",
-  "false",
+  "#t",
+  "#f",
   "nil",
   "if",
   "cond",
@@ -42,7 +43,7 @@ const KEYWORDS = [
   "provide",
   "module",
 ];
-const PUNCTUATION = [",", ":", "[", "]", "{", "}", ".", "'"];
+const PUNCTUATION = [",", "[", "]", "{", "}", "'"];
 
 // token identifiers
 const isDigit = (char) => DIGIT.test(char);
@@ -51,7 +52,9 @@ const isInteger = (str) => INTEGER.test(str);
 
 const isFloat = (str) => FLOAT.test(str);
 
-const isLetter = (char) => LETTER.test(char);
+const isLetter = (char) => {
+  return char != undefined && LETTER.test(char);
+};
 
 const isValidSpecialChar = (char) =>
   VALID_SPECIAL_CHARS.includes(char);

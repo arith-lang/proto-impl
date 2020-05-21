@@ -114,7 +114,7 @@ const parseCall = (tokens) => {
 
 const parseAtom = (token) => {
   if (isKeyword(token.value)) {
-    if (token.value === "true" || token.value === "false") {
+    if (token.value === "#t" || token.value === "#f") {
       return nodeCreators["BOOLEAN"](token);
     } else if (token.value === "nil") {
       return nodeCreators["NIL"](token);
@@ -155,7 +155,13 @@ const IDENTIFIER = ({ value, line, start, end }) => {
 };
 
 const BOOLEAN = ({ value, line, start, end }) => {
-  return createAtomNode("BooleanLiteral", value, line, start, end);
+  return createAtomNode(
+    "BooleanLiteral",
+    value === "#t" ? "true" : "false",
+    line,
+    start,
+    end,
+  );
 };
 
 const NIL = ({ value, line, start, end }) => {

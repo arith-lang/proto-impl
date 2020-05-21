@@ -126,7 +126,7 @@ const tokenize = (input) => {
       skipComment();
       return null;
     }
-    if (isHash(char) || isDigit(char)) {
+    if (isDigit(char)) {
       return readNumber(char);
     }
     if (isPlusOrMinus(char)) {
@@ -135,6 +135,15 @@ const tokenize = (input) => {
         isDigit(lookahead(input, pos))
       ) {
         return readNumber(char);
+      }
+    }
+    if (isHash(char)) {
+      if (isDigit(lookahead(input, pos))) {
+        return readNumber(char);
+      } else if (isIdStart(lookahead(input, pos))) {
+        return readIdent(char);
+      } else {
+        die(`Invalid input ${char} (${line}:${col})`);
       }
     }
     if (isDoubleQuote(char)) {
@@ -148,8 +157,6 @@ const tokenize = (input) => {
     }
     if (isPunctuation(char)) {
       return createToken("PUNC", char);
-    } else {
-      return null;
     }
   };
 

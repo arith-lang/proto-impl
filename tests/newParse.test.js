@@ -72,7 +72,7 @@ describe("The parser function", () => {
   });
 
   it("Should return a BooleanLiteral node when parsing a boolean keyword token", () => {
-    const input = `true`;
+    const input = `#t`;
     const ast = {
       type: "BooleanLiteral",
       value: "true",

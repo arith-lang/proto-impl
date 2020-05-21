@@ -233,4 +233,253 @@ describe("The parser function", () => {
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
+
+  it("Should correctly parse a block of consecutive (not nested) expressions", () => {
+    const input = `(+ 1 2)
+    3.1415
+    "hello"`;
+    const result = {
+      type: "Program",
+      body: [
+        {
+          type: "CallExpression",
+          name: "+",
+          arguments: [
+            {
+              type: "DecimalLiteral",
+              value: "1",
+              start: {
+                line: 1,
+                col: 3,
+              },
+              end: {
+                line: 1,
+                col: 4,
+              },
+            },
+            {
+              type: "DecimalLiteral",
+              value: "2",
+              start: {
+                line: 1,
+                col: 5,
+              },
+              end: {
+                line: 1,
+                col: 6,
+              },
+            },
+          ],
+          start: {
+            line: 1,
+            col: 1,
+          },
+          end: {
+            line: 1,
+            col: 7,
+          },
+        },
+        {
+          type: "DecimalLiteral",
+          value: "3.1415",
+          start: {
+            line: 2,
+            col: 3,
+          },
+          end: {
+            line: 2,
+            col: 9,
+          },
+        },
+        {
+          type: "StringLiteral",
+          value: "hello",
+          start: {
+            line: 3,
+            col: 5,
+          },
+          end: {
+            line: 3,
+            col: 10,
+          },
+        },
+      ],
+      start: {
+        line: 1,
+        col: 0,
+      },
+      end: {
+        line: 3,
+        col: 10,
+      },
+    };
+    expect(parse(tokenize(input))).toEqual(result);
+  });
+
+  it("Should correctly parse a lambda expression", () => {
+    const input = `
+  (lambda (x)
+    (+ x x))
+  `;
+    const result = {
+      type: "Program",
+      body: [
+        {
+          type: "LambdaExpression",
+          params: [
+            {
+              type: "FunctionParameter",
+              name: "x",
+            },
+          ],
+          body: [
+            {
+              type: "CallExpression",
+              name: "+",
+              arguments: [
+                {
+                  type: "Identifier",
+                  value: "x",
+                  start: {
+                    line: 3,
+                    col: 6,
+                  },
+                  end: {
+                    line: 3,
+                    col: 7,
+                  },
+                },
+                {
+                  type: "Identifier",
+                  value: "x",
+                  start: {
+                    line: 3,
+                    col: 8,
+                  },
+                  end: {
+                    line: 3,
+                    col: 9,
+                  },
+                },
+              ],
+              start: {
+                line: 3,
+                col: 4,
+              },
+              end: {
+                line: 3,
+                col: 10,
+              },
+            },
+          ],
+        },
+      ],
+      start: {
+        line: 2,
+        col: 1,
+      },
+      end: {
+        line: 3,
+        col: 11,
+      },
+    };
+    expect(parse(tokenize(input))).toEqual(result);
+  });
+
+  it("Should correctly parse a lambda expression with multiple expressions in its body", () => {
+    const input = `
+  (lambda (x)
+    (+ x x)
+    (print "hello"))
+  `;
+    const result = {
+      type: "Program",
+      body: [
+        {
+          type: "LambdaExpression",
+          params: [
+            {
+              type: "FunctionParameter",
+              name: "x",
+            },
+          ],
+          body: [
+            {
+              type: "CallExpression",
+              name: "+",
+              arguments: [
+                {
+                  type: "Identifier",
+                  value: "x",
+                  start: {
+                    line: 3,
+                    col: 6,
+                  },
+                  end: {
+                    line: 3,
+                    col: 7,
+                  },
+                },
+                {
+                  type: "Identifier",
+                  value: "x",
+                  start: {
+                    line: 3,
+                    col: 8,
+                  },
+                  end: {
+                    line: 3,
+                    col: 9,
+                  },
+                },
+              ],
+              start: {
+                line: 3,
+                col: 4,
+              },
+              end: {
+                line: 3,
+                col: 10,
+              },
+            },
+            {
+              type: "CallExpression",
+              name: "print",
+              arguments: [
+                {
+                  type: "StringLiteral",
+                  value: "hello",
+                  start: {
+                    line: 4,
+                    col: 12,
+                  },
+                  end: {
+                    line: 4,
+                    col: 17,
+                  },
+                },
+              ],
+              start: {
+                line: 4,
+                col: 4,
+              },
+              end: {
+                line: 4,
+                col: 18,
+              },
+            },
+          ],
+        },
+      ],
+      start: {
+        line: 2,
+        col: 1,
+      },
+      end: {
+        line: 4,
+        col: 19,
+      },
+    };
+    expect(parse(tokenize(input))).toEqual(result);
+  });
 });

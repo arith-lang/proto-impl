@@ -31,15 +31,24 @@ const parse = (tokens) => {
 
 const parseBlock = (tokens) => {
   let body = [];
+  let parsed;
   while (tokens.length) {
-    body.push(parseExpr(tokens));
+    parsed = parseExpr(tokens);
+    if (parsed) {
+      body.push(parsed);
+    }
   }
   return body;
 };
 
 parseExpr = (tokens) => {
-  const token = pop(tokens);
-  if (isLeftParen(token.value)) {
+  let token = pop(tokens);
+  // I'd rather do this than return a noop for stray right parens
+  // and have to check if token for every function
+  if (isRightParen(token.value)) {
+    return null;
+  }
+  if (token && isLeftParen(token.value)) {
     return maybeCall(tokens);
   }
   return parseAtom(token);
@@ -62,11 +71,36 @@ const parseKeyword = (tokens) => {
   switch (token.value) {
     case "define":
       return parseDefine(tokens);
+    case "lambda":
+      return parseLambda(tokens);
   }
   throw new ArithSyntaxError(
     `Unknown keyword ${token.value} at line ${token.line} and col ${token.start}`,
   );
 };
+
+const parseLambda = (tokens) => {
+  const lambdaTokens = eatExprTokens(tokens);
+  let token = pop(lambdaTokens);
+  let params = [];
+  // parse parameters
+  while (!isRightParen(token.value)) {
+    token = pop(lambdaTokens);
+    if (token.type === "IDENTIFIER") {
+      params.push(parseParam(token));
+    }
+  }
+  return {
+    type: "LambdaExpression",
+    params,
+    body: parseBlock(lambdaTokens),
+  };
+};
+
+const parseParam = (token) => ({
+  type: "FunctionParameter",
+  name: token.value,
+});
 
 const parseDefine = (tokens) => {
   const defineTokens = eatExprTokens(tokens);
@@ -186,3 +220,16 @@ const createAtomNode = (type, value, line, start, end) => {
 };
 
 module.exports = { parse, parseExpr };
+
+console.log(
+  JSON.stringify(
+    parse(
+      tokenize(`
+  (lambda (x)
+    (+ x x))
+  `),
+    ),
+    null,
+    2,
+  ),
+);

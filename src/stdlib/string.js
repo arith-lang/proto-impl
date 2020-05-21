@@ -91,6 +91,7 @@ function isString(obj) {
 }
 
 module.exports = {
+  string,
   "string-length": strlen,
   "string-upcase": upper,
   "string-downcase": lower,

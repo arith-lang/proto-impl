@@ -185,7 +185,18 @@ const STRING = ({ value, line, start, end }) => {
 };
 
 const IDENTIFIER = ({ value, line, start, end }) => {
-  return createAtomNode("Identifier", value, line, start, end);
+  return {
+    type: "Identifier",
+    name: value,
+    start: {
+      line,
+      col: start,
+    },
+    end: {
+      line,
+      col: end,
+    },
+  };
 };
 
 const BOOLEAN = ({ value, line, start, end }) => {
@@ -218,5 +229,20 @@ const createAtomNode = (type, value, line, start, end) => {
     },
   };
 };
+
+// const createIdentifierNode = (type, value, line, start, end) => {
+//   return {
+//     type,
+//     name: value,
+//     start: {
+//       line,
+//       col: start,
+//     },
+//     end: {
+//       line,
+//       col: end,
+//     },
+//   };
+// };
 
 module.exports = { parse, parseExpr };

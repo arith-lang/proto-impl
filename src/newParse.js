@@ -81,10 +81,19 @@ const parseKeyword = (tokens) => {
   );
 };
 
-const parseIf = (tokens) => {};
+const parseIf = (tokens) => {
+  let ifExprTokens = eatExprTokens(tokens);
+  let expr = {
+    type: "IfExpression",
+    condition: parseExpr(ifExprTokens),
+    then: parseExpr(ifExprTokens),
+    else: parseExpr(ifExprTokens),
+  };
+  return expr;
+};
 
 const parseLambda = (tokens) => {
-  const lambdaTokens = eatExprTokens(tokens);
+  let lambdaTokens = eatExprTokens(tokens);
   let token = pop(lambdaTokens);
   let params = [];
   // parse parameters
@@ -107,7 +116,7 @@ const parseParam = (token) => ({
 });
 
 const parseDefine = (tokens) => {
-  const defineTokens = eatExprTokens(tokens);
+  let defineTokens = eatExprTokens(tokens);
   let startToken = peek(defineTokens);
   let endToken = lookahead(defineTokens, defineTokens.length - 1);
   let token = pop(defineTokens);
@@ -128,10 +137,10 @@ const parseDefine = (tokens) => {
 };
 
 const parseCall = (tokens) => {
-  const callTokens = eatExprTokens(tokens);
+  let callTokens = eatExprTokens(tokens);
   let token = pop(callTokens);
   let endToken = lookahead(callTokens, callTokens.length - 1);
-  const call = {
+  let call = {
     type: "CallExpression",
     name: token.value,
     arguments: [],

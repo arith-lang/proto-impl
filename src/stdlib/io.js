@@ -7,7 +7,7 @@ const toString = require("./list")["list->string"];
 const isList = require("./list")["list?"];
 
 // I/O functions
-function log(...args) {
+function jsLog(...args) {
   console.log(...args);
 }
 
@@ -53,7 +53,7 @@ function outputFileWrite(file, data, encoding) {
 }
 
 module.exports = {
-  log,
+  "js-log": jsLog,
   print,
   "output-string": outputString,
   println,

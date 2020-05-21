@@ -57,6 +57,7 @@ module.exports = {
   print,
   "output-string": outputString,
   println,
+  printf,
   input,
   "input-string": input,
   "input-file-read": inputFileRead,

@@ -50,6 +50,18 @@ const define = (node, env) => {
   return defVar(node.name, evaluate(node.value, env), env);
 };
 
-const makeLambda = (node, env) => {};
+const makeLambda = (node, env) => {
+  const lambda = (...args) => {
+    const names = node.params;
+    const scope = createEnv(env);
+    if (names && names.length) {
+      names.forEach((n, i) => {
+        defVar(n.name, args[i], scope);
+      });
+    }
+    return evalBlock(node.body, scope);
+  };
+  return lambda;
+};
 
 module.exports = { evaluate };

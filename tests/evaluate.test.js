@@ -2,133 +2,93 @@ const { evaluate } = require("../src/evaluate");
 
 describe("AST Evaluator", () => {
   it("Should return the value of a primitive integer literal", () => {
-    const ast = { type: "IntegerLiteral", value: 10 };
+    const input = `10`;
 
-    expect(evaluate(ast)).toBe(10);
+    expect(evaluate(input).toString()).toMatch(input);
   });
 
   it("Should return zero", () => {
-    const ast = { type: "IntegerLiteral", value: 0 };
+    const input = `0`;
 
-    expect(evaluate(ast)).toBe(0);
+    expect(evaluate(input).toString()).toBe("0");
   });
 
-  it("Should return the value of a primitive float literal", () => {
-    const ast = { type: "FloatLiteral", value: 3.14159 };
+  it("Should return the value of a primitive decimal literal", () => {
+    const input = `3.14159`;
 
-    expect(evaluate(ast)).toBe(3.14159);
+    expect(evaluate(input).toString()).toBe("3.14159");
   });
 
   it("Should be able to look up identifiers in the environment", () => {
-    const ast = { type: "Identifier", name: "PI" };
-    expect(evaluate(ast)).toBe(Math.PI);
+    const input = `PI`;
+    expect(evaluate(input).toString()).toBe("3.1415926535897932385");
   });
 
   it("Should be able to evaluate a single call expression", () => {
-    const ast = {
-      type: "CallExpression",
-      name: "+",
-      arguments: [
-        { type: "IntegerLiteral", value: 2 },
-        { type: "IntegerLiteral", value: 3 },
-      ],
-    };
+    const input = `(+ 2 3)`;
 
-    expect(evaluate(ast)).toBe(5);
+    expect(evaluate(input).toString()).toBe("5");
   });
 
-  it("Should be able to evaluate a call expression with float arguments", () => {
-    const ast = {
-      type: "CallExpression",
-      name: "-",
-      arguments: [
-        { type: "FloatLiteral", value: 6.4 },
-        { type: "FloatLiteral", value: 3.2 },
-      ],
-    };
+  it("Should be able to evaluate a call expression with decimal arguments", () => {
+    const input = `(- 6.4 3.2)`;
 
-    expect(evaluate(ast)).toBeCloseTo(3.2);
+    expect(evaluate(input).toString()).toBe("3.2");
   });
 
   it("Should be able to evaluate a nested expression", () => {
-    const ast = {
-      type: "CallExpression",
-      name: "+",
-      arguments: [
-        { type: "IntegerLiteral", value: 2 },
-        { type: "IntegerLiteral", value: 3 },
-        {
-          type: "CallExpression",
-          name: "-",
-          arguments: [
-            { type: "IntegerLiteral", value: 5 },
-            { type: "IntegerLiteral", value: 4 },
-          ],
-        },
-      ],
-    };
+    const input = `(+ 2 3 (- 5 4))`;
 
-    expect(evaluate(ast)).toEqual(6);
+    expect(evaluate(input).toString()).toBe("6");
   });
 
   it("Should be able to evaluate a string literal", () => {
-    const ast = {
-      type: "StringLiteral",
-      value: "Hello",
-    };
+    const input = `"Hello"`;
 
-    expect(evaluate(ast)).toEqual("Hello");
+    expect(evaluate(input).toString()).toBe("Hello");
   });
 
   it("Should be able to evaluate a function with a string argument", () => {
-    const ast = {
-      type: "CallExpression",
-      name: "string-upcase",
-      arguments: [{ type: "StringLiteral", value: "hello" }],
-    };
+    const input = `(string-upcase "hello")`;
 
-    expect(evaluate(ast)).toEqual("HELLO");
+    expect(evaluate(input).toString()).toEqual("HELLO");
   });
 
   it("Should correctly evaluate a boolean literal", () => {
-    const ast1 = { type: "BooleanLiteral", value: true };
-    const ast2 = { type: "BooleanLiteral", value: false };
+    const input1 = `#t`;
+    const input2 = `#f`;
 
-    expect(evaluate(ast1)).toBe(true);
-    expect(evaluate(ast2)).toBe(false);
+    expect(evaluate(input1).bool).toBe(true);
+    expect(evaluate(input1).toString()).toBe("#t");
+    expect(evaluate(input2).bool).toBe(false);
+    expect(evaluate(input2).toString()).toBe("#f");
   });
 
   it("Should correctly evaluate a program with multiple top-level expressions", () => {
-    const ast = {
-      type: "Program",
-      body: [
-        { type: "StringLiteral", value: "Hello" },
-        { type: "BooleanLiteral", value: true },
-        {
-          type: "CallExpression",
-          name: "+",
-          arguments: [
-            { type: "IntegerLiteral", value: 2 },
-            { type: "IntegerLiteral", value: 3 },
-          ],
-        },
-      ],
-    };
+    const input = `
+    "Hello"
+    #t
+    (+ 2 3)
+    `; // only the value of the last expression should be returned
 
-    // it works, but how to test?
+    expect(evaluate(input).toString()).toBe("5");
   });
 
-  it.skip("Should correctly evaluate a keyword expression", () => {
-    const ast = {
-      type: "KeywordExpression",
-      name: "if",
-      arguments: [
-        { type: "BooleanLiteral", value: true },
-        { type: "StringLiteral", value: "This one" },
-        { type: "StringLiteral", value: "Not this one" },
-      ],
-    };
+  it("Should correctly evaluate an if expression", () => {
+    const input = `
+    (if #t
+      "This one"
+      "Not this one")`;
+    // {
+    //   type: "KeywordExpression",
+    //   name: "if",
+    //   arguments: [
+    //     { type: "BooleanLiteral", value: true },
+    //     { type: "StringLiteral", value: "This one" },
+    //     { type: "StringLiteral", value: "Not this one" },
+    //   ],
+    // };
 
-    expect(evaluate(ast)).toEqual("This one");
+    expect(evaluate(input).toString()).toBe("This one");
   });
 });

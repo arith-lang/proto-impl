@@ -6,7 +6,7 @@ const empty = nil;
 
 // pair constructor
 function cons(car, cdr) {
-  if (!car) {
+  if (!car || isNull(car)) {
     return nil;
   }
 

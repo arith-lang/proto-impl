@@ -6,6 +6,10 @@ const empty = nil;
 
 // pair constructor
 function cons(car, cdr) {
+  if (!car) {
+    return nil;
+  }
+
   if (!cdr) {
     cdr = nil;
   }

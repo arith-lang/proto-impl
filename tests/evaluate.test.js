@@ -82,4 +82,34 @@ describe("AST Evaluator", () => {
 
     expect(evaluate(input).toString()).toBe("This one");
   });
+
+  it("Should return a function when a lambda definition is evaluated", () => {
+    const input = `
+    (define identity
+      (lambda (x) x))
+    `;
+
+    expect(typeof evaluate(input)).toBe("function");
+  });
+
+  it("Should correctly evaluate the identity function", () => {
+    const input = `
+    (define identity
+      (lambda (x) x))
+    (identity 10)
+    `;
+
+    expect(evaluate(input).toString()).toBe("10");
+  });
+
+  it("Should correctly evaluate a function with a call expression body", () => {
+    const input = `
+    (define add2
+      (lambda (x y)
+        (+ x y)))
+    (add2 2 3)
+    `;
+
+    expect(evaluate(input).toString()).toEqual("5");
+  });
 });

@@ -32,7 +32,7 @@ class _Boolean extends Boolean {
   }
 
   static isBool(obj) {
-    return obj.constructor.name === "_Boolean"
+    return obj.constructor && obj.constructor.name === "_Boolean"
       ? new _Boolean("#t")
       : new _Boolean("#f");
   }

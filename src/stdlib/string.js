@@ -66,7 +66,7 @@ function stringToArray(str) {
 
 // string comparisons
 function strEq(str1, str2) {
-  return str1.toString() === str2.toString();
+  return str1.isEq(str2);
 }
 
 function strLt(str1, str2) {

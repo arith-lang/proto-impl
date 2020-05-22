@@ -66,7 +66,7 @@ function floor(x) {
 
 // numeric comparisons
 function eq(x, y) {
-  return x.equals(y);
+  return x.isEq(y);
 }
 
 function lt(x, y) {

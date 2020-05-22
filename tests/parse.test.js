@@ -75,9 +75,15 @@ describe("The parser function", () => {
     const input = `#t`;
     const ast = {
       type: "BooleanLiteral",
-      value: "true",
-      start: { line: 1, col: 0 },
-      end: { line: 1, col: 2 },
+      value: "#t",
+      start: {
+        line: 1,
+        col: 0,
+      },
+      end: {
+        line: 1,
+        col: 2,
+      },
     };
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
@@ -372,6 +378,14 @@ describe("The parser function", () => {
               },
             },
           ],
+          start: {
+            line: 2,
+            col: 9,
+          },
+          end: {
+            line: 3,
+            col: 11,
+          },
         },
       ],
       start: {
@@ -469,6 +483,14 @@ describe("The parser function", () => {
               },
             },
           ],
+          start: {
+            line: 2,
+            col: 9,
+          },
+          end: {
+            line: 4,
+            col: 19,
+          },
         },
       ],
       start: {

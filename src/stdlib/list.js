@@ -35,13 +35,13 @@ function cdr(lst) {
 
 // basic predicates
 function isNull(obj) {
-  return obj.constructor.name === "Nil";
+  return obj.constructor && obj.constructor.name === "Nil";
 }
 
 const isEmpty = isNull;
 
 function isPair(obj) {
-  return obj.constructor.name === "Cons";
+  return obj.constructor && obj.constructor.name === "Cons";
 }
 
 function isList(obj) {

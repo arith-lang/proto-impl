@@ -1,4 +1,5 @@
 const Decimal = require("decimal.js");
+const _Boolean = require("./Boolean");
 
 class _Decimal extends Decimal {
   constructor(value) {
@@ -8,8 +9,14 @@ class _Decimal extends Decimal {
     this.isEqual = this.isEq;
   }
 
-  static isExactNumber(obj) {
+  static isExactNumberNative(obj) {
     return obj.constructor && obj.constructor.name === "_Decimal";
+  }
+
+  static isExactNumber(obj) {
+    return obj.constructor && obj.constructor.name === "_Decimal"
+      ? _Boolean.make("#t")
+      : _Boolean.make("#f");
   }
 
   isEq(other) {

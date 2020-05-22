@@ -34,6 +34,18 @@ class _Boolean extends Boolean {
       : new _Boolean("#f");
   }
 
+  isEq(other) {
+    if (_Boolean.isBoolNative(other)) {
+      if (
+        (this.value === "#t" && other.value === "#t") ||
+        (this.value === "#f" && other.value === "#f")
+      ) {
+        return _Boolean.make("#t");
+      }
+    }
+    return _Boolean.make("#f");
+  }
+
   toString() {
     return `${this.value}`;
   }

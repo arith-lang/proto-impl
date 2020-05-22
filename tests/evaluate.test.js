@@ -79,15 +79,6 @@ describe("AST Evaluator", () => {
     (if #t
       "This one"
       "Not this one")`;
-    // {
-    //   type: "KeywordExpression",
-    //   name: "if",
-    //   arguments: [
-    //     { type: "BooleanLiteral", value: true },
-    //     { type: "StringLiteral", value: "This one" },
-    //     { type: "StringLiteral", value: "Not this one" },
-    //   ],
-    // };
 
     expect(evaluate(input).toString()).toBe("This one");
   });

@@ -430,21 +430,6 @@ function drop(num, lst) {
   return list(...temp2);
 }
 
-// range
-function range(...args) {
-  if (args.length === 1) {
-    let range = Array.from(new Array(args[0]), (c, i) => i);
-    return list(...range);
-  } else if (args.length === 2) {
-    let range = Array.from(
-      new Array(args[1] - 1),
-      (c, i) => i + args[0],
-    );
-    return list(...range);
-  }
-  throw new RangeError("Invalid arguments to range function");
-}
-
 module.exports = {
   nil,
   empty,
@@ -493,5 +478,4 @@ module.exports = {
   last,
   take,
   drop,
-  range,
 };

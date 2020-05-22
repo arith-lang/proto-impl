@@ -504,4 +504,142 @@ describe("The parser function", () => {
     };
     expect(parse(input)).toEqual(result);
   });
+
+  it("Should correctly parse a definition expression with a lambda value", () => {
+    const input = `
+    (define add2
+      (lambda (x y)
+      (+ x y)));
+    `;
+
+    const ast = {
+      type: "DefinitionExpression",
+      name: "add2",
+      value: {
+        type: "LambdaExpression",
+        params: [
+          {
+            type: "FunctionParameter",
+            name: "x",
+          },
+          {
+            type: "FunctionParameter",
+            name: "y",
+          },
+        ],
+        body: [
+          {
+            type: "CallExpression",
+            name: "+",
+            arguments: [
+              {
+                type: "Identifier",
+                name: "x",
+                start: {
+                  line: 4,
+                  col: 8,
+                },
+                end: {
+                  line: 4,
+                  col: 9,
+                },
+              },
+              {
+                type: "Identifier",
+                name: "y",
+                start: {
+                  line: 4,
+                  col: 10,
+                },
+                end: {
+                  line: 4,
+                  col: 11,
+                },
+              },
+            ],
+            start: {
+              line: 4,
+              col: 6,
+            },
+            end: {
+              line: 4,
+              col: 12,
+            },
+          },
+        ],
+        start: {
+          line: 3,
+          col: 13,
+        },
+        end: {
+          line: 4,
+          col: 13,
+        },
+      },
+      start: {
+        line: 2,
+        col: 11,
+      },
+      end: {
+        line: 4,
+        col: 14,
+      },
+    };
+
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should correctly parse defining the identity function", () => {
+    const input = `
+    (define identity
+      (lambda (x) x))
+    `;
+
+    const ast = {
+      type: "DefinitionExpression",
+      name: "identity",
+      value: {
+        type: "LambdaExpression",
+        params: [
+          {
+            type: "FunctionParameter",
+            name: "x",
+          },
+        ],
+        body: [
+          {
+            type: "Identifier",
+            name: "x",
+            start: {
+              line: 3,
+              col: 17,
+            },
+            end: {
+              line: 3,
+              col: 18,
+            },
+          },
+        ],
+        start: {
+          line: 3,
+          col: 13,
+        },
+        end: {
+          line: 3,
+          col: 19,
+        },
+      },
+      start: {
+        line: 2,
+        col: 11,
+      },
+      end: {
+        line: 3,
+        col: 20,
+      },
+    };
+
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+    // console.log(JSON.stringify(parseExpr(tokenize(input)), null, 2));
+  });
 });

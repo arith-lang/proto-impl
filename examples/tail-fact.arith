@@ -1,0 +1,7 @@
+(define tail-fact
+  (lambda (x, accum)
+    (if (= x 0)
+      accum
+      (tail-fact (- x 1) (* accum x)))))
+
+(tail-fact 1250 1)

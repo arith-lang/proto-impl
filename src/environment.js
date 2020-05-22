@@ -1,3 +1,5 @@
+const { ArithReferenceError } = require("./errors");
+
 const createEnv = (parent) => {
   const newEnv = Object.create(parent ? parent : null);
   newEnv.parent = parent || null;
@@ -35,19 +37,26 @@ const getValue = (node, env) => {
     return env[Symbol.for(node.name)];
   }
 
-  throw new ReferenceError(`${node.name} is not defined`);
+  throw new ArithReferenceError(
+    `Symbol ${node.name} is not defined at (${node.start.line}:${node.start.col})`,
+  );
 };
 
 const getIdentifier = (node, env) => {
   if (Reflect.ownKeys(env).includes(Symbol.for(node.name))) {
     return Symbol.keyFor(Symbol.for(node.name));
   }
+  throw new ArithReferenceError(
+    `Symbol ${node.name} is not defined at (${node.start.line}:${node.start.col})`,
+  );
 };
 
 const setValue = (name, value, env) => {
   const scope = lookup(name, env);
   if (!scope && env.parent) {
-    throw new ReferenceError(`Cannot set undefined variable ${name}`);
+    throw new ArithReferenceError(
+      `Cannot set undefined variable ${name}`,
+    );
   }
   return (scope[Symbol.for(name)] = value);
 };

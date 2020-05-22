@@ -1,275 +1,645 @@
-const { parse, parseProgram } = require("../src/parse");
+const { parse, parseExpr } = require("../src/parse");
+const { tokenize } = require("../src/tokenize");
 
 describe("The parser function", () => {
-  it("Should return a node with the type of IntegerLiteral for integer tokens", () => {
-    const tokens = [
-      {
-        type: "INTEGER",
-        value: 2,
-      },
-    ];
-
-    const ast = { type: "IntegerLiteral", value: 2 };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should return a node with the type of FloatLiteral for float tokens", () => {
-    const tokens = [
-      {
-        type: "FLOAT",
-        value: 210.5532,
-      },
-    ];
-
-    const ast = { type: "FloatLiteral", value: 210.5532 };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should return a node with the type of Identifier for identifier tokens", () => {
-    const tokens = [
-      {
-        type: "IDENTIFIER",
-        value: "x",
-      },
-    ];
-
-    const ast = { type: "Identifier", name: "x" };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should return an AST for a basic call expression", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
-      { type: "INTEGER", value: 2 },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: ")" },
-    ];
-
-    const ast = {
-      type: "CallExpression",
-      name: "add",
-      arguments: [
-        { type: "IntegerLiteral", value: 2 },
-        { type: "IntegerLiteral", value: 3 },
-      ],
-    };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should return an AST for a basic call expression", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
-      { type: "FLOAT", value: 1.5 },
-      { type: "FLOAT", value: 3.2 },
-      { type: "PAREN", value: ")" },
-    ];
-
-    const ast = {
-      type: "CallExpression",
-      name: "add",
-      arguments: [
-        { type: "FloatLiteral", value: 1.5 },
-        { type: "FloatLiteral", value: 3.2 },
-      ],
-    };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should return an AST for a nested call expression", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
-      { type: "INTEGER", value: 2 },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "subtract" },
-      { type: "INTEGER", value: 4 },
-      { type: "INTEGER", value: 2 },
-      { type: "PAREN", value: ")" },
-      { type: "PAREN", value: ")" },
-    ];
-
-    const ast = {
-      type: "CallExpression",
-      name: "add",
-      arguments: [
-        { type: "IntegerLiteral", value: 2 },
-        { type: "IntegerLiteral", value: 3 },
-        {
-          type: "CallExpression",
-          name: "subtract",
-          arguments: [
-            { type: "IntegerLiteral", value: 4 },
-            { type: "IntegerLiteral", value: 2 },
-          ],
-        },
-      ],
-    };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should correctly parse a string token into a StringLiteral node", () => {
-    const tokens = [{ type: "STRING", value: "A string" }];
-
-    const ast = {
-      type: "StringLiteral",
-      value: "A string",
-    };
-  });
-
-  it("Should correctly return an AST for a call expression using a string argument", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "print" },
-      { type: "STRING", value: "hello" },
-      { type: "PAREN", value: ")" },
-    ];
-
-    const ast = {
-      type: "CallExpression",
-      name: "print",
-      arguments: [{ type: "StringLiteral", value: "hello" }],
-    };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should correctly parse a boolean token into a BooleanLiteral node", () => {
-    const tokens = [{ type: "BOOLEAN", value: false }];
-
-    const ast = {
-      type: "BooleanLiteral",
-      value: false,
-    };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should parse token stream as a program with a body of expressions", () => {
-    const tokens = [];
-
-    const ast = { type: "Program", body: [] };
-
-    expect(parseProgram(tokens)).toEqual(ast);
-  });
-
-  it("Should correctly parse multiple, consecutive (not nested) expressions as part of the program body", () => {
-    const tokens = [
-      { type: "STRING", value: "Hello" },
-      { type: "BOOLEAN", value: true },
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
-      { type: "INTEGER", value: 2 },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: ")" },
-    ];
-
+  it("Should return a program with a node the type of DecimalLiteral for a program consisting of one number token", () => {
+    const input = `1`;
     const ast = {
       type: "Program",
       body: [
-        { type: "StringLiteral", value: "Hello" },
-        { type: "BooleanLiteral", value: true },
         {
-          type: "CallExpression",
-          name: "add",
-          arguments: [
-            { type: "IntegerLiteral", value: 2 },
-            { type: "IntegerLiteral", value: 3 },
-          ],
+          type: "DecimalLiteral",
+          value: "1",
+          start: {
+            line: 1,
+            col: 1,
+          },
+          end: {
+            line: 1,
+            col: 2,
+          },
         },
       ],
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 2,
+      },
     };
-
-    expect(parseProgram(tokens)).toEqual(ast);
+    expect(parse(input)).toEqual(ast);
   });
 
-  it.skip("Should correctly parse a keyword expression", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "if" },
-      { type: "BOOLEAN", value: true },
-      { type: "STRING", value: "This one" },
-      { type: "STRING", value: "Not this one" },
-      { type: "PAREN", value: ")" },
-    ];
-
+  it("Should return a DecimalLiteral node when parsing a number token", () => {
+    const input = `3.1415`;
     const ast = {
-      type: "KeywordExpression",
-      name: "if",
+      type: "DecimalLiteral",
+      value: "3.1415",
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 7,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should return a StringLiteral node when parsing a string token", () => {
+    const input = `"hello"`;
+    const ast = {
+      type: "StringLiteral",
+      value: "hello",
+      start: { line: 1, col: 2 },
+      end: { line: 1, col: 7 },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should return an Identifier node when parsing a literal identifier", () => {
+    const input = `add`;
+    const ast = {
+      type: "Identifier",
+      name: "add",
+      start: { line: 1, col: 0 },
+      end: { line: 1, col: 3 },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should return a BooleanLiteral node when parsing a boolean keyword token", () => {
+    const input = `#t`;
+    const ast = {
+      type: "BooleanLiteral",
+      value: "#t",
+      start: {
+        line: 1,
+        col: 0,
+      },
+      end: {
+        line: 1,
+        col: 2,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should return a NilLiteral node when parsing a nil keyword token", () => {
+    const input = `nil`;
+    const ast = {
+      type: "NilLiteral",
+      value: "nil",
+      start: { line: 1, col: 0 },
+      end: { line: 1, col: 3 },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should correctly parse a simple call expression", () => {
+    const input = `(+ 2 3)`;
+    const ast = {
+      type: "CallExpression",
+      name: "+",
       arguments: [
-        { type: "BooleanLiteral", value: true },
-        { type: "StringLiteral", value: "This one" },
-        { type: "StringLiteral", value: "Not this one" },
+        {
+          type: "DecimalLiteral",
+          value: "2",
+          start: {
+            line: 1,
+            col: 3,
+          },
+          end: {
+            line: 1,
+            col: 4,
+          },
+        },
+        {
+          type: "DecimalLiteral",
+          value: "3",
+          start: {
+            line: 1,
+            col: 5,
+          },
+          end: {
+            line: 1,
+            col: 6,
+          },
+        },
       ],
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 7,
+      },
     };
-
-    expect(parse(tokens)).toEqual(ast);
+    expect(parseExpr(tokenize(input))).toEqual(ast);
   });
 
-  it("Should correctly parse a literal enclosed in parenthesis as simply the literal itself", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "STRING", value: "hello" },
-      { type: "PAREN", value: ")" },
-    ];
-
-    const ast = { type: "StringLiteral", value: "hello" };
-
-    expect(parse(tokens)).toEqual(ast);
-  });
-
-  it("Should correctly parse a definition expression", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "define" },
-      { type: "IDENTIFIER", value: "x" },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: ")" },
-    ];
-
+  it("Should be able to correctly parse nested call expressions", () => {
+    const input = `(+ 8 (- 2 3))`;
     const ast = {
-      type: "DefinitionExpression",
-      name: "x",
-      value: { type: "IntegerLiteral", value: 3 },
+      type: "CallExpression",
+      name: "+",
+      arguments: [
+        {
+          type: "DecimalLiteral",
+          value: "8",
+          start: {
+            line: 1,
+            col: 3,
+          },
+          end: {
+            line: 1,
+            col: 4,
+          },
+        },
+        {
+          type: "CallExpression",
+          name: "-",
+          arguments: [
+            {
+              type: "DecimalLiteral",
+              value: "2",
+              start: {
+                line: 1,
+                col: 8,
+              },
+              end: {
+                line: 1,
+                col: 9,
+              },
+            },
+            {
+              type: "DecimalLiteral",
+              value: "3",
+              start: {
+                line: 1,
+                col: 10,
+              },
+              end: {
+                line: 1,
+                col: 11,
+              },
+            },
+          ],
+          start: {
+            line: 1,
+            col: 6,
+          },
+          end: {
+            line: 1,
+            col: 12,
+          },
+        },
+      ],
+      start: {
+        line: 1,
+        col: 1,
+      },
+      end: {
+        line: 1,
+        col: 13,
+      },
     };
-
-    expect(parse(tokens)).toEqual(ast);
+    expect(parseExpr(tokenize(input))).toEqual(ast);
   });
 
-  it("Should correctly parse a definition expression with an expression as its value", () => {
-    const tokens = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "define" },
-      { type: "IDENTIFIER", value: "x" },
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "+" },
-      { type: "INTEGER", value: 2 },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: ")" },
-      { type: "PAREN", value: ")" },
-    ];
-
+  it("Should correctly parse a DefinitionExpression", () => {
+    const input = `(define x 7)`;
     const ast = {
       type: "DefinitionExpression",
       name: "x",
       value: {
-        type: "CallExpression",
-        name: "+",
-        arguments: [
-          { type: "IntegerLiteral", value: 2 },
-          { type: "IntegerLiteral", value: 3 },
+        type: "DecimalLiteral",
+        value: "7",
+        start: {
+          line: 1,
+          col: 10,
+        },
+        end: {
+          line: 1,
+          col: 11,
+        },
+      },
+      start: {
+        line: 1,
+        col: 8,
+      },
+      end: {
+        line: 1,
+        col: 12,
+      },
+    };
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should correctly parse a block of consecutive (not nested) expressions", () => {
+    const input = `(+ 1 2)
+    3.1415
+    "hello"`;
+    const result = {
+      type: "Program",
+      body: [
+        {
+          type: "CallExpression",
+          name: "+",
+          arguments: [
+            {
+              type: "DecimalLiteral",
+              value: "1",
+              start: {
+                line: 1,
+                col: 3,
+              },
+              end: {
+                line: 1,
+                col: 4,
+              },
+            },
+            {
+              type: "DecimalLiteral",
+              value: "2",
+              start: {
+                line: 1,
+                col: 5,
+              },
+              end: {
+                line: 1,
+                col: 6,
+              },
+            },
+          ],
+          start: {
+            line: 1,
+            col: 1,
+          },
+          end: {
+            line: 1,
+            col: 7,
+          },
+        },
+        {
+          type: "DecimalLiteral",
+          value: "3.1415",
+          start: {
+            line: 2,
+            col: 3,
+          },
+          end: {
+            line: 2,
+            col: 9,
+          },
+        },
+        {
+          type: "StringLiteral",
+          value: "hello",
+          start: {
+            line: 3,
+            col: 5,
+          },
+          end: {
+            line: 3,
+            col: 10,
+          },
+        },
+      ],
+      start: {
+        line: 1,
+        col: 0,
+      },
+      end: {
+        line: 3,
+        col: 10,
+      },
+    };
+    expect(parse(input)).toEqual(result);
+  });
+
+  it("Should correctly parse a lambda expression", () => {
+    const input = `
+  (lambda (x)
+    (+ x x))
+  `;
+    const result = {
+      type: "Program",
+      body: [
+        {
+          type: "LambdaExpression",
+          params: [
+            {
+              type: "FunctionParameter",
+              name: "x",
+            },
+          ],
+          body: [
+            {
+              type: "CallExpression",
+              name: "+",
+              arguments: [
+                {
+                  type: "Identifier",
+                  name: "x",
+                  start: {
+                    line: 3,
+                    col: 6,
+                  },
+                  end: {
+                    line: 3,
+                    col: 7,
+                  },
+                },
+                {
+                  type: "Identifier",
+                  name: "x",
+                  start: {
+                    line: 3,
+                    col: 8,
+                  },
+                  end: {
+                    line: 3,
+                    col: 9,
+                  },
+                },
+              ],
+              start: {
+                line: 3,
+                col: 4,
+              },
+              end: {
+                line: 3,
+                col: 10,
+              },
+            },
+          ],
+          start: {
+            line: 2,
+            col: 9,
+          },
+          end: {
+            line: 3,
+            col: 11,
+          },
+        },
+      ],
+      start: {
+        line: 2,
+        col: 1,
+      },
+      end: {
+        line: 3,
+        col: 11,
+      },
+    };
+    expect(parse(input)).toEqual(result);
+  });
+
+  it("Should correctly parse a lambda expression with multiple expressions in its body", () => {
+    const input = `
+  (lambda (x)
+    (+ x x)
+    (print "hello"))
+  `;
+    const result = {
+      type: "Program",
+      body: [
+        {
+          type: "LambdaExpression",
+          params: [
+            {
+              type: "FunctionParameter",
+              name: "x",
+            },
+          ],
+          body: [
+            {
+              type: "CallExpression",
+              name: "+",
+              arguments: [
+                {
+                  type: "Identifier",
+                  name: "x",
+                  start: {
+                    line: 3,
+                    col: 6,
+                  },
+                  end: {
+                    line: 3,
+                    col: 7,
+                  },
+                },
+                {
+                  type: "Identifier",
+                  name: "x",
+                  start: {
+                    line: 3,
+                    col: 8,
+                  },
+                  end: {
+                    line: 3,
+                    col: 9,
+                  },
+                },
+              ],
+              start: {
+                line: 3,
+                col: 4,
+              },
+              end: {
+                line: 3,
+                col: 10,
+              },
+            },
+            {
+              type: "CallExpression",
+              name: "print",
+              arguments: [
+                {
+                  type: "StringLiteral",
+                  value: "hello",
+                  start: {
+                    line: 4,
+                    col: 12,
+                  },
+                  end: {
+                    line: 4,
+                    col: 17,
+                  },
+                },
+              ],
+              start: {
+                line: 4,
+                col: 4,
+              },
+              end: {
+                line: 4,
+                col: 18,
+              },
+            },
+          ],
+          start: {
+            line: 2,
+            col: 9,
+          },
+          end: {
+            line: 4,
+            col: 19,
+          },
+        },
+      ],
+      start: {
+        line: 2,
+        col: 1,
+      },
+      end: {
+        line: 4,
+        col: 19,
+      },
+    };
+    expect(parse(input)).toEqual(result);
+  });
+
+  it("Should correctly parse a definition expression with a lambda value", () => {
+    const input = `
+    (define add2
+      (lambda (x y)
+      (+ x y)));
+    `;
+
+    const ast = {
+      type: "DefinitionExpression",
+      name: "add2",
+      value: {
+        type: "LambdaExpression",
+        params: [
+          {
+            type: "FunctionParameter",
+            name: "x",
+          },
+          {
+            type: "FunctionParameter",
+            name: "y",
+          },
         ],
+        body: [
+          {
+            type: "CallExpression",
+            name: "+",
+            arguments: [
+              {
+                type: "Identifier",
+                name: "x",
+                start: {
+                  line: 4,
+                  col: 8,
+                },
+                end: {
+                  line: 4,
+                  col: 9,
+                },
+              },
+              {
+                type: "Identifier",
+                name: "y",
+                start: {
+                  line: 4,
+                  col: 10,
+                },
+                end: {
+                  line: 4,
+                  col: 11,
+                },
+              },
+            ],
+            start: {
+              line: 4,
+              col: 6,
+            },
+            end: {
+              line: 4,
+              col: 12,
+            },
+          },
+        ],
+        start: {
+          line: 3,
+          col: 13,
+        },
+        end: {
+          line: 4,
+          col: 13,
+        },
+      },
+      start: {
+        line: 2,
+        col: 11,
+      },
+      end: {
+        line: 4,
+        col: 14,
       },
     };
 
-    expect(parse(tokens)).toEqual(ast);
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+  });
+
+  it("Should correctly parse defining the identity function", () => {
+    const input = `
+    (define identity
+      (lambda (x) x))
+    `;
+
+    const ast = {
+      type: "DefinitionExpression",
+      name: "identity",
+      value: {
+        type: "LambdaExpression",
+        params: [
+          {
+            type: "FunctionParameter",
+            name: "x",
+          },
+        ],
+        body: [
+          {
+            type: "Identifier",
+            name: "x",
+            start: {
+              line: 3,
+              col: 17,
+            },
+            end: {
+              line: 3,
+              col: 18,
+            },
+          },
+        ],
+        start: {
+          line: 3,
+          col: 13,
+        },
+        end: {
+          line: 3,
+          col: 19,
+        },
+      },
+      start: {
+        line: 2,
+        col: 11,
+      },
+      end: {
+        line: 3,
+        col: 20,
+      },
+    };
+
+    expect(parseExpr(tokenize(input))).toEqual(ast);
+    // console.log(JSON.stringify(parseExpr(tokenize(input)), null, 2));
   });
 });

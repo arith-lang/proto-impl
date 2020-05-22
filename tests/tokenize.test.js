@@ -9,7 +9,7 @@ describe("Tokenize the input stream", () => {
     const input = "2";
     const result = [
       {
-        type: "NUMBER",
+        type: "DECIMAL",
         value: "2",
         end: 2,
         line: 1,
@@ -24,7 +24,7 @@ describe("Tokenize the input stream", () => {
     const input = "249102";
     const result = [
       {
-        type: "NUMBER",
+        type: "DECIMAL",
         value: "249102",
         end: 7,
         line: 1,
@@ -39,7 +39,7 @@ describe("Tokenize the input stream", () => {
     const input = "31.1415";
     const result = [
       {
-        type: "NUMBER",
+        type: "DECIMAL",
         value: "31.1415",
         end: 8,
         line: 1,
@@ -70,9 +70,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "abcdefg",
-        end: 8,
+        end: 7,
         line: 1,
-        start: 1,
+        start: 0,
       },
     ];
 
@@ -85,9 +85,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "_abcdefg",
-        end: 9,
+        end: 8,
         line: 1,
-        start: 1,
+        start: 0,
       },
     ];
 
@@ -100,9 +100,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "$abcdefg",
-        end: 9,
+        end: 8,
         line: 1,
-        start: 1,
+        start: 0,
       },
     ];
 
@@ -110,14 +110,14 @@ describe("Tokenize the input stream", () => {
   });
 
   it("Should tokenize a string starting with a valid beginning character and containing valid special characters as an identifier", () => {
-    const input = "_-$%&!?*+/\\>^<";
+    const input = "_-$%&!?*+/>^<";
     const result = [
       {
         type: "IDENTIFIER",
-        value: "_-$%&!?*+/\\>^<",
-        end: 15,
+        value: "_-$%&!?*+/>^<",
+        end: 13,
         line: 1,
-        start: 1,
+        start: 0,
       },
     ];
 
@@ -125,9 +125,9 @@ describe("Tokenize the input stream", () => {
   });
 
   it("Should correctly tokenize a punctuation mark", () => {
-    const input = ":";
+    const input = "'";
     const result = [
-      { type: "PUNC", value: ":", end: 1, line: 1, start: 0 },
+      { type: "PUNC", value: "'", end: 1, line: 1, start: 0 },
     ];
     expect(tokenize(input)).toEqual(result);
   });
@@ -139,9 +139,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "symbol",
-        end: 8,
+        end: 7,
         line: 1,
-        start: 2,
+        start: 1,
       },
     ];
     expect(tokenize(input)).toEqual(result);
@@ -184,7 +184,7 @@ describe("Tokenize the input stream", () => {
         line: 1,
         start: 2,
       },
-      { type: "NUMBER", value: "3.14", end: 16, line: 1, start: 12 },
+      { type: "DECIMAL", value: "3.14", end: 16, line: 1, start: 12 },
     ];
 
     expect(tokenize(input)).toEqual(result);
@@ -193,17 +193,17 @@ describe("Tokenize the input stream", () => {
   it("Should correctly tokenize consecutive (not nested) expressions", () => {
     const input = `
       "Hello"
-      true
+      #t
       (add 2 3)
     `;
 
     const result = [
       { type: "STRING", value: "Hello", end: 12, line: 2, start: 7 },
-      { type: "KEYWORD", value: "true", end: 9, line: 3, start: 5 },
+      { type: "KEYWORD", value: "#t", end: 7, line: 3, start: 5 },
       { type: "PAREN", value: "(", end: 6, line: 4, start: 5 },
       { type: "IDENTIFIER", value: "add", end: 9, line: 4, start: 6 },
-      { type: "NUMBER", value: "2", line: 4, start: 10, end: 11 },
-      { type: "NUMBER", value: "3", line: 4, start: 12, end: 13 },
+      { type: "DECIMAL", value: "2", line: 4, start: 10, end: 11 },
+      { type: "DECIMAL", value: "3", line: 4, start: 12, end: 13 },
       { type: "PAREN", value: ")", line: 4, start: 13, end: 14 },
     ];
 
@@ -223,7 +223,7 @@ describe("Tokenize the input stream", () => {
         start: 1,
       },
       { type: "IDENTIFIER", value: "x", end: 9, line: 1, start: 8 },
-      { type: "NUMBER", value: "3", end: 11, line: 1, start: 10 },
+      { type: "DECIMAL", value: "3", end: 11, line: 1, start: 10 },
       { type: "PAREN", value: ")", end: 12, line: 1, start: 11 },
     ];
 

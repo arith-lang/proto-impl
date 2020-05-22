@@ -165,21 +165,6 @@ function arrayDrop(num, arr) {
   return arr.slice(toTake);
 }
 
-// range
-function arrayRange(...args) {
-  if (args.length === 1) {
-    let range = Array.from(new Array(args[0]), (c, i) => i);
-    return range;
-  } else if (args.length === 2) {
-    let range = Array.from(
-      new Array(args[1] - 1),
-      (c, i) => i + args[0],
-    );
-    return range;
-  }
-  throw new RangeError("Invalid arguments to range function");
-}
-
 module.exports = {
   array,
   "array?": isArray,
@@ -213,5 +198,4 @@ module.exports = {
   "array-last": arrayLast,
   "array-take": arrayTake,
   "array-drop": arrayDrop,
-  "array-range": arrayRange,
 };

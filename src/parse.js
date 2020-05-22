@@ -1,29 +1,52 @@
-const { peek, pop } = require("./utilities");
+const { peek, lookahead, pop } = require("./utilities");
+const { tokenize } = require("./tokenize");
 const {
-  isRightParen,
   isLeftParen,
-  isParen,
+  isRightParen,
+  isKeyword,
 } = require("./identifiers");
-
-const keywords = ["if", "cond", "define", "lambda"];
-
-const parseProgram = (tokens) => {
-  const program = {
-    type: "Program",
-    body: [],
-  };
-
-  let i = 0;
-  while (tokens.length) {
-    program.body.push(parse(tokens));
-    i++;
-  }
-
-  return program;
-};
+const { ArithSyntaxError } = require("./errors");
 
 const parse = (tokens) => {
-  const token = pop(tokens);
+  const parseProgram = (tokens) => {
+    const startToken = peek(tokens);
+    const endToken = lookahead(tokens, tokens.length - 1);
+    const program = {
+      type: "Program",
+      body: parseBlock(tokens),
+      start: {
+        line: startToken.line,
+        col: startToken.start,
+      },
+      end: {
+        line: endToken.line,
+        col: endToken.end,
+      },
+    };
+
+    return program;
+  };
+
+  return parseProgram(tokens);
+};
+
+const parseBlock = (tokens) => {
+  let body = [];
+  let parsed;
+
+  while (tokens.length) {
+    parsed = parseExpr(tokens);
+
+    if (parsed) {
+      body.push(parsed);
+    }
+  }
+
+  return body;
+};
+
+parseExpr = (tokens) => {
+  let token = pop(tokens);
 
   if (token && isLeftParen(token.value)) {
     return maybeCall(tokens);
@@ -35,83 +58,15 @@ const parse = (tokens) => {
 const maybeCall = (tokens) => {
   let token = peek(tokens);
 
-  if (token && token.type === "IDENTIFIER") {
-    if (keywords.includes(token.value)) {
-      return parseKeyword(tokens);
-    }
+  if (token.type === "KEYWORD") {
+    return parseKeyword(tokens);
+  } else if (token.type === "IDENTIFIER") {
     return parseCall(tokens);
-  } else if (isLeftParen(token.value)) {
-    token = pop(tokens);
-
-    if (peek(tokens) && peek(tokens).value === "lambda") {
-      return parseIIFE(tokens);
-    } else {
-      tokens.unshift(token);
-    }
   }
 
-  return parse(tokens);
-};
-
-const parseIIFE = (tokens) => {
-  const exprTokens = eatExprTokens(tokens, 2);
-
-  let token = pop(exprTokens); // lambda identifier
-  let callExpr = {
-    type: "CallExpression",
-    lambda: parseLambda(exprTokens),
-    name: "lambda",
-    arguments: [],
-  };
-
-  pop(exprTokens); // end-of-lambda right paren
-
-  while (token && !isRightParen(token.value)) {
-    callExpr.arguments.push(parse(exprTokens));
-    token = pop(exprTokens);
-  }
-
-  return callExpr;
-};
-
-const parseIf = (tokens) => {
-  const ifExprTokens = eatExprTokens(tokens);
-  let token = pop(ifExprTokens);
-  let conditionTokens;
-
-  if (token && isLeftParen(token.value)) {
-    conditionTokens = eatExprTokens(ifExprTokens);
-    conditionTokens.unshift(token); // needed for parsing
-  } else {
-    conditionTokens = [token];
-  }
-
-  token = pop(ifExprTokens);
-  let thenTokens;
-
-  if (token && isLeftParen(token.value)) {
-    thenTokens = eatExprTokens(ifExprTokens);
-    thenTokens.unshift(token); // needed for parsing
-  } else {
-    thenTokens = [token];
-  }
-
-  token = pop(ifExprTokens);
-  let elseTokens;
-
-  if (token && isLeftParen(token.value)) {
-    elseTokens = eatExprTokens(ifExprTokens);
-    elseTokens.unshift(token); // needed for parsing
-  } else {
-    elseTokens = [token];
-  }
-
-  return {
-    type: "IfExpression",
-    condition: parse(conditionTokens),
-    then: parse(thenTokens),
-    else: parse(elseTokens),
-  };
+  throw new ArithSyntaxError(
+    `Don't know how to parse ${token.value} at line ${token.line}, col ${token.start}`,
+  );
 };
 
 const parseKeyword = (tokens) => {
@@ -125,90 +80,137 @@ const parseKeyword = (tokens) => {
     case "if":
       return parseIf(tokens);
   }
+  throw new ArithSyntaxError(
+    `Unknown keyword ${token.value} at line ${token.line} and col ${token.start}`,
+  );
+};
 
-  const expr = {
-    type: "KeywordExpression",
-    name: token.value,
-    arguments: [],
+const parseIf = (tokens) => {
+  let ifExprTokens = eatExprTokens(tokens);
+  const startToken = ifExprTokens[0];
+  const endToken = ifExprTokens[ifExprTokens.length - 1];
+
+  return {
+    type: "IfExpression",
+    condition: parseExpr(ifExprTokens),
+    then: parseExpr(ifExprTokens),
+    else: parseExpr(ifExprTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
-
-  while (!isRightParen(peek(tokens).value)) {
-    expr.arguments.push(parse(tokens));
-  }
-
-  return expr;
 };
 
 const parseLambda = (tokens) => {
-  let token = pop(tokens); // left paren for args
+  let lambdaTokens = eatExprTokens(tokens);
+  let token = pop(lambdaTokens);
   let params = [];
+  const startToken = token;
+  const endToken = lambdaTokens[lambdaTokens.length - 1];
 
+  // parse parameters
   while (!isRightParen(token.value)) {
-    token = pop(tokens);
-
-    if (token && token.type === "IDENTIFIER") {
+    token = pop(lambdaTokens);
+    if (token.type === "IDENTIFIER") {
       params.push(parseParam(token));
     }
+  }
+
+  let bodyTokens;
+
+  if (isLeftParen(peek(lambdaTokens).value)) {
+    // get rid of paren closing the lambda so parseBody doesn't
+    // send it through where parseAtom will choke on it
+    bodyTokens = lambdaTokens.slice(0, lambdaTokens.length - 1);
+  } else {
+    bodyTokens = [pop(lambdaTokens)]; // body is an atom
   }
 
   return {
     type: "LambdaExpression",
     params,
-    body: parse(tokens),
+    body: parseBlock(bodyTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
 };
 
-const parseParam = (token) => {
-  return {
-    type: "FunctionParameter",
-    name: token.value,
-  };
-};
+const parseParam = (token) => ({
+  type: "FunctionParameter",
+  name: token.value,
+});
 
 const parseDefine = (tokens) => {
-  let token = pop(tokens);
-  const definition = {
+  let defineTokens = eatExprTokens(tokens);
+  let startToken = peek(defineTokens);
+  let endToken = lookahead(defineTokens, defineTokens.length - 1);
+  let token = pop(defineTokens);
+
+  return {
     type: "DefinitionExpression",
     name: token.value,
-    value: parse(tokens),
+    value: parseExpr(defineTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
-
-  return definition;
 };
 
 const parseCall = (tokens) => {
-  let token = pop(tokens);
-  const call = {
+  let callTokens = eatExprTokens(tokens);
+  let token = pop(callTokens);
+  let endToken = lookahead(callTokens, callTokens.length - 1);
+  let call = {
     type: "CallExpression",
     name: token.value,
     arguments: [],
+    start: {
+      line: token.line,
+      col: token.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
-  if (isLeftParen(peek(tokens).value)) {
-    token = pop(tokens);
-    if (peek(tokens).value === "lambda") {
-      pop(tokens); // get rid of "lambda" token for parseLambda
-      const lambdaTokens = eatExprTokens(tokens);
-      const lambda = parseLambda(lambdaTokens);
-      call.arguments.push(lambda);
-    } else {
-      tokens.unshift(token); // if not a lambda, the next line needs that token
-    }
+
+  while (!isRightParen(peek(callTokens).value)) {
+    call.arguments.push(parseExpr(callTokens));
   }
 
-  while (!isRightParen(peek(tokens).value)) {
-    call.arguments.push(parse(tokens));
-  }
-
-  pop(tokens);
   return call;
 };
 
 const parseAtom = (token) => {
-  if (token) {
-    return nodeCreators[token.type]
-      ? nodeCreators[token.type](token.value)
-      : noop();
+  if (isKeyword(token.value)) {
+    if (token.value === "#t" || token.value === "#f") {
+      return nodeCreators["BOOLEAN"](token);
+    } else if (token.value === "nil") {
+      return nodeCreators["NIL"](token);
+    }
+  } else if (nodeCreators[token.type]) {
+    return nodeCreators[token.type](token);
   }
+
+  throw new ArithSyntaxError(
+    `Could not parse ${token.value} at line ${token.line}, col ${token.start}`,
+  );
 };
 
 const eatExprTokens = (tokens, numOfLeft = 1) => {
@@ -226,52 +228,55 @@ const eatExprTokens = (tokens, numOfLeft = 1) => {
   return exprTokens;
 };
 
-const INTEGER = (value) => {
-  return {
-    type: "IntegerLiteral",
-    value,
-  };
+const DECIMAL = ({ value, line, start, end }) => {
+  return createAtomNode("DecimalLiteral", value, line, start, end);
 };
 
-const FLOAT = (value) => {
-  return {
-    type: "FloatLiteral",
-    value,
-  };
+const STRING = ({ value, line, start, end }) => {
+  return createAtomNode("StringLiteral", value, line, start, end);
 };
 
-const IDENTIFIER = (value) => {
+const IDENTIFIER = ({ value, line, start, end }) => {
   return {
     type: "Identifier",
     name: value,
+    start: {
+      line,
+      col: start,
+    },
+    end: {
+      line,
+      col: end,
+    },
   };
 };
 
-const STRING = (value) => {
+const BOOLEAN = ({ value, line, start, end }) => {
+  return createAtomNode("BooleanLiteral", value, line, start, end);
+};
+
+const NIL = ({ value, line, start, end }) => {
+  return createAtomNode("NilLiteral", value, line, start, end);
+};
+
+const nodeCreators = { DECIMAL, STRING, IDENTIFIER, BOOLEAN, NIL };
+
+const createAtomNode = (type, value, line, start, end) => {
   return {
-    type: "StringLiteral",
+    type,
     value,
+    start: {
+      line,
+      col: start,
+    },
+    end: {
+      line,
+      col: end,
+    },
   };
-};
-
-const BOOLEAN = (value) => {
-  return {
-    type: "BooleanLiteral",
-    value,
-  };
-};
-
-const noop = () => {};
-
-const nodeCreators = {
-  INTEGER,
-  FLOAT,
-  IDENTIFIER,
-  STRING,
-  BOOLEAN,
 };
 
 module.exports = {
-  parseProgram,
-  parse,
+  parse: (input) => parse(tokenize(input)),
+  parseExpr,
 };

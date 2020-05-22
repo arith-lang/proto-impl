@@ -87,7 +87,7 @@ const tokenize = (input) => {
   const readNumber = (char) => {
     let tok = char + readWhile((c) => !isSeparator(c));
     if (isInteger(tok) || isFloat(tok)) {
-      return createToken("NUMBER", tok);
+      return createToken("DECIMAL", tok);
     } else {
       if (isPlusOrMinus(tok[0])) {
         return readIdent(tok);
@@ -106,6 +106,9 @@ const tokenize = (input) => {
   };
 
   const readIdent = (char) => {
+    if (char === ".") {
+      return createToken("PUNC", char);
+    }
     const tok = char + readWhile(isIdChar);
     return createToken(
       isKeyword(tok) ? "KEYWORD" : "IDENTIFIER",
@@ -126,7 +129,7 @@ const tokenize = (input) => {
       skipComment();
       return null;
     }
-    if (isHash(char) || isDigit(char)) {
+    if (isDigit(char)) {
       return readNumber(char);
     }
     if (isPlusOrMinus(char)) {
@@ -135,6 +138,15 @@ const tokenize = (input) => {
         isDigit(lookahead(input, pos))
       ) {
         return readNumber(char);
+      }
+    }
+    if (isHash(char)) {
+      if (isDigit(lookahead(input, pos))) {
+        return readNumber(char);
+      } else if (isIdStart(lookahead(input, pos))) {
+        return readIdent(char);
+      } else {
+        die(`Invalid input ${char} (${line}:${col})`);
       }
     }
     if (isDoubleQuote(char)) {
@@ -148,8 +160,6 @@ const tokenize = (input) => {
     }
     if (isPunctuation(char)) {
       return createToken("PUNC", char);
-    } else {
-      return null;
     }
   };
 

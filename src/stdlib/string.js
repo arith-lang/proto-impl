@@ -1,5 +1,11 @@
+const _String = require("./types/String");
 const { all } = require("./utils");
 const { list } = require("./list");
+
+// string constructor
+function string(value) {
+  return new _String(value);
+}
 
 // string utilities
 function strlen(str) {
@@ -60,7 +66,7 @@ function stringToArray(str) {
 
 // string comparisons
 function strEq(str1, str2) {
-  return str1 === str2;
+  return str1.isEq(str2);
 }
 
 function strLt(str1, str2) {
@@ -81,10 +87,11 @@ function strGte(str1, str2) {
 
 // string predicate
 function isString(obj) {
-  return typeof obj === "string";
+  return _String.isString(obj);
 }
 
 module.exports = {
+  string,
   "string-length": strlen,
   "string-upcase": upper,
   "string-downcase": lower,

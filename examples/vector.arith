@@ -1,8 +1,7 @@
 (define numbers (vector 1 2 3 4 5 6 7 8 9 10))
 
 (define numbers
-  (vector-append (vector-slice 0 4 numbers) (vector-tail 5 numbers)))
-(print numbers)
+  (vector-concat (vector-slice 0 4 numbers) (vector-tail 5 numbers)))
 
 (define reversed (vector-reverse numbers))
 (print reversed)

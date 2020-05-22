@@ -6,6 +6,9 @@ class _Boolean extends Boolean {
     super(bool);
     this.value = value;
     this.bool = bool;
+    this.isEq = this.isEq.bind(this);
+    this.isEqv = this.isEq;
+    this.isEqual = this.isEq;
   }
 
   static make(value) {

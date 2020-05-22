@@ -1,3 +1,4 @@
+const equal = require("fast-deep-equal");
 const Char = require("./Char");
 const _Boolean = require("./Boolean");
 const { array } = require("../array");
@@ -25,6 +26,10 @@ class _String extends String {
     return obj.constructor && obj.constructor.name === "_String"
       ? _Boolean.make("#t")
       : _Boolean.make("#f");
+  }
+
+  static make(string) {
+    return new _String(string);
   }
 
   toCharString() {

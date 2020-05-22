@@ -2,14 +2,12 @@ class _Boolean extends Boolean {
   constructor(value) {
     const bool = value === "#f" ? false : true;
     super(bool);
-    this.value = bool;
+    this.value = value;
+    this.bool = bool;
   }
 
   toString() {
-    if (this.value !== false) {
-      return "#t";
-    }
-    return "#f";
+    return `${this.value}`;
   }
 }
 

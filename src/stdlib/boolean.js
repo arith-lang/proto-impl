@@ -18,16 +18,22 @@ function and(...exprs) {
 
 function or(...exprs) {
   for (expr of exprs) {
-    if (expr == true || expr === 0 || expr === "") {
+    if (!_Boolean.shouldReturnFalse(expr)) {
+      if (expr === true) {
+        return _Boolean.make("#t");
+      }
       return expr;
     }
   }
 
-  return exprs[exprs.length - 1];
+  return _Boolean.make("f");
 }
 
 function not(expr) {
-  return !expr;
+  if (!_Boolean.shouldReturnFalse(expr)) {
+    return _Boolean.make("#f");
+  }
+  return _Boolean.make("#t");
 }
 
 module.exports = {

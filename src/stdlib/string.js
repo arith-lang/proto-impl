@@ -87,7 +87,7 @@ function strGte(str1, str2) {
 
 // string predicate
 function isString(obj) {
-  return typeof obj === "string";
+  return _String.isString(obj);
 }
 
 module.exports = {

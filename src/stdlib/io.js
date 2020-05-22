@@ -14,10 +14,12 @@ function jsLog(...args) {
 function print(...args) {
   let temp = [];
   for (item of args) {
-    if (isList(item)) {
-      temp.push(toString(item));
-    } else {
-      temp.push(item.toString());
+    if (item) {
+      if (isList(item)) {
+        temp.push(toString(item));
+      } else {
+        temp.push(item.toString());
+      }
     }
   }
   console.log(...temp);

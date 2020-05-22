@@ -100,6 +100,8 @@ const parseIf = (tokens) => {
 const parseLambda = (tokens) => {
   let lambdaTokens = eatExprTokens(tokens);
   let token = pop(lambdaTokens);
+  let startToken = token;
+  let endToken = lambdaTokens[lambdaTokens.length - 1];
   let params = [];
 
   // parse parameters
@@ -124,6 +126,14 @@ const parseLambda = (tokens) => {
     type: "LambdaExpression",
     params,
     body: parseBlock(bodyTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
 };
 

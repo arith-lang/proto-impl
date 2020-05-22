@@ -23,6 +23,7 @@ const parse = (tokens) => {
         col: endToken.end,
       },
     };
+
     return program;
   };
 
@@ -32,30 +33,37 @@ const parse = (tokens) => {
 const parseBlock = (tokens) => {
   let body = [];
   let parsed;
+
   while (tokens.length) {
     parsed = parseExpr(tokens);
+
     if (parsed) {
       body.push(parsed);
     }
   }
+
   return body;
 };
 
 parseExpr = (tokens) => {
   let token = pop(tokens);
+
   if (token && isLeftParen(token.value)) {
     return maybeCall(tokens);
   }
+
   return parseAtom(token);
 };
 
 const maybeCall = (tokens) => {
   let token = peek(tokens);
+
   if (token.type === "KEYWORD") {
     return parseKeyword(tokens);
   } else if (token.type === "IDENTIFIER") {
     return parseCall(tokens);
   }
+
   throw new ArithSyntaxError(
     `Don't know how to parse ${token.value} at line ${token.line}, col ${token.start}`,
   );
@@ -63,6 +71,7 @@ const maybeCall = (tokens) => {
 
 const parseKeyword = (tokens) => {
   let token = pop(tokens);
+
   switch (token.value) {
     case "define":
       return parseDefine(tokens);
@@ -84,6 +93,7 @@ const parseIf = (tokens) => {
     then: parseExpr(ifExprTokens),
     else: parseExpr(ifExprTokens),
   };
+
   return expr;
 };
 
@@ -91,6 +101,7 @@ const parseLambda = (tokens) => {
   let lambdaTokens = eatExprTokens(tokens);
   let token = pop(lambdaTokens);
   let params = [];
+
   // parse parameters
   while (!isRightParen(token.value)) {
     token = pop(lambdaTokens);
@@ -98,7 +109,9 @@ const parseLambda = (tokens) => {
       params.push(parseParam(token));
     }
   }
+
   let bodyTokens;
+
   if (isLeftParen(peek(lambdaTokens).value)) {
     // get rid of paren closing the lambda so parseBody doesn't
     // send it through where parseAtom will choke on it
@@ -106,6 +119,7 @@ const parseLambda = (tokens) => {
   } else {
     bodyTokens = [pop(lambdaTokens)]; // body is an atom
   }
+
   return {
     type: "LambdaExpression",
     params,
@@ -123,7 +137,8 @@ const parseDefine = (tokens) => {
   let startToken = peek(defineTokens);
   let endToken = lookahead(defineTokens, defineTokens.length - 1);
   let token = pop(defineTokens);
-  const definition = {
+
+  return {
     type: "DefinitionExpression",
     name: token.value,
     value: parseExpr(defineTokens),
@@ -136,7 +151,6 @@ const parseDefine = (tokens) => {
       col: endToken.end,
     },
   };
-  return definition;
 };
 
 const parseCall = (tokens) => {
@@ -156,9 +170,11 @@ const parseCall = (tokens) => {
       col: endToken.end,
     },
   };
+
   while (!isRightParen(peek(callTokens).value)) {
     call.arguments.push(parseExpr(callTokens));
   }
+
   return call;
 };
 
@@ -172,6 +188,7 @@ const parseAtom = (token) => {
   } else if (nodeCreators[token.type]) {
     return nodeCreators[token.type](token);
   }
+
   throw new ArithSyntaxError(
     `Could not parse ${token.value} at line ${token.line}, col ${token.start}`,
   );

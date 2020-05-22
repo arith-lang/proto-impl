@@ -43,11 +43,6 @@ const parseBlock = (tokens) => {
 
 parseExpr = (tokens) => {
   let token = pop(tokens);
-  // I'd rather do this than return a noop for stray right parens
-  // and have to check if token for every function
-  if (isRightParen(token.value)) {
-    return null;
-  }
   if (token && isLeftParen(token.value)) {
     return maybeCall(tokens);
   }
@@ -103,10 +98,18 @@ const parseLambda = (tokens) => {
       params.push(parseParam(token));
     }
   }
+  let bodyTokens;
+  if (isLeftParen(peek(lambdaTokens).value)) {
+    // get rid of paren closing the lambda so parseBody doesn't
+    // send it through where parseAtom will choke on it
+    bodyTokens = lambdaTokens.slice(0, lambdaTokens.length - 1);
+  } else {
+    bodyTokens = [pop(lambdaTokens)]; // body is an atom
+  }
   return {
     type: "LambdaExpression",
     params,
-    body: parseBlock(lambdaTokens),
+    body: parseBlock(bodyTokens),
   };
 };
 

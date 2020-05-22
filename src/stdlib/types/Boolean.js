@@ -1,7 +1,8 @@
 class _Boolean extends Boolean {
   constructor(value) {
-    super(value);
-    this.value = value;
+    const bool = value === "#f" ? false : true;
+    super(bool);
+    this.value = bool;
   }
 
   toString() {

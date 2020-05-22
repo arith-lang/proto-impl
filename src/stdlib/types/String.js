@@ -10,6 +10,11 @@ class _String extends String {
     this.chars = Object.freeze(
       string.split("").map((c) => new Char(c)),
     );
+
+    this.toCharString = this.toCharString.bind(this);
+    this.toCharArray = this.toCharArray.bind(this);
+    this.toCharVector = this.toCharVector.bind(this);
+    this.toCharList = this.toCharList.bind(this);
   }
 
   static isStringNative(obj) {

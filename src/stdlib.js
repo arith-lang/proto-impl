@@ -1,4 +1,4 @@
-const system = require("./stdlib/system");
+const boolean = require("./stdlib/boolean");
 const io = require("./stdlib/io");
 const decimal = require("./stdlib/decimal");
 const string = require("./stdlib/string");
@@ -7,7 +7,7 @@ const utils = require("./stdlib/utils");
 const vector = require("./stdlib/vector");
 
 module.exports = {
-  ...system,
+  ...boolean,
   ...io,
   ...decimal,
   ...string,

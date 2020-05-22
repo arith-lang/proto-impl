@@ -1,4 +1,5 @@
 const Char = require("./Char");
+const _Boolean = require("./Boolean");
 const { array } = require("../array");
 const { vector } = require("../vector");
 const { list } = require("../list");
@@ -9,6 +10,16 @@ class _String extends String {
     this.chars = Object.freeze(
       string.split("").map((c) => new Char(c)),
     );
+  }
+
+  static isStringNative(obj) {
+    return obj.constructor && obj.constructor.name === "_String";
+  }
+
+  static isString(obj) {
+    return obj.constructor && obj.constructor.name === "_String"
+      ? _Boolean.make("#t")
+      : _Boolean.make("#f");
   }
 
   toCharString() {

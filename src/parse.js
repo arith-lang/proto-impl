@@ -87,22 +87,31 @@ const parseKeyword = (tokens) => {
 
 const parseIf = (tokens) => {
   let ifExprTokens = eatExprTokens(tokens);
-  let expr = {
+  const startToken = ifExprTokens[0];
+  const endToken = ifExprTokens[ifExprTokens.length - 1];
+
+  return {
     type: "IfExpression",
     condition: parseExpr(ifExprTokens),
     then: parseExpr(ifExprTokens),
     else: parseExpr(ifExprTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
-
-  return expr;
 };
 
 const parseLambda = (tokens) => {
   let lambdaTokens = eatExprTokens(tokens);
   let token = pop(lambdaTokens);
-  let startToken = token;
-  let endToken = lambdaTokens[lambdaTokens.length - 1];
   let params = [];
+  const startToken = token;
+  const endToken = lambdaTokens[lambdaTokens.length - 1];
 
   // parse parameters
   while (!isRightParen(token.value)) {

@@ -12,6 +12,9 @@ class _String extends String {
       string.split("").map((c) => new Char(c)),
     );
 
+    this.isEq = this.isEq.bind(this);
+    this.isEqv = this.isEq;
+    this.isEqual = this.isEq;
     this.toCharString = this.toCharString.bind(this);
     this.toCharArray = this.toCharArray.bind(this);
     this.toCharVector = this.toCharVector.bind(this);
@@ -30,6 +33,10 @@ class _String extends String {
 
   static make(string) {
     return new _String(string);
+  }
+
+  isEq(other) {
+    return equal(this, other);
   }
 
   toCharString() {

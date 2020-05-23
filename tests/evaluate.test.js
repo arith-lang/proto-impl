@@ -94,9 +94,9 @@ describe("AST Evaluator", () => {
 
   it("Should correctly evaluate the identity function", () => {
     const input = `
-    (define identity
+    (define id
       (lambda (x) x))
-    (identity 10)
+    (id 10)
     `;
 
     expect(evaluate(input).toString()).toBe("10");

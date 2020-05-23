@@ -1,3 +1,4 @@
+const Decimal = require("decimal.js");
 const _Decimal = require("./types/Decimal");
 const { all } = require("./utils");
 
@@ -16,11 +17,11 @@ const PI = _Decimal.acos(-1);
 // mathematical functions
 // const add = all((a, c) => a + c);
 function add(...args) {
-  return all((a, c) => _Decimal.add(a, c))(...args);
+  return all((a, c) => a.add(c))(...args);
 }
 
 function sub(...args) {
-  return all((a, c) => _Decimal.sub(a, c))(...args);
+  return all((a, c) => a.sub(c))(...args);
 }
 
 function mul(...args) {
@@ -66,7 +67,8 @@ function floor(x) {
 
 // numeric comparisons
 function eq(x, y) {
-  return x.isEq(y);
+  x instanceof _Decimal;
+  return x.equals(y);
 }
 
 function lt(x, y) {

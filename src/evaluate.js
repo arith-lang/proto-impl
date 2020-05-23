@@ -1,4 +1,4 @@
-const stdlib = require("./stdlib");
+const globals = require("./globals");
 const _Boolean = require("./stdlib/types/Boolean");
 const {
   createEnv,
@@ -7,19 +7,19 @@ const {
   defVar,
 } = require("./environment");
 const { ArithTypeError } = require("./errors");
-const environment = setEnv(stdlib);
+const globalEnv = setEnv(globals);
 const { parse } = require("./parse");
 
-const evaluate = (node, env = environment) => {
+const evaluate = (node, env = globalEnv) => {
   switch (node.type) {
     case "Program":
       return evalBlock(node.body);
     case "DecimalLiteral":
-      return stdlib.decimal(node.value);
+      return globals.decimal(node.value);
     case "StringLiteral":
-      return stdlib.string(node.value);
+      return globals.string(node.value);
     case "NilLiteral":
-      return stdlib.nil;
+      return globals.nil;
     case "BooleanLiteral":
       return new _Boolean(node.value);
     case "Identifier":

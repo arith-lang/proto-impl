@@ -1,9 +1,9 @@
-const stdlib = require("./stdlib");
+const globals = require("./globals");
 const { setEnv, getValue, getIdentifier } = require("./environment");
 
-const environment = setEnv(stdlib);
+const globalEnv = setEnv(globals);
 
-const transpile = (node, env = environment) => {
+const transpile = (node, env = globalEnv) => {
   if (node) {
     return (
       emit[node.type](node, env) ||
@@ -33,7 +33,7 @@ const BooleanLiteral = returnValue;
 
 const StringLiteral = ({ value }) => `"${value}"`;
 
-const Identifier = (node, env = environment) => {
+const Identifier = (node, env = globalEnv) => {
   let name = "";
 
   try {
@@ -45,7 +45,7 @@ const Identifier = (node, env = environment) => {
   return name;
 };
 
-const CallExpression = (node, env = environment) => {
+const CallExpression = (node, env = globalEnv) => {
   let name = "";
 
   try {
@@ -66,18 +66,18 @@ const CallExpression = (node, env = environment) => {
   return code;
 };
 
-const KeywordExpression = (node, env = environment) => {
+const KeywordExpression = (node, env = globalEnv) => {
   node.name = `${node.name}Expr`;
 
   return CallExpression(node, env);
 };
 
-const DefinitionExpression = (node, env = environment) => {
+const DefinitionExpression = (node, env = globalEnv) => {
   let value = transpile(node.value, env);
   return `var ${makeVar(node.name)} = ${value};`;
 };
 
-const LambdaExpression = (node, env = environment) => {
+const LambdaExpression = (node, env = globalEnv) => {
   let code = "(function(";
   node.params.forEach((param, i, a) => {
     code += `${makeVar(param.name)}`;
@@ -90,7 +90,7 @@ const LambdaExpression = (node, env = environment) => {
   return code;
 };
 
-const IfExpression = (node, env = environment) => {
+const IfExpression = (node, env = globalEnv) => {
   let code = "(";
   code += transpile(node.condition, env) !== false;
   code += " ? ";

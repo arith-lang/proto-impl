@@ -1,3 +1,4 @@
+const { parse } = require("./parse");
 const globals = require("./globals");
 const _Boolean = require("./stdlib/types/Boolean");
 const {
@@ -8,9 +9,9 @@ const {
 } = require("./environment");
 const { ArithTypeError } = require("./errors");
 const globalEnv = setEnv(globals);
-const { parse } = require("./parse");
+const moduleEnv = createEnv(globalEnv);
 
-const evaluate = (node, env = globalEnv) => {
+const evaluate = (node, env = moduleEnv) => {
   switch (node.type) {
     case "Program":
       return evalBlock(node.body);

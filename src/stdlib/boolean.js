@@ -1,5 +1,10 @@
 const _Boolean = require("./types/Boolean");
 
+// boolean constructor
+function bool(value) {
+  return new _Boolean(value);
+}
+
 // boolean expression functions
 function and(...exprs) {
   for (expr of exprs) {
@@ -37,6 +42,7 @@ function not(expr) {
 }
 
 module.exports = {
+  bool,
   and,
   or,
   not,

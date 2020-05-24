@@ -31,7 +31,7 @@ const DecimalLiteral = ({ value }) => `number(${value})`;
 
 const BooleanLiteral = ({ value }) => `bool(${value})`;
 
-const StringLiteral = ({ value }) => `"${value}"`;
+const StringLiteral = ({ value }) => `string(${value})`;
 
 const Identifier = (node, env = globalEnv) => {
   let name = "";

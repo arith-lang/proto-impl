@@ -13,12 +13,12 @@ const transpile = (node, env = globalEnv) => {
   }
 };
 
-const transpileBlock = (node) => {
+const transpileBlock = (block) => {
   let i = 0;
   let code = "";
-  while (i < node.body.length) {
-    if (node.body[i]) {
-      code += transpile(node.body[i]) + "\n";
+  while (i < block.length) {
+    if (block[i]) {
+      code += transpile(block[i]) + "\n";
     }
     i += 1;
   }
@@ -110,6 +110,7 @@ const makeVar = (name) => {
 };
 
 const emit = {
+  Program,
   DecimalLiteral,
   StringLiteral,
   BooleanLiteral,

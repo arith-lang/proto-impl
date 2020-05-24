@@ -25,8 +25,6 @@ const transpileProgram = (prog) => {
   return code;
 };
 
-const returnValue = ({ value }) => `${value}`;
-
 const DecimalLiteral = ({ value }) => `number(${value})`;
 
 const BooleanLiteral = ({ value }) => `bool(${value})`;

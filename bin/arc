@@ -7,7 +7,7 @@ const { transpile } = require("../src/transpile");
 const libDir = path.join(__dirname, "../src/stdlib/");
 const libFiles = fs.readdirSync(libDir);
 let libText = "";
-console.log(libFiles);
+
 libFiles.forEach((file) => {
   if (file !== "types") {
     libText += fs

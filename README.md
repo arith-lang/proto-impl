@@ -38,6 +38,8 @@ Now I'm on a mission to bring the power and elegance of Lisp to the web, while a
 
 Start by cloning the repo: `git clone https://github.com/jasonsbarr/arith.git <directory>`.
 
+Install dependencies with `npm install`.
+
 You'll need to run `npm link` from the project directory if you want the commands to be available in your global path.
 
 To see all commands and options, use `arith help`.

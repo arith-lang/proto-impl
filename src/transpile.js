@@ -1,3 +1,4 @@
+const { parse } = require("./parse");
 const globals = require("./globals");
 const { setEnv, getValue, getIdentifier } = require("./environment");
 
@@ -12,18 +13,20 @@ const transpile = (node, env = globalEnv) => {
   }
 };
 
-const transpileProgram = (prog) => {
+const transpileBlock = (node) => {
   let i = 0;
   let code = "";
-  while (i < prog.body.length) {
-    if (prog.body[i]) {
-      code += transpile(prog.body[i]) + "\n";
+  while (i < node.body.length) {
+    if (node.body[i]) {
+      code += transpile(node.body[i]) + "\n";
     }
     i += 1;
   }
 
   return code;
 };
+
+const Program = ({ body }) => transpileBlock(body);
 
 const DecimalLiteral = ({ value }) => `number(${value})`;
 
@@ -82,7 +85,7 @@ const LambdaExpression = (node, env = globalEnv) => {
     if (i + 1 < a.length) code += ", ";
   });
   code += ") { ";
-  code += "return " + transpile(node.body);
+  code += "return " + transpileBlock(node.body);
   code += " })\n";
 
   return code;
@@ -107,8 +110,7 @@ const makeVar = (name) => {
 };
 
 const emit = {
-  IntegerLiteral,
-  FloatLiteral,
+  DecimalLiteral,
   StringLiteral,
   BooleanLiteral,
   Identifier,
@@ -119,4 +121,4 @@ const emit = {
   IfExpression,
 };
 
-module.exports = { transpile, transpileProgram };
+module.exports = { transpile: (input) => transpile(parse(input)) };

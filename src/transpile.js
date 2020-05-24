@@ -28,7 +28,7 @@ const transpileBlock = (block) => {
 
 const Program = ({ body }) => transpileBlock(body);
 
-const DecimalLiteral = ({ value }) => `number(${value})`;
+const DecimalLiteral = ({ value }) => `decimal(${value})`;
 
 const BooleanLiteral = ({ value }) => `bool(${value})`;
 

@@ -28,19 +28,20 @@ const transpileBlock = (block) => {
 
 const Program = ({ body }) => transpileBlock(body);
 
-const DecimalLiteral = ({ value }) => `decimal(${value})`;
+const DecimalLiteral = ({ value }) => `__arith__.decimal(${value})`;
 
-const BooleanLiteral = ({ value }) => `bool(${value})`;
+const BooleanLiteral = ({ value }) => `__arith__.bool(${value})`;
 
-const StringLiteral = ({ value }) => `string(${value})`;
+const StringLiteral = ({ value }) => `__arith__.string(${value})`;
 
 const Identifier = (node, env = globalEnv) => {
   let name = "";
 
   try {
-    name = getValue(node, env).name;
+    name = getIdentifier(node, env);
+    name = `__arith__["${name}"]`;
   } catch (e) {
-    name = getIdentifier(node, env) || makeVar(node.name);
+    name = makeVar(node.name);
   }
 
   return name;
@@ -50,7 +51,8 @@ const CallExpression = (node, env = globalEnv) => {
   let name = "";
 
   try {
-    name = getValue(node, env).name;
+    name = getIdentifier(node, env);
+    name = `__arith__["${name}"]`;
   } catch (e) {
     name = makeVar(node.name);
   }

@@ -211,10 +211,10 @@ describe("The parser function", () => {
     expect(parseExpr(tokenize(input))).toEqual(ast);
   });
 
-  it("Should correctly parse a DefinitionExpression", () => {
+  it("Should correctly parse a VariableDefinition", () => {
     const input = `(define x 7)`;
     const ast = {
-      type: "DefinitionExpression",
+      type: "VariableDefinition",
       name: "x",
       value: {
         type: "DecimalLiteral",
@@ -513,7 +513,7 @@ describe("The parser function", () => {
     `;
 
     const ast = {
-      type: "DefinitionExpression",
+      type: "VariableDefinition",
       name: "add2",
       value: {
         type: "LambdaExpression",
@@ -596,7 +596,7 @@ describe("The parser function", () => {
     `;
 
     const ast = {
-      type: "DefinitionExpression",
+      type: "VariableDefinition",
       name: "identity",
       value: {
         type: "LambdaExpression",

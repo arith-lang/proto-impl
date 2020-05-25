@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { transpile } = require("../src/transpile");
+const { compile } = require("../src/compile");
 
 const lib = `const __arith__ = require("${path.join(
   __dirname,
@@ -13,7 +13,7 @@ const file = process.argv.slice(2)[0];
 
 const input = fs.readFileSync(file, "utf-8");
 
-const code = `${transpile(input)}\n`;
+const code = `${compile(input)}\n`;
 const newFile = `${file.split(".")[0]}.js`;
 
 fs.writeFileSync(newFile, `${lib + code}`);

@@ -130,4 +130,4 @@ const emit = {
   IfExpression,
 };
 
-module.exports = { transpile: (input) => transpile(parse(input)) };
+module.exports = { compile: (input) => transpile(parse(input)) };

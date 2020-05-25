@@ -51,4 +51,7 @@ class _String extends String {
   }
 }
 
+_String.prototype.isEqv = _String.prototype.isEq;
+_String.prototype.isEqual = _String.prototype.isEq;
+
 module.exports = _String;

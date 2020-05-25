@@ -1,5 +1,4 @@
-const Decimal = require("decimal.js");
-const _Decimal = require("./types/Decimal");
+const Decimal = require("./types/Decimal");
 const { all } = require("./utils");
 
 // Create a new _Number
@@ -8,11 +7,11 @@ function decimal(value) {
   if (value[0] === "#") {
     value = value.replace("#", "0");
   }
-  return new _Decimal(value);
+  return new Decimal(value);
 }
 
 // mathematical constants
-const PI = _Decimal.acos(-1);
+const PI = Decimal.acos(-1);
 
 // mathematical functions
 // const add = all((a, c) => a + c);
@@ -25,15 +24,15 @@ function sub(...args) {
 }
 
 function mul(...args) {
-  return all((a, c) => _Decimal.mul(a, c))(...args);
+  return all((a, c) => Decimal.mul(a, c))(...args);
 }
 
 function div(...args) {
-  return all((a, c) => _Decimal.div(a, c))(...args);
+  return all((a, c) => Decimal.div(a, c))(...args);
 }
 
 function mod(...args) {
-  return all((a, c) => _Decimal.mod(a, c))(...args);
+  return all((a, c) => Decimal.mod(a, c))(...args);
 }
 
 function floorDiv(...args) {
@@ -42,15 +41,15 @@ function floorDiv(...args) {
 }
 
 function max(...args) {
-  return _Decimal.max(...args);
+  return Decimal.max(...args);
 }
 
 function min(...args) {
-  return _Decimal.min(...args);
+  return Decimal.min(...args);
 }
 
 function pow(x, y) {
-  return _Decimal.pow(x, y);
+  return Decimal.pow(x, y);
 }
 
 function round(x) {
@@ -67,8 +66,7 @@ function floor(x) {
 
 // numeric comparisons
 function eq(x, y) {
-  x instanceof _Decimal;
-  return x.equals(y);
+  return y instanceof Decimal && x.equals(y);
 }
 
 function lt(x, y) {

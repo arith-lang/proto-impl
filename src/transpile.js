@@ -95,7 +95,7 @@ const LambdaExpression = (node, env = globalEnv) => {
 
 const IfExpression = (node, env = globalEnv) => {
   let code = "(";
-  code += transpile(node.condition, env) !== false;
+  code += transpile(node.condition, env) + " !== false ";
   code += " ? ";
   code += transpile(node.then, env);
   code += " : ";

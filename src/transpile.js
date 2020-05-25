@@ -87,7 +87,13 @@ const LambdaExpression = (node, env = globalEnv) => {
     if (i + 1 < a.length) code += ", ";
   });
   code += ") { ";
-  code += "return " + transpileBlock(node.body);
+  node.body.forEach((item, i, a) => {
+    if (i + 1 === a.length) {
+      code += `\nreturn ${transpile(item)}`;
+    } else {
+      code += transpile(item);
+    }
+  });
   code += " })\n";
 
   return code;

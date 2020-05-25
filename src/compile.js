@@ -101,7 +101,10 @@ const LambdaExpression = (node, env = globalEnv) => {
 
 const IfExpression = (node, env = globalEnv) => {
   let code = "(";
-  code += compile(node.condition, env) + " !== false ";
+  code +=
+    `!__arith__.shouldReturnFalse(` +
+    compile(node.condition, env) +
+    ") ";
   code += " ? ";
   code += compile(node.then, env);
   code += " : ";

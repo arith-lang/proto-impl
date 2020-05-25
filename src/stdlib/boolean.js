@@ -5,6 +5,11 @@ function bool(value) {
   return new _Boolean(value);
 }
 
+// check if new _Boolean should return false
+function shouldReturnFalse(value) {
+  return _Boolean.shouldReturnFalse(value);
+}
+
 // boolean expression functions
 function and(...exprs) {
   for (expr of exprs) {
@@ -43,6 +48,7 @@ function not(expr) {
 
 module.exports = {
   bool,
+  shouldReturnFalse,
   and,
   or,
   not,

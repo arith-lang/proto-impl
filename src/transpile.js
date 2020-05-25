@@ -32,7 +32,7 @@ const DecimalLiteral = ({ value }) => `__arith__.decimal(${value})`;
 
 const BooleanLiteral = ({ value }) => `__arith__.bool(${value})`;
 
-const StringLiteral = ({ value }) => `__arith__.string(${value})`;
+const StringLiteral = ({ value }) => `__arith__.string("${value}")`;
 
 const Identifier = (node, env = globalEnv) => {
   let name = "";

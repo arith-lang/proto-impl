@@ -1,6 +1,9 @@
 const _String = require("./types/String");
+const Decimal = require("./types/Decimal");
+const Char = require("./types/Char");
 const { all } = require("./utils");
 const { list } = require("./list");
+const _Boolean = require("./types/Boolean");
 
 // string constructor
 function string(value) {
@@ -9,59 +12,59 @@ function string(value) {
 
 // string utilities
 function strlen(str) {
-  str.length;
+  return new Decimal(str.length);
 }
 
 function upper(str) {
-  return str.toUpperCase();
+  return string(str.toUpperCase());
 }
 function lower(str) {
-  return str.toLowerCase();
+  return string(str.toLowerCase());
 }
 
 function strAppend(...args) {
-  return all((a, s) => a + s)(...args);
+  return string(all((a, s) => a + s)(...args));
 }
 
 function strRepeat(str, num) {
-  return str.repeat(num);
+  return string(str.repeat(num));
 }
 
 function strRef(str, i) {
-  return str[i];
+  return new Char(str[i]);
 }
 
 function substring(str, start, end) {
-  return str.slice(start, end);
+  return string(str.slice(start, end));
 }
 
 function makeString(num, char) {
-  return char.repeat(num);
+  return string(char.repeat(num));
 }
 
 function stringCopy(str) {
-  return substring(str, 0);
+  return string(substring(str, 0));
 }
 
 function stringTrim(str) {
-  return str.trim();
+  return string(str.trim());
 }
 
 function stringJoin(sep, ...strs) {
-  return strs.join(sep);
+  return string(strs.join(sep));
 }
 
 function stringReplace(str, toReplace, replaceWith) {
-  return str.replace(toReplace, replaceWith);
+  return string(str.replace(toReplace, replaceWith));
 }
 
 // to list and array
 function stringToList(str) {
-  return list(...str);
+  return str.toCharList();
 }
 
 function stringToArray(str) {
-  return [...str];
+  return str.toCharArray();
 }
 
 // string comparisons
@@ -70,24 +73,39 @@ function strEq(str1, str2) {
 }
 
 function strLt(str1, str2) {
-  str1 < str2;
+  if (str1 < str2) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 function strLte(str1, str2) {
-  return str1 <= str2;
+  if (str1 <= str2) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 function strGt(str1, str2) {
-  return str1 > str2;
+  if (str1 > str2) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 function strGte(str1, str2) {
-  return str1 >= str2;
+  if (str1 >= str2) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 // string predicate
 function isString(obj) {
-  return _String.isString(obj);
+  if (_String.isString(obj)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 module.exports = {

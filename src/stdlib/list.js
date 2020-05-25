@@ -1,12 +1,13 @@
 const Nil = require("./types/Nil");
 const Cons = require("./types/Cons");
+const _Boolean = require("./types/Boolean");
 
 const nil = new Nil();
 const empty = nil;
 
 // pair constructor
 function cons(car, cdr) {
-  if (!car || isNull(car)) {
+  if (!car || isNullNative(car)) {
     return nil;
   }
 
@@ -38,26 +39,33 @@ function cdr(lst) {
 }
 
 // basic predicates
-function isNull(obj) {
+function isNullNative(obj) {
   return obj.constructor && obj.constructor.name === "Nil";
 }
 
-const isEmpty = isNull;
+function isNull(obj) {
+  if (obj.constructor && obj.constructor.name === "Nil") {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
+const isEmpty = isNullNative;
 
 function isPair(obj) {
   return obj.constructor && obj.constructor.name === "Cons";
 }
 
 function isList(obj) {
-  if (isNull(obj)) {
+  if (isNullNative(obj)) {
     return true;
   } else if (isPair(obj) === false) {
     return false;
   }
   let head = car(obj);
   let tail = cdr(obj);
-  while (!isNull(tail)) {
-    if (isPair(tail) && !isPair(tail[1]) && !isNull(tail[1])) {
+  while (!isNullNative(tail)) {
+    if (isPair(tail) && !isPair(tail[1]) && !isNullNative(tail[1])) {
       return false;
     }
     head = car(tail);
@@ -68,7 +76,7 @@ function isList(obj) {
 
 // list helpers
 function length(lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return 0;
   }
   let head = car(lst);
@@ -76,7 +84,7 @@ function length(lst) {
   let len = 0;
   while (head) {
     len += 1;
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(tail);
       tail = cdr(tail);
     } else {
@@ -97,7 +105,7 @@ function append(...lists) {
     let tail = cdr(lst);
     while (head) {
       temp.push(head);
-      if (!isNull(tail)) {
+      if (!isNullNative(tail)) {
         head = car(tail);
         tail = cdr(tail);
       } else {
@@ -111,7 +119,7 @@ function append(...lists) {
 const concat = append;
 
 function copy(lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil;
   }
   const temp = toArray(lst);
@@ -119,7 +127,7 @@ function copy(lst) {
 }
 
 function reverse(lst) {
-  if (isNull(lst) || length(lst) === 1) {
+  if (isNullNative(lst) || length(lst) === 1) {
     return lst;
   }
   let temp = [];
@@ -127,7 +135,7 @@ function reverse(lst) {
   let tail = cdr(lst);
   while (head) {
     temp.unshift(head);
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(lst);
       tail = cdr(lst);
     } else {
@@ -139,7 +147,7 @@ function reverse(lst) {
 
 // list iterators
 function map(fn, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil;
   } else {
     let temp = toArray(lst);
@@ -152,14 +160,14 @@ function map(fn, lst) {
 }
 
 function foldl(fn, accum, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return accum;
   }
   let head = car(lst);
   let tail = cdr(lst);
   while (head) {
     accum = fn(accum, head);
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(tail);
       tail = cdr(tail);
     } else {
@@ -180,14 +188,14 @@ function foldr(fn, accum, lst) {
 const reduceRight = foldr;
 
 function foreach(fn, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil;
   }
   let head = car(lst);
   let tail = cdr(lst);
   while (head) {
     fn(head);
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(tail);
       tail = cdr(tail);
     } else {
@@ -199,14 +207,14 @@ function foreach(fn, lst) {
 // conversion functions
 function toArray(lst) {
   let arr = [];
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil;
   }
   let head = car(lst);
   let tail = cdr(lst);
   while (head) {
     arr.push(head);
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(tail);
       tail = cdr(tail);
     } else {
@@ -217,7 +225,7 @@ function toArray(lst) {
 }
 
 function toString(lst, n) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil.toString();
   } else if (isPair(lst) && !isList(lst)) {
     return lst.toString();
@@ -245,7 +253,7 @@ function toString(lst, n) {
 
 // filtering, removing, sorting, and searching
 function filter(pred, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil;
   }
   let temp = toArray(lst);
@@ -260,7 +268,7 @@ function filter(pred, lst) {
 }
 
 function reject(pred, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return nil;
   }
   let temp = toArray(lst);
@@ -285,7 +293,7 @@ function remove(item, lst) {
 }
 
 function sort(lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return lst;
   }
   const temp = toArray(lst);
@@ -294,7 +302,7 @@ function sort(lst) {
 }
 
 function sortBy(compare, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return lst;
   }
   const temp = toArray(lst);
@@ -303,7 +311,7 @@ function sortBy(compare, lst) {
 }
 
 function member(item, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return lst;
   }
   const temp = toArray(lst);
@@ -315,7 +323,7 @@ function member(item, lst) {
 }
 
 function find(pred, list) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return lst;
   }
   const temp = toArray(lst);
@@ -333,7 +341,7 @@ function listRef(pos, lst) {
   let head = car(lst);
   let tail = cdr(lst);
   while (c < pos) {
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(tail);
       tail = cdr(tail);
       c++;
@@ -350,7 +358,7 @@ function listTail(pos, lst) {
   let head = car(lst);
   let tail = cdr(lst);
   while (c < pos - 1) {
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(lst);
       tail = cdr(lst);
       c++;
@@ -405,7 +413,7 @@ function last(lst) {
 
 // take and drop
 function take(num, lst) {
-  if (isNull(lst)) {
+  if (isNullNative(lst)) {
     return lst;
   }
   let temp = [];
@@ -414,7 +422,7 @@ function take(num, lst) {
   let c = 0;
   while (head && c < num) {
     temp.push(head);
-    if (!isNull(tail)) {
+    if (!isNullNative(tail)) {
       head = car(tail);
       tail = cdr(tail);
       c++;
@@ -426,7 +434,7 @@ function take(num, lst) {
 }
 
 function drop(num, lst) {
-  if (isNull(lst) || length(lst) <= num) {
+  if (isNullNative(lst) || length(lst) <= num) {
     return nil;
   }
   let temp1 = toArray(lst);
@@ -441,6 +449,7 @@ module.exports = {
   list,
   car,
   cdr,
+  "null-native?": isNullNative,
   "null?": isNull,
   "empty?": isEmpty,
   "pair?": isPair,

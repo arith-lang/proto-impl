@@ -192,20 +192,6 @@ function vectorDrop(num, vec) {
   return vector(...L.drop(num, vec));
 }
 
-// range
-function vectorRange(...args) {
-  if (args.length === 1) {
-    let range = L.range(0, args[0]);
-  } else if (args.length === 2) {
-    let range = L.range(args[0], args[1]);
-  } else {
-    throw new RangeError(
-      "Invalid arguments to vector-range function",
-    );
-  }
-  return vector(...range);
-}
-
 module.exports = {
   vector,
   "vector?": isVector,
@@ -242,5 +228,4 @@ module.exports = {
   "vector-last": vectorLast,
   "vector-take": vectorTake,
   "vector-drop": vectorDrop,
-  "vector-range": vectorRange,
 };

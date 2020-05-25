@@ -1,0 +1,6 @@
+(define inc
+  (lambda (x)
+    (define y 1)
+    (+ x y)))
+
+(print (inc 10))

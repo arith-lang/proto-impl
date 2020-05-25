@@ -2,42 +2,18 @@
 
 const fs = require("fs");
 const path = require("path");
-const {
-  tokenizeAndParseProgram,
-} = require("../src/parse-and-evaluate");
-const { transpileProgram } = require("../src/transpile");
+const { compile } = require("../src/compile");
 
-const libDir = path.join(__dirname, "../src/stdlib/");
-const libFiles = fs.readdirSync(libDir);
-let libText = "";
-
-libFiles.forEach((file) => {
-  libText += fs
-    .readFileSync(libDir + file, "utf8")
-    .split("module.exports")[0];
-});
-
-let libArr = libText.split("\n");
-let lib = "";
-
-// remove require statements to eliminate duplicate names
-for (let i = 0; i < libArr.length; i++) {
-  if (libArr[i].includes("require")) {
-    continue;
-  }
-  lib += libArr[i] + "\n";
-}
-
-lib = `const readlineSync = require("readline-sync");\n` + lib;
-lib = `const L = require("list");\n` + lib;
-lib = `const fs = require("fs");\n` + lib;
-lib = `const path = require("path");\n` + lib;
+const lib = `const __arith__ = require("${path.join(
+  __dirname,
+  "../src/globals",
+)}");\n\n`;
 
 const file = process.argv.slice(2)[0];
 
 const input = fs.readFileSync(file, "utf-8");
 
-const code = `${transpileProgram(tokenizeAndParseProgram(input))}\n`;
+const code = `${compile(input)}\n`;
 const newFile = `${file.split(".")[0]}.js`;
 
 fs.writeFileSync(newFile, `${lib + code}`);

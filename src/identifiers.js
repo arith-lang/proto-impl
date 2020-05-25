@@ -1,6 +1,7 @@
 // constants
-const INTEGER = /^[+-]?[0-9]+$/;
-const FLOAT = /^[-+]?[0-9]+\.[0-9]+$/;
+const DIGIT = /[0-9]/;
+const INTEGER = /^[+-]?#?[o|b|x]?[0-9]+$/;
+const FLOAT = /^[-+]?#?[0-9]+\.[0-9]+([eE][-+]?[0-9]+)?$/;
 const WHITESPACE = /\s+/;
 const LETTER = /[A-Za-z]/;
 const VALID_SPECIAL_CHARS = [
@@ -15,18 +16,45 @@ const VALID_SPECIAL_CHARS = [
   "*",
   "+",
   "/",
-  "\\",
+  "|",
   ">",
   "<",
   "^",
+  "@",
+  ":",
+  ".",
 ];
+const KEYWORDS = [
+  "#t",
+  "#f",
+  "nil",
+  "if",
+  "cond",
+  "else",
+  "lambda",
+  "define",
+  "let",
+  "type",
+  "class",
+  "struct",
+  "union",
+  "enum",
+  "require",
+  "provide",
+  "module",
+];
+const PUNCTUATION = [",", "[", "]", "{", "}", "'", ".", "`"];
 
 // token identifiers
+const isDigit = (char) => DIGIT.test(char);
+
 const isInteger = (str) => INTEGER.test(str);
 
 const isFloat = (str) => FLOAT.test(str);
 
-const isLetter = (char) => LETTER.test(char);
+const isLetter = (char) => {
+  return char != undefined && LETTER.test(char);
+};
 
 const isValidSpecialChar = (char) =>
   VALID_SPECIAL_CHARS.includes(char);
@@ -48,18 +76,27 @@ const isRightParen = (char) => char === ")";
 const isParen = (char) => isLeftParen(char) || isRightParen(char);
 
 const isEndOfInput = (input, pos) =>
-  pos >= input.length || input[pos] == undefined;
+  pos > -1 && input[pos] == undefined;
 
 const isSeparator = (char) =>
   isWhitespace(char) || isComma(char) || isParen(char);
 
-const isQuote = (char) => char === '"';
+const isDoubleQuote = (char) => char === '"';
 
 const isSemicolon = (char) => char === ";";
 
 const isEndOfLine = (char) => char === "\n";
 
+const isKeyword = (word) => KEYWORDS.includes(word);
+
+const isPunctuation = (char) => PUNCTUATION.includes(char);
+
+const isHash = (char) => char === "#";
+
+const isPlusOrMinus = (char) => char === "+" || char === "-";
+
 module.exports = {
+  isDigit,
   isInteger,
   isFloat,
   isLetter,
@@ -74,7 +111,11 @@ module.exports = {
   isParen,
   isSeparator,
   isEndOfInput,
-  isQuote,
+  isDoubleQuote,
   isSemicolon,
   isEndOfLine,
+  isKeyword,
+  isPunctuation,
+  isHash,
+  isPlusOrMinus,
 };

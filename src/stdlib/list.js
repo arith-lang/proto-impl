@@ -1,13 +1,19 @@
-// let nil = empty array
-const nil = [];
+const Nil = require("./types/Nil");
+const Cons = require("./types/Cons");
+
+const nil = new Nil();
 const empty = nil;
 
 // pair constructor
 function cons(car, cdr) {
+  if (!car || isNull(car)) {
+    return nil;
+  }
+
   if (!cdr) {
     cdr = nil;
   }
-  return [car, cdr];
+  return new Cons(car, cdr);
 }
 
 // list constructor
@@ -15,41 +21,49 @@ function list(...args) {
   if (!args.length) {
     return nil;
   }
-  const [head, ...tail] = args;
-  return cons(head, list(...tail));
+  let l = cons(args.pop(), nil);
+  while (args.length) {
+    l = cons(args.pop(), l);
+  }
+  return l;
 }
 
 // pair accessors
-function car(list) {
-  return list[0];
+function car(lst) {
+  return lst[0];
 }
 
-function cdr(list) {
-  const [, [...rest]] = list;
-  return rest;
+function cdr(lst) {
+  return lst[1];
 }
 
 // basic predicates
 function isNull(obj) {
-  return obj instanceof Array && obj.length === 0;
+  return obj.constructor && obj.constructor.name === "Nil";
 }
 
 const isEmpty = isNull;
 
 function isPair(obj) {
-  return obj instanceof Array && obj.length === 2;
+  return obj.constructor && obj.constructor.name === "Cons";
 }
 
 function isList(obj) {
   if (isNull(obj)) {
     return true;
-  } else if (obj instanceof Array === false) {
-    return false;
-  } else if (isPair(obj) && obj[1] instanceof Array === false) {
+  } else if (isPair(obj) === false) {
     return false;
   }
-  const [head, [...tail]] = obj;
-  return isList(tail);
+  let head = car(obj);
+  let tail = cdr(obj);
+  while (!isNull(tail)) {
+    if (isPair(tail) && !isPair(tail[1]) && !isNull(tail[1])) {
+      return false;
+    }
+    head = car(tail);
+    tail = cdr(tail);
+  }
+  return true;
 }
 
 // list helpers
@@ -57,20 +71,35 @@ function length(lst) {
   if (isNull(lst)) {
     return 0;
   }
-  const temp = toArray(lst);
-  return temp.length;
+  let head = car(lst);
+  let tail = cdr(lst);
+  let len = 0;
+  while (head) {
+    len += 1;
+    if (!isNull(tail)) {
+      head = car(tail);
+      tail = cdr(tail);
+    } else {
+      head = null;
+    }
+  }
+  return len;
 }
 
-const prepend = cons;
+function prepend(item, lst) {
+  return cons(item, lst);
+}
 
 function append(...lists) {
   let temp = [];
   for (lst of lists) {
-    let [head, [...tail]] = lst;
+    let head = car(lst);
+    let tail = cdr(lst);
     while (head) {
       temp.push(head);
       if (!isNull(tail)) {
-        [head, ...[tail]] = tail;
+        head = car(tail);
+        tail = cdr(tail);
       } else {
         head = null;
       }
@@ -94,11 +123,13 @@ function reverse(lst) {
     return lst;
   }
   let temp = [];
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (head) {
     temp.unshift(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(lst);
+      tail = cdr(lst);
     } else {
       head = null;
     }
@@ -111,8 +142,12 @@ function map(fn, lst) {
   if (isNull(lst)) {
     return nil;
   } else {
-    const [head, [...tail]] = lst;
-    return cons(fn(head), map(fn, tail));
+    let temp = toArray(lst);
+    let l = cons(fn(temp.pop()), nil);
+    while (temp.length) {
+      l = cons(fn(temp.pop()), l);
+    }
+    return l;
   }
 }
 
@@ -120,8 +155,18 @@ function foldl(fn, accum, lst) {
   if (isNull(lst)) {
     return accum;
   }
-  const [head, [...tail]] = lst;
-  return foldl(fn, fn(accum, head), tail);
+  let head = car(lst);
+  let tail = cdr(lst);
+  while (head) {
+    accum = fn(accum, head);
+    if (!isNull(tail)) {
+      head = car(tail);
+      tail = cdr(tail);
+    } else {
+      head = null;
+    }
+  }
+  return accum;
 }
 
 const fold = foldl;
@@ -138,29 +183,32 @@ function foreach(fn, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (head) {
     fn(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
     } else {
       head = null;
     }
   }
-  return nil;
 }
 
 // conversion functions
 function toArray(lst) {
   let arr = [];
   if (isNull(lst)) {
-    return arr;
+    return nil;
   }
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (head) {
     arr.push(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
     } else {
       head = null;
     }
@@ -170,7 +218,9 @@ function toArray(lst) {
 
 function toString(lst, n) {
   if (isNull(lst)) {
-    return `'()`;
+    return nil.toString();
+  } else if (isPair(lst) && !isList(lst)) {
+    return lst.toString();
   }
   let arr = toArray(lst);
   let str = "";
@@ -198,22 +248,30 @@ function filter(pred, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  const [head, [...tail]] = lst;
-  if (pred(head) !== false) {
-    return cons(head, filter(pred, tail));
+  let temp = toArray(lst);
+  let l = nil;
+  while (temp.length) {
+    let i = temp.pop();
+    if (pred(i) !== false) {
+      l = cons(i, l);
+    }
   }
-  return filter(pred, tail);
+  return l;
 }
 
 function reject(pred, lst) {
   if (isNull(lst)) {
     return nil;
   }
-  const [head, [...tail]] = lst;
-  if (pred(head) === false) {
-    return cons(head, filter(pred, tail));
+  let temp = toArray(lst);
+  let l = nil;
+  while (temp.length) {
+    let i = temp.pop();
+    if (pred(i) === false) {
+      l = cons(i, l);
+    }
   }
-  return reject(pred, tail);
+  return l;
 }
 
 function remove(item, lst) {
@@ -272,10 +330,12 @@ const tail = cdr;
 
 function listRef(pos, lst) {
   let c = 0;
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (c < pos) {
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
       c++;
     }
     throw new ReferenceError(
@@ -287,10 +347,12 @@ function listRef(pos, lst) {
 
 function listTail(pos, lst) {
   let c = 0;
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   while (c < pos - 1) {
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(lst);
+      tail = cdr(lst);
       c++;
     } else {
       throw new ReferenceError(
@@ -347,12 +409,14 @@ function take(num, lst) {
     return lst;
   }
   let temp = [];
-  let [head, [...tail]] = lst;
+  let head = car(lst);
+  let tail = cdr(lst);
   let c = 0;
   while (head && c < num) {
     temp.push(head);
     if (!isNull(tail)) {
-      [head, [...tail]] = tail;
+      head = car(tail);
+      tail = cdr(tail);
       c++;
     } else {
       head = null;
@@ -368,21 +432,6 @@ function drop(num, lst) {
   let temp1 = toArray(lst);
   let temp2 = temp1.slice(num);
   return list(...temp2);
-}
-
-// range
-function range(...args) {
-  if (args.length === 1) {
-    let range = Array.from(new Array(args[0]), (c, i) => i);
-    return list(...range);
-  } else if (args.length === 2) {
-    let range = Array.from(
-      new Array(args[1] - 1),
-      (c, i) => i + args[0],
-    );
-    return list(...range);
-  }
-  throw new RangeError("Invalid arguments to range function");
 }
 
 module.exports = {
@@ -433,5 +482,4 @@ module.exports = {
   last,
   take,
   drop,
-  range,
 };

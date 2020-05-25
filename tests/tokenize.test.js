@@ -9,8 +9,11 @@ describe("Tokenize the input stream", () => {
     const input = "2";
     const result = [
       {
-        type: "INTEGER",
-        value: 2,
+        type: "DECIMAL",
+        value: "2",
+        end: 2,
+        line: 1,
+        start: 1,
       },
     ];
 
@@ -21,8 +24,11 @@ describe("Tokenize the input stream", () => {
     const input = "249102";
     const result = [
       {
-        type: "INTEGER",
-        value: 249102,
+        type: "DECIMAL",
+        value: "249102",
+        end: 7,
+        line: 1,
+        start: 1,
       },
     ];
 
@@ -33,8 +39,11 @@ describe("Tokenize the input stream", () => {
     const input = "31.1415";
     const result = [
       {
-        type: "FLOAT",
-        value: 31.1415,
+        type: "DECIMAL",
+        value: "31.1415",
+        end: 8,
+        line: 1,
+        start: 1,
       },
     ];
 
@@ -61,6 +70,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "abcdefg",
+        end: 7,
+        line: 1,
+        start: 0,
       },
     ];
 
@@ -73,6 +85,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "_abcdefg",
+        end: 8,
+        line: 1,
+        start: 0,
       },
     ];
 
@@ -85,6 +100,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "IDENTIFIER",
         value: "$abcdefg",
+        end: 8,
+        line: 1,
+        start: 0,
       },
     ];
 
@@ -92,20 +110,46 @@ describe("Tokenize the input stream", () => {
   });
 
   it("Should tokenize a string starting with a valid beginning character and containing valid special characters as an identifier", () => {
-    const input = "_-$%&!?*+/\\>^<";
+    const input = "_-$%&!?*+/>^<";
     const result = [
       {
         type: "IDENTIFIER",
-        value: "_-$%&!?*+/\\>^<",
+        value: "_-$%&!?*+/>^<",
+        end: 13,
+        line: 1,
+        start: 0,
       },
     ];
 
     expect(tokenize(input)).toEqual(result);
   });
 
+  it("Should correctly tokenize a punctuation mark", () => {
+    const input = "'";
+    const result = [
+      { type: "PUNC", value: "'", end: 1, line: 1, start: 0 },
+    ];
+    expect(tokenize(input)).toEqual(result);
+  });
+
+  it("Should correctly tokenize a punctuation mark followed by an identifier", () => {
+    const input = "'symbol";
+    const result = [
+      { type: "PUNC", value: "'", end: 1, line: 1, start: 0 },
+      {
+        type: "IDENTIFIER",
+        value: "symbol",
+        end: 7,
+        line: 1,
+        start: 1,
+      },
+    ];
+    expect(tokenize(input)).toEqual(result);
+  });
+
   it("Should throw an error when an identifier contains invalid characters", () => {
     expect(() => {
-      tokenize("_:");
+      tokenize("_#");
     }).toThrow();
   });
 
@@ -121,6 +165,9 @@ describe("Tokenize the input stream", () => {
       {
         type: "STRING",
         value: "This is a string",
+        end: 18,
+        line: 1,
+        start: 2,
       },
     ];
 
@@ -130,38 +177,34 @@ describe("Tokenize the input stream", () => {
   it("Should correctly tokenize the next token after a string literal", () => {
     const input = '"A string" 3.14';
     const result = [
-      { type: "STRING", value: "A string" },
-      { type: "FLOAT", value: 3.14 },
+      {
+        type: "STRING",
+        value: "A string",
+        end: 10,
+        line: 1,
+        start: 2,
+      },
+      { type: "DECIMAL", value: "3.14", end: 16, line: 1, start: 12 },
     ];
 
     expect(tokenize(input)).toEqual(result);
   });
 
-  it("Should correctly tokenize a boolean literal", () => {
-    const input1 = "false";
-    const result1 = [{ type: "BOOLEAN", value: false }];
-    const input2 = "true";
-    const result2 = [{ type: "BOOLEAN", value: true }];
-
-    expect(tokenize(input1)).toEqual(result1);
-    expect(tokenize(input2)).toEqual(result2);
-  });
-
   it("Should correctly tokenize consecutive (not nested) expressions", () => {
     const input = `
       "Hello"
-      true
+      #t
       (add 2 3)
     `;
 
     const result = [
-      { type: "STRING", value: "Hello" },
-      { type: "BOOLEAN", value: true },
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "add" },
-      { type: "INTEGER", value: 2 },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: ")" },
+      { type: "STRING", value: "Hello", end: 12, line: 2, start: 7 },
+      { type: "KEYWORD", value: "#t", end: 7, line: 3, start: 5 },
+      { type: "PAREN", value: "(", end: 6, line: 4, start: 5 },
+      { type: "IDENTIFIER", value: "add", end: 9, line: 4, start: 6 },
+      { type: "DECIMAL", value: "2", line: 4, start: 10, end: 11 },
+      { type: "DECIMAL", value: "3", line: 4, start: 12, end: 13 },
+      { type: "PAREN", value: ")", line: 4, start: 13, end: 14 },
     ];
 
     expect(tokenize(input)).toEqual(result);
@@ -171,11 +214,17 @@ describe("Tokenize the input stream", () => {
     const input = "(define x 3)";
 
     const result = [
-      { type: "PAREN", value: "(" },
-      { type: "IDENTIFIER", value: "define" },
-      { type: "IDENTIFIER", value: "x" },
-      { type: "INTEGER", value: 3 },
-      { type: "PAREN", value: ")" },
+      { type: "PAREN", value: "(", end: 1, line: 1, start: 0 },
+      {
+        type: "KEYWORD",
+        value: "define",
+        end: 7,
+        line: 1,
+        start: 1,
+      },
+      { type: "IDENTIFIER", value: "x", end: 9, line: 1, start: 8 },
+      { type: "DECIMAL", value: "3", end: 11, line: 1, start: 10 },
+      { type: "PAREN", value: ")", end: 12, line: 1, start: 11 },
     ];
 
     expect(tokenize(input)).toEqual(result);

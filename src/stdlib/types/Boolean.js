@@ -4,9 +4,6 @@ class _Boolean extends Boolean {
     super(bool);
     this.value = value;
     this.bool = bool;
-    this.isEq = this.isEq.bind(this);
-    this.isEqv = this.isEq;
-    this.isEqual = this.isEq;
   }
 
   static make(value) {
@@ -51,5 +48,8 @@ class _Boolean extends Boolean {
     return `${this.value}`;
   }
 }
+
+_Boolean.prototype.isEqv = _Boolean.prototype.isEq;
+_Boolean.prototype.isEqual = _Boolean.prototype.isEq;
 
 module.exports = _Boolean;

@@ -1,19 +1,20 @@
 const { compile } = require("../src/compile");
 const { setEnv } = require("../src/environment");
 
-describe.skip("Transpile to JavaScript", () => {
-  it("Should emit a decimal literal constructor", () => {
+describe("Transpile to JavaScript", () => {
+  it.skip("Should emit a decimal literal constructor", () => {
     const input = `17`;
     const code = "__arith__.decimal(17)";
 
     expect(compile(input)).toEqual(code);
   });
 
-  it("Should emit a float literal", () => {
+  it.skip("Should emit a float literal", () => {
     const input = `51.225`;
+    const code = `__arith__.decimal(51.225)`;
     console.log(compile(input));
 
-    expect(compile(input)).toEqual();
+    expect(compile(input)).toEqual(code);
   });
 
   it.skip("Should emit an identifier name", () => {

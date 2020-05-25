@@ -158,7 +158,7 @@ const parseDefine = (tokens) => {
   let token = pop(defineTokens);
 
   return {
-    type: "DefinitionExpression",
+    type: "VariableDefinition",
     name: token.value,
     value: parseExpr(defineTokens),
     start: {

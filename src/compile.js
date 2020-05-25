@@ -75,7 +75,7 @@ const KeywordExpression = (node, env = globalEnv) => {
   return CallExpression(node, env);
 };
 
-const DefinitionExpression = (node, env = globalEnv) => {
+const VariableDefinition = (node, env = globalEnv) => {
   let value = transpile(node.value, env);
   return `let ${makeVar(node.name)} = ${value};`;
 };
@@ -125,7 +125,7 @@ const emit = {
   Identifier,
   CallExpression,
   KeywordExpression,
-  DefinitionExpression,
+  VariableDefinition,
   LambdaExpression,
   IfExpression,
 };

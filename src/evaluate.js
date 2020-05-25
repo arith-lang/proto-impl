@@ -27,7 +27,7 @@ const evaluate = (node, env = moduleEnv) => {
       return getValue(node, env);
     case "CallExpression":
       return apply(node, env);
-    case "DefinitionExpression":
+    case "VariableDefinition":
       return define(node, env);
     case "LambdaExpression":
       return makeLambda(node, env);

@@ -4,7 +4,7 @@ const { setEnv, getValue, getIdentifier } = require("./environment");
 
 const globalEnv = setEnv(globals);
 
-const transpile = (node, env = globalEnv) => {
+const compile = (node, env = globalEnv) => {
   if (node) {
     return (
       emit[node.type](node, env) ||
@@ -13,12 +13,12 @@ const transpile = (node, env = globalEnv) => {
   }
 };
 
-const transpileBlock = (block) => {
+const compileBlock = (block) => {
   let i = 0;
   let code = "";
   while (i < block.length) {
     if (block[i]) {
-      code += transpile(block[i]) + "\n";
+      code += compile(block[i]) + "\n";
     }
     i += 1;
   }
@@ -26,7 +26,7 @@ const transpileBlock = (block) => {
   return code;
 };
 
-const Program = ({ body }) => transpileBlock(body);
+const Program = ({ body }) => compileBlock(body);
 
 const DecimalLiteral = ({ value }) => `__arith__.decimal(${value})`;
 
@@ -58,7 +58,7 @@ const CallExpression = (node, env = globalEnv) => {
   }
 
   let code = node.arguments.reduce((acc, c, i, a) => {
-    let tmp = acc + transpile(c);
+    let tmp = acc + compile(c);
     if (i + 1 < a.length) tmp += ", ";
 
     return tmp;
@@ -76,7 +76,7 @@ const KeywordExpression = (node, env = globalEnv) => {
 };
 
 const VariableDefinition = (node, env = globalEnv) => {
-  let value = transpile(node.value, env);
+  let value = compile(node.value, env);
   return `let ${makeVar(node.name)} = ${value};`;
 };
 
@@ -89,9 +89,9 @@ const LambdaExpression = (node, env = globalEnv) => {
   code += ") { ";
   node.body.forEach((item, i, a) => {
     if (i + 1 === a.length) {
-      code += `\nreturn ${transpile(item)}`;
+      code += `\nreturn ${compile(item)}`;
     } else {
-      code += transpile(item);
+      code += compile(item);
     }
   });
   code += " })\n";
@@ -101,11 +101,11 @@ const LambdaExpression = (node, env = globalEnv) => {
 
 const IfExpression = (node, env = globalEnv) => {
   let code = "(";
-  code += transpile(node.condition, env) + " !== false ";
+  code += compile(node.condition, env) + " !== false ";
   code += " ? ";
-  code += transpile(node.then, env);
+  code += compile(node.then, env);
   code += " : ";
-  code += transpile(node.else, env) + ")";
+  code += compile(node.else, env) + ")";
 
   return code;
 };
@@ -130,4 +130,4 @@ const emit = {
   IfExpression,
 };
 
-module.exports = { compile: (input) => transpile(parse(input)) };
+module.exports = { compile: (input) => compile(parse(input)) };

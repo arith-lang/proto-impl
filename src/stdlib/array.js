@@ -1,4 +1,5 @@
 const { nil } = require("./list");
+const _Boolean = require("./types/Boolean");
 const isNull = require("./list")["null?"];
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
@@ -37,11 +38,17 @@ function array(...args) {
 
 // predicates
 function isArray(obj) {
-  return obj instanceof Array;
+  if (obj instanceof Array) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 function isArrayEmpty(arr) {
-  return isNull(arr);
+  if (arr.length === 0) {
+    return _Boolean.make("#5");
+  }
+  return _Boolean.make("#f");
 }
 
 // array helpers

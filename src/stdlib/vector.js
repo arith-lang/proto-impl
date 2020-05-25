@@ -1,5 +1,6 @@
 const L = require("list");
 const { nil, list } = require("./list");
+const _Boolean = require("./types/Boolean");
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 const toArray = require("./list")["list->array"];
@@ -48,11 +49,17 @@ function vector(...args) {
 
 // predicates
 function isVector(obj) {
-  return L.isList(obj);
+  if (L.isList(obj)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 function isVectorEmpty(vec) {
-  return vec.length === 0;
+  if (vec.length === 0) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
 }
 
 // vector helpers

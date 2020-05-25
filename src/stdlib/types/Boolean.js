@@ -1,5 +1,3 @@
-const isNull = require("../list")["null?"];
-
 class _Boolean extends Boolean {
   constructor(value) {
     const bool = _Boolean.shouldReturnFalse(value) ? false : true;
@@ -26,7 +24,7 @@ class _Boolean extends Boolean {
       value === false ||
       value === "#f" ||
       value == undefined ||
-      isNull(value) ||
+      (value.constructor && value.constructor.name === "Nil") || // to prevent circular dependency by importing null-native? from list
       (_Boolean.isBool(value) && value.bool === false)
     );
   }

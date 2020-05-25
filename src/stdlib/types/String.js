@@ -11,14 +11,6 @@ class _String extends String {
     this.chars = Object.freeze(
       string.split("").map((c) => new Char(c)),
     );
-
-    this.isEq = this.isEq.bind(this);
-    this.isEqv = this.isEq;
-    this.isEqual = this.isEq;
-    this.toCharString = this.toCharString.bind(this);
-    this.toCharArray = this.toCharArray.bind(this);
-    this.toCharVector = this.toCharVector.bind(this);
-    this.toCharList = this.toCharList.bind(this);
   }
 
   static isStringNative(obj) {
@@ -36,7 +28,10 @@ class _String extends String {
   }
 
   isEq(other) {
-    return equal(this, other);
+    if (equal(this, other)) {
+      return _Boolean.make("#t");
+    }
+    return _Boolean.make("#f");
   }
 
   toCharString() {

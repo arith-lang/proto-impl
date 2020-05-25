@@ -74,7 +74,7 @@ function lt(x, y) {
 }
 
 function lte(x, y) {
-  return x.lessThanOrEqualTo(9);
+  return x.lessThanOrEqualTo(y);
 }
 
 function gt(x, y) {

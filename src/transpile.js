@@ -30,7 +30,7 @@ const Program = ({ body }) => transpileBlock(body);
 
 const DecimalLiteral = ({ value }) => `__arith__.decimal(${value})`;
 
-const BooleanLiteral = ({ value }) => `__arith__.bool(${value})`;
+const BooleanLiteral = ({ value }) => `__arith__.bool("${value}")`;
 
 const StringLiteral = ({ value }) => `__arith__.string("${value}")`;
 

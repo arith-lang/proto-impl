@@ -52,26 +52,59 @@ function isNull(obj) {
 
 const isEmpty = isNullNative;
 
-function isPair(obj) {
+function isPairNative(obj) {
   return obj.constructor && obj.constructor.name === "Cons";
 }
 
-function isList(obj) {
+function isPair(obj) {
+  if (obj.constructor && obj.constructor.name === "Cons") {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
+function isListNative(obj) {
   if (isNullNative(obj)) {
     return true;
-  } else if (isPair(obj) === false) {
+  } else if (isPairNative(obj) === false) {
     return false;
   }
   let head = car(obj);
   let tail = cdr(obj);
   while (!isNullNative(tail)) {
-    if (isPair(tail) && !isPair(tail[1]) && !isNullNative(tail[1])) {
+    if (
+      isPairNative(tail) &&
+      !isPairNative(tail[1]) &&
+      !isNullNative(tail[1])
+    ) {
       return false;
     }
     head = car(tail);
     tail = cdr(tail);
   }
   return true;
+}
+
+function isList(obj) {
+  if (isNullNative(obj)) {
+    return _Boolean.make("#t");
+  } else if (isPairNative(obj) === false) {
+    return _Boolean.make("#f");
+  }
+  let head = car(obj);
+  let tail = cdr(obj);
+  while (!isNullNative(tail)) {
+    if (
+      isPairNative(tail) &&
+      !isPairNative(tail[1]) &&
+      !isNullNative(tail[1])
+    ) {
+      return _Boolean.make("#f");
+    }
+    head = car(tail);
+    tail = cdr(tail);
+  }
+  return _Boolean.make("#t");
 }
 
 // list helpers
@@ -227,7 +260,7 @@ function toArray(lst) {
 function toString(lst, n) {
   if (isNullNative(lst)) {
     return nil.toString();
-  } else if (isPair(lst) && !isList(lst)) {
+  } else if (isPairNative(lst) && !isListNative(lst)) {
     return lst.toString();
   }
   let arr = toArray(lst);
@@ -237,7 +270,7 @@ function toString(lst, n) {
   }
   str += `(`;
   for (const [i, item] of arr.entries()) {
-    if (isList(item)) {
+    if (isListNative(item)) {
       str += `${toString(item, i + 1)}`;
     } else {
       if (i === arr.length - 1) {
@@ -452,7 +485,9 @@ module.exports = {
   "null-native?": isNullNative,
   "null?": isNull,
   "empty?": isEmpty,
+  "pair-native?": isPairNative,
   "pair?": isPair,
+  "list-native?": isListNative,
   "list?": isList,
   length,
   prepend,

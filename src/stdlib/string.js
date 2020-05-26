@@ -202,6 +202,10 @@ function stringSplit(sep, str) {
   return list(...v.split(str, sep));
 }
 
+function splitWords(str) {
+  return string(v.words(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -247,4 +251,5 @@ module.exports = {
   "word-wrap-with": wordWrapWith,
   "string-split-chars": stringSplitChars,
   "string-split": stringSplit,
+  "split-words": splitWords,
 };

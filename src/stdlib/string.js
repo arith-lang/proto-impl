@@ -213,6 +213,14 @@ function stripHtmlTags(str) {
   return string(v.stripTags(str));
 }
 
+// utility predicates
+function stringEndsWith(end, str) {
+  if (v.endsWith(str, end)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -261,4 +269,5 @@ module.exports = {
   "string-split": stringSplit,
   "split-words": splitWords,
   "strip-html-tags": stripHtmlTags,
+  "string-ends-with?": stringEndsWith,
 };

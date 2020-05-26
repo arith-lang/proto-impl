@@ -123,6 +123,10 @@ function decapitalize(str) {
   return string(v.decapitalize(str));
 }
 
+function lispCase(str) {
+  return string(v.kebabCase(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -148,4 +152,5 @@ module.exports = {
   "camel-case": camelCase,
   capitalize,
   decapitalize,
+  "lisp-case": lispCase,
 };

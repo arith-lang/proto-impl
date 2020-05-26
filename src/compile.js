@@ -77,7 +77,7 @@ const KeywordExpression = (node, env = globalEnv) => {
 
 const VariableDefinition = (node, env = globalEnv) => {
   let value = compile(node.value, env);
-  return `let ${makeVar(node.name)} = ${value};`;
+  return `var ${makeVar(node.name)} = ${value};`;
 };
 
 const LambdaExpression = (node, env = globalEnv) => {

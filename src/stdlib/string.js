@@ -263,6 +263,20 @@ function stringIsEmpty(str) {
   return _Boolean.make("#f");
 }
 
+function stringIsLowerCase(str) {
+  if (v.isLowerCase(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
+function stringIsUpperCase(str) {
+  if (v.isUpperCase(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -318,4 +332,6 @@ module.exports = {
   "string-blank?": stringIsBlank,
   "string-digit?": stringIsDigit,
   "string-empty?": stringIsEmpty,
+  "string-lower-case?": stringIsLowerCase,
+  "string-upper-case?": stringIsUpperCase,
 };

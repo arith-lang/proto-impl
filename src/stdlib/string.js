@@ -169,6 +169,10 @@ function stringReverse(str) {
   return string(v.reverseGrapheme(str));
 }
 
+function slugify(str) {
+  return string(v.slugify(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -205,4 +209,5 @@ module.exports = {
   "escape-regex": escapeRegex,
   "unescape-html": unescapeHtml,
   "string-reverse": stringReverse,
+  slugify,
 };

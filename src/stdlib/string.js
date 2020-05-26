@@ -78,6 +78,10 @@ function stringToArray(str) {
   return str.toCharArray();
 }
 
+function stringToVector(str) {
+  return str.toCharVector();
+}
+
 // string comparisons
 function strEq(str1, str2) {
   return str1.isEq(str2);
@@ -224,6 +228,7 @@ module.exports = {
   "string-replace": stringReplace,
   "string->list": stringToList,
   "string->array": stringToArray,
+  "string->vector": stringToVector,
   "string=?": strEq,
   "string<?": strLt,
   "string<=?": strLte,

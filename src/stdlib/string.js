@@ -256,7 +256,12 @@ function stringIsDigit(str) {
   return _Boolean.make("#f");
 }
 
-function stringIsEmpty
+function stringIsEmpty(str) {
+  if (v.isEmpty(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
 
 module.exports = {
   string,
@@ -312,4 +317,5 @@ module.exports = {
   "string-alpha-digit?": stringIsAlphaDigit,
   "string-blank?": stringIsBlank,
   "string-digit?": stringIsDigit,
+  "string-empty?": stringIsEmpty,
 };

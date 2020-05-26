@@ -1,4 +1,5 @@
 const equal = require("fast-deep-equal");
+const v = require("voca");
 const Char = require("./Char");
 const _Boolean = require("./Boolean");
 const { array } = require("../array");
@@ -8,9 +9,7 @@ const { list } = require("../list");
 class _String extends String {
   constructor(string) {
     super(string);
-    this.chars = Object.freeze(
-      string.split("").map((c) => new Char(c)),
-    );
+    this.chars = v.graphemes(string).map((c) => new Char(c));
   }
 
   static isStringNative(obj) {

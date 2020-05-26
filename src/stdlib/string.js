@@ -135,6 +135,10 @@ function swapCase(str) {
   return string(v.swapCase(str));
 }
 
+function titleCase(str) {
+  return string(v.titleCase(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -163,4 +167,5 @@ module.exports = {
   "lisp-case": lispCase,
   "snake-case": snakeCase,
   "swap-case": swapCase,
+  "title-case": titleCase,
 };

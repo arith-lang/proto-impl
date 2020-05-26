@@ -165,6 +165,10 @@ function unescapeHtml(str) {
   return string(v.unescapeHtml(str));
 }
 
+function stringReverse(str) {
+  return string(v.reverseGrapheme(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -200,4 +204,5 @@ module.exports = {
   "escape-html": escapeHtml,
   "escape-regex": escapeRegex,
   "unescape-html": unescapeHtml,
+  "string-reverse": stringReverse,
 };

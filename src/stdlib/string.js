@@ -131,6 +131,10 @@ function snakeCase(str) {
   return string(v.snakeCase(str));
 }
 
+function swapCase(str) {
+  return string(v.swapCase(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -158,4 +162,5 @@ module.exports = {
   decapitalize,
   "lisp-case": lispCase,
   "snake-case": snakeCase,
+  "swap-case": swapCase,
 };

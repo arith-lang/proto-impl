@@ -277,6 +277,13 @@ function stringIsUpperCase(str) {
   return _Boolean.make("#f");
 }
 
+function stringIsNumeric(str) {
+  if (v.isNumeric(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -334,4 +341,5 @@ module.exports = {
   "string-empty?": stringIsEmpty,
   "string-lower-case?": stringIsLowerCase,
   "string-upper-case?": stringIsUpperCase,
+  "string-numeric?": stringIsNumeric,
 };

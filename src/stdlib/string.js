@@ -284,6 +284,13 @@ function stringIsNumeric(str) {
   return _Boolean.make("#f");
 }
 
+function stringStartsWith(start, str) {
+  if (v.startsWith(str, start)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -342,4 +349,5 @@ module.exports = {
   "string-lower-case?": stringIsLowerCase,
   "string-upper-case?": stringIsUpperCase,
   "string-numeric?": stringIsNumeric,
+  "string-starts-with?": stringStartsWith,
 };

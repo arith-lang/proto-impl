@@ -41,6 +41,14 @@ function substring(str, start, end) {
   );
 }
 
+function stringFirst(str, num) {
+  return substring(str, 0, num);
+}
+
+function stringLast(str, num) {
+  return substring(str, str.chars.length - num, str.chars.length);
+}
+
 function makeString(num, char) {
   return string(char.repeat(num));
 }
@@ -150,6 +158,8 @@ module.exports = {
   "string-repeat": strRepeat,
   "string-ref": strRef,
   substring,
+  "string-first": stringFirst,
+  "string-last": stringLast,
   "make-string": makeString,
   "string-copy": stringCopy,
   "string-trim": stringTrim,

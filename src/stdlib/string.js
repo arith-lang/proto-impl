@@ -119,6 +119,10 @@ function capitalize(str) {
   return string(v.capitalize(str, true));
 }
 
+function decapitalize(str) {
+  return string(v.decapitalize(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -143,4 +147,5 @@ module.exports = {
   "string?": isString,
   "camel-case": camelCase,
   capitalize,
+  decapitalize,
 };

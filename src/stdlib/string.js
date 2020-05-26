@@ -153,6 +153,18 @@ function countWords(str) {
   return new Decimal(v.countWords(str));
 }
 
+function escapeHtml(str) {
+  return string(v.escapeHtml(str));
+}
+
+function escapeRegex(str) {
+  return string(v.escapeRegExp(str));
+}
+
+function unescapeHtml(str) {
+  return string(v.unescapeHtml(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -185,4 +197,7 @@ module.exports = {
   "swap-case": swapCase,
   "title-case": titleCase,
   "count-words": countWords,
+  "escape-html": escapeHtml,
+  "escape-regex": escapeRegex,
+  "unescape-html": unescapeHtml,
 };

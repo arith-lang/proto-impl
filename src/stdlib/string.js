@@ -127,6 +127,10 @@ function lispCase(str) {
   return string(v.kebabCase(str));
 }
 
+function snakeCase(str) {
+  return string(v.snakeCase(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -153,4 +157,5 @@ module.exports = {
   capitalize,
   decapitalize,
   "lisp-case": lispCase,
+  "snake-case": snakeCase,
 };

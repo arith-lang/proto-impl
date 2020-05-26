@@ -235,6 +235,13 @@ function stringIsAlpha(str) {
   return _Boolean.make("#f");
 }
 
+function stringIsAlphaDigit(str) {
+  if (v.isAlphaDigit(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -286,4 +293,5 @@ module.exports = {
   "string-ends-with?": stringEndsWith,
   "string-contains?": stringContains,
   "string-is-alpha?": stringIsAlpha,
+  "string-is-alpha-digit?": stringIsAlphaDigit,
 };

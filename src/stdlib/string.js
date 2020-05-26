@@ -249,6 +249,13 @@ function stringIsBlank(str) {
   return _Boolean.make("#f");
 }
 
+function stringIsDigit(str) {
+  if (v.isDigit(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -302,4 +309,5 @@ module.exports = {
   "string-is-alpha?": stringIsAlpha,
   "string-is-alpha-digit?": stringIsAlphaDigit,
   "string-is-blank?": stringIsBlank,
+  "string-is-digit?": stringIsDigit,
 };

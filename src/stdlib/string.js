@@ -174,7 +174,19 @@ function slugify(str) {
 }
 
 function stringInsert(str, insert, pos) {
-  return v.insert(str, insert, pos);
+  return string(v.insert(str, insert, pos));
+}
+
+function latinize(str) {
+  return string(v.latinise(str));
+}
+
+function padleft(str, length, pad) {
+  return string(v.padLeft(str, length, pad));
+}
+
+function padright(str, length, pad) {
+  return string(v.padRight(str, length, pad));
 }
 
 module.exports = {
@@ -215,4 +227,6 @@ module.exports = {
   "string-reverse": stringReverse,
   slugify,
   "string-insert": stringInsert,
+  latinize,
+  padleft,
 };

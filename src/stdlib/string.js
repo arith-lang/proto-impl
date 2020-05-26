@@ -221,6 +221,20 @@ function stringEndsWith(end, str) {
   return _Boolean.make("#f");
 }
 
+function stringContains(search, str) {
+  if (v.includes(str, search)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
+function stringIsAlpha(str) {
+  if (v.isAlpha(str)) {
+    return _Boolean.make("#t");
+  }
+  return _Boolean.make("#f");
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -270,4 +284,6 @@ module.exports = {
   "split-words": splitWords,
   "strip-html-tags": stripHtmlTags,
   "string-ends-with?": stringEndsWith,
+  "string-contains?": stringContains,
+  "string-is-alpha?": stringIsAlpha,
 };

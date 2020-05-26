@@ -173,6 +173,10 @@ function slugify(str) {
   return string(v.slugify(str));
 }
 
+function stringInsert(str, insert, pos) {
+  return v.insert(str, insert, pos);
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -210,4 +214,5 @@ module.exports = {
   "unescape-html": unescapeHtml,
   "string-reverse": stringReverse,
   slugify,
+  "string-insert": stringInsert,
 };

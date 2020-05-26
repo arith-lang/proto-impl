@@ -115,6 +115,10 @@ function camelCase(str) {
   return string(v.camelCase(str));
 }
 
+function capitalize(str) {
+  return string(v.capitalize(str, true));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -138,4 +142,5 @@ module.exports = {
   "string>=?": strGte,
   "string?": isString,
   "camel-case": camelCase,
+  capitalize,
 };

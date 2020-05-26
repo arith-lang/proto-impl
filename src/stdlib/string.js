@@ -32,7 +32,7 @@ function strRepeat(str, num) {
 }
 
 function strRef(str, i) {
-  return new Char(str[i]);
+  return new Char(v.graphemeAt(str, i));
 }
 
 function substring(str, start, end) {

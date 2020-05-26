@@ -189,6 +189,14 @@ function padright(length, pad, str) {
   return string(v.padRight(str, length, pad));
 }
 
+function wordWrap(width, str) {
+  return string(v.wordWrap(str, { width, newLine: "\n" }));
+}
+
+function wordWrapWith(width, wrap, str) {
+  return string(v.wordWrap(str, { width, newLine: wrap }));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -228,5 +236,8 @@ module.exports = {
   slugify,
   "string-insert": stringInsert,
   latinize,
-  padleft,
+  "pad-left": padleft,
+  "pad-right": padright,
+  "word-wrap": wordWrap,
+  "word-wrap-with": wordWrapWith,
 };

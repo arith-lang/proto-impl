@@ -256,6 +256,8 @@ function stringIsDigit(str) {
   return _Boolean.make("#f");
 }
 
+function stringIsEmpty
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -306,8 +308,8 @@ module.exports = {
   "strip-html-tags": stripHtmlTags,
   "string-ends-with?": stringEndsWith,
   "string-contains?": stringContains,
-  "string-is-alpha?": stringIsAlpha,
-  "string-is-alpha-digit?": stringIsAlphaDigit,
-  "string-is-blank?": stringIsBlank,
-  "string-is-digit?": stringIsDigit,
+  "string-alpha?": stringIsAlpha,
+  "string-alpha-digit?": stringIsAlphaDigit,
+  "string-blank?": stringIsBlank,
+  "string-digit?": stringIsDigit,
 };

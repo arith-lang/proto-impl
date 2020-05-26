@@ -149,6 +149,10 @@ function titleCase(str) {
   return string(v.titleCase(str));
 }
 
+function countWords(str) {
+  return new Decimal(v.countWords(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -180,4 +184,5 @@ module.exports = {
   "snake-case": snakeCase,
   "swap-case": swapCase,
   "title-case": titleCase,
+  "count-words": countWords,
 };

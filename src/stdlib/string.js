@@ -109,6 +109,12 @@ function isString(obj) {
   return _Boolean.make("#f");
 }
 
+// additional string utilities
+
+function camelCase(str) {
+  return string(v.camelCase(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -131,4 +137,5 @@ module.exports = {
   "string>?": strGt,
   "string>=?": strGte,
   "string?": isString,
+  "camel-case": camelCase,
 };

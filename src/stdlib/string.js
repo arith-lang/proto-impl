@@ -2,9 +2,9 @@ const v = require("voca");
 const _String = require("./types/String");
 const Decimal = require("./types/Decimal");
 const Char = require("./types/Char");
+const _Boolean = require("./types/Boolean");
 const { all } = require("./utils");
 const { list } = require("./list");
-const _Boolean = require("./types/Boolean");
 
 // string constructor
 function string(value) {
@@ -113,10 +113,7 @@ function strGte(str1, str2) {
 
 // string predicate
 function isString(obj) {
-  if (_String.isString(obj)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return _String.isString(obj);
 }
 
 // additional string utilities
@@ -197,6 +194,14 @@ function wordWrapWith(width, wrap, str) {
   return string(v.wordWrap(str, { width, newLine: wrap }));
 }
 
+function stringSplitChars(str) {
+  return str.toCharList();
+}
+
+function stringSplit(sep, str) {
+  return list(...v.split(str, sep));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -240,4 +245,6 @@ module.exports = {
   "pad-right": padright,
   "word-wrap": wordWrap,
   "word-wrap-with": wordWrapWith,
+  "string-split-chars": stringSplitChars,
+  "string-split": stringSplit,
 };

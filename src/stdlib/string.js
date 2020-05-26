@@ -27,25 +27,25 @@ function strAppend(...args) {
   return string(all((a, s) => a + s)(...args));
 }
 
-function strRepeat(str, num) {
+function strRepeat(num, str) {
   return string(str.repeat(num));
 }
 
-function strRef(str, i) {
+function strRef(i, str) {
   return new Char(v.graphemeAt(str, i));
 }
 
-function substring(str, start, end) {
+function substring(start, end, str) {
   return string(
     str.chars.slice(start, end).reduce((s, c) => s + c.value, ""),
   );
 }
 
-function stringFirst(str, num) {
+function stringFirst(num, str) {
   return substring(str, 0, num);
 }
 
-function stringLast(str, num) {
+function stringLast(num, str) {
   return substring(str, str.chars.length - num, str.chars.length);
 }
 
@@ -65,7 +65,7 @@ function stringJoin(sep, ...strs) {
   return string(strs.join(sep));
 }
 
-function stringReplace(str, toReplace, replaceWith) {
+function stringReplace(toReplace, replaceWith, str) {
   return string(str.replace(toReplace, replaceWith));
 }
 
@@ -173,7 +173,7 @@ function slugify(str) {
   return string(v.slugify(str));
 }
 
-function stringInsert(str, insert, pos) {
+function stringInsert(insert, pos, str) {
   return string(v.insert(str, insert, pos));
 }
 
@@ -181,11 +181,11 @@ function latinize(str) {
   return string(v.latinise(str));
 }
 
-function padleft(str, length, pad) {
+function padleft(length, pad, str) {
   return string(v.padLeft(str, length, pad));
 }
 
-function padright(str, length, pad) {
+function padright(length, pad, str) {
   return string(v.padRight(str, length, pad));
 }
 

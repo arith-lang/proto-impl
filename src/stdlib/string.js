@@ -1,3 +1,4 @@
+const v = require("voca");
 const _String = require("./types/String");
 const Decimal = require("./types/Decimal");
 const Char = require("./types/Char");
@@ -12,7 +13,7 @@ function string(value) {
 
 // string utilities
 function strlen(str) {
-  return new Decimal(str.length);
+  return new Decimal(v.countGraphemes(str));
 }
 
 function upper(str) {

@@ -121,7 +121,6 @@ function isString(obj) {
 }
 
 // additional string utilities
-
 function camelCase(str) {
   return string(v.camelCase(str));
 }
@@ -210,6 +209,10 @@ function splitWords(str) {
   return string(v.words(str));
 }
 
+function stripHtmlTags(str) {
+  return string(v.stripTags(str));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -257,4 +260,5 @@ module.exports = {
   "string-split-chars": stringSplitChars,
   "string-split": stringSplit,
   "split-words": splitWords,
+  "strip-html-tags": stripHtmlTags,
 };

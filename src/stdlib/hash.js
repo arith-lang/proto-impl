@@ -46,8 +46,16 @@ function isHashEqual(hash1, hash2) {
 isHashEqual = R.curry(isHashEqual);
 
 // hash-has-key?
+function hashHasKey(key, hash) {
+  return hash.has(key);
+}
+
+hashHasKey = R.curry(hashHasKey);
 
 // hash-empty?
+function isHashEmpty(hash) {
+  return hash.size === 0;
+}
 
 // CRUD functions
 // hash-ref
@@ -92,4 +100,9 @@ module.exports = {
   hash,
   "make-hash": makeHash,
   "hash?": isHash,
+  "hash-eq?": isHashEq,
+  "hash-eqv?": isHashEqv,
+  "hash-equal?": isHashEqual,
+  "hash-has-key?": hashHasKey,
+  "hash-empty?": isHashEmpty,
 };

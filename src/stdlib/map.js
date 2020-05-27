@@ -46,8 +46,16 @@ function isMapEqual(map1, map2) {
 isMapEqual = R.curry(isMapEqual);
 
 // map-has-key?
+function mapHasKey(key, map) {
+  return map.has(key);
+}
+
+mapHasKey = R.curry(mapHasKey);
 
 // map-empty?
+function isMapEmpty(map) {
+  return map.size === 0;
+}
 
 // CRUD functions
 // map-ref
@@ -92,4 +100,9 @@ module.exports = {
   hashmap,
   "make-map": makeMap,
   "map?": isMap,
+  "map-eq?": isMapEq,
+  "map-eqv?": isMapEqv,
+  "map-equals?": isMapEqual,
+  "map-has-key?": mapHasKey,
+  "map-empty?": isMapEmpty,
 };

@@ -26,10 +26,10 @@ const symbolExists = (name, env) => {
   );
 };
 
-const lookup = (name, env) => {
+const lookup = (node, env) => {
   let scope = env;
   while (scope) {
-    if (symbolExists(name, scope)) {
+    if (symbolExists(node.name, scope)) {
       return scope;
     }
     scope = scope.parent;
@@ -40,7 +40,7 @@ const lookup = (name, env) => {
 };
 
 const getValue = (node, env) => {
-  const scope = lookup(node.name, env);
+  const scope = lookup(node, env);
   return scope[Symbol.for(node.name)];
 };
 

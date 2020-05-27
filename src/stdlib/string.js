@@ -35,7 +35,9 @@ function strRef(str, i) {
 }
 
 function substring(str, start, end) {
-  return string(str.slice(start, end));
+  return string(
+    str.chars.slice(start, end).reduce((s, c) => s + c.value, ""),
+  );
 }
 
 function makeString(num, char) {
@@ -93,6 +95,15 @@ function isString(obj) {
   return _String.isString(obj);
 }
 
+// additional string utilities
+function camelCase(str) {
+  return string(v.camelCase(str));
+}
+
+function capitalize(str) {
+  return string(v.capitalize(str, true));
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -115,4 +126,6 @@ module.exports = {
   "string>?": strGt,
   "string>=?": strGte,
   "string?": isString,
+  "string-camelcase": camelCase,
+  "string-capitalize": capitalize,
 };

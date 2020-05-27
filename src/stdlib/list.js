@@ -260,6 +260,8 @@ function filter(pred, lst) {
   return l;
 }
 
+const keep = filter;
+
 function reject(pred, lst) {
   if (isNull(lst)) {
     return nil;
@@ -461,6 +463,7 @@ module.exports = {
   "list->array": toArray,
   "list->string": toString,
   filter,
+  keep,
   reject,
   remove,
   sort,

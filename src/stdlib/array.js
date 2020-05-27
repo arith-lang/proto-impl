@@ -112,6 +112,8 @@ function arrayFilter(pred, arr) {
   return array(...arr.filter(pred));
 }
 
+const arrayKeep = arrayFilter;
+
 function arrayReject(pred, arr) {
   return array(...arr.filter(!pred));
 }
@@ -187,6 +189,7 @@ module.exports = {
   "array-foreach": arrayForeach,
   "array->string": arrayToString,
   "array-filter": arrayFilter,
+  "array-keep": arrayKeep,
   "array-reject": arrayReject,
   "array-remove!": arrayRemove,
   "array-sort!": arraySort,

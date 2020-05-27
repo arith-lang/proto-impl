@@ -140,6 +140,8 @@ function vectorFilter(pred, vec) {
   return vector(...L.filter(pred, vec));
 }
 
+const vectorKeep = vectorFilter;
+
 function vectorReject(pred, vec) {
   return vector(...L.reject(pred, vec));
 }
@@ -217,6 +219,7 @@ module.exports = {
   "array->vector": arrayToVector,
   "vector->string": vectorToString,
   "vector-filter": vectorFilter,
+  "vector-keep": vectorKeep,
   "vector-reject": vectorReject,
   "vector-remove": vectorRemove,
   "vector-sort": vectorSort,

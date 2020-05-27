@@ -28,8 +28,14 @@ function isMap(obj) {
 }
 
 // map-eq?
+function isMapEq(map1, map2) {
+  return Object.is(map1, map2);
+}
+
+isMapEq = R.curry(isMapEq);
 
 // map-eqv?
+const isMapEqv = isMapEq;
 
 // map-equals?
 

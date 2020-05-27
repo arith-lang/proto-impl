@@ -1,4 +1,4 @@
-const { Map: IMap } = require("immutable");
+const { Map: IMap, is } = require("immutable");
 const R = require("ramda");
 const { cons } = require("./list");
 
@@ -29,8 +29,14 @@ function isHash(obj) {
 }
 
 // hash-eq?
+function isHashEq(hash1, hash2) {
+  return Object.is(hash1, hash2);
+}
+
+isHashEq = R.curry(isHashEq);
 
 // hash-eqv?
+const isHashEqv = isHashEq;
 
 // hash-equals?
 

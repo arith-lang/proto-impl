@@ -31,7 +31,7 @@ function strRepeat(str, num) {
 }
 
 function strRef(str, i) {
-  return new Char(str[i]);
+  return string(str[i]);
 }
 
 function substring(str, start, end) {

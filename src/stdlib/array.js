@@ -1,3 +1,4 @@
+const R = require("ramda");
 const { nil } = require("./list");
 const isNull = require("./list")["null?"];
 const isList = require("./list")["list?"];
@@ -29,6 +30,7 @@ function arrToString() {
 }
 
 // array constructor
+// do not curry
 function array(...args) {
   let arr = [...args];
   arr.toString = arrToString.bind(arr);
@@ -53,18 +55,26 @@ function arraySlice(start, end, arr) {
   return array(...arr.slice(start, end));
 }
 
+arraySlice = R.curry(arraySlice);
+
 function arrayPrepend(item, arr) {
   arr.unshift(item);
 }
+
+arrayPrepend = R.curry(arrayPrepend);
 
 function arrayAppend(item, arr) {
   arr.push(item);
 }
 
+arrayAppend = R.curry(arrayAppend);
+
 function arrayConcat(...arrs) {
   let accum = [];
-  return array(...accum.concat(...arrs)).toString();
+  return array(...accum.concat(...arrs));
 }
+
+arrayConcat = R.curryN(2, arrayConcat);
 
 function arrayCopy(arr) {
   return array(...arr);
@@ -78,6 +88,8 @@ function arraySet(pos, newItem, arr) {
   arr.splice(pos, 1, newItem);
 }
 
+arraySet = R.curry(arraySet);
+
 const arrayUpdate = arraySet;
 
 // array iterators
@@ -85,9 +97,13 @@ function arrayMap(fn, arr) {
   return array(...arr.map(fn));
 }
 
+arrayMap = R.curry(arrayMap);
+
 function arrayFoldl(fn, accum, arr) {
   return array(...arr.reduce(fn, accum));
 }
+
+arrayFoldl = R.curry(arrayFoldl);
 
 const arrayFold = arrayFoldl;
 const arrayReduce = arrayFoldl;
@@ -96,11 +112,15 @@ function arrayFoldr(fn, accum, arr) {
   return array(...arr.reduceRight(fn, accum));
 }
 
+arrayFoldr = R.curry(arrayFoldr);
+
 const arrayReduceRight = arrayFoldr;
 
 function arrayForeach(fn, arr) {
   arr.forEach(fn);
 }
+
+arrayForeach = R.curry(arrayForeach);
 
 // conversion functions
 function arrayToString(arr) {
@@ -112,15 +132,21 @@ function arrayFilter(pred, arr) {
   return array(...arr.filter(pred));
 }
 
+arrayFilter = R.curry(arrayFilter);
+
 const arrayKeep = arrayFilter;
 
 function arrayReject(pred, arr) {
   return array(...arr.filter(!pred));
 }
 
+arrayReject = R.curry(arrayReject);
+
 function arrayRemove(index, number, arr) {
   arr.splice(index, number);
 }
+
+arrayRemove = R.curry(arrayRemove);
 
 function arraySort(arr) {
   arr.sort();
@@ -130,9 +156,13 @@ function arraySortBy(compare, arr) {
   arr.sort(compare);
 }
 
+arraySortBy = R.curry(arraySortBy);
+
 function arrayFind(pred, arr) {
   return arr.find(pred);
 }
+
+arrayFind = R.curry(arrayFind);
 
 // array accessors
 function arrayRef(pos, arr) {
@@ -145,9 +175,13 @@ function arrayRef(pos, arr) {
   return elem;
 }
 
+arrayRef = R.curry(arrayRef);
+
 function arrayTail(pos, arr) {
   return array(...arr.slice(pos));
 }
+
+arrayTail = R.curry(arrayTail);
 
 function arrayFirst(arr) {
   return arr[0];
@@ -162,10 +196,14 @@ function arrayTake(num, arr) {
   return arr.slice(0, num);
 }
 
+arrayTake = R.curry(arrayTake);
+
 function arrayDrop(num, arr) {
   const toTake = arr.length - 1 - num;
   return arr.slice(toTake);
 }
+
+arrayDrop = R.curry(arrayDrop);
 
 module.exports = {
   array,

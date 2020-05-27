@@ -73,8 +73,14 @@ function hashSet(key, value, hash) {
 hashSet = R.curry(hashSet);
 
 // hash-update
+const hashUpdate = hashSet;
 
 // hash-remove
+function hashRemove(key, hash) {
+  return hash.delete(key);
+}
+
+hashRemove = R.curry(hashRemove);
 
 // hash-clear
 
@@ -95,6 +101,7 @@ hashSet = R.curry(hashSet);
 
 // hash-values
 
+// conversion
 // hash->list
 
 // hash->array
@@ -117,4 +124,6 @@ module.exports = {
   "hash-empty?": isHashEmpty,
   "hash-ref": hashRef,
   "hash-set": hashSet,
+  "hash-update": hashUpdate,
+  "hash-remove": hashRemove,
 };

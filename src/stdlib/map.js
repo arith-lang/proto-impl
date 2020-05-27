@@ -73,8 +73,14 @@ function mapSet(key, value, map) {
 mapSet = R.curry(mapSet);
 
 // map-update!
+const mapUpdate = mapSet;
 
 // map-remove!
+function mapRemove(key, map) {
+  map.delete(key);
+}
+
+mapRemove = R.curry(mapRemove);
 
 // map-clear!
 
@@ -95,6 +101,7 @@ mapSet = R.curry(mapSet);
 
 // map-values
 
+// conversion
 // map->list
 
 // map->array
@@ -116,4 +123,6 @@ module.exports = {
   "map-has-key?": mapHasKey,
   "map-empty?": isMapEmpty,
   "map-set": mapSet,
+  "map-update": mapUpdate,
+  "map-remove": mapRemove,
 };

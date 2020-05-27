@@ -11,4 +11,4 @@
         (fn x)))))
 
 (define fib-memo (memo fib))
-(fib-memo 20)
+(fib-memo 25)

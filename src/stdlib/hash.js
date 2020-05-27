@@ -39,6 +39,11 @@ isHashEq = R.curry(isHashEq);
 const isHashEqv = isHashEq;
 
 // hash-equals?
+function isHashEqual(hash1, hash2) {
+  return is(hash1, hash2);
+}
+
+isHashEqual = R.curry(isHashEqual);
 
 // hash-has-key?
 

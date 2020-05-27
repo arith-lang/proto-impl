@@ -1,4 +1,5 @@
 const R = require("ramda");
+const equal = require("fast-deep-equal/es6");
 const { cons } = require("./list");
 
 // hash map constructor
@@ -38,6 +39,11 @@ isMapEq = R.curry(isMapEq);
 const isMapEqv = isMapEq;
 
 // map-equals?
+function isMapEqual(map1, map2) {
+  return equal(map1, map2);
+}
+
+isMapEqual = R.curry(isMapEqual);
 
 // map-has-key?
 

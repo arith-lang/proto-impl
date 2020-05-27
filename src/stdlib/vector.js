@@ -1,12 +1,13 @@
 const L = require("list");
 const { nil, list } = require("./list");
+const _Boolean = require("./types/Boolean");
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 const toArray = require("./list")["list->array"];
 
 // replace toString method
 function vecToString() {
-  if (isVectorEmpty(this)) {
+  if (isVectorEmptyNative(this)) {
     return `#()`;
   }
   let str = `#(`;
@@ -47,12 +48,26 @@ function vector(...args) {
 }
 
 // predicates
-function isVector(obj) {
+function isVectorNative(obj) {
   return L.isList(obj);
 }
 
-function isVectorEmpty(vec) {
+function isVector(obj) {
+  if (L.isList(obj)) {
+    return _Boolean("#t");
+  }
+  return _Boolean("#f");
+}
+
+function isVectorEmptyNative(vec) {
   return vec.length === 0;
+}
+
+function isVectorEmpty(vec) {
+  if (vec.length === 0) {
+    return _Boolean("#t");
+  }
+  return _Boolean("#f");
 }
 
 // vector helpers
@@ -194,7 +209,9 @@ function vectorDrop(num, vec) {
 
 module.exports = {
   vector,
+  "vector-native?": isVectorNative,
   "vector?": isVector,
+  "vector-empty-native?": isVectorEmptyNative,
   "vector-empty?": isVectorEmpty,
   "vector-length": vectorLength,
   "vector-slice": vectorSlice,

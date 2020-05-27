@@ -95,6 +95,8 @@ const isHash = (char) => char === "#";
 
 const isPlusOrMinus = (char) => char === "+" || char === "-";
 
+const isBackslash = (char) => char === "\\";
+
 module.exports = {
   isDigit,
   isInteger,
@@ -118,4 +120,5 @@ module.exports = {
   isPunctuation,
   isHash,
   isPlusOrMinus,
+  isBackslash,
 };

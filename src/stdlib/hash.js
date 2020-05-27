@@ -59,6 +59,11 @@ function isHashEmpty(hash) {
 
 // CRUD functions
 // hash-ref
+function hashRef(ref, hash) {
+  return hash.get(ref);
+}
+
+hashRef = R.curry(hashRef);
 
 // hash-ref-key
 
@@ -105,4 +110,5 @@ module.exports = {
   "hash-equal?": isHashEqual,
   "hash-has-key?": hashHasKey,
   "hash-empty?": isHashEmpty,
+  "hash-ref": hashRef,
 };

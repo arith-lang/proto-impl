@@ -59,6 +59,11 @@ function isMapEmpty(map) {
 
 // CRUD functions
 // map-ref
+function mapRef(ref, map) {
+  return map.get(ref);
+}
+
+mapRef = R.curry(mapRef);
 
 // map-ref-key
 
@@ -105,4 +110,5 @@ module.exports = {
   "map-equals?": isMapEqual,
   "map-has-key?": mapHasKey,
   "map-empty?": isMapEmpty,
+  "map-ref": mapRef,
 };

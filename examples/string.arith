@@ -1,5 +1,5 @@
 (define hi
-  (string-append (string-upcase (string-ref "hello" 0))
-  (string-downcase (substring "HELLO" 1))))
+  (string-append (string-upcase (string-ref 0 "hello"))
+  (string-downcase (string-last 4 "HELLO"))))
 
 (print hi)

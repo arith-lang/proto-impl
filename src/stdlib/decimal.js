@@ -15,7 +15,6 @@ function decimal(value) {
 const PI = Decimal.acos(-1);
 
 // mathematical functions
-// const add = all((a, c) => a + c);
 function add(...args) {
   return all((a, c) => a.add(c))(...args);
 }

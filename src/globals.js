@@ -5,6 +5,8 @@ const string = require("./stdlib/string");
 const list = require("./stdlib/list");
 const utils = require("./stdlib/utils");
 const vector = require("./stdlib/vector");
+const hash = require("./stdlib/hash");
+const map = require("./stdlib/map");
 
 module.exports = {
   ...boolean,
@@ -14,4 +16,6 @@ module.exports = {
   ...list,
   ...utils,
   ...vector,
+  ...hash,
+  ...map,
 };

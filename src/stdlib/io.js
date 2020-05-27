@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const readlineSync = require("readline-sync");
-const printf = require("printf");
 const { list } = require("./list");
 const toString = require("./list")["list->string"];
 const isList = require("./list")["list?"];
@@ -59,7 +58,6 @@ module.exports = {
   print,
   "output-string": outputString,
   println,
-  printf,
   input,
   "input-string": input,
   "input-file-read": inputFileRead,

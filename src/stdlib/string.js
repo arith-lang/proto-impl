@@ -1,3 +1,4 @@
+const R = require("ramda");
 const _String = require("./types/String");
 const Decimal = require("./types/Decimal");
 const Char = require("./types/Char");
@@ -26,13 +27,19 @@ function strAppend(...args) {
   return string(all((a, s) => a + s)(...args));
 }
 
+strAppend = R.curryN(2, strAppend);
+
 function strRepeat(num, str) {
   return string(str.repeat(num));
 }
 
+strRepeat = R.curry(strRepeat);
+
 function strRef(i, str) {
   return string(str[i]);
 }
+
+strRef = R.curry(strRef);
 
 function substring(start, end, str) {
   return string(
@@ -42,17 +49,25 @@ function substring(start, end, str) {
   );
 }
 
+substring = R.curry(substring);
+
 function stringFirst(num, str) {
   return substring(0, num, str);
 }
+
+stringFirst = R.curry(stringFirst);
 
 function stringLast(num, str) {
   return substring(str.chars.length - num, str.chars.length, str);
 }
 
+stringLast = R.curry(stringLast);
+
 function makeString(num, char) {
   return string(char.repeat(num));
 }
+
+makeString = R.curry(makeString);
 
 function stringCopy(str) {
   return string(substring(str, 0));
@@ -66,9 +81,13 @@ function stringJoin(sep, ...strs) {
   return string(strs.join(sep));
 }
 
+stringJoin = R.curryN(3, stringJoin);
+
 function stringReplace(toReplace, replaceWith, str) {
   return string(str.replace(toReplace, replaceWith));
 }
+
+stringReplace = R.curry(stringReplace);
 
 // to list and array
 function stringToList(str) {
@@ -84,21 +103,31 @@ function strEq(str1, str2) {
   return str1.isEq(str2);
 }
 
+strEq = R.curry(strEq);
+
 function strLt(str1, str2) {
   return str1 < str2;
 }
+
+strLt = R.curry(strLt);
 
 function strLte(str1, str2) {
   return str1 <= str2;
 }
 
+strLte = R.curry(strLte);
+
 function strGt(str1, str2) {
   return str1 > str2;
 }
 
+strGt = R.curry(strGt);
+
 function strGte(str1, str2) {
   return str1 >= str2;
 }
+
+strGte = R.curry(strGte);
 
 // string predicate
 function isString(obj) {
@@ -162,6 +191,8 @@ function stringInsert(insert, pos, str) {
   return string(v.insert(str, insert, pos));
 }
 
+stringInsert = R.curry(stringInsert);
+
 function latinize(str) {
   return string(v.latinise(str));
 }
@@ -170,17 +201,25 @@ function padleft(length, pad, str) {
   return string(v.padLeft(str, length, pad));
 }
 
+padleft = R.curry(padleft);
+
 function padright(length, pad, str) {
   return string(v.padRight(str, length, pad));
 }
+
+padright = R.curry(padright);
 
 function wordWrap(width, str) {
   return string(v.wordWrap(str, { width, newLine: "\n" }));
 }
 
+wordWrap = R.curry(wordWrap);
+
 function wordWrapWith(width, wrap, str) {
   return string(v.wordWrap(str, { width, newLine: wrap }));
 }
+
+wordWrapWith = R.curry(wordWrapWith);
 
 function stringSplitChars(str) {
   return str.toCharList();
@@ -189,6 +228,8 @@ function stringSplitChars(str) {
 function stringSplit(sep, str) {
   return list(...v.split(str, sep));
 }
+
+stringSplit = R.curry(stringSplit);
 
 function splitWords(str) {
   return string(v.words(str));
@@ -203,9 +244,13 @@ function stringEndsWith(end, str) {
   return v.endsWith(str, end);
 }
 
+stringEndsWith = R.curry(stringEndsWith);
+
 function stringContains(search, str) {
   return v.includes(str, search);
 }
+
+stringContains = R.curry(stringContains);
 
 function stringIsAlpha(str) {
   return v.isAlpha(str);
@@ -242,6 +287,8 @@ function stringIsNumeric(str) {
 function stringStartsWith(start, str) {
   return v.startsWith(str, start);
 }
+
+stringStartsWith = R.curry(stringStartsWith);
 
 module.exports = {
   string,

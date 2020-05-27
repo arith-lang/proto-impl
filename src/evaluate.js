@@ -1,3 +1,4 @@
+const R = require("ramda");
 const { parse } = require("./parse");
 const globals = require("./globals");
 const _Boolean = require("./stdlib/types/Boolean");
@@ -71,7 +72,7 @@ const makeLambda = (node, env) => {
     }
     return evalBlock(node.body, scope);
   };
-  return lambda;
+  return R.curry(lambda);
 };
 
 const applyIf = (node, env) => {

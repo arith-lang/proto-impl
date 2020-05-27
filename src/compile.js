@@ -81,7 +81,7 @@ const VariableDefinition = (node, env = globalEnv) => {
 };
 
 const LambdaExpression = (node, env = globalEnv) => {
-  let code = "(function(";
+  let code = "R.curry(function(";
   node.params.forEach((param, i, a) => {
     code += `${makeVar(param.name)}`;
     if (i + 1 < a.length) code += ", ";

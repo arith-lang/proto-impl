@@ -13,11 +13,6 @@ class Char extends _Object {
 
     this.value = char;
     this.code = char.codePointAt(0).toString(16).padStart(4, "0");
-
-    this.isEq = this.isEq.bind(this);
-    this.isEqv = this.isEq.bind(this);
-    this.isEqual = this.isEq.bind(this);
-    this.toUnicodeEscape = this.toUnicodeEscape.bind(this);
   }
 
   static isCharNative(obj) {
@@ -42,5 +37,8 @@ class Char extends _Object {
     return `#\\u${this.code}`;
   }
 }
+
+Char.prototype.isEqv = Char.prototype.isEq;
+Char.prototype.isEqual = Char.prototype.isEq;
 
 module.exports = Char;

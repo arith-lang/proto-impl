@@ -43,11 +43,11 @@ function substring(start, end, str) {
 }
 
 function stringFirst(num, str) {
-  return substring(str, 0, num);
+  return substring(0, num, str);
 }
 
 function stringLast(num, str) {
-  return substring(str, str.chars.length - num, str.chars.length);
+  return substring(str.chars.length - num, str.chars.length, str);
 }
 
 function makeString(num, char) {

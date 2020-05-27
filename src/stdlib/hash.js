@@ -83,15 +83,36 @@ function hashRemove(key, hash) {
 hashRemove = R.curry(hashRemove);
 
 // hash-clear
+function hashClear(hash) {
+  return hash.clear();
+}
 
 // hash-count
+function hashCount(hash) {
+  return hash.size;
+}
 
 // hash-copy
+function hashCopy(hash) {
+  return IMap(hash);
+}
 
 // hash-concat
+function hashConcat(...hashes) {
+  let merged = new IMap();
+  merged = merged.merge(...hashes);
+  return merged;
+}
+
+hashConcat = R.curryN(2, hashConcat);
 
 // iterators
 // hash-map
+function hashMap(fn, hash) {
+  return hash.map(fn);
+}
+
+hashMap = R.curry(hashMap);
 
 // hash-foreach
 
@@ -126,4 +147,9 @@ module.exports = {
   "hash-set": hashSet,
   "hash-update": hashUpdate,
   "hash-remove": hashRemove,
+  "hash-clear": hashClear,
+  "hash-count": hashCount,
+  "hash-copy": hashCopy,
+  "hash-concat": hashConcat,
+  "hash-map": hashMap,
 };

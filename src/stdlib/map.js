@@ -1,6 +1,7 @@
 const R = require("ramda");
 const equal = require("fast-deep-equal/es6");
 const { cons } = require("./list");
+const { hash } = require("immutable");
 
 // hash map constructor
 // mutable equivalent of hash tables
@@ -83,15 +84,49 @@ function mapRemove(key, map) {
 mapRemove = R.curry(mapRemove);
 
 // map-clear!
+function mapClear(map) {
+  map.clear();
+}
 
 // map-count
+function mapCount(map) {
+  return map.keys().length;
+}
 
 // map-copy
+function mapCopy(map) {
+  const entries = map.entries();
+  const newMap = new Map();
+  for (entry of entries) {
+    newMap.set(entry[0], entry[1]);
+  }
+  return newMap;
+}
 
 // map-concat
+function mapConcat(...maps) {
+  let merged = new Map();
+  for (map of maps) {
+    for (entry of map.entries()) {
+      merged.set(entry[0], entry[1]);
+    }
+  }
+  return merged;
+}
+
+mapConcat = R.curryN(2, mapConcat);
 
 // iterators
 // map-map
+function mapMap(fn, map) {
+  let mapped = new Map();
+  for (entry of map.entries()) {
+    mapped.set(entry[0], fn(entry[1]));
+  }
+  return mapped;
+}
+
+mapMap = R.curry(mapMap);
 
 // map-foreach
 
@@ -125,4 +160,9 @@ module.exports = {
   "map-set": mapSet,
   "map-update": mapUpdate,
   "map-remove": mapRemove,
+  "map-clear": mapClear,
+  "map-count": mapCount,
+  "map-copy": mapCopy,
+  "map-concat": mapConcat,
+  "map-map": mapMap,
 };

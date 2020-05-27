@@ -1,6 +1,6 @@
 const { Map: IMap, is } = require("immutable");
 const R = require("ramda");
-const { cons } = require("./list");
+const { cons, list } = require("./list");
 
 // hash table constructor
 // immutable equivalent of hash maps
@@ -115,12 +115,35 @@ function hashMap(fn, hash) {
 hashMap = R.curry(hashMap);
 
 // hash-foreach
+function hashForeach(fn, hash) {
+  hash.forEach(fn);
+}
+
+hashForeach = R.curry(hashForeach);
 
 // hash-reduce
+function hashReduce(fn, accum, hash) {
+  return hash.reduce(fn, accum);
+}
+
+hashReduce = R.curry(hashReduce);
+
+// hash-reduce-right
+function hashReduceRight(fn, accum, hash) {
+  return hash.reduceRight(fn, accum);
+}
+
+hashReduceRight = R.curry(hashReduceRight);
 
 // hash-keys
+function hashKeys(hash) {
+  return list(...hash.keys());
+}
 
 // hash-values
+function hashValues(hash) {
+  return list(...hash.values());
+}
 
 // conversion
 // hash->list
@@ -152,4 +175,12 @@ module.exports = {
   "hash-copy": hashCopy,
   "hash-concat": hashConcat,
   "hash-map": hashMap,
+  "hash-foreach": hashForeach,
+  "hash-reduce": hashReduce,
+  "hash-foldl": hashReduce,
+  "hash-fold": hashReduce,
+  "hash-reduce-right": hashReduceRight,
+  "hash-foldr": hashReduceRight,
+  "hash-keys": hashKeys,
+  "hash-values": hashValues,
 };

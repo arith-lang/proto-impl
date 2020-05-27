@@ -11,7 +11,7 @@ function string(value) {
 
 // string utilities
 function strlen(str) {
-  return new Decimal(str.length);
+  return new Decimal(v.countGraphemes(str));
 }
 
 function upper(str) {

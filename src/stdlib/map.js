@@ -23,6 +23,9 @@ function makeMap(...args) {
 
 // predicates
 // map?
+function isMap(obj) {
+  return obj.constructor && obj.constructor.name === "Map";
+}
 
 // map-eq?
 
@@ -34,6 +37,7 @@ function makeMap(...args) {
 
 // map-empty?
 
+// CRUD functions
 // map-ref
 
 // map-ref-key
@@ -50,9 +54,12 @@ function makeMap(...args) {
 
 // map-copy
 
+// iterators
 // map-map
 
 // map-foreach
+
+// map-reduce
 
 // map-keys
 
@@ -64,13 +71,13 @@ function makeMap(...args) {
 
 // map->vector
 
+// filters
 // map-filter
 
 // map-reject
 
-// map-reduce
-
 module.exports = {
   hashmap,
   "make-map": makeMap,
+  "map?": isMap,
 };

@@ -1,4 +1,4 @@
-const { Map } = require("immutable");
+const { Map: IMap } = require("immutable");
 const R = require("ramda");
 const { cons } = require("./list");
 
@@ -7,7 +7,7 @@ const { cons } = require("./list");
 // takes a sequence of values
 // do not curry
 function hash(...args) {
-  let hash = Map();
+  let hash = IMap();
   for (let i = 0; i < args.length; i += 2) {
     hash = hash.set(args[i], args[i + 1]);
   }
@@ -19,11 +19,14 @@ function hash(...args) {
 // takes a sequence of cons pairs
 // do not curry
 function makeHash(...args) {
-  return Map(args);
+  return IMap(args);
 }
 
 // predicates
 // hash?
+function isHash(obj) {
+  return IMap.isMap(obj);
+}
 
 // hash-eq?
 
@@ -35,6 +38,7 @@ function makeHash(...args) {
 
 // hash-empty?
 
+// CRUD functions
 // hash-ref
 
 // hash-ref-key
@@ -51,9 +55,12 @@ function makeHash(...args) {
 
 // hash-copy
 
+// iterators
 // hash-map
 
 // hash-foreach
+
+// hash-reduce
 
 // hash-keys
 
@@ -65,13 +72,13 @@ function makeHash(...args) {
 
 // hash->vector
 
+// filters
 // hash-filter
 
 // hash-reject
 
-// hash-reduce
-
 module.exports = {
   hash,
   "make-hash": makeHash,
+  "hash?": isHash,
 };

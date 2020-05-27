@@ -50,6 +50,26 @@ function makeMap(...args) {
 
 // map-copy
 
+// map-map
+
+// map-foreach
+
+// map-keys
+
+// map-values
+
+// map->list
+
+// map->array
+
+// map->vector
+
+// map-filter
+
+// map-reject
+
+// map-reduce
+
 module.exports = {
   hashmap,
   "make-map": makeMap,

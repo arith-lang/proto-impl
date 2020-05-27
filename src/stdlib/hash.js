@@ -49,7 +49,27 @@ function makeHash(...args) {
 
 // hash-count
 
-// hash copy
+// hash-copy
+
+// hash-map
+
+// hash-foreach
+
+// hash-keys
+
+// hash-values
+
+// hash->list
+
+// hash->array
+
+// hash->vector
+
+// hash-filter
+
+// hash-reject
+
+// hash-reduce
 
 module.exports = {
   hash,

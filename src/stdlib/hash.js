@@ -1,6 +1,8 @@
 const { Map: IMap, is } = require("immutable");
 const R = require("ramda");
 const { cons, list } = require("./list");
+const { array } = require("./array");
+const { vector } = require("./vector");
 
 // hash table constructor
 // immutable equivalent of hash maps
@@ -147,15 +149,48 @@ function hashValues(hash) {
 
 // conversion
 // hash->list
+function hashToList(hash) {
+  let temp = [];
+  for ([k, v] of hash.entries()) {
+    temp.push(cons(k, v));
+  }
+  return list(...temp);
+}
 
 // hash->array
+function hashToArray(hash) {
+  let temp = [];
+  for ([k, v] of hash.entries()) {
+    temp.push(cons(k, v));
+  }
+  return array(...temp);
+}
 
 // hash->vector
+function hashToVector(hash) {
+  let temp = [];
+  for ([k, v] of hash.entries()) {
+    temp.push(cons(k, v));
+  }
+  return vector(...temp);
+}
 
 // filters
 // hash-filter
+function hashFilter(pred, hash) {
+  return hash.filter(pred);
+}
+
+hashFilter = R.curry(hashFilter);
+
+const hashKeep = hashFilter;
 
 // hash-reject
+function hashReject(pred, hash) {
+  return hash.filterNot(pred);
+}
+
+hashReject = R.curry(hashReject);
 
 module.exports = {
   hash,
@@ -183,4 +218,10 @@ module.exports = {
   "hash-foldr": hashReduceRight,
   "hash-keys": hashKeys,
   "hash-values": hashValues,
+  "hash->list": hashToList,
+  "hash->array": hashToArray,
+  "hash->vector": hashToVector,
+  "hash-filter": hashFilter,
+  "hash-keep": hashKeep,
+  "hash-reject": hashReject,
 };

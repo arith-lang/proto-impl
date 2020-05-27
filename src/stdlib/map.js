@@ -1,6 +1,8 @@
 const R = require("ramda");
 const equal = require("fast-deep-equal/es6");
 const { cons, list } = require("./list");
+const { array } = require("./array");
+const { vector } = require("./vector");
 
 // hash map constructor
 // mutable equivalent of hash tables
@@ -160,15 +162,60 @@ function mapValues(map) {
 
 // conversion
 // map->list
+function mapToList(map) {
+  let temp = [];
+  for ([k, v] of map.entries()) {
+    temp.push(cons(k, v));
+  }
+  return list(...temp);
+}
 
 // map->array
+function mapToArray(map) {
+  let temp = [];
+  for ([k, v] of map.entries()) {
+    temp.push(cons(k, v));
+  }
+  return array(...temp);
+}
 
 // map->vector
+function mapToVector(map) {
+  let temp = [];
+  for ([k, v] of map.entries()) {
+    temp.push(cons(k, v));
+  }
+  return vector(...temp);
+}
 
 // filters
 // map-filter
+function mapFilter(pred, map) {
+  let filtered = new Map();
+  for (entry of map.entries()) {
+    if (pred(entry[1]) !== false) {
+      filtered.set(entry[0], entry[1]);
+    }
+  }
+  return filtered;
+}
+
+mapFilter = R.curry(mapFilter);
+
+const mapKeep = mapFilter;
 
 // map-reject
+function mapReject(pred, map) {
+  let filtered = new Map();
+  for (entry of map.entries()) {
+    if (pred(entry[1]) === false) {
+      filtered.set(entry[0], entry[1]);
+    }
+  }
+  return filtered;
+}
+
+mapReject = R.curry(mapReject);
 
 module.exports = {
   hashmap,
@@ -195,4 +242,10 @@ module.exports = {
   "map-foldr": mapReduceRight,
   "map-keys": mapKeys,
   "map-values": mapValues,
+  "map->list": mapToList,
+  "map->array": mapToArray,
+  "map->vector": mapToVector,
+  "map-filter": mapFilter,
+  "map-keep": mapKeep,
+  "map-reject": mapReject,
 };

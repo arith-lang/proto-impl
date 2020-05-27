@@ -64,11 +64,6 @@ const setValue = (name, value, env) => {
 };
 
 const defVar = (name, value, env) => {
-  if (symbolExists(name, env)) {
-    throw new ArithReferenceError(
-      `Cannot redefine existing symbol ${name}`,
-    );
-  }
   return (env[Symbol.for(name)] = value);
 };
 

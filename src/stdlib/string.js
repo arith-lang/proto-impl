@@ -42,6 +42,14 @@ function substring(str, start, end) {
   );
 }
 
+function stringFirst(str, num) {
+  return substring(str, 0, num);
+}
+
+function stringLast(str, num) {
+  return substring(str, str.chars.length - num, str.chars.length);
+}
+
 function makeString(num, char) {
   return string(char.repeat(num));
 }
@@ -106,6 +114,135 @@ function capitalize(str) {
   return string(v.capitalize(str, true));
 }
 
+function decapitalize(str) {
+  return string(v.decapitalize(str));
+}
+
+function lispCase(str) {
+  return string(v.kebabCase(str));
+}
+
+function snakeCase(str) {
+  return string(v.snakeCase(str));
+}
+
+function swapCase(str) {
+  return string(v.swapCase(str));
+}
+
+function titleCase(str) {
+  return string(v.titleCase(str));
+}
+
+function countWords(str) {
+  return new Decimal(v.countWords(str));
+}
+
+function escapeHtml(str) {
+  return string(v.escapeHtml(str));
+}
+
+function escapeRegex(str) {
+  return string(v.escapeRegExp(str));
+}
+
+function unescapeHtml(str) {
+  return string(v.unescapeHtml(str));
+}
+
+function stringReverse(str) {
+  return string(v.reverseGrapheme(str));
+}
+
+function slugify(str) {
+  return string(v.slugify(str));
+}
+
+function stringInsert(str, insert, pos) {
+  return string(v.insert(str, insert, pos));
+}
+
+function latinize(str) {
+  return string(v.latinise(str));
+}
+
+function padleft(str, length, pad) {
+  return string(v.padLeft(str, length, pad));
+}
+
+function padright(str, length, pad) {
+  return string(v.padRight(str, length, pad));
+}
+
+function wordWrap(width, str) {
+  return string(v.wordWrap(str, { width, newLine: "\n" }));
+}
+
+function wordWrapWith(width, wrap, str) {
+  return string(v.wordWrap(str, { width, newLine: wrap }));
+}
+
+function stringSplitChars(str) {
+  return str.toCharList();
+}
+
+function stringSplit(sep, str) {
+  return list(...v.split(str, sep));
+}
+
+function splitWords(str) {
+  return string(v.words(str));
+}
+
+function stripHtmlTags(str) {
+  return string(v.stripTags(str));
+}
+
+// utility predicates
+function stringEndsWith(end, str) {
+  return v.endsWith(str, end);
+}
+
+function stringContains(search, str) {
+  return v.includes(str, search);
+}
+
+function stringIsAlpha(str) {
+  return v.isAlpha(str);
+}
+
+function stringIsAlphaDigit(str) {
+  return v.isAlphaDigit(str);
+}
+
+function stringIsBlank(str) {
+  return v.isBlank(str);
+}
+
+function stringIsDigit(str) {
+  return v.isDigit(str);
+}
+
+function stringIsEmpty(str) {
+  return v.isEmpty(str);
+}
+
+function stringIsLowerCase(str) {
+  return v.isLowerCase(str);
+}
+
+function stringIsUpperCase(str) {
+  return v.isUpperCase(str);
+}
+
+function stringIsNumeric(str) {
+  return v.isNumeric(str);
+}
+
+function stringStartsWith(start, str) {
+  return v.startsWith(str, start);
+}
+
 module.exports = {
   string,
   "string-length": strlen,
@@ -115,6 +252,8 @@ module.exports = {
   "string-repeat": strRepeat,
   "string-ref": strRef,
   substring,
+  "string-first": stringFirst,
+  "string-last": stringLast,
   "make-string": makeString,
   "string-copy": stringCopy,
   "string-trim": stringTrim,
@@ -130,4 +269,36 @@ module.exports = {
   "string?": isString,
   "string-camelcase": camelCase,
   "string-capitalize": capitalize,
+  "string-decapitalize": decapitalize,
+  "string-lispcase": lispCase,
+  "string-snakecase": snakeCase,
+  "string-swapcase": swapCase,
+  "string-titlecase": titleCase,
+  "count-words": countWords,
+  "escape-html": escapeHtml,
+  "escape-regex": escapeRegex,
+  "unescape-html": unescapeHtml,
+  "string-reverse": stringReverse,
+  "string-slugify": slugify,
+  "string-insert": stringInsert,
+  "string-latinize": latinize,
+  "string-padleft": padleft,
+  "string-padright": padright,
+  "word-wrap": wordWrap,
+  "word-wrap-with": wordWrapWith,
+  "string-split-chars": stringSplitChars,
+  "string-split": stringSplit,
+  "split-words": splitWords,
+  "strip-html-tags": stripHtmlTags,
+  "string-ends-with?": stringEndsWith,
+  "string-contains?": stringContains,
+  "string-alpha?": stringIsAlpha,
+  "string-alpha-digit?": stringIsAlphaDigit,
+  "string-blank?": stringIsBlank,
+  "string-digit?": stringIsDigit,
+  "string-empty?": stringIsEmpty,
+  "string-lower-case?": stringIsLowerCase,
+  "string-upper-case?": stringIsUpperCase,
+  "string-numeric?": stringIsNumeric,
+  "string-starts-with?": stringStartsWith,
 };

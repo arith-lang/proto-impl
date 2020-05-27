@@ -1,3 +1,4 @@
+const R = require("ramda");
 const Nil = require("./types/Nil");
 const Cons = require("./types/Cons");
 const _Boolean = require("./types/Boolean");
@@ -6,6 +7,7 @@ const nil = new Nil();
 const empty = nil;
 
 // pair constructor
+// do not curry
 function cons(car, cdr) {
   if (!car || isNull(car)) {
     return nil;
@@ -18,6 +20,7 @@ function cons(car, cdr) {
 }
 
 // list constructor
+// do not curry
 function list(...args) {
   if (!args.length) {
     return nil;
@@ -91,6 +94,8 @@ function prepend(item, lst) {
   return cons(item, lst);
 }
 
+prepend = R.curry(prepend);
+
 function append(...lists) {
   let temp = [];
   for (lst of lists) {
@@ -108,6 +113,8 @@ function append(...lists) {
   }
   return list(...temp);
 }
+
+append = R.curry(append);
 
 const concat = append;
 
@@ -152,6 +159,8 @@ function map(fn, lst) {
   }
 }
 
+map = R.curry(map);
+
 function foldl(fn, accum, lst) {
   if (isNull(lst)) {
     return accum;
@@ -170,6 +179,8 @@ function foldl(fn, accum, lst) {
   return accum;
 }
 
+foldl = R.curry(foldl);
+
 const fold = foldl;
 const reduce = foldl;
 
@@ -177,6 +188,8 @@ function foldr(fn, accum, lst) {
   const temp = reverse(lst);
   return foldl(fn, accum, temp);
 }
+
+foldr = R.curry(foldr);
 
 const reduceRight = foldr;
 
@@ -196,6 +209,8 @@ function foreach(fn, lst) {
     }
   }
 }
+
+foreach = R.curry(foreach);
 
 // conversion functions
 function toArray(lst) {
@@ -217,6 +232,7 @@ function toArray(lst) {
   return arr;
 }
 
+// do not curry
 function toString(lst, n) {
   if (isNull(lst)) {
     return nil.toString();
@@ -260,6 +276,8 @@ function filter(pred, lst) {
   return l;
 }
 
+filter = R.curry(filter);
+
 const keep = filter;
 
 function reject(pred, lst) {
@@ -277,6 +295,8 @@ function reject(pred, lst) {
   return l;
 }
 
+reject = R.curry(reject);
+
 function remove(item, lst) {
   let temp = toArray(lst);
   let i = temp.indexOf(item);
@@ -286,6 +306,8 @@ function remove(item, lst) {
   }
   return lst;
 }
+
+remove = R.curry(remove);
 
 function sort(lst) {
   if (isNull(lst)) {
@@ -305,6 +327,8 @@ function sortBy(compare, lst) {
   return list(...temp);
 }
 
+sortBy = R.curry(sortBy);
+
 function member(item, lst) {
   if (isNull(lst)) {
     return lst;
@@ -317,6 +341,8 @@ function member(item, lst) {
   return nil;
 }
 
+member = R.curry(member);
+
 function find(pred, list) {
   if (isNull(lst)) {
     return lst;
@@ -324,6 +350,8 @@ function find(pred, list) {
   const temp = toArray(lst);
   return temp.find(pred) || nil;
 }
+
+find = R.curry(find);
 
 // list accessors
 const first = car;
@@ -348,6 +376,8 @@ function listRef(pos, lst) {
   return head;
 }
 
+listRef = R.curry(listRef);
+
 function listTail(pos, lst) {
   let c = 0;
   let head = car(lst);
@@ -365,6 +395,8 @@ function listTail(pos, lst) {
   }
   return tail;
 }
+
+listTail = R.curry(listTail);
 
 function second(lst) {
   return listRef(2, lst);
@@ -428,6 +460,8 @@ function take(num, lst) {
   return list(...temp);
 }
 
+take = R.curry(take);
+
 function drop(num, lst) {
   if (isNull(lst) || length(lst) <= num) {
     return nil;
@@ -436,6 +470,8 @@ function drop(num, lst) {
   let temp2 = temp1.slice(num);
   return list(...temp2);
 }
+
+drop = R.curry(drop);
 
 module.exports = {
   nil,

@@ -11,6 +11,7 @@ function shouldReturnFalse(value) {
 }
 
 // boolean expression functions
+// do not curry
 function and(...exprs) {
   for (expr of exprs) {
     if (_Boolean.shouldReturnFalse(expr)) {

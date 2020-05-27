@@ -65,9 +65,12 @@ function mapRef(ref, map) {
 
 mapRef = R.curry(mapRef);
 
-// map-ref-key
-
 // map-set!
+function mapSet(key, value, map) {
+  map.set(key, value);
+}
+
+mapSet = R.curry(mapSet);
 
 // map-update!
 
@@ -78,6 +81,8 @@ mapRef = R.curry(mapRef);
 // map-count
 
 // map-copy
+
+// map-concat
 
 // iterators
 // map-map
@@ -110,5 +115,5 @@ module.exports = {
   "map-equals?": isMapEqual,
   "map-has-key?": mapHasKey,
   "map-empty?": isMapEmpty,
-  "map-ref": mapRef,
+  "map-set": mapSet,
 };

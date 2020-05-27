@@ -65,9 +65,12 @@ function hashRef(ref, hash) {
 
 hashRef = R.curry(hashRef);
 
-// hash-ref-key
-
 // hash-set
+function hashSet(key, value, hash) {
+  return hash.set(key, value);
+}
+
+hashSet = R.curry(hashSet);
 
 // hash-update
 
@@ -78,6 +81,8 @@ hashRef = R.curry(hashRef);
 // hash-count
 
 // hash-copy
+
+// hash-concat
 
 // iterators
 // hash-map
@@ -111,4 +116,5 @@ module.exports = {
   "hash-has-key?": hashHasKey,
   "hash-empty?": isHashEmpty,
   "hash-ref": hashRef,
+  "hash-set": hashSet,
 };

@@ -36,7 +36,9 @@ function strRef(str, i) {
 
 function substring(str, start, end) {
   return string(
-    str.chars.slice(start, end).reduce((s, c) => s + c.value, ""),
+    string(
+      str.chars.slice(start, end).reduce((s, c) => s + c.value, ""),
+    ),
   );
 }
 

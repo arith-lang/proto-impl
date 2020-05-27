@@ -1,0 +1,14 @@
+(define fib
+  (lambda (n)
+    (if (> 2 n) n
+      (+ (fib (- n 2)) (fib (- n 1))))))
+
+(define memo
+  (lambda (fn)
+    (define cache (hashmap))
+    (lambda (x)
+      (if (map-has-key? x cache) (map-ref x cache)
+        (fn x)))))
+
+(define fib-memo (memo fib))
+(fib-memo 20)

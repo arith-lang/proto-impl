@@ -1,0 +1,11 @@
+(define my-hash (hash 1 "one" 2 "two" 3 "three"))
+(print my-hash)
+
+(define my-hash2 (make-hash (cons 1 "one") (cons 2 "two") (cons 3 "three")))
+(print my-hash2)
+
+(define my-map (hashmap 1 "one" 2 "two" 3 "three"))
+(print my-map)
+
+(define my-map2 (make-map (cons 1 "one") (cons 2 "two") (cons 3 "three")))
+(print my-map2)

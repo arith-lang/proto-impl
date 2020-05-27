@@ -1,6 +1,5 @@
 const equal = require("fast-deep-equal");
 const _Object = require("./Object");
-const _Boolean = require("./Boolean");
 const { ArithTypeError } = require("../../errors");
 
 class Char extends _Object {
@@ -15,14 +14,8 @@ class Char extends _Object {
     this.code = char.codePointAt(0).toString(16).padStart(4, "0");
   }
 
-  static isCharNative(obj) {
-    return obj.constructor && obj.constructor === "Char";
-  }
-
   static isChar(obj) {
-    return obj.constructor && obj.constructor === "Char"
-      ? _Boolean.make("#t")
-      : _Boolean.make("#f");
+    return obj.constructor && obj.constructor === "Char";
   }
 
   isEq(other) {

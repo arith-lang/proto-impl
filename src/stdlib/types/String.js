@@ -1,6 +1,5 @@
 const equal = require("fast-deep-equal");
 const Char = require("./Char");
-const _Boolean = require("./Boolean");
 const { array } = require("../array");
 const { vector } = require("../vector");
 const { list } = require("../list");
@@ -13,14 +12,8 @@ class _String extends String {
     );
   }
 
-  static isStringNative(obj) {
-    return obj.constructor && obj.constructor.name === "_String";
-  }
-
   static isString(obj) {
-    return obj.constructor && obj.constructor.name === "_String"
-      ? _Boolean.make("#t")
-      : _Boolean.make("#f");
+    return obj.constructor && obj.constructor.name === "_String";
   }
 
   static make(string) {
@@ -28,10 +21,7 @@ class _String extends String {
   }
 
   isEq(other) {
-    if (equal(this, other)) {
-      return _Boolean.make("#t");
-    }
-    return _Boolean.make("#f");
+    return equal(this, other);
   }
 
   toCharString() {

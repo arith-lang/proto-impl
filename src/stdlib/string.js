@@ -3,7 +3,6 @@ const Decimal = require("./types/Decimal");
 const Char = require("./types/Char");
 const { all } = require("./utils");
 const { list } = require("./list");
-const _Boolean = require("./types/Boolean");
 
 // string constructor
 function string(value) {
@@ -18,6 +17,7 @@ function strlen(str) {
 function upper(str) {
   return string(str.toUpperCase());
 }
+
 function lower(str) {
   return string(str.toLowerCase());
 }
@@ -73,39 +73,24 @@ function strEq(str1, str2) {
 }
 
 function strLt(str1, str2) {
-  if (str1 < str2) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return str1 < str2;
 }
 
 function strLte(str1, str2) {
-  if (str1 <= str2) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return str1 <= str2;
 }
 
 function strGt(str1, str2) {
-  if (str1 > str2) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return str1 > str2;
 }
 
 function strGte(str1, str2) {
-  if (str1 >= str2) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return str1 >= str2;
 }
 
 // string predicate
 function isString(obj) {
-  if (_String.isString(obj)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return _String.isString(obj);
 }
 
 module.exports = {

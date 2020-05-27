@@ -1,6 +1,5 @@
 const Decimal = require("./types/Decimal");
 const { all } = require("./utils");
-const _Boolean = require("./types/Boolean");
 
 // Create a new _Number
 function decimal(value) {
@@ -67,38 +66,23 @@ function floor(x) {
 
 // numeric comparisons
 function eq(x, y) {
-  if (y instanceof Decimal && x.equals(y)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return y instanceof Decimal && x.equals(y);
 }
 
 function lt(x, y) {
-  if (x.lessThan(y)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return x.lessThan(y);
 }
 
 function lte(x, y) {
-  if (x.lessThanOrEqualTo(y)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return x.lessThanOrEqualTo(y);
 }
 
 function gt(x, y) {
-  if (x.greaterThan(y)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return x.greaterThan(y);
 }
 
 function gte(x, y) {
-  if (x.greaterThanOrEqualTo(y)) {
-    return _Boolean.make("#t");
-  }
-  return _Boolean.make("#f");
+  return x.greaterThanOrEqualTo(y);
 }
 
 module.exports = {

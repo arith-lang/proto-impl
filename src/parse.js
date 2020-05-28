@@ -87,7 +87,22 @@ const parseKeyword = (tokens) => {
   );
 };
 
-const parseStructDefinition = (tokens) => {};
+const parseStructDefinition = (tokens) => {
+  let structTokens = eatExprTokens(tokens);
+  let token = pop(structTokens);
+  let struct = {
+    type: "StructDefinition",
+    name: token.value,
+    fields: [],
+  };
+  token = pop(structTokens); // left paren opening fields
+  while (!isRightParen(peek(structTokens).value)) {
+    token = pop(structTokens);
+    struct.fields.push(parseAtom(token));
+  }
+
+  return struct;
+};
 
 const parseIf = (tokens) => {
   let ifExprTokens = eatExprTokens(tokens);

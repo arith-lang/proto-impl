@@ -21,4 +21,5 @@ module.exports = {
   "get-struct-name": getStructName,
   "get-struct-field": getStructField,
   "set-struct-field": setStructField,
+  "struct-update": setStructField,
 };

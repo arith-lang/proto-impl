@@ -125,7 +125,6 @@ const defineStruct = (node, env) => {
       );
     };
     defVar(`${node.name}-${field.name}`, accessor, env);
-    console.log(env);
   });
 };
 

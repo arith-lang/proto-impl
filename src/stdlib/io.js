@@ -13,7 +13,13 @@ function jsLog(...args) {
 function print(...args) {
   let temp = [];
   for (item of args) {
-    if (item) {
+    if (
+      item ||
+      item === 0 ||
+      item === "" ||
+      item === false ||
+      item === null
+    ) {
       if (isList(item)) {
         temp.push(toString(item));
       } else {

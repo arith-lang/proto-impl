@@ -7,6 +7,7 @@ const utils = require("./stdlib/utils");
 const vector = require("./stdlib/vector");
 const hash = require("./stdlib/hash");
 const map = require("./stdlib/map");
+const struct = require("./stdlib/struct");
 
 module.exports = {
   ...boolean,
@@ -18,4 +19,5 @@ module.exports = {
   ...vector,
   ...hash,
   ...map,
+  ...struct,
 };

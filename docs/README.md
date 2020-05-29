@@ -57,3 +57,7 @@ Second, and perhaps more importantly, JavaScript is the dominant programming lan
 Finally, making the language interact with JavaScript gives us immediate access to the hundreds of thousands of packages available on NPM, the JavaScript package registry, which means if there's a functionality you need that's not baked into Arith itself but *is* available in a package you can still access and use it.
 
 As an added bonus, JavaScript itself was heavily influenced by a Lisp. Brendan Eich, the original designer of the JavaScript language, took heavy inspiration from Scheme when he defined the first feature set for JavaScript.
+
+### Why do the sample code blocks in these docs say "Scheme"?
+
+We currently use the Scheme label for code highlighting because it's far simpler than writing our own plugin for Prism, the tool our documentation builder uses for syntax highlighting. We're focused on bringing more great features to Arith, so tooling and the like is going to have to wait. We'll make do with the fantastic tools that are already out there as long as we can so we can keep working on the language itself!

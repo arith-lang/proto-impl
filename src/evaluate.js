@@ -89,7 +89,6 @@ const applyIf = (node, env) => {
 const defineStruct = (node, env) => {
   const structDefiner = {};
   node.fields.forEach((field) => (structDefiner[field.name] = null));
-  // defVar(node.name, globals.struct(obj, node.name), env);
   const structConstructor = (...args) => {
     const structFunc = globals["struct"](structDefiner, node.name);
     let obj = {};

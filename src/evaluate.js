@@ -9,6 +9,7 @@ const {
   defVar,
 } = require("./environment");
 const { ArithTypeError } = require("./errors");
+
 const globalEnv = setEnv(globals);
 const moduleEnv = createEnv(globalEnv);
 
@@ -34,6 +35,8 @@ const evaluate = (node, env = moduleEnv) => {
       return makeLambda(node, env);
     case "IfExpression":
       return applyIf(node, env);
+    case "StructDefinition":
+      return defineStruct(node, env);
   }
 };
 
@@ -81,6 +84,17 @@ const applyIf = (node, env) => {
     return evaluate(node.then, env);
   }
   return evaluate(node.else, env);
+};
+
+const defineStruct = (node, env) => {
+  const obj = {};
+  node.fields.forEach((field) => (obj[field.name] = null));
+  defVar(node.name, globals.struct(obj, node.name), env);
+
+  const pred = (obj) => {
+    return globals["get-struct-name"](obj) === node.name;
+  };
+  defVar(`${node.name}?`, pred, env);
 };
 
 module.exports = { evaluate: (input) => evaluate(parse(input)) };

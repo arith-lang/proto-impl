@@ -1,0 +1,20 @@
+(struct posn (x y))
+(define point (posn 1 2))
+(define num 7)
+
+(print point)
+(print (posn? point))
+(print (posn? num))
+(print (posn-x point))
+
+(define point2 (posn-x 10 point))
+(print point2)
+
+(struct square (a b c d))
+(define new-square
+  (square
+    (posn 0 0)
+    (posn 0 10)
+    (posn 10 10)
+    (posn 10 0)))
+(print new-square)

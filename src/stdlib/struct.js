@@ -1,9 +1,12 @@
-const { Record } = require("immutable");
+const { Record, merge } = require("immutable");
+const equal = require("fast-deep-equal/es6");
 
 function struct(obj, name) {
   return Record(obj, name);
 }
 
+// the following 3 functions are for the interpreter
+// and may not work as expected in Arith programs
 function getStructName(obj) {
   return Record.getDescriptiveName(obj);
 }
@@ -21,7 +24,11 @@ function isStructEq(struct1, struct2) {
 }
 
 function isStructEqual(struct1, struct2) {
-  return struct1.equals(struct2);
+  return equal(struct1.toObject(), struct2.toObject());
+}
+
+function structCopy(struct) {
+  return merge(struct, {});
 }
 
 module.exports = {
@@ -29,8 +36,8 @@ module.exports = {
   "get-struct-name": getStructName,
   "get-struct-field": getStructField,
   "set-struct-field": setStructField,
-  "struct-update": setStructField,
   "struct-eq?": isStructEq,
   "struct-eqv?": isStructEq,
   "struct-equal?": isStructEqual,
+  "struct-copy": structCopy,
 };

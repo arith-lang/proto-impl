@@ -29,9 +29,10 @@ const run = (argv) => {
       "<none>, i",
       "              Open the interpreter in interactive/REPL mode",
     );
+    console.log("help", "                   Print this help message");
     console.log(
       "version",
-      "                    Print the version of Arith you're using",
+      "                Print the version of Arith you're using",
     );
     console.log(
       "run",

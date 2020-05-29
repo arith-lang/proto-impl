@@ -1,2 +1,3 @@
 - [Home](/)
-- [Quick Start](quick-start.md)
+- Getting started
+    - [Quick Start](quick-start.md)

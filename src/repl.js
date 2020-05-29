@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { prompt } = require("inquirer");
 const chalk = require("chalk");
-const { parseAndEvaluate } = require("./parse-and-evaluate");
+const { evaluate } = require("./evaluate");
 
 const version = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../package.json"), "utf-8"),
@@ -26,7 +26,7 @@ const repl = async () => {
     const { INPUT } = await getInput();
 
     if (INPUT.trim()) {
-      console.log(chalk.yellow(parseAndEvaluate(INPUT)));
+      console.log(chalk.yellow(evaluate(INPUT)));
     }
   } catch (e) {
     console.error(e);

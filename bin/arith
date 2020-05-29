@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
+const path = require("path");
 const chalk = require("chalk");
 const { evaluate } = require("../src/evaluate");
 const { print } = require("../src/stdlib/io");
+
+const version = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../package.json"), "utf-8"),
+).version;
 
 const run = (argv) => {
   const [command, ...args] = argv.slice(2);
@@ -17,11 +22,16 @@ const run = (argv) => {
         "Welcome to Arith - a simple, Lisp-like programming language.\n",
       ),
     );
+    console.log(`You are using Arith ${version}`);
     console.log(chalk.blue("Here are the valid commands:\n"));
     console.log("COMMAND", "                DESCRIPTION");
     console.log(
       "<none>, i",
       "              Open the interpreter in interactive/REPL mode",
+    );
+    console.log(
+      "version",
+      "                    Print the version of Arith you're using",
     );
     console.log(
       "run",
@@ -36,6 +46,8 @@ const run = (argv) => {
     console.log("Enjoy!");
 
     process.exit(0);
+  } else if (command.toLowerCase() === "version") {
+    console.log(`Arith ${version}`);
   } else if (command.toLowerCase() === "run") {
     const input = fs.readFileSync(args[0], "utf-8");
 

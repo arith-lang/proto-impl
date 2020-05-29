@@ -36,6 +36,10 @@ function setStructField(field, value, struct) {
 }
 // end of interpreter-only functions
 
+function isStruct(obj) {
+  return Record.isRecord(obj);
+}
+
 function isStructEq(struct1, struct2) {
   return Object.is(struct1, struct2);
 }
@@ -54,6 +58,7 @@ module.exports = {
   "get-struct-name": getStructName,
   "get-struct-field": getStructField,
   "set-struct-field": setStructField,
+  "struct?": isStruct,
   "struct-eq?": isStructEq,
   "struct-eqv?": isStructEq,
   "struct-equal?": isStructEqual,

@@ -133,7 +133,25 @@ const StructDefinition = (node, env) => {
     node.name
   }"\n`;
 
-  return constructor + predicate;
+  let accessors = "";
+  node.fields.forEach((field) => {
+    accessors += `const ${makeVar(
+      node.name + "-" + field.name,
+    )} = (...args) => {\n`;
+    accessors += `if (args.length === 1) {\n`;
+    accessors += `return __arith__["get-struct-field"]("${makeVar(
+      field.name,
+    )}", args[0]);\n`;
+    accessors += `} else if (args.length === 2) {\n`;
+    accessors += `return __arith__["set-struct-field"]("${makeVar(
+      field.name,
+    )}", args[0], args[1]);\n`;
+    accessors += `}\n`;
+    accessors += `throw new Error("Invalid accessor call for struct ${node.name}");\n`;
+    accessors += `}\n`;
+  });
+
+  return constructor + predicate + accessors;
 };
 
 const makeVar = (name) => {

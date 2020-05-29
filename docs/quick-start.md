@@ -33,6 +33,8 @@ Since Lisp is famous for lists (the name is shorthand for "LISt Processing), you
   (reduce string-append "" message)) ; -> "Hello, world"
 ```
 
+You can see many additional example programs [here](https://github.com/jasonsbarr/arith/tree/master/examples).
+
 ## Running or compiling Arith files
 
 To evaluate a program and print its output to the terminal, use `arith run <filename>`.

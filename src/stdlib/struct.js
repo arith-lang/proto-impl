@@ -5,8 +5,8 @@ function struct(obj, name) {
   return Record(obj, name);
 }
 
-// the following functions are for the interpreter
-// and may not work as expected in Arith programs
+// the following functions are for the interpreter/compiler
+// and they may not work as expected in Arith programs
 function makeStructConstructor(obj, name) {
   let structFunc = struct(obj, name);
   return function (...args) {

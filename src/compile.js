@@ -113,7 +113,28 @@ const IfExpression = (node, env) => {
   return code;
 };
 
-const StructDefinition = () => {};
+const StructDefinition = (node, env) => {
+  let constructor = `const ${makeVar(
+    node.name,
+  )} = __arith__["make-struct-constructor"]({`;
+
+  node.fields.forEach((field, i) => {
+    if (i < node.fields.length - 1) {
+      constructor += `${makeVar(field.name)}: null, `;
+    } else {
+      constructor += `${makeVar(field.name)}: null`;
+    }
+  });
+  constructor += `}, "${node.name}")\n`;
+
+  let predicate = `const ${makeVar(
+    node.name + "?",
+  )} = (obj) => __arith__["get-struct-name"](obj)  === "${
+    node.name
+  }"\n`;
+
+  return constructor + predicate;
+};
 
 const makeVar = (name) => {
   const specialChars = /[-%|&!\?\*\+\/\\><\^@]/g;

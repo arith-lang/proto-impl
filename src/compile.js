@@ -34,7 +34,7 @@ const BooleanLiteral = ({ value }) => `__arith__.bool("${value}")`;
 
 const StringLiteral = ({ value }) => `__arith__.string("${value}")`;
 
-const Identifier = (node, env = globalEnv) => {
+const Identifier = (node, env) => {
   let name = "";
 
   try {
@@ -47,7 +47,7 @@ const Identifier = (node, env = globalEnv) => {
   return name;
 };
 
-const CallExpression = (node, env = globalEnv) => {
+const CallExpression = (node, env) => {
   let name = "";
 
   try {
@@ -69,18 +69,18 @@ const CallExpression = (node, env = globalEnv) => {
   return code;
 };
 
-const KeywordExpression = (node, env = globalEnv) => {
+const KeywordExpression = (node, env) => {
   node.name = `${node.name}Expr`;
 
   return CallExpression(node, env);
 };
 
-const VariableDefinition = (node, env = globalEnv) => {
+const VariableDefinition = (node, env) => {
   let value = compile(node.value, env);
   return `var ${makeVar(node.name)} = ${value};`;
 };
 
-const LambdaExpression = (node, env = globalEnv) => {
+const LambdaExpression = (node, env) => {
   let code = "R.curry(function(";
   node.params.forEach((param, i, a) => {
     code += `${makeVar(param.name)}`;
@@ -99,7 +99,7 @@ const LambdaExpression = (node, env = globalEnv) => {
   return code;
 };
 
-const IfExpression = (node, env = globalEnv) => {
+const IfExpression = (node, env) => {
   let code = "(";
   code +=
     `!__arith__.shouldReturnFalse(` +

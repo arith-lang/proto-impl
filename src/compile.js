@@ -113,6 +113,8 @@ const IfExpression = (node, env = globalEnv) => {
   return code;
 };
 
+const StructDefinition = () => {};
+
 const makeVar = (name) => {
   const specialChars = /[-%|&!\?\*\+\/\\><\^@]/g;
   const newName = `_arith_${name.replace(specialChars, "_")}`;
@@ -131,6 +133,7 @@ const emit = {
   VariableDefinition,
   LambdaExpression,
   IfExpression,
+  StructDefinition,
 };
 
 module.exports = { compile: (input) => compile(parse(input)) };

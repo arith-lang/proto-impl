@@ -5,8 +5,24 @@ function struct(obj, name) {
   return Record(obj, name);
 }
 
-// the following 3 functions are for the interpreter
+// the following functions are for the interpreter
 // and may not work as expected in Arith programs
+function makeStructConstructor(obj, name) {
+  let structFunc = struct(obj, name);
+  return function (...args) {
+    let params = {};
+    Object.keys(obj).forEach((key, i) => {
+      if (!args[i]) {
+        throw new ArithReferenceError(
+          `Invalid number of arguments for struct constructor ${node.name}`,
+        );
+      }
+      params[key] = args[i];
+    });
+    return structFunc(params);
+  };
+}
+
 function getStructName(obj) {
   return Record.getDescriptiveName(obj);
 }
@@ -18,6 +34,7 @@ function getStructField(field, struct) {
 function setStructField(field, value, struct) {
   return struct.set(field, value);
 }
+// end of interpreter-only functions
 
 function isStructEq(struct1, struct2) {
   return Object.is(struct1, struct2);
@@ -33,6 +50,7 @@ function structCopy(struct) {
 
 module.exports = {
   struct,
+  "make-struct-constructor": makeStructConstructor,
   "get-struct-name": getStructName,
   "get-struct-field": getStructField,
   "set-struct-field": setStructField,

@@ -49,7 +49,9 @@ Try a longer sentence. It can be anything you like.
 
 You guessed it&mdash;the REPL again echoes the input straight back to you.
 
-The simplest expressions are simply values, which the interpreter will evaluate to the values themselves. You can do the same thing with numbers: try typing `21` into the REPL. Again, it should echo the number right back to you, just like it did with text.
+The REPL processes these values as **expressions**, which are complete, self-contained bits of code that are evaluated by the interpreter. That means the interpreter processes them so they produce, or **return** a value. Returning simply means the value produced by the expression is given to the interpreter for it to use in the program in some way.
+
+The simplest expressions are simply values, which the interpreter will evaluate to the values themselves. You can do the same thing with numbers: try typing `21` into the REPL. Again, it should echo the number right back to you, just like it did with strings of text.
 
 Now type `#t`. What does it print back to you? I'll talk more about this value later in the tutorial.
 
@@ -86,7 +88,7 @@ You've seen Arith evaluate values as expressions, including numbers. Let's look 
 
 You're used to seeing arithmetic expressions written in **infix notation**, which means the operator comes between its operands like this: `5 + 3`.
 
-Lisps use **prefix notation**, where the operator comes *before* its operands: `(+ 5 3)`.
+Lisps use **prefix notation**, where the operator comes *before* its operands: `(+ 5 3)`. Also, unlike many other programming languages, you don't use a comma between arguments to your functions &ndash; just a space.
 
 It may take some getting used to, but you'll find this notation is extremely powerful especially when it comes to composing programs with functions.
 
@@ -103,3 +105,76 @@ You can also nest a function call inside another function call, like so:
 ```
 
 Composing expressions by nesting them is an extremely powerful technique that will allow you to write complex programs with considerably less effort than it often takes in other languages.
+
+### Floor division and modulo
+
+Let's look at those other two arithmetic operator functions: `//` and `%`.
+
+If you know Python, the latter will be familiar to you: it's floor division, also sometimes called integer division.
+
+Regular division can give you a result either as a decimal or integer, depending on its operands. Floor division will always give you an integer. It takes the result of dividing its operands and then rounds it down, or floors it.
+
+To see what I mean, first run `(/ 10 3)` in your REPL. The result is `3.3333333333333333333`.
+
+Then run `(// 10 3)`. It should return `3` as its result.
+
+Floor division is useful when you're doing operations and you only need an integer result.
+
+`%` is the modulo operator, which gives you the integer remainder of a division operation. Run `(% 10 3)`. You should get `1` as a result.
+
+These two functions are very powerful when used together. If you need to work with multiples of 10, for example, you can get the number of 100s in a large number by taking the floor division result of that number divided by 100. This is very helpful for doing things like turning a decimal number into a string.
+
+### Exercise: additional numeric operations
+
+Arith has several other functions that work on numbers. Try using `max`, `min`, `ceil`, and `floor` with different combinations of arguments and see what you get! Try composing them with the arithmetic functions. Use the constant `PI` (always upper-case) in calculations. Don't worry about making a mistake! You won't break your computer. The worst-case scenario when using the Arith REPL is that you'll need to close the REPL (CTRL/CMD+C or CTRL/CMD+D) and restart it.
+
+## Strings and text
+
+First a bit of terminology: **string** is the computer science word for "text."
+
+Arith has a large library of string functions, so we're only just going to scratch the surface here.
+
+Type the following expressions in your REPL, making sure to hit `ENTER` after each one:
+
+```scheme
+(string-append "Hello," "world")
+(string-append "Hello," " " "world")
+(string-upcase "hello")
+(string-downcase "HELLO")
+(string-reverse "hello")
+(string-repeat 3 "hello")
+(string-length "hello")
+(string-swapcase "Hello")
+(string-titlecase "hello")
+(substring 1 3 "hello")
+```
+
+If you're new to programming, that last one might seem a bit confusing. Why does starting at `1` give you the *2nd* character in the string?
+
+The answer is that programming languages mostly use *zero-based indexing*, which means when counting the items in a sequence, like a string, you start counting from `0`. That means the string "Hello" starts at index `0` and ends at index `4`.
+
+This is important to remember when using functions like `substring` that use the index numbers.
+
+### Exercise: using `string-ref`
+
+Use the `string-ref` function 5 times, starting with `0`, to get each letter in the string "hello". Use the function like so: `(string-ref <index> <string>)`. What happens if you try to access an index that doesn't exist?
+
+## Booleans and the conditional expression
+
+## Variable definitions
+
+## Basic lists
+
+## Moving to a text editor
+
+## Creating your own functions
+
+## Lists in more depth
+
+## Vectors and Arrays
+
+## Hash tables and Maps
+
+## Defining your own data types
+
+## Putting it all together

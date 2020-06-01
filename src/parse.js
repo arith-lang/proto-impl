@@ -73,6 +73,9 @@ const parseKeyword = (tokens) => {
   let token = pop(tokens);
 
   switch (token.value) {
+    case "#t":
+    case "#f":
+      return parseAtom(token);
     case "define":
       return parseDefine(tokens);
     case "lambda":
@@ -89,7 +92,9 @@ const parseKeyword = (tokens) => {
   );
 };
 
-const parseCond = (tokens) => {};
+const parseCond = (tokens) => {
+  console.log(tokens);
+};
 
 const parseStructDefinition = (tokens) => {
   let structTokens = eatExprTokens(tokens);

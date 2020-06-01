@@ -128,6 +128,14 @@ These two functions are very powerful when used together. If you need to work wi
 
 Arith has several other functions that work on numbers. Try using `max`, `min`, `ceil`, and `floor` with different combinations of arguments and see what you get! Try composing them with the arithmetic functions. Use the constant `PI` (always upper-case) in calculations. Don't worry about making a mistake! You won't break your computer. The worst-case scenario when using the Arith REPL is that you'll need to close the REPL (CTRL/CMD+C or CTRL/CMD+D) and restart it.
 
+### A note about numbers in Arith
+
+If you're an experienced programmer, you're probably familiar with the quirks of floating-point numbers and the problems this can cause with mathematical operations.
+
+Arith uses exact-precision numbers, so you don't have to worry about any of that. If you give Arith a piece of numeric data it will read it as exactly the number it is, not as a binary approximation of a decimal number. You can even give it binary, hexadecimal, or octal numbers (prefixed with `#b`, `#x`, and `#o`) and Arith will store them as their exact decimal value.
+
+If you don't know what any of this means, it's enough to know that when you give Arith a number it will behave exactly as you expect that number to behave.
+
 ## Strings and text
 
 First a bit of terminology: **string** is the computer science word for "text."

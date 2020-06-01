@@ -8,7 +8,8 @@
     (define cache (hashmap))
     (lambda (x)
       (if (map-has-key? x cache) (map-ref x cache)
-        (fn x)))))
+        (map-set! x (fn x) cache))
+      (map-ref x cache))))
 
 (define fib-memo (memo fib))
 (fib-memo 25)

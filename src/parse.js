@@ -92,11 +92,21 @@ const parseKeyword = (tokens) => {
 
 const parseStructDefinition = (tokens) => {
   let structTokens = eatExprTokens(tokens);
+  const startToken = structTokens[0];
+  const endToken = structTokens[structTokens.length - 1];
   let token = pop(structTokens);
   let struct = {
     type: "StructDefinition",
     name: token.value,
     fields: [],
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
   };
   token = pop(structTokens); // left paren opening fields
   while (!isRightParen(peek(structTokens).value)) {

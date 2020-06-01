@@ -37,7 +37,12 @@ function strRepeat(num, str) {
 strRepeat = R.curry(strRepeat);
 
 function strRef(i, str) {
-  return string(str[i]);
+  if (i > strlen(str) - 1) {
+    throw new ReferenceError(
+      "Ref out of bounds: string length exceeded",
+    );
+  }
+  return string(str.chars[i]);
 }
 
 strRef = R.curry(strRef);

@@ -138,7 +138,7 @@ Type the following expressions in your REPL, making sure to hit `ENTER` after ea
 
 ```scheme
 (string-append "Hello," "world")
-(string-append "Hello," " " "world")
+(string-append "Hello, " "world")
 (string-upcase "hello")
 (string-downcase "HELLO")
 (string-reverse "hello")
@@ -158,6 +158,20 @@ This is important to remember when using functions like `substring` that use the
 ### Exercise: using `string-ref`
 
 Use the `string-ref` function 5 times, starting with `0`, to get each letter in the string "hello". Use the function like so: `(string-ref <index> <string>)`. What happens if you try to access an index that doesn't exist?
+
+### A note about computers
+
+If you look back at the list of string function calls above, you'll notice two different calls of `string-append`. The second has a space after "Hello,", but the first doesn't. How did this affect what you saw echoed back to you in the REPL?
+
+That's right, in the first call the two strings were right up against each other with no space in between.
+
+This demonstrates a very important thing to know about computers and programming:
+
+The computer will always do *exactly* what you tell it to do, and not a bit more or less.
+
+This can be a problem when what you mean for the computer to do and what you actually tell it to do aren't the same thing!
+
+Unfortunately as programmers we have only ourselves to blame when the computer doesn't do what we wanted it to do; remember, it's doing exactly what you told it. It doesn't know any better!
 
 ## Booleans and the conditional expression
 

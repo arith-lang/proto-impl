@@ -110,7 +110,7 @@ Composing expressions by nesting them is an extremely powerful technique that wi
 
 Let's look at those other two arithmetic operator functions: `//` and `%`.
 
-If you know Python, the latter will be familiar to you: it's floor division, also sometimes called integer division.
+If you know Python, the former will be familiar to you: it's floor division, also sometimes called integer division.
 
 Regular division can give you a result either as a decimal or integer, depending on its operands. Floor division will always give you an integer. It takes the result of dividing its operands and then rounds it down, or floors it.
 

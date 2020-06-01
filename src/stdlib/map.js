@@ -226,6 +226,7 @@ module.exports = {
   "map-equals?": isMapEqual,
   "map-has-key?": mapHasKey,
   "map-empty?": isMapEmpty,
+  "map-ref": mapRef,
   "map-set!": mapSet,
   "map-update!": mapUpdate,
   "map-remove!": mapRemove,

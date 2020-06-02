@@ -38,14 +38,14 @@ const inputString = input;
 
 // Working with files
 // Encoding only necessary if text file
-function readFile(file, encoding) {
+function readFile(file, encoding = "utf-8") {
   const realPath = /^\./.test(file)
     ? path.join(process.cwd(), file)
     : file;
   return fs.readFileSync(realPath, encoding);
 }
 
-function writeFile(file, data, encoding) {
+function writeFile(file, data, encoding = "utf-8") {
   const realPath = /^\./.test(file)
     ? path.join(process.cwd(), file)
     : file;

@@ -49,6 +49,7 @@ function writeFile(file, data, encoding = "utf-8") {
   const realPath = /^\./.test(file)
     ? path.join(process.cwd(), file)
     : file;
+  print(`Writing to ${file}...`);
   fs.writeFileSync(realPath, data, encoding);
 }
 

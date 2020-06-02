@@ -30,13 +30,6 @@ function print(...args) {
   console.log(...temp);
 }
 
-const outputString = print;
-
-function println(...args) {
-  print(...args);
-  console.log("");
-}
-
 function input(prompt) {
   return readlineSync.question(prompt);
 }
@@ -45,14 +38,14 @@ const inputString = input;
 
 // Working with files
 // Encoding only necessary if text file
-function inputFileRead(file, encoding) {
+function readFile(file, encoding) {
   const realPath = /^\./.test(file)
     ? path.join(process.cwd(), file)
     : file;
   return fs.readFileSync(realPath, encoding);
 }
 
-function outputFileWrite(file, data, encoding) {
+function writeFile(file, data, encoding) {
   const realPath = /^\./.test(file)
     ? path.join(process.cwd(), file)
     : file;
@@ -62,10 +55,7 @@ function outputFileWrite(file, data, encoding) {
 module.exports = {
   "js-log": jsLog,
   print,
-  "output-string": outputString,
-  println,
   input,
-  "input-string": input,
-  "input-file-read": inputFileRead,
-  "output-file-write": outputFileWrite,
+  "read-file": readFile,
+  "write-file": writeFile,
 };

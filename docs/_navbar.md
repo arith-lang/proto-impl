@@ -1,9 +1,9 @@
 - [Home](/)
 - [Getting Started](/getting-started/getting-started.md)
     - [Quick Start](/getting-started/quick-start.md)
-    - [Tutorial](/getting-started/tutorial.md)
-    - [Expressions and Numbers](/getting-started/expressions.md)
-    - [Strings and Text](/getting-started/strings.md)
+- [Tutorial](/tutorial/index.md)
+    - [Expressions and Numbers](/tutorial/expressions.md)
+    - [Strings and Text](/tutorial/strings.md)
     - Variable definitions
     - Moving to a text editor
     - Booleans, predicates, and the conditional expression

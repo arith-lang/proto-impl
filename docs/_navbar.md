@@ -2,6 +2,6 @@
 - [Getting Started](/getting-started/getting-started.md)
     - [Quick Start](/getting-started/quick-start.md)
 - [Tutorial](/tutorial/)
-    - [Arith CLI Basics](/tutorial/)
+    - [Installing and Using the Arith CLI](/tutorial/basics.md)
     - [Expressions and Numbers](/tutorial/expressions.md)
     - [Strings and Text](/tutorial/strings.md)

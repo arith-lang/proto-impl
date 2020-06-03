@@ -85,3 +85,5 @@ If you're an experienced programmer, you're probably familiar with the quirks of
 Arith uses exact-precision numbers, so you don't have to worry about any of that. If you give Arith a piece of numeric data it will read it as exactly the number it is, not as a binary approximation of a decimal number. You can even give it binary, hexadecimal, or octal numbers (prefixed with `#b`, `#x`, and `#o`) and Arith will store them as their exact decimal value.
 
 If you don't know what any of this means, it's enough to know that when you give Arith a number it will behave exactly as you expect that number to behave.
+
+<p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/basics">&lt;&lt; CLI Basics | <a href="https://jasonsbarr.github.io/arith/#/tutorial/strings">  &gt;&gt; Strings &amp; Text</p>

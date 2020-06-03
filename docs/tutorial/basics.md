@@ -48,4 +48,4 @@ REPL is an acronym for "Read-Eval-Print Loop," which describes exactly what it d
 
 You can't (or at least shouldn't) write a long program in your REPL, but it's a fantastic tool for trying out little snippets like what we're doing here.
 
-<p style="text-align: center">| <a href="https://jasonsbarr.github.io/arith/#/tutorial/expressions"> Expressions and Numbers &gt;&gt;</p>
+<p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/">&lt;&lt; Introduction | <a href="https://jasonsbarr.github.io/arith/#/tutorial/expressions"> Expressions and Numbers &gt;&gt;</p>

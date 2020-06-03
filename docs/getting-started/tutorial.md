@@ -39,6 +39,17 @@ The `>` is what's known as the *prompt*, which prompts you for input.
 
 The REPL is perfect for testing short snippets of code or for getting used to writing code in the Lisp style.
 
+### The Read-Eval-Print Loop
+
+REPL is an acronym for "Read-Eval-Print Loop," which describes exactly what it does:
+
+1. It reads the input you give it as Arith code
+2. It evaluates the expression you've just typed
+3. It prints the value your code produces on the screen
+4. It does this forever, looping until you decide to close the program.
+
+You can't (or at least shouldn't) write a long program in your REPL, but it's a fantastic tool for trying out little snippets like what we're doing here.
+
 ## Simple expressions
 
 First, type "Hello, world" at the prompt. Don't forget the quotation marks!
@@ -55,24 +66,13 @@ The REPL processes these values as **expressions**, which are complete, self-con
 
 The simplest expressions are simply values, which the interpreter will evaluate to the values themselves. You can do the same thing with numbers: try typing `21` into the REPL. Again, it should echo the number right back to you, just like it did with strings of text.
 
-Now type `#t`. What does it print back to you? I'll talk more about this value later in the tutorial.
-
-### The Read-Eval-Print Loop
-
-REPL is an acronym for "Read-Eval-Print Loop," which describes exactly what it does:
-
-1. It reads the input you give it as Arith code
-2. It evaluates the expression you've just typed
-3. It prints the value your code produces on the screen
-4. It does this forever, looping until you decide to close the program.
-
-You can't (or at least shouldn't) write a long program in your REPL, but it's a fantastic tool for trying out little snippets like what we're doing here.
+Now type `#t`. What does it print back to you? You'll learn more about this value later in the tutorial.
 
 ### Errors
 
 Now try typing just Hello at the prompt, without quotation marks.
 
-As you probably guessed based on the heading for this section, this will generate an error:
+As you probably guessed based on the heading for this section, this will generate an error like this:
 
 ```
 ArithReferenceError: Reference error: Symbol Hello is not defined at (1:0)

@@ -11,7 +11,7 @@ If you've never programmed before, the tutorial will also introduce you to sever
 - [Strings and Text](/tutorial/strings.md)
 - Variable definitions
 - Moving to a text editor
-- Booleans, predicates, and the conditional expression
+- Booleans, predicates, and conditional expressions
 - Getting user input
 - Basic lists
 - Creating your own functions

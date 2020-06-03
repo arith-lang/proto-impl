@@ -196,11 +196,11 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 9. `substring` takes a starting position, and end position, and a string, then returns a string with the characters from start to end (non-inclusive of the end position) from the original string. Try a few different values for the starting and ending position and see how it works. Try it with other strings that aren't your name.
 10. The `string-replace` function lets you replace part of a string with other text. Instead of using the built-in `string-replace` function, see if you can combine `string-append` and `substring` to replace the space between your first and last names with an underscore.
 
-## Booleans and the conditional expression
-
 ## Variable definitions
 
 ## Moving to a text editor
+
+## Booleans, predicates, and the conditional expression
 
 ## Getting user input
 

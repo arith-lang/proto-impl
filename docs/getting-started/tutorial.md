@@ -161,7 +161,7 @@ Type the following expressions in your REPL, making sure to hit `ENTER` after ea
 
 If you're new to programming, that last one might seem a bit confusing. Why does starting at `1` give you the *2nd* character in the string?
 
-The answer is that programming languages mostly use *zero-based indexing*, which means when counting the items in a sequence, like a string, you start counting from `0`. That means the string "Hello" starts at index `0` and ends at index `4`.
+The answer is that programming languages mostly use **zero-based indexing**, which means when counting the items in a sequence, like a string, you start counting from `0`. That means the string "Hello" starts at index `0` and ends at index `4`.
 
 This is important to remember when using functions like `substring` that use the index numbers.
 

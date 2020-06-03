@@ -2,26 +2,26 @@
 - [Getting Started](/getting-started/getting-started.md)
     - [Quick Start](/getting-started/quick-start.md)
     - [Tutorial](/getting-started/tutorial.md)
-      - [Expressions and Numbers](/getting-started/expressions.md)
-      - [Strings and Text](/getting-started/strings.md)
-      - Variable definitions
-      - Moving to a text editor
-      - Booleans, predicates, and the conditional expression
-      - Getting user input
-      - Basic lists
-      - Creating your own functions
-      - Recursion
-      - Higher-order functions
-      - Currying and partial application
-      - Lists in more depth
-      - Pipelines and function composition
-      - Vectors and Arrays
-      - Hash tables and Maps
-      - Defining your own data types
-      - Classes and objects
-      - Modules and packages
-      - Serializing data and working with files
-      - HTTP requests and responses
-      - Creating and interacting with web pages
-      - JavaScript interoperability
-      - Putting it all together
+    - [Expressions and Numbers](/getting-started/expressions.md)
+    - [Strings and Text](/getting-started/strings.md)
+    - Variable definitions
+    - Moving to a text editor
+    - Booleans, predicates, and the conditional expression
+    - Getting user input
+    - Basic lists
+    - Creating your own functions
+    - Recursion
+    - Higher-order functions
+    - Currying and partial application
+    - Lists in more depth
+    - Pipelines and function composition
+    - Vectors and Arrays
+    - Hash tables and Maps
+    - Defining your own data types
+    - Classes and objects
+    - Modules and packages
+    - Serializing data and working with files
+    - HTTP requests and responses
+    - Creating and interacting with web pages
+    - JavaScript interoperability
+    - Putting it all together

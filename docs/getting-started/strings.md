@@ -84,6 +84,16 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 
 ## Defining your own data types
 
+## Classes and objects
+
+## Modules and packages
+
 ## Serializing data and working with files
+
+## HTTP requests and responses
+
+## Creating and interacting with web pages
+
+## JavaScript interoperability
 
 ## Putting it all together

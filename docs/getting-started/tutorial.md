@@ -53,3 +53,5 @@ REPL is an acronym for "Read-Eval-Print Loop," which describes exactly what it d
 4. It does this forever, looping until you decide to close the program.
 
 You can't (or at least shouldn't) write a long program in your REPL, but it's a fantastic tool for trying out little snippets like what we're doing here.
+
+<p style="text-align: center">[Next: Expressions and Numbers](/getting-started/expressions.md)</p>

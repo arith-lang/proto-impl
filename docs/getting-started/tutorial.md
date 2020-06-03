@@ -4,6 +4,10 @@ This brief tutorial will help you get used to programming in Arith and introduce
 
 If you've never programmed before, the tutorial will also introduce you to several important concepts in programming and help you start your programming journey on the right foot.
 
+## Installing Arith
+
+To install Arith, follow the directions in the [Getting Started](getting-started.md) guide.
+
 ## Using the Arith CLI
 
 The Arith CLI is quite simple. Assuming you have Arith installed globally (using `npm link`), as explained in the [Quick Start Guide](getting-started/quick-start.md), start by typing `arith help` into your shell. You should see something like the following set of instructions (your version number may be different):

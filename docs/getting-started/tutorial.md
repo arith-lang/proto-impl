@@ -187,7 +187,7 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 
 ## Variable definitions
 
-## Input and output
+## Getting user input
 
 ## Basic lists
 
@@ -203,10 +203,14 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 
 ## Lists in more depth
 
+## Pipelines and function composition
+
 ## Vectors and Arrays
 
 ## Hash tables and Maps
 
 ## Defining your own data types
+
+## Serializing data and working with files
 
 ## Putting it all together

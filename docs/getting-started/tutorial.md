@@ -200,11 +200,11 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 
 ## Variable definitions
 
+## Moving to a text editor
+
 ## Getting user input
 
 ## Basic lists
-
-## Moving to a text editor
 
 ## Creating your own functions
 

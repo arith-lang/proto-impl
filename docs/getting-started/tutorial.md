@@ -189,11 +189,12 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 2. Use `string-upcase` to convert your name to uppercase.
 3. Use `string-downcase` to convert your name to lowercase.
 4. Use `string-append` to combine your first, middle, and last names into one string. `string-append` can take any number of strings as arguments.
-5. The `string-first` function takes a numeric position followed by a string, and then returns all the characters in the string up to the position you gave it. Try it with your name using different numbers and see what you get.
-6. Apply the function `split-words` to your full name and see what happens. What do you think the value printed to the console represents?
-7. `string-insert` takes a string to insert into the target string, a numeric position, and a target string which will have the first string inserted into it. Use it to insert an underscore (_) into your name after the 3rd character.
-8. `substring` takes a starting position, and end position, and a string, then returns a string with the characters from start to end (non-inclusive of the end position) from the original string. Try a few different values for the starting and ending position and see how it works. Try it with other strings that aren't your name.
-9. The `string-replace` function lets you replace part of a string with other text. Instead of using the built-in `string-replace` function, see if you can combine `string-append` and `substring` to replace the space between your first and last names with an underscore.
+5. Use `string-length` to find out how many characters are in your full name.
+6. The `string-first` function takes a numeric position followed by a string, and then returns all the characters in the string up to the position you gave it. Try it with your name using different numbers and see what you get.
+7. Apply the function `split-words` to your full name and see what happens. What do you think the value printed to the console represents?
+8. `string-insert` takes a string to insert into the target string, a numeric position, and a target string which will have the first string inserted into it. Use it to insert an underscore (_) into your name after the 3rd character.
+9. `substring` takes a starting position, and end position, and a string, then returns a string with the characters from start to end (non-inclusive of the end position) from the original string. Try a few different values for the starting and ending position and see how it works. Try it with other strings that aren't your name.
+10. The `string-replace` function lets you replace part of a string with other text. Instead of using the built-in `string-replace` function, see if you can combine `string-append` and `substring` to replace the space between your first and last names with an underscore.
 
 ## Booleans and the conditional expression
 

@@ -3,3 +3,4 @@
     - [Quick Start](/getting-started/quick-start.md)
     - [Tutorial](/getting-started/tutorial.md)
     - [Expressions and Numbers](/getting-started/expressions.md)
+    - [Strings and Text](/getting-started/strings.md)

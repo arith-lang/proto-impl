@@ -95,13 +95,17 @@ function stringReplace(toReplace, replaceWith, str) {
 
 stringReplace = R.curry(stringReplace);
 
-// to list and array
+// to list, array, and vector
 function stringToList(str) {
   return str.toCharList();
 }
 
 function stringToArray(str) {
   return str.toCharArray();
+}
+
+function stringToVector(str) {
+  return str.toCharVector();
 }
 
 // string comparisons
@@ -238,7 +242,7 @@ function stringSplit(sep, str) {
 stringSplit = R.curry(stringSplit);
 
 function splitWords(str) {
-  return string(v.words(str));
+  return list(...v.words(str));
 }
 
 function stripHtmlTags(str) {
@@ -314,6 +318,7 @@ module.exports = {
   "string-replace": stringReplace,
   "string->list": stringToList,
   "string->array": stringToArray,
+  "string->vector": stringToVector,
   "string=?": strEq,
   "string<?": strLt,
   "string<=?": strLte,

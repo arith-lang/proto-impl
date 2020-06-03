@@ -185,11 +185,19 @@ Unfortunately as programmers we have only ourselves to blame when the computer d
 
 ## Variable definitions
 
+## Input and output
+
 ## Basic lists
 
 ## Moving to a text editor
 
 ## Creating your own functions
+
+## Recursion
+
+## Higher-order functions
+
+## Currying and partial application
 
 ## Lists in more depth
 

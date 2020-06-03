@@ -1,10 +1,10 @@
 - [Home](/)
 - [Getting Started](/getting-started/getting-started.md)
     - [Quick Start](/getting-started/quick-start.md)
-- [Tutorial](/tutorial/index.md)
+- [Tutorial](/tutorial/)
     - [Expressions and Numbers](/tutorial/expressions.md)
     - [Strings and Text](/tutorial/strings.md)
-    - Variable definitions
+<!-->    - Variable definitions
     - Moving to a text editor
     - Booleans, predicates, and the conditional expression
     - Getting user input

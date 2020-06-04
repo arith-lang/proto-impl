@@ -53,14 +53,14 @@ const getIdentifier = (node, env) => {
   );
 };
 
-const setValue = (name, value, env) => {
-  const scope = lookup(name, env);
+const setValue = (node, value, env) => {
+  const scope = lookup(node, env);
   if (!scope && env.parent) {
     throw new ArithReferenceError(
-      `Cannot set undefined variable ${name}`,
+      `Cannot set undefined variable ${node.name}`,
     );
   }
-  return (scope[Symbol.for(name)] = value);
+  return (scope[Symbol.for(node.name)] = value);
 };
 
 const defVar = (name, value, env) => {

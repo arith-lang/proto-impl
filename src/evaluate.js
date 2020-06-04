@@ -6,6 +6,7 @@ const {
   createEnv,
   setEnv,
   getValue,
+  setValue,
   defVar,
 } = require("./environment");
 const { ArithTypeError, ArithReferenceError } = require("./errors");
@@ -130,6 +131,8 @@ const defineStruct = (node, env) => {
   });
 };
 
-const mutate = (node, env) => {};
+const mutate = (node, env) => {
+  return setValue(node, evaluate(node.value, env), env);
+};
 
 module.exports = { evaluate: (input) => evaluate(parse(input)) };

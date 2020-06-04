@@ -12,47 +12,55 @@ const version = JSON.parse(
 
 const run = (argv) => {
   const [command, ...args] = argv.slice(2);
-
-  if (!command || command === "i") {
+  if (argv.length === 2 || command === "i") {
     const { repl } = require("../src/repl");
     repl();
-  } else if (command.toLowerCase() === "help") {
-    console.log(
-      chalk.cyan(
-        "Welcome to Arith - a simple, Lisp-like programming language.\n",
-      ),
-    );
-    console.log(`You are using Arith ${version}`);
-    console.log(chalk.blue("Here are the valid commands:\n"));
-    console.log("COMMAND", "                DESCRIPTION");
-    console.log(
-      "<none>, i",
-      "              Open the interpreter in interactive/REPL mode",
-    );
-    console.log("help", "                   Print this help message");
-    console.log(
-      "version",
-      "                Print the version of Arith you're using",
-    );
-    console.log(
-      "run",
-      "                    Execute the contents of a valid Arith file",
-    );
-    console.log(); // blank line
-    console.log(
-      chalk.cyan(
-        "Use the command 'arc <file>' to transpile its contents to JavaScript.\n",
-      ),
-    );
-    console.log("Enjoy!");
+  } else {
+    switch (command.toLowerCase()) {
+      case "help":
+        console.log(
+          chalk.cyan(
+            "Welcome to Arith - a simple, Lisp-like programming language.\n",
+          ),
+        );
+        console.log(`You are using Arith ${version}`);
+        console.log(chalk.blue("Here are the valid commands:\n"));
+        console.log("COMMAND", "                DESCRIPTION");
+        console.log(
+          "<none>, i",
+          "              Open the interpreter in interactive/REPL mode",
+        );
+        console.log(
+          "help",
+          "                   Print this help message",
+        );
+        console.log(
+          "version",
+          "                Print the version of Arith you're using",
+        );
+        console.log(
+          "run",
+          "                    Execute the contents of a valid Arith file",
+        );
+        console.log(); // blank line
+        console.log(
+          chalk.cyan(
+            "Use the command 'arc <file>' to transpile its contents to JavaScript.\n",
+          ),
+        );
+        console.log("Enjoy!");
 
-    process.exit(0);
-  } else if (command.toLowerCase() === "version") {
-    console.log(`Arith ${version}`);
-  } else if (command.toLowerCase() === "run") {
-    const input = fs.readFileSync(args[0], "utf-8");
+        process.exit(0);
+      case "version":
+        console.log(`Arith ${version}`);
+      case "run":
+        const input = fs.readFileSync(args[0], "utf-8");
 
-    print(evaluate(input));
+        print(evaluate(input));
+      default:
+        console.log(evaluate(argv.slice(2).join("")));
+        process.exit(0);
+    }
   }
 };
 

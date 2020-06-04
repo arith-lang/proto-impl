@@ -154,6 +154,8 @@ const StructDefinition = (node, env) => {
   return constructor + predicate + accessors;
 };
 
+const VariableMutation = (node, env) => {};
+
 const makeVar = (name) => {
   const specialChars = /[-%|&!\?\*\+\/\\><\^@]/g;
   const newName = `_arith_${name.replace(specialChars, "_")}`;

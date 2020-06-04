@@ -86,4 +86,4 @@ Arith uses exact-precision numbers, so you don't have to worry about any of that
 
 If you don't know what any of this means, it's enough to know that when you give Arith a number it will behave exactly as you expect that number to behave.
 
-<p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/basics">&lt;&lt; CLI Basics</a> | <a href="https://jasonsbarr.github.io/arith/#/tutorial/strings"> Strings &amp; Text &gt;&gt;</p>
+<p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/basics">&laquo; CLI Basics</a> | <a href="https://jasonsbarr.github.io/arith/#/tutorial/strings"> Strings &amp; Text &raquo;</p>

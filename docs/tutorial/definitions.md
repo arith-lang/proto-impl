@@ -10,7 +10,7 @@ As you saw in some of the exercises from the last section, you can combine these
 
 The third and perhaps most important thing all programming languages give their users is methods of abstraction. Abstraction allows you to give names to compound operations and use them in your programs in exactly the same way you can use built-in primitives, which lets you create ever more complex operations while keeping the complexity manageable for yourself and other programmers who might use your code.
 
-The simplest means of abstraction in the Arith language is the definition.
+The simplest means of abstraction in the Arith language is the **definition**.
 
 Definition is giving a name to a piece of data or operation so you can reference it later, in another part of your program.
 

@@ -34,6 +34,7 @@ const KEYWORDS = [
   "lambda",
   "define",
   "let",
+  "set!",
   "type",
   "class",
   "struct",

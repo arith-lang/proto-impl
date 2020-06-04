@@ -84,11 +84,15 @@ const parseKeyword = (tokens) => {
       return parseIf(tokens);
     case "struct":
       return parseStructDefinition(tokens);
+    case "set!":
+      return parseSet(tokens);
   }
   throw new ArithSyntaxError(
     `Unknown keyword ${token.value} at line ${token.line} and col ${token.start}`,
   );
 };
+
+const parseSet = (tokens) => {};
 
 const parseStructDefinition = (tokens) => {
   let structTokens = eatExprTokens(tokens);

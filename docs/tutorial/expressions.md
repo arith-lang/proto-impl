@@ -1,4 +1,4 @@
-# Simple expressions
+# Simple Expressions
 
 First, type "Hello, world" at the prompt. Don't forget the quotation marks!
 

@@ -9,7 +9,7 @@ If you've never programmed before, the tutorial will also introduce you to sever
 - [Installing and Using the Arith CLI](/tutorial/basics.md)
 - [Expressions and Numbers](/tutorial/expressions.md)
 - [Strings and Text](/tutorial/strings.md)
-- Variable definitions
+- [Variable Definitions](/tutorial/definitions.md)
 - Moving to a text editor
 - Booleans, predicates, and conditional expressions
 - Getting user input

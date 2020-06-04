@@ -6,27 +6,27 @@ If you've never programmed before, the tutorial will also introduce you to sever
 
 ## Tutorial sections
 
-- [Installing and Using the Arith CLI](/tutorial/basics.md)
-- [Expressions and Numbers](/tutorial/expressions.md)
-- [Strings and Text](/tutorial/strings.md)
-- [Variable Definitions](/tutorial/definitions.md)
-- Moving to a text editor
-- Booleans, predicates, and conditional expressions
-- Getting user input
-- Basic lists
-- Creating your own functions
-- Recursion
-- Higher-order functions
-- Currying and partial application
-- Lists in more depth
-- Pipelines and function composition
-- Vectors and Arrays
-- Hash tables and Maps
-- Defining your own data types
-- Classes and objects
-- Modules and packages
-- Serializing data and working with files
-- HTTP requests and responses
-- Creating and interacting with web pages
-- JavaScript interoperability
-- Putting it all together
+1. [Installing and Using the Arith CLI](/tutorial/basics.md)
+2. [Expressions and Numbers](/tutorial/expressions.md)
+3. [Strings and Text](/tutorial/strings.md)
+4. [Variable Definitions](/tutorial/definitions.md)
+5. Moving to a text editor
+6. Booleans, predicates, and conditional expressions
+7. Getting user input
+8. Basic lists
+9. Creating your own functions
+10. Recursion
+11. Higher-order functions
+12. Currying and partial application
+13. Lists in more depth
+14. Pipelines and function composition
+15. Vectors and Arrays
+16. Hash tables and Maps
+17. Defining your own data types
+18. Classes and objects
+19. Modules and packages
+20. Serializing data and working with files
+21. HTTP requests and responses
+22. Creating and interacting with web pages
+23. JavaScript interoperability
+24. Putting it all together

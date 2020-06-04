@@ -40,7 +40,7 @@ Then use the name anywhere you would use the value bound to it:
 You can also use an existing name as part of the expression to bind a new name:
 
 ```scheme
-(define meaning-of-life-incremented (+ meaning-of-life 1))
+(define meaning-of-life-incremented (+ meaning-of-life 1)) ; -> 43
 ```
 
 Since everything in Arith is an expression, a variable definition returns the value bound to the name. That means you can do this:

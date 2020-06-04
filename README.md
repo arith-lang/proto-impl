@@ -12,7 +12,7 @@ Now I'm on a mission to bring the power and elegance of Lisp to the web, while a
 
 ## Language features
 
-*Note: this section includes features that are still under development*
+_Note: this section includes features that are still under development_
 
 - Lisp-style syntax, programs as data, and macros
 - The best features of both functional and object-oriented paradigms
@@ -37,6 +37,8 @@ Now I'm on a mission to bring the power and elegance of Lisp to the web, while a
 ## Using the interpreter and transpiler
 
 Start by cloning the repo: `git clone https://github.com/jasonsbarr/arith.git <directory>`.
+
+`cd` into directory created by previous command.
 
 Install dependencies with `npm install`.
 

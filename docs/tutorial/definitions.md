@@ -61,6 +61,20 @@ Every Arith program starts with two environments defined: the global environment
 
 When you execute a function, this creates an additional environment nested inside the module environment. We'll talk more about how this works when you start creating your own functions.
 
+## Mutating variables
+
+If you really, *really* need to change a variable's value, you can do so like this:
+
+```scheme
+(define greet "Hello")
+; ...
+(set! greet "Hi")
+```
+
+Note that the `!` is part of the expression symbol. Lisp languages use exclamation points to indicate that an expression is unsafe due to mutating a value.
+
+You *can* do this if you need to. You should generally try to avoid it unless you have a *really* good reason for it.
+
 ### Exercises:
 
 1. Define several different variables with number values and use them with the math functions from section 2 of this tutorial.

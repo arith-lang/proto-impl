@@ -49,18 +49,19 @@ const run = (argv) => {
           ),
         );
         console.log("Enjoy!");
-
-        process.exit(0);
+        break;
       case "version":
         console.log(`Arith ${version}`);
+        break;
       case "run":
         const input = fs.readFileSync(args[0], "utf-8");
-
         print(evaluate(input));
+        break;
       default:
         console.log(evaluate(argv.slice(2).join("")));
-        process.exit(0);
+        break;
     }
+    process.exit(0);
   }
 };
 

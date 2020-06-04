@@ -37,6 +37,8 @@ const evaluate = (node, env = moduleEnv) => {
       return applyIf(node, env);
     case "StructDefinition":
       return defineStruct(node, env);
+    case "VariableMutation":
+      return mutate(node, env);
   }
 };
 
@@ -127,5 +129,7 @@ const defineStruct = (node, env) => {
     defVar(`${node.name}-${field.name}`, accessor, env);
   });
 };
+
+const mutate = (node, env) => {};
 
 module.exports = { evaluate: (input) => evaluate(parse(input)) };

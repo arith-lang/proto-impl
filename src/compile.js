@@ -154,7 +154,10 @@ const StructDefinition = (node, env) => {
   return constructor + predicate + accessors;
 };
 
-const VariableMutation = (node, env) => {};
+const VariableMutation = (node, env) => {
+  let value = compile(node.value, env);
+  return `${makeVar(node.name)} = ${value};`;
+};
 
 const makeVar = (name) => {
   const specialChars = /[-%|&!\?\*\+\/\\><\^@]/g;

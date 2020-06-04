@@ -1,6 +1,6 @@
 {
   "name": "arith",
-  "version": "0.11.0-alpha3",
+  "version": "0.11.0",
   "description": "Interpreter and transpiler for a Lisp-like language",
   "bin": {
     "arith": "bin/arith",

@@ -92,7 +92,26 @@ const parseKeyword = (tokens) => {
   );
 };
 
-const parseSet = (tokens) => {};
+const parseSet = (tokens) => {
+  let setTokens = eatExprTokens(tokens);
+  let startToken = peek(setTokens);
+  let endToken = lookahead(setTokens, setTokens.length - 1);
+  let token = pop(setTokens);
+
+  return {
+    type: "VariableMutation",
+    name: token.value,
+    value: parseExpr(setTokens),
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
+  };
+};
 
 const parseStructDefinition = (tokens) => {
   let structTokens = eatExprTokens(tokens);

@@ -65,5 +65,8 @@ When you execute a function, this creates an additional environment nested insid
 
 1. Define several different variables with number values and use them with the math functions from section 2 of this tutorial.
 2. Define a variable with a string value, preferably with more than one word. Apply various string functions from the previous section to it. Define another string variable and use them both with `string-append`.
+3. Use `string-insert` to replace the spaces in your multi-word string with underscores.
+4. Now do the same thing, but use a combination of `substring` and `string-append`.
+5. Finally, apply the function `string-snakecase` to get the same result. As you can see, there's often more than one way to accomplish the same task!
 
 <p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/strings"> &laquo; Strings &amp; Text</a> |</p>

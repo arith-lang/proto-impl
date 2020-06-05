@@ -11,11 +11,22 @@ const version = JSON.parse(
 ).version;
 
 const run = (argv) => {
+  const fileName = argv[2];
+  let validExtensions = /\.(txt|jsx?|tsx?)$/g;
+  if (validExtensions.test(fileName)) {
+    const input = fs.readFileSync(fileName, "utf-8");
+    print(evaluate(input));
+    process.exit();
+  }
   const [command, ...args] = argv.slice(2);
-
   if (!command || command === "i") {
-    const { repl } = require("../src/repl");
-    repl();
+    const { initializeRepl } = require("../src/repl");
+    console.log(
+      chalk.cyan(
+        "Welcome to Arith - a simple, Lisp-like programming language.\nType .help for help, .load to load a file, .exit to exit\n",
+      ),
+    );
+    initializeRepl();
   } else if (command.toLowerCase() === "help") {
     console.log(
       chalk.cyan(
@@ -35,7 +46,7 @@ const run = (argv) => {
       "                Print the version of Arith you're using",
     );
     console.log(
-      "run",
+      "<filename> or run <filename>",
       "                    Execute the contents of a valid Arith file",
     );
     console.log(); // blank line

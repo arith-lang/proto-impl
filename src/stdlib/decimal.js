@@ -1,6 +1,7 @@
 const R = require("ramda");
 const Decimal = require("./types/Decimal");
 const { all } = require("./utils");
+const { string } = require("./string");
 
 // Create a new _Number
 function decimal(value) {
@@ -113,6 +114,10 @@ function gte(x, y) {
 
 gte = R.curry(gte);
 
+function decimalToString(dec) {
+  return string(dec.toString());
+}
+
 module.exports = {
   decimal,
   PI,
@@ -133,4 +138,5 @@ module.exports = {
   "<=": lte,
   ">": gt,
   ">=": gte,
+  "decimal->string": decimalToString,
 };

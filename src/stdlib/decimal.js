@@ -18,13 +18,13 @@ const PI = Decimal.acos(-1);
 
 // mathematical functions
 function add(...args) {
-  return all((a, c) => a.add(c))(...args);
+  return all((a, c) => Decimal.add(a, c))(...args);
 }
 
 add = R.curryN(2, add);
 
 function sub(...args) {
-  return all((a, c) => a.sub(c))(...args);
+  return all((a, c) => Decimal.sub(a, c))(...args);
 }
 
 sub = R.curryN(2, sub);

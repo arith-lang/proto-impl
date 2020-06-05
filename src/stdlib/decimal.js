@@ -2,6 +2,7 @@ const R = require("ramda");
 const Decimal = require("./types/Decimal");
 const { all } = require("./utils");
 const { string } = require("./string");
+const { ArithTypeError } = require("../errors");
 
 // Create a new _Number
 function decimal(value) {
@@ -119,6 +120,11 @@ function decimalToString(dec) {
 }
 
 function stringToDecimal(str) {
+  if (isNaN(str.toString())) {
+    throw new ArithTypeError(
+      `Cannot convert non-numeric input ${str.toString()} to decimal`,
+    );
+  }
   return decimal(str.toString());
 }
 

@@ -1,9 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const readlineSync = require("readline-sync");
-const { list } = require("./list");
 const toString = require("./list")["list->string"];
 const isList = require("./list")["list?"];
+const hashToString = require("./hash")["hash->string"];
+const isHash = require("./hash")["hash?"];
+const mapToString = require("./map")["map->string"];
+const isMap = require("./map")["map?"];
 
 // I/O functions
 function jsLog(...args) {
@@ -22,6 +25,10 @@ function print(...args) {
     ) {
       if (isList(item)) {
         temp.push(toString(item));
+      } else if (isHash(item)) {
+        temp.push(hashToString(item));
+      } else if (isMap(item)) {
+        temp.push(mapToString(item));
       } else {
         temp.push(item.toString());
       }

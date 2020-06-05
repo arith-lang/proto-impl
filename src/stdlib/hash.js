@@ -40,7 +40,7 @@ isHashEq = R.curry(isHashEq);
 // hash-eqv?
 const isHashEqv = isHashEq;
 
-// hash-equals?
+// hash-equal?
 function isHashEqual(hash1, hash2) {
   return is(hash1, hash2);
 }

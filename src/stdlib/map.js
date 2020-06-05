@@ -40,7 +40,7 @@ isMapEq = R.curry(isMapEq);
 // map-eqv?
 const isMapEqv = isMapEq;
 
-// map-equals?
+// map-equal?
 function isMapEqual(map1, map2) {
   return equal(map1, map2);
 }
@@ -236,7 +236,7 @@ module.exports = {
   "map?": isMap,
   "map-eq?": isMapEq,
   "map-eqv?": isMapEqv,
-  "map-equals?": isMapEqual,
+  "map-equal?": isMapEqual,
   "map-has-key?": mapHasKey,
   "map-empty?": isMapEmpty,
   "map-ref": mapRef,

@@ -118,6 +118,10 @@ function decimalToString(dec) {
   return string(dec.toString());
 }
 
+function stringToDecimal(str) {
+  return decimal(str.toString());
+}
+
 module.exports = {
   decimal,
   PI,
@@ -139,4 +143,5 @@ module.exports = {
   ">": gt,
   ">=": gte,
   "decimal->string": decimalToString,
+  "string->decimal": stringToDecimal,
 };

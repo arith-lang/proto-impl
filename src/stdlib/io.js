@@ -29,6 +29,9 @@ function print(...args) {
         temp.push(hashToString(item));
       } else if (isMap(item)) {
         temp.push(mapToString(item));
+      } else if (typeof item === "boolean") {
+        console.log("bool");
+        temp.push(item === true ? "#t" : "#f");
       } else {
         temp.push(item.toString());
       }

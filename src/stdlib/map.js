@@ -188,6 +188,19 @@ function mapToVector(map) {
   return vector(...temp);
 }
 
+// map->string
+function mapToString(map) {
+  let str = "#map(";
+
+  for ([k, v] of map.entries()) {
+    str += `(${k} . ${v})`;
+  }
+  str += ")";
+  str = str.replace(")(", ") (");
+
+  return str;
+}
+
 // filters
 // map-filter
 function mapFilter(pred, map) {
@@ -246,6 +259,7 @@ module.exports = {
   "map->list": mapToList,
   "map->array": mapToArray,
   "map->vector": mapToVector,
+  "map->string": mapToString,
   "map-filter": mapFilter,
   "map-keep": mapKeep,
   "map-reject": mapReject,

@@ -175,6 +175,19 @@ function hashToVector(hash) {
   return vector(...temp);
 }
 
+// hash->string
+function hashToString(hash) {
+  let str = "#hash(";
+
+  for ([k, v] of hash.entries()) {
+    str += `(${k} . ${v})`;
+  }
+  str += ")";
+  str = str.replace(")(", ") (");
+
+  return str;
+}
+
 // filters
 // hash-filter
 function hashFilter(pred, hash) {
@@ -221,6 +234,7 @@ module.exports = {
   "hash->list": hashToList,
   "hash->array": hashToArray,
   "hash->vector": hashToVector,
+  "hash->string": hashToString,
   "hash-filter": hashFilter,
   "hash-keep": hashKeep,
   "hash-reject": hashReject,

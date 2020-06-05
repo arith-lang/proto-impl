@@ -197,6 +197,7 @@ function mapToString(map) {
   }
   str += ")";
   str = str.replace(")(", ") (");
+
   return str;
 }
 

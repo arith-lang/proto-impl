@@ -12,7 +12,7 @@ const version = JSON.parse(
 
 const run = (argv) => {
   const fileName = argv[2];
-  let validExtensions = /\.(txt|jsx?|tsx?)$/g;
+  let validExtensions = /\.arith$/g;
   if (validExtensions.test(fileName)) {
     const input = fs.readFileSync(fileName, "utf-8");
     print(evaluate(input));
@@ -29,6 +29,10 @@ const run = (argv) => {
     initializeRepl();
   } else {
     switch (command.toLowerCase()) {
+      case "eval":
+        const input = args[0].trim();
+        print(evaluate(input));
+        break;
       case "help":
         console.log(
           chalk.cyan(
@@ -42,6 +46,7 @@ const run = (argv) => {
           "<none>, i",
           "\t\t\t\tOpen the interpreter in interactive/REPL mode",
         );
+        console.log("eval", "\t\t\t\t\tEvaluate an expression");
         console.log("help", "\t\t\t\t\tPrint this help message");
         console.log(
           "version",
@@ -100,9 +105,7 @@ const run = (argv) => {
         print(evaluate(fileInput));
         break;
       default:
-        const input = command.trim();
-        print(evaluate(input));
-        break;
+        process.exit(0);
     }
     process.exit(0);
   }

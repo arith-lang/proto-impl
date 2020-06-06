@@ -16,7 +16,7 @@ function eval(cmd, context, fileName, callback) {
   for (let i = 0; i < cmd.length; i++) {
     if (cmd[i] === "(") {
       openParenCount++;
-    } else if (cmd[i] == ")") {
+    } else if (cmd[i] === ")") {
       closeParenCount++;
     }
   }
@@ -70,29 +70,6 @@ const initializeRepl = () => {
     action(name) {
       this.clearBufferedCommand();
       console.log(`Arith version ${version}`);
-      this.displayPrompt();
-    },
-  });
-  replServer.defineCommand("help", {
-    help: "Displays the valid commands in Arith",
-    action(name) {
-      this.clearBufferedCommand();
-      console.log(
-        chalk.cyan(
-          "Welcome to Arith - a simple, Lisp-like programming language.\n",
-        ),
-      );
-      console.log(`You are using Arith ${version}`);
-      console.log(chalk.blue("Here are the valid commands:\n"));
-      console.log("COMMAND", "                DESCRIPTION");
-      help.map(([command, description]) =>
-        command.length >= 12
-          ? console.log(command, `\t${description}`)
-          : command.length >= 6
-          ? console.log(command, `\t\t${description}`)
-          : console.log(command, `\t\t\t${description}`),
-      );
-      console.log("\nEnjoy!");
       this.displayPrompt();
     },
   });

@@ -19,17 +19,26 @@ function eval(cmd, context, fileName, callback) {
       closeParenCount++;
     }
   }
-  let result;
-  try {
-    result = vm.runInThisContext(evaluate(cmd));
-  } catch (error) {
-    if (
-      isRecoverableError(error, cmd, openParenCount, closeParenCount)
-    ) {
-      return callback(new repl.Recoverable(error));
+  if (openParenCount === closeParenCount) {
+    callback(null, evaluate(cmd));
+  } else {
+    let result;
+    try {
+      result = vm.runInThisContext(evaluate(cmd));
+    } catch (error) {
+      if (
+        isRecoverableError(
+          error,
+          cmd,
+          openParenCount,
+          closeParenCount,
+        )
+      ) {
+        return callback(new repl.Recoverable(error));
+      }
     }
+    callback(null, result);
   }
-  callback(null, result);
 }
 
 function isRecoverableError(
@@ -42,8 +51,6 @@ function isRecoverableError(
     return /^(Unexpected end of input|Unexpected token)/.test(
       error.message,
     );
-  } else if (error.name === "TypeError" && /^\(.+[^)]$/.test(cmd)) {
-    return true;
   } else if (openParenCount > closeParenCount) {
     return true;
   }

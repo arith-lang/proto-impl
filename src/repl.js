@@ -1,38 +1,84 @@
 const fs = require("fs");
 const path = require("path");
-const { prompt } = require("inquirer");
 const chalk = require("chalk");
 const { evaluate } = require("./evaluate");
+const repl = require("repl");
+const vm = require("vm");
 
 const version = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../package.json"), "utf-8"),
 ).version;
 
-const getInput = () => {
-  const input = [
-    {
-      name: "INPUT",
-      type: "input",
-      prefix: chalk.green(`(arith v${version}):`),
-      message: ">",
-    },
-  ];
-
-  return prompt(input);
-};
-
-const repl = async () => {
-  try {
-    const { INPUT } = await getInput();
-
-    if (INPUT.trim()) {
-      console.log(chalk.yellow(evaluate(INPUT)));
+function eval(cmd, context, fileName, callback) {
+  let openParenCount = 0,
+    closeParenCount = 0;
+  for (let i = 0; i < cmd.length; i++) {
+    if (cmd[i] === "(") {
+      openParenCount++;
+    } else if (cmd[i] === ")") {
+      closeParenCount++;
     }
-  } catch (e) {
-    console.error(e);
   }
+  if (openParenCount === closeParenCount) {
+    callback(null, evaluate(cmd));
+  } else {
+    let result;
+    try {
+      result = vm.runInThisContext(evaluate(cmd));
+    } catch (error) {
+      if (
+        isRecoverableError(
+          error,
+          cmd,
+          openParenCount,
+          closeParenCount,
+        )
+      ) {
+        return callback(new repl.Recoverable(error));
+      }
+    }
+    callback(null, result);
+  }
+}
 
-  repl();
+function isRecoverableError(
+  error,
+  cmd,
+  openParenCount,
+  closeParenCount,
+) {
+  if (error.name === "SyntaxError") {
+    return /^(Unexpected end of input|Unexpected token)/.test(
+      error.message,
+    );
+  } else if (openParenCount > closeParenCount) {
+    return true;
+  }
+  return false;
+}
+
+const initializeRepl = () => {
+  const replServer = repl.start({
+    prompt: `${chalk.green(`(arith v${version})`)}: ${chalk.white(
+      "> ",
+    )}`,
+    input: process.stdin,
+    output: process.stdout,
+    eval: eval,
+    ignoreUndefined: true,
+  });
+  replServer.on("exit", () => {
+    console.log("Have a nice day!");
+    process.exit();
+  });
+  replServer.defineCommand("version", {
+    help: "Displays the current version of Arith",
+    action(name) {
+      this.clearBufferedCommand();
+      console.log(`Arith version ${version}`);
+      this.displayPrompt();
+    },
+  });
 };
 
 if (require.main === module) {
@@ -41,7 +87,7 @@ if (require.main === module) {
       `*** Welcome to the Arith programming language, v${version} ***`,
     ),
   );
-  repl();
+  initializeRepl();
 }
 
-module.exports = { repl };
+module.exports = { initializeRepl };

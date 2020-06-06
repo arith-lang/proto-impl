@@ -11,48 +11,103 @@ const version = JSON.parse(
 ).version;
 
 const run = (argv) => {
-  const [command, ...args] = argv.slice(2);
-
-  if (!command || command === "i") {
-    const { repl } = require("../src/repl");
-    repl();
-  } else if (command.toLowerCase() === "help") {
-    console.log(
-      chalk.cyan(
-        "Welcome to Arith - a simple, Lisp-like programming language.\n",
-      ),
-    );
-    console.log(`You are using Arith ${version}`);
-    console.log(chalk.blue("Here are the valid commands:\n"));
-    console.log("COMMAND", "                DESCRIPTION");
-    console.log(
-      "<none>, i",
-      "              Open the interpreter in interactive/REPL mode",
-    );
-    console.log("help", "                   Print this help message");
-    console.log(
-      "version",
-      "                Print the version of Arith you're using",
-    );
-    console.log(
-      "run",
-      "                    Execute the contents of a valid Arith file",
-    );
-    console.log(); // blank line
-    console.log(
-      chalk.cyan(
-        "Use the command 'arc <file>' to transpile its contents to JavaScript.\n",
-      ),
-    );
-    console.log("Enjoy!");
-
-    process.exit(0);
-  } else if (command.toLowerCase() === "version") {
-    console.log(`Arith ${version}`);
-  } else if (command.toLowerCase() === "run") {
-    const input = fs.readFileSync(args[0], "utf-8");
-
+  const fileName = argv[2];
+  let validExtensions = /\.arith$/g;
+  if (validExtensions.test(fileName)) {
+    const input = fs.readFileSync(fileName, "utf-8");
     print(evaluate(input));
+    process.exit();
+  }
+  const [command, ...args] = argv.slice(2);
+  if (!command || command === "i") {
+    const { initializeRepl } = require("../src/repl");
+    console.log(
+      chalk.cyan(
+        "Welcome to Arith - a simple, Lisp-like programming language.\nType .help for help, .editor to enter multi-line mode, .exit to exit\n",
+      ),
+    );
+    initializeRepl();
+  } else {
+    switch (command.toLowerCase()) {
+      case "eval":
+        const input = args[0].trim();
+        print(evaluate(input));
+        break;
+      case "help":
+        console.log(
+          chalk.cyan(
+            "Welcome to Arith - a simple, Lisp-like programming language.\n",
+          ),
+        );
+        console.log(`You are using Arith ${version}`);
+        console.log(chalk.blue("Here are the valid commands:\n"));
+        console.log("COMMAND", "\t\t\t\tDESCRIPTION");
+        console.log(
+          "<none>, i",
+          "\t\t\t\tOpen the interpreter in interactive/REPL mode",
+        );
+        console.log("eval", "\t\t\t\t\tEvaluate an expression");
+        console.log("help", "\t\t\t\t\tPrint this help message");
+        console.log(
+          "version",
+          "\t\t\t\tPrint the version of Arith you're using",
+        );
+        console.log(
+          "<filename> or run <filename>",
+          "\t\tExecute the contents of a valid Arith file",
+        );
+        console.log(); // blank line
+        console.log(
+          chalk.cyan(
+            "Use the command 'arc <file>' to transpile its contents to JavaScript.\n",
+          ),
+        );
+        console.log("Enjoy!");
+        break;
+      case ".help":
+        console.log(
+          chalk.cyan(
+            "Welcome to Arith - a simple, Lisp-like programming language.\n",
+          ),
+        );
+        console.log(`You are using Arith ${version}`);
+        console.log(chalk.blue("Here are the valid commands:\n"));
+        console.log("COMMAND", "\t\t\t\tDESCRIPTION");
+        console.log(
+          "<none>, i",
+          "\t\t\t\tOpen the interpreter in interactive/REPL mode",
+        );
+        console.log("help", "\t\t\t\t\tPrint this help message");
+        console.log(
+          "version",
+          "\t\t\t\tPrint the version of Arith you're using",
+        );
+        console.log(
+          "<filename> or run <filename>",
+          "\t\tExecute the contents of a valid Arith file",
+        );
+        console.log(); // blank line
+        console.log(
+          chalk.cyan(
+            "Use the command 'arc <file>' to transpile its contents to JavaScript.\n",
+          ),
+        );
+        console.log("Enjoy!");
+        break;
+      case "version":
+        console.log(`Arith ${version}`);
+        break;
+      case ".version":
+        console.log(`Arith ${version}`);
+        break;
+      case "run":
+        const fileInput = fs.readFileSync(args[0], "utf-8");
+        print(evaluate(fileInput));
+        break;
+      default:
+        process.exit(0);
+    }
+    process.exit(0);
   }
 };
 

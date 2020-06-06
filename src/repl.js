@@ -3,7 +3,6 @@ const path = require("path");
 const chalk = require("chalk");
 const { evaluate } = require("./evaluate");
 const repl = require("repl");
-const { help } = require("./help");
 const vm = require("vm");
 
 const version = JSON.parse(

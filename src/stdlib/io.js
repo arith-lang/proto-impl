@@ -70,7 +70,7 @@ function writeFile(file, data, encoding = "utf-8") {
 
 module.exports = {
   "js-log": jsLog,
-  "output-string", outputString,
+  "output-string": outputString,
   print,
   input,
   "read-file": readFile,

@@ -13,7 +13,7 @@ function jsLog(...args) {
   console.log(...args);
 }
 
-function print(...args) {
+function outputString(...args) {
   let temp = [];
   for (item of args) {
     if (
@@ -37,7 +37,11 @@ function print(...args) {
       }
     }
   }
-  console.log(...temp);
+  return temp.join("");
+}
+
+function print(...args) {
+  console.log(outputString(...args));
 }
 
 function input(prompt) {
@@ -66,6 +70,7 @@ function writeFile(file, data, encoding = "utf-8") {
 
 module.exports = {
   "js-log": jsLog,
+  "output-string", outputString,
   print,
   input,
   "read-file": readFile,

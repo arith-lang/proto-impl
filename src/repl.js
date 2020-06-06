@@ -1,9 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-const chalk = require("chalk");
-const { evaluate } = require("./evaluate");
 const repl = require("repl");
 const vm = require("vm");
+const chalk = require("chalk");
+const { evaluate } = require("./evaluate");
+const outputString = require("./stdlib/io")["output-string"];
 
 const version = JSON.parse(
   fs.readFileSync(path.join(__dirname, "../package.json"), "utf-8"),
@@ -57,6 +58,10 @@ function isRecoverableError(
   return false;
 }
 
+function writer(output) {
+  return outputString(output);
+}
+
 const initializeRepl = () => {
   const replServer = repl.start({
     prompt: `${chalk.green(`(arith v${version})`)}: ${chalk.white(
@@ -66,6 +71,7 @@ const initializeRepl = () => {
     output: process.stdout,
     eval: eval,
     ignoreUndefined: true,
+    writer,
   });
   replServer.on("exit", () => {
     console.log("Have a nice day!");

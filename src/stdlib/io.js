@@ -73,6 +73,7 @@ module.exports = {
   "output-string": outputString,
   print,
   input,
+  "input-string": inputString,
   "read-file": readFile,
   "write-file": writeFile,
 };

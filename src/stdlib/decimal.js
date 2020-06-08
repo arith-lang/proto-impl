@@ -128,6 +128,10 @@ function stringToDecimal(str) {
   return decimal(str.toString());
 }
 
+function isExact(obj) {
+  return Decimal.isExactNumber(obj);
+}
+
 module.exports = {
   decimal,
   PI,
@@ -150,4 +154,5 @@ module.exports = {
   ">=": gte,
   "decimal->string": decimalToString,
   "string->decimal": stringToDecimal,
+  "exact?": isExact,
 };

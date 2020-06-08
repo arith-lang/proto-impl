@@ -85,6 +85,36 @@ const initializeRepl = () => {
       this.displayPrompt();
     },
   });
+  // Adapted from NodeJS repl module code
+  // See https://github.com/nodejs/node/blob/a29d7c7ff7ed68cc7d1ba30b8ef24f64dc59df7c/lib/repl.js#L1515
+  replServer.defineCommand("load", {
+    help: "Load an Arith file into the REPL session",
+    action: function (file) {
+      try {
+        const stats = fs.statSync(file);
+        if (stats && stats.isFile()) {
+          replServer.editorMode = true;
+          const data = fs.readFileSync(file, "utf8");
+          this.write(data);
+          replServer.editorMode = false;
+          this.write("\n");
+        } else {
+          this.output.write(
+            `Failed to load: ${file} is not a valid file\n`,
+          );
+        }
+      } catch (e) {
+        if (
+          e.message === "Cannot read property 'line' of undefined"
+        ) {
+          // ignore error - parser errors at end of already-loaded file for some reason
+        } else {
+          this.output.write(`Failed to load: ${file}\n`);
+        }
+      }
+      this.displayPrompt();
+    },
+  });
 };
 
 if (require.main === module) {

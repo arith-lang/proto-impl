@@ -4,4 +4,4 @@
       accum
       (tail-fact (- x 1) (* accum x)))))
 
-(print (tail-fact 1250 1))
+(tail-fact 800 1)

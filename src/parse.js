@@ -94,7 +94,39 @@ const parseKeyword = (tokens) => {
   );
 };
 
-const parseCond = (tokens) => {};
+const parseCond = (tokens) => {
+  let condTokens = eatExprTokens(tokens);
+  let startToken = peek(condTokens);
+  let endToken = lookahead(condTokens, condTokens.length - 1);
+  let condExpr = {
+    type: "CondExpression",
+    body: [],
+    start: {
+      line: startToken.line,
+      col: startToken.start,
+    },
+    end: {
+      line: endToken.line,
+      col: endToken.end,
+    },
+  };
+
+  condTokens = condTokens.slice(0, condTokens.length - 1); // slice off closing paren so parseBlock doesn't choke
+  let token = pop(condTokens); // opening paren of first body expr
+
+  while (peek(condTokens).value !== "else") {
+    // while we're still looking at body exprs
+    let bodyTokens = eatExprTokens(condTokens);
+    condExpr.body.push(
+      parseBlock(bodyTokens.slice(0, bodyTokens.length - 1)), // slice off closing paren
+    );
+    token = pop(condTokens); // opening paren of next set of body exprs
+  }
+  pop(condTokens); // else token
+  condExpr.else = parseExpr(condTokens);
+
+  return condExpr;
+};
 
 const parseSet = (tokens) => {
   let setTokens = eatExprTokens(tokens);

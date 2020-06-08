@@ -155,4 +155,5 @@ module.exports = {
   "decimal->string": decimalToString,
   "string->decimal": stringToDecimal,
   "exact?": isExact,
+  "number?": isExact,
 };

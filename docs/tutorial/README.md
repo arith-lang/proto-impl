@@ -10,8 +10,8 @@ If you've never programmed before, the tutorial will also introduce you to sever
 2. [Expressions and Numbers](/tutorial/expressions.md)
 3. [Strings and Text](/tutorial/strings.md)
 4. [Variable Definitions](/tutorial/definitions.md)
-5. Booleans, predicates, and conditional expressions
-6. Getting user input
+5. Getting user input
+6. Booleans, predicates, and conditional expressions
 7. Basic lists
 8. Creating your own functions
 9. Recursion

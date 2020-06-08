@@ -58,10 +58,8 @@ describe("AST Evaluator", () => {
     const input1 = `#t`;
     const input2 = `#f`;
 
-    expect(evaluate(input1).bool).toBe(true);
-    expect(evaluate(input1).toString()).toBe("#t");
-    expect(evaluate(input2).bool).toBe(false);
-    expect(evaluate(input2).toString()).toBe("#f");
+    expect(evaluate(input1)).toBe(true);
+    expect(evaluate(input2)).toBe(false);
   });
 
   it("Should correctly evaluate a program with multiple top-level expressions", () => {

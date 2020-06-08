@@ -1,27 +1,10 @@
-const _Boolean = require("./types/Boolean");
-
-// boolean constructor
-function bool(value) {
-  return new _Boolean(value);
-}
-
-// check if new _Boolean should return false
-function shouldReturnFalse(value) {
-  return _Boolean.shouldReturnFalse(value);
-}
-
 // boolean expression functions
 // do not curry
 function and(...exprs) {
   for (expr of exprs) {
-    if (_Boolean.shouldReturnFalse(expr)) {
-      return _Boolean.make("#f");
+    if (expr === false) {
+      return false;
     }
-  }
-
-  const last = exprs[exprs.length - 1];
-  if (_Boolean.isBoolNative(last) || last === true) {
-    return _Boolean.make("#t");
   }
 
   return last;
@@ -29,27 +12,19 @@ function and(...exprs) {
 
 function or(...exprs) {
   for (expr of exprs) {
-    if (!_Boolean.shouldReturnFalse(expr)) {
-      if (expr === true) {
-        return _Boolean.make("#t");
-      }
+    if (expr !== false) {
       return expr;
     }
   }
 
-  return _Boolean.make("f");
+  return false;
 }
 
 function not(expr) {
-  if (!_Boolean.shouldReturnFalse(expr)) {
-    return _Boolean.make("#f");
-  }
-  return _Boolean.make("#t");
+  return !expr;
 }
 
 module.exports = {
-  bool,
-  shouldReturnFalse,
   and,
   or,
   not,

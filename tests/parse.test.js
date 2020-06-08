@@ -75,7 +75,7 @@ describe("The parser function", () => {
     const input = `#t`;
     const ast = {
       type: "BooleanLiteral",
-      value: "#t",
+      value: true,
       start: {
         line: 1,
         col: 0,

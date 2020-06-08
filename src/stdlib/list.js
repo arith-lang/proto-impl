@@ -1,7 +1,6 @@
 const R = require("ramda");
 const Nil = require("./types/Nil");
 const Cons = require("./types/Cons");
-const _Boolean = require("./types/Boolean");
 
 const nil = new Nil();
 const empty = nil;

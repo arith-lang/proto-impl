@@ -1,7 +1,6 @@
 const R = require("ramda");
 const { parse } = require("./parse");
 const globals = require("./globals");
-const _Boolean = require("./stdlib/types/Boolean");
 const {
   createEnv,
   setEnv,
@@ -25,7 +24,7 @@ const evaluate = (node, env = moduleEnv) => {
     case "NilLiteral":
       return globals.nil;
     case "BooleanLiteral":
-      return new _Boolean(node.value);
+      return node.value;
     case "Identifier":
       return getValue(node, env);
     case "CallExpression":
@@ -83,7 +82,7 @@ const makeLambda = (node, env) => {
 
 const applyIf = (node, env) => {
   const cond = evaluate(node.condition, env);
-  if (!_Boolean.shouldReturnFalse(cond)) {
+  if (cond !== false) {
     return evaluate(node.then, env);
   }
   return evaluate(node.else, env);

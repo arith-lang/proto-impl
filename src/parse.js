@@ -343,7 +343,8 @@ const IDENTIFIER = ({ value, line, start, end }) => {
 };
 
 const BOOLEAN = ({ value, line, start, end }) => {
-  return createAtomNode("BooleanLiteral", value, line, start, end);
+  const bool = value === "#t" ? true : false;
+  return createAtomNode("BooleanLiteral", bool, line, start, end);
 };
 
 const NIL = ({ value, line, start, end }) => {

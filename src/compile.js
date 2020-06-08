@@ -30,7 +30,7 @@ const Program = ({ body }) => compileBlock(body);
 
 const DecimalLiteral = ({ value }) => `__arith__.decimal(${value})`;
 
-const BooleanLiteral = ({ value }) => `__arith__.bool("${value}")`;
+const BooleanLiteral = ({ value }) => `${value}`;
 
 const StringLiteral = ({ value }) => `__arith__.string("${value}")`;
 
@@ -101,10 +101,7 @@ const LambdaExpression = (node, env) => {
 
 const IfExpression = (node, env) => {
   let code = "(";
-  code +=
-    `!__arith__.shouldReturnFalse(` +
-    compile(node.condition, env) +
-    ") ";
+  code += compile(node.condition, env) + "!== false";
   code += " ? ";
   code += compile(node.then, env);
   code += " : ";

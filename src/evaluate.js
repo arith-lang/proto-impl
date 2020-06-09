@@ -39,6 +39,8 @@ const evaluate = (node, env = moduleEnv) => {
       return defineStruct(node, env);
     case "VariableMutation":
       return mutate(node, env);
+    case "CondExpression":
+      return cond(node, env);
   }
 };
 
@@ -132,6 +134,16 @@ const defineStruct = (node, env) => {
 
 const mutate = (node, env) => {
   return setValue(node, evaluate(node.value, env), env);
+};
+
+const cond = (node, env) => {
+  for (expr of node.body) {
+    if (evaluate(expr[0], env) !== false) {
+      return evaluate(expr[1], env);
+    }
+  }
+
+  return evaluate(node.else, env);
 };
 
 module.exports = { evaluate: (input) => evaluate(parse(input)) };

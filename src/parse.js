@@ -215,7 +215,7 @@ const parseLambda = (tokens) => {
   let bodyTokens;
 
   if (isLeftParen(peek(lambdaTokens).value)) {
-    // get rid of paren closing the lambda so parseBody doesn't
+    // get rid of paren closing the lambda so parseBlock doesn't
     // send it through where parseAtom will choke on it
     bodyTokens = lambdaTokens.slice(0, lambdaTokens.length - 1);
   } else {

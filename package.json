@@ -24,6 +24,7 @@
     "chalk": "^4.0.0",
     "decimal.js": "^10.2.0",
     "fast-deep-equal": "^3.1.1",
+    "ffi-napi": "^3.0.1",
     "immutable": "^4.0.0-rc.12",
     "list": "^2.0.19",
     "ramda": "^0.27.0",

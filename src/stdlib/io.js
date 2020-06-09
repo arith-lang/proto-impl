@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const readlineSync = require("readline-sync");
+const ffi = require("ffi-napi");
 const toString = require("./list")["list->string"];
 const isList = require("./list")["list?"];
 const hashToString = require("./hash")["hash->string"];
@@ -44,7 +44,11 @@ function print(...args) {
 }
 
 function input(prompt) {
-  return readlineSync.question(prompt);
+  const rllib = ffi.Library("libreadline", {
+    readline: ["string", ["string"]],
+  });
+
+  return rllib.readline(prompt.toString());
 }
 
 const inputString = input;

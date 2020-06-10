@@ -156,6 +156,20 @@ const VariableMutation = (node, env) => {
   return `${makeVar(node.name)} = ${value};`;
 };
 
+const CondExpression = (node, env) => {
+  let code = "(";
+
+  for (expr of node.body) {
+    code += compile(expr[0], env) + " !== false ? ";
+    code += compile(expr[1], env) + " : ";
+  }
+
+  code += compile(node.else, env);
+  code += ")\n";
+
+  return code;
+};
+
 const makeVar = (name) => {
   const specialChars = /[-%|&!\?\*\+\/\\><\^@]/g;
   const newName = `_arith_${name.replace(specialChars, "_")}`;
@@ -175,6 +189,7 @@ const emit = {
   LambdaExpression,
   IfExpression,
   StructDefinition,
+  CondExpression,
 };
 
 module.exports = { compile: (input) => compile(parse(input)) };

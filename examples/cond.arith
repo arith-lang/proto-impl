@@ -1,0 +1,7 @@
+(define ans
+  (cond
+  (#t "this one")
+  (#f "doesn't get here")
+  (else "also doesn't get here")))
+
+(print ans)

@@ -83,4 +83,4 @@ You *can* do this if you need to. You should generally try to avoid it unless yo
 4. Now do the same thing, but use a combination of `substring` and `string-append`.
 5. Finally, apply the function `string-snakecase` to get the same result. As you can see, there's often more than one way to accomplish the same task!
 
-<p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/strings"> &laquo; Strings &amp; Text</a> |</p>
+<p style="text-align: center"><a href="https://jasonsbarr.github.io/arith/#/tutorial/strings"> &laquo; Strings &amp; Text</a> | <a href="https://jasonsbarr.github.io/arith/#/tutorial/input">Basic Input &amp; Output &raquo;</p>

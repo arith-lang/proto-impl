@@ -7,15 +7,15 @@ const empty = nil;
 
 // pair constructor
 // do not curry
-function cons(car, cdr) {
-  if (!car || isNull(car)) {
+function cons(first, second) {
+  if (!first || isNull(first)) {
     return nil;
   }
 
-  if (!cdr) {
-    cdr = nil;
+  if (!second) {
+    second = nil;
   }
-  return new Cons(car, cdr);
+  return new Cons(first, second);
 }
 
 // list constructor
@@ -42,13 +42,13 @@ function cdr(lst) {
 
 // basic predicates
 function isNull(obj) {
-  return obj.constructor && obj.constructor.name === "Nil";
+  return obj && obj.constructor && obj.constructor.name === "Nil";
 }
 
 const isEmpty = isNull;
 
 function isPair(obj) {
-  return obj.constructor && obj.constructor.name === "Cons";
+  return obj && obj.constructor && obj.constructor.name === "Cons";
 }
 
 function isList(obj) {
@@ -56,10 +56,12 @@ function isList(obj) {
     return true;
   } else if (isPair(obj) === false) {
     return false;
+  } else if (isPair(obj) && !isPair(obj[1]) && !isNull(obj[1])) {
+    return false;
   }
   let head = car(obj);
   let tail = cdr(obj);
-  while (!isNull(tail)) {
+  while (!isNull(tail) && tail !== undefined) {
     if (isPair(tail) && !isPair(tail[1]) && !isNull(tail[1])) {
       return false;
     }

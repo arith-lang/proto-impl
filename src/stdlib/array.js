@@ -1,5 +1,6 @@
 const R = require("ramda");
 const { nil } = require("./list");
+const Cons = require("./types/Cons");
 const isNull = require("./list")["null?"];
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
@@ -13,7 +14,7 @@ function array(...args) {
 
 // predicates
 function isArray(obj) {
-  return obj instanceof Array;
+  return obj instanceof Array && obj instanceof Cons === false;
 }
 
 function isArrayEmpty(arr) {

@@ -2,6 +2,8 @@
 
 Start by cloning the repo: `git clone https://github.com/jasonsbarr/arith.git <directory>`.
 
+Then `cd` into the directory you cloned the repo into.
+
 Install dependencies with `npm install`.
 
 You'll need to run `npm link` from the project directory if you want the commands to be available in your global path.

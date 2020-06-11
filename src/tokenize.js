@@ -143,6 +143,8 @@ const tokenize = (input) => {
     if (isHash(char)) {
       if (isDigit(lookahead(input, pos))) {
         return readNumber(char);
+      } else if (/[o|b|x]/.test(lookahead(input, pos))) {
+        return readNumber(char);
       } else if (isIdStart(lookahead(input, pos))) {
         return readIdent(char);
       } else {

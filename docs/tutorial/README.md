@@ -12,20 +12,19 @@ If you've never programmed before, the tutorial will also introduce you to sever
 4. [Variable Definitions](/tutorial/definitions.md)
 5. [Basic Input and Output](/tutorial/input.md)
 6. Booleans, predicates, and conditional expressions
-7. Basic lists
+7. Lists
 8. Creating your own functions
 9. Recursion
 10. Higher-order functions
 11. Currying and partial application
-12. Lists in more depth
-13. Pipelines and function composition
-14. Vectors and Arrays
-15. Hash tables and Maps
-16. Defining your own data types
-17. Classes and objects
-18. Modules and packages
-19. Serializing data and working with files
-20. HTTP requests and responses
-21. Creating and interacting with web pages
-22. JavaScript interoperability
-23. Putting it all together
+12. Pipelines and function composition
+13. Vectors and Arrays
+14. Hash tables and Maps
+15. Defining your own data types
+16. Classes and objects
+17. Modules and packages
+18. Serializing data and working with files
+19. HTTP requests and responses
+20. Creating and interacting with web pages
+21. JavaScript interoperability
+22. Putting it all together

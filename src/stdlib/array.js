@@ -182,7 +182,7 @@ function arrayFirst(arr) {
 }
 
 function arrayLast(arr) {
-  return array[array.length - 1];
+  return arr[array.length - 1];
 }
 
 // take and drop

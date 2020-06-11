@@ -63,7 +63,6 @@ const inputString = input;
 
 // Working with files
 // Encoding only necessary if text file
-// TODO: make these work with absolute paths as args
 function readFile(file, encoding = "utf-8") {
   const realPath = /^\./.test(file)
     ? path.join(process.cwd(), file)

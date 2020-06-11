@@ -5,3 +5,5 @@
     - [Installing and Using the Arith CLI](/tutorial/basics.md)
     - [Expressions and Numbers](/tutorial/expressions.md)
     - [Strings and Text](/tutorial/strings.md)
+    - [Variable Definitions](/tutorial/definitions.md)
+    - [Basic Input and Output](/tutorial/input.md)

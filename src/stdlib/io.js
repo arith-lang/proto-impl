@@ -9,6 +9,8 @@ const mapToString = require("./map")["map->string"];
 const isMap = require("./map")["map?"];
 const vectorToString = require("./vector")["vector->string"];
 const isVector = require("./vector")["vector?"];
+const arrayToString = require("./array")["array->string"];
+const isArray = require("./array")["array?"];
 
 // I/O functions
 function jsLog(...args) {
@@ -33,6 +35,8 @@ function outputString(...args) {
         temp.push(mapToString(item));
       } else if (isVector(item)) {
         temp.push(vectorToString(item));
+      } else if (isArray(item)) {
+        temp.push(arrayToString(item));
       } else if (typeof item === "boolean") {
         temp.push(item === true ? "#t" : "#f");
       } else {

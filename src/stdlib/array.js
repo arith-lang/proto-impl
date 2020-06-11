@@ -4,36 +4,10 @@ const isNull = require("./list")["null?"];
 const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 
-// replace toString method
-function arrToString() {
-  if (isNull(this)) {
-    return `#(||)`;
-  }
-  let str = `#(|`;
-  for (const [i, item] of this.entries()) {
-    if (i === this.length - 1) {
-      if (isList(item)) {
-        str += `${toString(item)}`;
-      } else {
-        str += `${item.toString()}`;
-      }
-    } else {
-      if (isList(item)) {
-        str += `${toString(item)} `;
-      } else {
-        str += `${item.toString()} `;
-      }
-    }
-  }
-  str += `|)`;
-  return str;
-}
-
 // array constructor
 // do not curry
 function array(...args) {
   let arr = [...args];
-  arr.toString = arrToString.bind(arr);
   return arr;
 }
 
@@ -52,7 +26,7 @@ function arrayLength(arr) {
 }
 
 function arraySlice(start, end, arr) {
-  return array(...arr.slice(start, end));
+  return arr.slice(start, end);
 }
 
 arraySlice = R.curry(arraySlice);
@@ -71,7 +45,7 @@ arrayAppend = R.curry(arrayAppend);
 
 function arrayConcat(...arrs) {
   let accum = [];
-  return array(...accum.concat(...arrs));
+  return accum.concat(...arrs);
 }
 
 arrayConcat = R.curryN(2, arrayConcat);
@@ -94,13 +68,13 @@ const arrayUpdate = arraySet;
 
 // array iterators
 function arrayMap(fn, arr) {
-  return array(...arr.map(fn));
+  return arr.map(fn);
 }
 
 arrayMap = R.curry(arrayMap);
 
 function arrayFoldl(fn, accum, arr) {
-  return array(...arr.reduce(fn, accum));
+  return arr.reduce(fn, accum);
 }
 
 arrayFoldl = R.curry(arrayFoldl);
@@ -109,7 +83,7 @@ const arrayFold = arrayFoldl;
 const arrayReduce = arrayFoldl;
 
 function arrayFoldr(fn, accum, arr) {
-  return array(...arr.reduceRight(fn, accum));
+  return arr.reduceRight(fn, accum);
 }
 
 arrayFoldr = R.curry(arrayFoldr);
@@ -124,12 +98,32 @@ arrayForeach = R.curry(arrayForeach);
 
 // conversion functions
 function arrayToString(arr) {
-  return arr.toString();
+  if (isNull(arr)) {
+    return `#(||)`;
+  }
+  let str = `#(|`;
+  for (const [i, item] of arr.entries()) {
+    if (i === arr.length - 1) {
+      if (isList(item)) {
+        str += `${toString(item)}`;
+      } else {
+        str += `${item.toString()}`;
+      }
+    } else {
+      if (isList(item)) {
+        str += `${toString(item)} `;
+      } else {
+        str += `${item.toString()} `;
+      }
+    }
+  }
+  str += `|)`;
+  return str;
 }
 
 // filtering, removing, sorting, and searching
 function arrayFilter(pred, arr) {
-  return array(...arr.filter(pred));
+  return arr.filter(pred);
 }
 
 arrayFilter = R.curry(arrayFilter);
@@ -137,7 +131,7 @@ arrayFilter = R.curry(arrayFilter);
 const arrayKeep = arrayFilter;
 
 function arrayReject(pred, arr) {
-  return array(...arr.filter(!pred));
+  return arr.filter(!pred);
 }
 
 arrayReject = R.curry(arrayReject);
@@ -178,7 +172,7 @@ function arrayRef(pos, arr) {
 arrayRef = R.curry(arrayRef);
 
 function arrayTail(pos, arr) {
-  return array(...arr.slice(pos));
+  return arr.slice(pos);
 }
 
 arrayTail = R.curry(arrayTail);
@@ -188,7 +182,7 @@ function arrayFirst(arr) {
 }
 
 function arrayLast(arr) {
-  return array.pop();
+  return array[array.length - 1];
 }
 
 // take and drop

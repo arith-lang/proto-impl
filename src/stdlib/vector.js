@@ -5,46 +5,10 @@ const isList = require("./list")["list?"];
 const toString = require("./list")["list->string"];
 const toArray = require("./list")["list->array"];
 
-// replace toString method
-function vecToString() {
-  if (isVectorEmpty(this)) {
-    return `#()`;
-  }
-  let str = `#(`;
-  let [head] = this.prefix;
-  if (isList(head)) {
-    str += `${toString(head)}`;
-  } else {
-    str += `${head.toString()}`;
-  }
-  if (this.suffix.length) {
-    str += " ";
-    for (const [i, item] of this.suffix.entries()) {
-      if (i === this.suffix.length - 1) {
-        if (isList(item)) {
-          str += `${toString(item)}`;
-        } else {
-          str += `${item.toString()}`;
-        }
-      } else {
-        if (isList(item)) {
-          str += `${toString(item)} `;
-        } else {
-          str += `${item.toString()} `;
-        }
-      }
-    }
-  }
-
-  str += `)`;
-  return str;
-}
-
 // vector constructor
 // do not curry
 function vector(...args) {
   let v = L.list(...args);
-  v.toString = vecToString.bind(v);
   return v;
 }
 
@@ -63,19 +27,19 @@ function vectorLength(vec) {
 }
 
 function vectorSlice(start, end, vec) {
-  return vector(...L.slice(start, end, vec));
+  return L.slice(start, end, vec);
 }
 
 vectorSlice = R.curry(vectorSlice);
 
 function vectorPrepend(item, vec) {
-  return vector(...L.prepend(item, vec));
+  return L.prepend(item, vec);
 }
 
 vectorPrepend = R.curry(vectorPrepend);
 
 function vectorAppend(item, vec) {
-  return vector(...L.append(item, vec));
+  return L.append(item, vec);
 }
 
 vectorAppend = R.curry(vectorAppend);
@@ -85,7 +49,7 @@ function vectorConcat(...vecs) {
   for (vec of vecs) {
     accum = L.concat(accum, vec);
   }
-  return vector(...accum);
+  return accum;
 }
 
 vectorConcat = R.curryN(2, vectorConcat);
@@ -95,18 +59,18 @@ function vectorCopy(vec) {
 }
 
 function vectorReverse(vec) {
-  return vector(...L.reverse(vec));
+  return L.reverse(vec);
 }
 
 function vectorUpdate(index, newItem, vec) {
-  return vector(...L.update(index, newItem, vec));
+  return L.update(index, newItem, vec);
 }
 
 vectorUpdate = R.curry(vectorUpdate);
 
 // vector iterators
 function vectorMap(fn, vec) {
-  return vector(...L.map(fn, vec));
+  return L.map(fn, vec);
 }
 
 vectorMap = R.curry(vectorMap);
@@ -152,12 +116,42 @@ function arrayToVector(arr) {
 }
 
 function vectorToString(vec) {
-  return vec.toString();
+  if (isVectorEmpty(vec)) {
+    return `#()`;
+  }
+  let str = `#(`;
+  let [head] = vec.prefix;
+  if (isList(head)) {
+    str += `${toString(head)}`;
+  } else {
+    str += `${head.toString()}`;
+  }
+  if (vec.suffix.length) {
+    str += " ";
+    for (const [i, item] of vec.suffix.entries()) {
+      if (i === vec.suffix.length - 1) {
+        if (isList(item)) {
+          str += `${toString(item)}`;
+        } else {
+          str += `${item.toString()}`;
+        }
+      } else {
+        if (isList(item)) {
+          str += `${toString(item)} `;
+        } else {
+          str += `${item.toString()} `;
+        }
+      }
+    }
+  }
+
+  str += `)`;
+  return str;
 }
 
 // filtering, removing, sorting, and searching
 function vectorFilter(pred, vec) {
-  return vector(...L.filter(pred, vec));
+  return L.filter(pred, vec);
 }
 
 vectorFilter = R.curry(vectorFilter);
@@ -165,23 +159,23 @@ vectorFilter = R.curry(vectorFilter);
 const vectorKeep = vectorFilter;
 
 function vectorReject(pred, vec) {
-  return vector(...L.reject(pred, vec));
+  return L.reject(pred, vec);
 }
 
 vectorReject = R.curry(vectorReject);
 
 function vectorRemove(index, number, vec) {
-  return vector(...L.remove(index, number, vec));
+  return L.remove(index, number, vec);
 }
 
 vectorRemove = R.curry(vectorRemove);
 
 function vectorSort(vec) {
-  return vector(...L.sort(vec));
+  return L.sort(vec);
 }
 
 function vectorSortBy(compare, vec) {
-  return vector(...L.sortBy(compare, vec));
+  return L.sortBy(compare, vec);
 }
 
 vectorSortBy = R.curry(vectorSortBy);
@@ -206,7 +200,7 @@ function vectorRef(pos, vec) {
 vectorRef = R.curry(vectorRef);
 
 function vectorTail(pos, vec) {
-  return vector(...L.slice(pos, vectorLength(vec), vec));
+  return L.slice(pos, vectorLength(vec), vec);
 }
 
 vectorTail = R.curry(vectorTail);
@@ -221,13 +215,13 @@ function vectorLast(vec) {
 
 // take and drop
 function vectorTake(num, vec) {
-  return vector(...L.take(num, vec));
+  return L.take(num, vec);
 }
 
 vectorTake = R.curry(vectorTake);
 
 function vectorDrop(num, vec) {
-  return vector(...L.drop(num, vec));
+  return L.drop(num, vec);
 }
 
 vectorDrop = R.curry(vectorDrop);

@@ -7,6 +7,8 @@ const hashToString = require("./hash")["hash->string"];
 const isHash = require("./hash")["hash?"];
 const mapToString = require("./map")["map->string"];
 const isMap = require("./map")["map?"];
+const vectorToString = require("./vector")["vector->string"];
+const isVector = require("./vector")["vector?"];
 
 // I/O functions
 function jsLog(...args) {
@@ -29,6 +31,8 @@ function outputString(...args) {
         temp.push(hashToString(item));
       } else if (isMap(item)) {
         temp.push(mapToString(item));
+      } else if (isVector(item)) {
+        temp.push(vectorToString(item));
       } else if (typeof item === "boolean") {
         temp.push(item === true ? "#t" : "#f");
       } else {

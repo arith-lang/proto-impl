@@ -76,9 +76,9 @@ Numbers in Arith have the type `decimal`, so to convert the string you get back 
 Here's an example:
 
 ```scheme
-(define age
+(define age-str
   (input "How old are you? "))
-(define age-str (string->decimal age))
+(define age (string->decimal age-str))
 
 (print "In 5 years you'll be " (+ age 5) " years old!")
 ```

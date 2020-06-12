@@ -75,7 +75,14 @@ function writeFile(file, data, encoding) {
     ? path.join(process.cwd(), file)
     : file;
   print(`Writing to ${file}...`);
-  fs.writeFileSync(realPath, data, encoding);
+  return fs.writeFileSync(realPath, data, encoding);
+}
+
+function doesFileExist(file) {
+  const realPath = /^\./.test(file)
+    ? path.join(process.cwd(), file)
+    : file;
+  return fs.existsSync(realPath);
 }
 
 module.exports = {
@@ -86,4 +93,5 @@ module.exports = {
   "input-string": inputString,
   "read-file": readFile,
   "write-file": writeFile,
+  "file-exists?": doesFileExist,
 };

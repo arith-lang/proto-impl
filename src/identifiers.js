@@ -22,7 +22,6 @@ const VALID_SPECIAL_CHARS = [
   "^",
   "@",
   ":",
-  ".",
   "~",
 ];
 const KEYWORDS = [

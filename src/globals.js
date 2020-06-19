@@ -9,6 +9,7 @@ const hash = require("./stdlib/hash");
 const map = require("./stdlib/map");
 const struct = require("./stdlib/struct");
 const array = require("./stdlib/array");
+const math = require("./stdlib/math");
 
 module.exports = {
   ...boolean,
@@ -22,4 +23,5 @@ module.exports = {
   ...hash,
   ...map,
   ...struct,
+  ...math,
 };

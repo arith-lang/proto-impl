@@ -13,9 +13,6 @@ function decimal(value) {
   return new Decimal(value);
 }
 
-// mathematical constants
-const PI = Decimal.acos(-1);
-
 // mathematical functions
 function add(...args) {
   return all((a, c) => Decimal.add(a, c))(...args);
@@ -65,24 +62,6 @@ function min(...args) {
 }
 
 min = R.curryN(2, min);
-
-function pow(x, y) {
-  return Decimal.pow(x, y);
-}
-
-pow = R.curry(pow);
-
-function round(x) {
-  return x.round();
-}
-
-function ceil(x) {
-  return x.ceil();
-}
-
-function floor(x) {
-  return x.floor();
-}
 
 // numeric comparisons
 function eq(x, y) {
@@ -134,7 +113,6 @@ function isExact(obj) {
 
 module.exports = {
   decimal,
-  PI,
   "+": add,
   "-": sub,
   "*": mul,
@@ -143,10 +121,6 @@ module.exports = {
   "//": floorDiv,
   max,
   min,
-  pow,
-  round,
-  ceil,
-  floor,
   "=": eq,
   "<": lt,
   "<=": lte,

@@ -21,7 +21,9 @@ describe("AST Evaluator", () => {
 
   it("Should be able to look up identifiers in the environment", () => {
     const input = `PI`;
-    expect(evaluate(input).toString()).toBe("3.1415926535897932385");
+    expect(evaluate(input).toString()).toBe(
+      "3.1415926535897932384626433832795028841971693993751",
+    );
   });
 
   it("Should be able to evaluate a single call expression", () => {

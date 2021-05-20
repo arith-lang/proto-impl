@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This repository hosts an old version of the language that now serves as a prototype for a fuller implementation.
+
 # Arith Programming Language
 
 Arith is a Lisp-like programming language implemented in JavaScript, designed for use in either a browser or server-side (via NodeJS) environment.
